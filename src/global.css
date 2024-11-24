@@ -1,0 +1,71 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url('@/assets/fonts/Montserrat-Bold.ttf');
+}
+
+@font-face {
+    font-family: "MontserratRegular";
+    src: url('@/assets/fonts/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: "LibreBaskerville";
+    src: url('@/assets/fonts/LibreBaskerville-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Monaco";
+    src: url('@/assets/fonts/Monaco 400.ttf');
+}
+
+h1 {
+    font-size: 1.6cm;
+    font-family: "LibreBaskerville";
+    text-transform: capitalize;
+    color: #12243A;
+}
+
+h2 {
+    font-size: 0.9cm;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    color: #12243A;
+}
+
+h3 {
+    font-size: 0.5cm;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    color: #A84322;
+}
+
+h4 {
+    font-size: 0.3cm;
+    font-family: "MontserratRegular";
+    text-transform: uppercase;
+    color: #FFDAB9;
+}
+
+p {
+    font-size: 0.3cm;
+    font-family: "MontserratRegular";
+    color: #264A76;
+}
+
+div {
+    font-size: 0.3cm;
+    font-family: "Montserrat";
+    color: #264A76;
+}
+
+li{
+    font-size: 0.3cm;
+    font-family: "MontserratRegular";
+    color: #264A76;
+}
+
+time {
+    font-size: 0.3cm;
+    font-family: "Monaco";
+    color: #264A76;
+}
