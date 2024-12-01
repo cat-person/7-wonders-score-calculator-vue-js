@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CV from '../views/ResultTable.vue'
+import WonderChoice from '../components/WonderChoice.vue'
+import Players from '../components/Players.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'score',
-      component: CV
+      component: Players
     },
   ]
 })
