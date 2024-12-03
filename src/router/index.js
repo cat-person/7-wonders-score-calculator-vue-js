@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import WonderChoice from '../components/WonderChoice.vue'
+// import AddPlayer from '../components/AddPlayer.vue'
 import Players from '../components/Players.vue'
 
 const router = createRouter({

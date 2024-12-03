@@ -1,14 +1,17 @@
 <template>
-    <Players :players="aaaa.game.players" @add-player="addPlayer"/>
+    <!-- <Players :players="aaaa.game.players" @add-player="addPlayer"/> -->
+    <AddPlayer/>
 </template>
 
 <script>
   import Players from './components/Players.vue'
+  import AddPlayer from './components/AddPlayer.vue'
 
   export default {
     name: 'App',
     components: {
-      Players
+      Players,
+      AddPlayer
     },
 
     data(){
@@ -41,13 +44,12 @@
     },
 
     methods: {
-    addPlayer(param) {
-      // aaaa.game.players = [ 
-      //   { name: "Mate", wonder: "Zeus Statue", side: "A"  }]
-      
-      console.log(param)
+      addPlayer(param) {
+        this.aaaa.game.players.push({ name: "Mate", wonder: "Zeus Statue", side: "A"  })
+        
+        console.log(param)
+      }
     }
-  }
 }
 
 </script> 
