@@ -1,14 +1,16 @@
 <template>
   <div>
     <h1> Players </h1>
-    <!-- <div v-if="awesome">Vue is awesome!</div>
-    <div v-else>Oh no 😢</div> -->
-
     <div id="app">
       <h1>Players</h1>
-      <div class="image-item" v-for="(name, index) in players" :key="index">
+      <div class="image-item" v-for="({name, wonder, side}, index) in players" :key="index">
         <h2>{{name}}</h2>
+        <h3>{{wonder}}</h3>
+        <h3>{{side}}</h3>
       </div>
+
+    <button @click="$emit('add-player', 'AAA')">Add player</button>
+
     </div>
   </div>
 </template>
@@ -18,17 +20,14 @@ export default {
   // import myComponent from 'my-component'
   name: 'Players',
   props: {
-    players: Array
+    players: Array,
+    // addPlayer: Function
   },
   data() {
     return {
       // players: ["A", "B"]
     };
   },
-  methods: {
-    changeSide() {
-      console.log(this.images)
-    }
-  }
+  emits: ['add-player'],
 }
 </script>

@@ -1,48 +1,54 @@
 <template>
-    <Players :players="state.game.players"/>
+    <Players :players="aaaa.game.players" @add-player="addPlayer"/>
 </template>
 
-<script setup>
-  // import { createApp } from 'vue'
-  // import { RouterLink, RouterView } from 'vue-router'
-  import WonderChoice from '@/components/WonderChoice.vue';
-  import Players from '@/components/Players.vue';
+<script>
+  import Players from './components/Players.vue'
 
-  const state = {
-    static: {
-      wonders: [
-        { name: 'Artemis temple', image: 'src/assets/Artemis_temple.jpg' },
-
-      ],
-      eventNames: {
-        addPlayer: 'addPlayer',
-        selectSide: 'selectSide',
-      }
+  export default {
+    name: 'App',
+    components: {
+      Players
     },
 
-    game: {
-      players: ["CA", "CC"]
-    },
+    data(){
+      return {
+        aaaa: {
+          static: {
+            wonders: [
+              { name: 'Artemis temple', image: 'src/assets/Artemis_temple.jpg' },
 
-    calculatedWonder: {
-      
-    }
-  }
+            ],
+            eventNames: {
+              addPlayer: 'addPlayer',
+              selectSide: 'selectSide',
+            }
+          },
 
-  const onEvent = (eventName, args) => {
-    switch(eventName){
-      case eventNames.changeSide: {
-        const {wonderName, chosenSide} = args
-        if(calculatedWonder.wonderName === wonderName) {
-          calculatedWonder.chosenSide = chosenSide
+          game: {
+            players: [
+              { name: "AA", wonder: "Artemis Temple", side: "A" }, 
+              { name: "BA", wonder: "Piramyds", side: "B"  },
+              { name: "CA", wonder: "Gardens", side: "B"  }
+            ]
+          },
+
+          calculatedWonder: {
+            
+          }
         }
       }
-      case eventNames.addPlayer: {
-        const {name} = args 
-        state.game.players.add(name)
-      }
+    },
+
+    methods: {
+    addPlayer(param) {
+      // aaaa.game.players = [ 
+      //   { name: "Mate", wonder: "Zeus Statue", side: "A"  }]
+      
+      console.log(param)
     }
   }
+}
 
 </script> 
 
