@@ -2,15 +2,15 @@
     <h1>Science</h1>
     <div id="Science" class=".horizontal">
         <div class=".vertical">
-          <img src="../assets/science_icons/clay.png"/>
+          <img src="../../../assets/science_icons/clay.png"/>
           <input v-model="clayCount" @keypress="isNumber($event)" type="number">
         </div>
         <div class=".vertical">
-          <img src="../assets/science_icons/measurer.png"/>
+          <img src="../../../assets/science_icons/measurer.png"/>
           <input v-model="measurerCount" @keypress="isNumber($event)" type="number">
         </div>
         <div class=".vertical">
-          <img src="../assets/science_icons/cog.png"/>  
+          <img src="../../../assets/science_icons/cog.png"/>  
           <input v-model="cogCount" @keypress="isNumber($event)" type="number">
         </div>
     </div>

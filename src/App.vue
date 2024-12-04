@@ -1,11 +1,12 @@
 <template>
     <!-- <Players :players="aaaa.game.players" @add-player="addPlayer"/> -->
-    <AddPlayer/>
+    <!-- <AddPlayer/> -->
+    <router-view/>
 </template>
 
 <script>
-  import Players from './components/Players.vue'
-  import AddPlayer from './components/AddPlayer.vue'
+  import Players from './views/Players/Players.vue'
+  import AddPlayer from './views/AddPlayer/AddPlayer.vue'
 
   export default {
     name: 'App',

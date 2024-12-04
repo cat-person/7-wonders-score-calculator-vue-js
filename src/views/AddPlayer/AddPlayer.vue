@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import WonderAndName  from './WonderAndName.vue';
-import Gold from './Gold.vue';
-import Military from './Military.vue';
-import Culture from './Culture.vue';
-import Trade from './Trade.vue';
-import Science from './Science.vue';
-import Guild from './Guild.vue';
+import WonderAndName  from './components/WonderAndName.vue';
+import Gold from './components/Gold.vue';
+import Military from './components/Military.vue';
+import Culture from './components/Culture.vue';
+import Trade from './components/Trade.vue';
+import Science from './components/Science.vue';
+import Guild from './components/Guild.vue';
 
 export default {
   data() {
