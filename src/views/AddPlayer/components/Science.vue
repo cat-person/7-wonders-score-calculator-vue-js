@@ -1,18 +1,18 @@
 <template>
     <h1>Science</h1>
-    <div id="Science" class=".horizontal">
-        <div class=".vertical">
-          <img src="../../../assets/science_icons/clay.png"/>
-          <input v-model="clayCount" @keypress="isNumber($event)" type="number">
-        </div>
-        <div class=".vertical">
-          <img src="../../../assets/science_icons/measurer.png"/>
-          <input v-model="measurerCount" @keypress="isNumber($event)" type="number">
-        </div>
-        <div class=".vertical">
-          <img src="../../../assets/science_icons/cog.png"/>  
-          <input v-model="cogCount" @keypress="isNumber($event)" type="number">
-        </div>
+    <div id="Science" class="horizontal">
+          <div class="vertical">
+            <img src="../../../assets/science_icons/clay.png"/>
+            <input v-model="clayCount" @keypress="isNumber($event)" type="number">
+          </div>
+          <div class="vertical">
+            <img src="../../../assets/science_icons/measurer.png"/>
+            <input v-model="measurerCount" @keypress="isNumber($event)" type="number">
+          </div>
+          <div class="vertical">
+            <img src="../../../assets/science_icons/cog.png"/>  
+            <input v-model="cogCount" @keypress="isNumber($event)" type="number">
+          </div>
     </div>
     <p> Science points: {{ clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount])) }} </p>
 </template>
@@ -45,13 +45,16 @@
   </script>
   
   <style>
-  .horizontal {
+  .horizontal { 
     display: flex;
     flex-direction: row;
+    background-color: aquamarine;
+    align-content: center;
   }
 
   .vertical {
     display: flex;
     flex-direction: column;
+    background-color: pink;
   }
   </style>

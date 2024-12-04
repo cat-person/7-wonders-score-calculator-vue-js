@@ -9,7 +9,7 @@
         <h3>{{side}}</h3>
       </div>
 
-    <button @click="$emit('add-player', 'AAA')">Add player</button>
+    <button @click="navigateToAddPlayers">Add player</button>
 
     </div>
   </div>
@@ -27,6 +27,11 @@ export default {
     return {
       // players: ["A", "B"]
     };
+  },
+  methods: {
+    navigateToAddPlayers(){
+      this.$router.push('/AddPlayer')
+    }
   },
   emits: ['add-player'],
 }
