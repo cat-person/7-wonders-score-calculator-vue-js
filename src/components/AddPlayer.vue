@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <h1>Radio Button Group Example</h1>
-    <form>
-      <div class="radio-group">
-        <label>
-          <input type="radio" value="Option 1" v-model="selectedOption" />
-          Option 1
-        </label>
-        <label>
-          <input type="radio" value="Option 2" v-model="selectedOption" />
-          Option 2
-        </label>
-        <label>
-          <input type="radio" value="Option 3" v-model="selectedOption" />
-          Option 3
-        </label>
-      </div>
-    </form>
-    <p>Selected Option: {{ selectedOption }}</p>
-  </div>
+  <WonderAndName/>
+  <Gold/>
+  <Military/>
+  <Culture/>
+  <Trade/>
+  <Science/>
+  <Guild/>
 </template>
 
 <script>
+import WonderAndName  from './WonderAndName.vue';
+import Gold from './Gold.vue';
+import Military from './Military.vue';
+import Culture from './Culture.vue';
+import Trade from './Trade.vue';
+import Science from './Science.vue';
+import Guild from './Guild.vue';
+
 export default {
   data() {
     return {
-      selectedOption: '' // Holds the value of the selected radio button
     };
+  },
+  components: {
+    WonderAndName,
+    Gold,
+    Military,
+    Culture,
+    Trade,
+    Science,
+    Guild,
   }
 };
 </script>
@@ -39,6 +42,9 @@ export default {
 
 .radio-group {
   margin: 20px;
+  display: flex;
+  flex-direction: row;
+  background-color: brown;
 }
 
 .radio-group label {
