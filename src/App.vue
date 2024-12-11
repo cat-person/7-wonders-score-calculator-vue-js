@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import Players from './views/Players/Players.vue'
-  import AddPlayer from './views/AddPlayer/AddPlayer.vue'
+  import Players from './routes/Players/Players.vue'
+  import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
 
   export default {
     name: 'App',

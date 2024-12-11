@@ -6,6 +6,8 @@
   <Trade/>
   <Science/>
   <Guild/>
+  <br/>
+  <button @click="meow">Calc and finish</button>
 </template>
 
 <script>
@@ -30,6 +32,17 @@ export default {
     Trade,
     Science,
     Guild,
+  },
+  methods: {
+    canMeow(wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints) {
+      return ![wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints].any(NaN)
+    },
+    meow(player) {
+      this.$router.back()
+    }
+  },
+  emit: {
+
   }
 };
 </script>

@@ -9,7 +9,7 @@
   export default {
     data() {
       return {
-        guildPoints: 1,
+        guildPoints: 0,
         methods: {
             isNumber: function(evt) {
                 evt = (evt) ? evt : window.event;

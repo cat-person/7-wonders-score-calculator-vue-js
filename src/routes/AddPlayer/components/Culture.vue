@@ -1,7 +1,7 @@
 <template>
     <h1>Culture</h1>
     <div id="Culture">
-        <input v-model="guildPoints" @keypress="isNumber($event)" type="number">
+        <input v-model="culturePoints" @keypress="isNumber($event)" type="number">
     </div>
 </template>
   
@@ -9,7 +9,7 @@
   export default {
     data() {
       return {
-        guildPoints: 1,
+        culturePoints: 0,
         methods: {
             isNumber: function(evt) {
                 evt = (evt) ? evt : window.event;
