@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div id="WonderAndName">
       <div class="radio-group">
         <div class="radio-group" v-for="(name, index) in wonders" :key="index">
@@ -53,4 +53,35 @@
   .radio-group label {
     margin-right: 20px; /* Space between radio buttons */
   }
-  </style>
+  </style> -->
+
+<script setup>
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef] = emblaCarouselVue()
+</script>
+
+<template>
+  <div class="embla" ref="emblaRef">
+    <div class="embla__container">
+      <img class="embla__slide" src="../../../assets/Artemis_temple.jpg"/>
+      <img class="embla__slide" src="../../../assets/gardens.jpg"/>
+      <img class="embla__slide" src="../../../assets/Colossus.jpg"/>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+  .embla {
+    overflow: hidden;
+    width: 160mm;
+    justify-self: center;
+  }
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    flex: 0 0 160mm;
+    min-width: 0;
+  }
+</style>
