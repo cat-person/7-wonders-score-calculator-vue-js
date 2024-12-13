@@ -1,9 +1,9 @@
 <template>
-    <h1>Gold</h1>
-    <div id="Gold amount">
-        <input v-model="goldCount" @keypress="isNumber($event)" type="number">
+    <div id="Gold amount" class="gold">
+      <h1>Gold</h1>
+      <input v-model="goldCount" @keypress="isNumber($event)" type="number">
+      <p>Gold points: {{ Math.floor(this.goldCount / 3) }}</p>
     </div>
-    <p>Gold points: {{ Math.floor(this.goldCount / 3) }}</p>
 </template>
   
   <script>
@@ -28,8 +28,11 @@
   </script>
   
   <style>
-  #app {
-    text-align: center;
-    margin: 20px;
-  }
+    .gold {
+      background-color: goldenrod;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
+    }
   </style>

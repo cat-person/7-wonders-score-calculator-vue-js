@@ -1,7 +1,7 @@
 <template>
-    <h1>Culture</h1>
-    <div id="Culture">
-        <input v-model="culturePoints" @keypress="isNumber($event)" type="number">
+    <div id="Culture" class="culture">
+      <h1>Culture</h1>
+      <input v-model="culturePoints" @keypress="isNumber($event)" type="number">
     </div>
 </template>
   
@@ -27,8 +27,11 @@
   </script>
   
   <style>
-    #app {
-        text-align: center;
-        margin: 20px;
+    .culture {
+      background-color: dodgerblue;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
     }
   </style>

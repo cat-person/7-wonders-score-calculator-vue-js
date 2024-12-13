@@ -1,6 +1,6 @@
 <template>
+  <div id="Trade" class="trade">
     <h1>Trade</h1>
-    <div id="Trade">
         <input v-model="tradePoints" @keypress="isNumber($event)" type="number">
     </div>
 </template>
@@ -27,8 +27,11 @@
   </script>
   
   <style>
-    #app {
-        text-align: center;
-        margin: 20px;
+    .trade {
+      background-color: orange;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
     }
   </style>

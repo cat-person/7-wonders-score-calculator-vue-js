@@ -1,4 +1,5 @@
 <template>
+    <div class="science">
     <h1>Science</h1>
     <div id="Science" class="horizontal">
           <div class="vertical">
@@ -15,6 +16,7 @@
           </div>
     </div>
     <p> Science points: {{ clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount])) }} </p>
+  </div>
 </template>
   
   <script>
@@ -41,11 +43,18 @@
   </script>
   
   <style>
+  .science {
+      background-color: cadetblue;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
+    }
+
   .horizontal { 
     display: flex;
     justify-content: center;
     flex-direction: row;
-    background-color: red;
   }
 
   .vertical {

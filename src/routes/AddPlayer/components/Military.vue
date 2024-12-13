@@ -1,7 +1,8 @@
 <template>
-    <h1>Military</h1>
     
-    <div>
+    
+    <div class="military">
+        <h1>Military</h1>
         <div>
             <button @click="handleClick('bronze', 'left')">{{ this.battles['bronze.left'] }}</button>
             Bronze
@@ -17,8 +18,8 @@
             Gold
             <button @click="handleClick('golden', 'right')">{{ this.battles['golden.right'] }}</button>
         </div>
+        <p>Military points: {{ calcMilitary(this.battles) }}</p>
     </div>
-    <p>Military points: {{ calcMilitary(this.battles) }}</p>
 
 </template>
   
@@ -85,18 +86,11 @@
   </script>
   
   <style>
-  #app {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .radio-group {
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .radio-group label {
-    margin-right: 20px; /* Space between radio buttons */
-  }
+   .military {
+      background-color: firebrick;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
+    }
   </style>

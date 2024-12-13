@@ -1,8 +1,8 @@
 <template>
-    <h1>Guilds</h1>
-    <div id="Guild">
-        <input v-model="guildPoints" @keypress="isNumber($event)" type="number">
-    </div>
+  <div id="Guilds" class="guilds">
+      <h1>Guilds</h1>
+      <input v-model="guildPoints" @keypress="isNumber($event)" type="number">
+  </div>
 </template>
   
   <script>
@@ -27,8 +27,11 @@
   </script>
   
   <style>
-    #app {
-        text-align: center;
-        margin: 20px;
+    .guilds {
+      background-color: mediumslateblue;
+      justify-self: center;
+      width: 120mm;
+      padding: 4mm;
+      margin: 10mm;
     }
   </style>
