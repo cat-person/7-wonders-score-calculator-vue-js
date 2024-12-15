@@ -1,77 +1,89 @@
-<!-- <template>
-    <div id="WonderAndName">
-      <div class="radio-group">
-        <div class="radio-group" v-for="(name, index) in wonders" :key="index">
-          <label>
-            <input type="radio" :value=name v-model="selectedWonder" />
-            {{name}}
-          </label>
-        </div>
-      </div>
-      <div class="radio-group">
-        <div  v-for="(name, index) in sides" :key="index">
-          <label>
-            <input type="radio" :value=name v-model="selectedSide" />
-            {{name}}
-          </label>
-        </div>
-      </div>
-      <p>Selected Option: {{ selectedWonder }}: {{ selectedSide }}</p>
-    </div>
-  </template>
-  
-  <script>
+<script>
+  import emblaCarouselVue from 'embla-carousel-vue'
+  // import EmblaCarousel from 'embla-carousel'
+  import { onMounted } from "vue";
+
   export default {
+    setup() {
+      const [emblaRef, emblaApi] = emblaCarouselVue()
+      return { emblaRef, emblaApi }
+    },
+    
     data() {
       return {
-        wonders: [
-          "A", "V", "C", "S", "G", "Q", "E"
+        availableWonders: [
+          { 
+            id: 0, 
+            name: 'Artemis Temple',
+            img: 'Artemis_temple.jpg',
+            background: 'red'
+          },
+          {
+            id: 1,
+            name: 'Gardens', 
+            img: 'gardens.jpg',
+            background: 'green'
+          },
+          {
+            id: 2,
+            name: 'Colossus', 
+            img: 'Colossus.jpg',
+            background: 'blue'
+          },
+          {
+            id: 3,
+            name: 'Colossus', 
+            img: 'Colossus.jpg',
+            background: "#ff0000"
+          }
         ],
-        sides: [
-          "A", "B"
-        ],
-        selectedWonder: '',
-        selectedSide: ''
-      };
+        currentId: 2
+      }
+    },
+    mounted() {
+      this.emblaApi.on('select', (emblaApi) => {
+        this.selectWonder(emblaApi)
+      })
+      console.error(this.emblaApi)
+    },
+    methods: {
+      getImageByWonder(img) {
+        return new URL(`../../../assets/${img}`, import.meta.url)
+      },
+      getWonderByIdx(idx) {
+        return this.availableWonders[idx]
+      },
+      selectWonder(emblaApi) {
+        this.currentId = emblaApi.selectedScrollSnap()
+      }
     }
-  };
-  </script>
-  
-  <style>
-  #app {
-    text-align: center;
-    margin: 20px;
   }
   
-  .radio-group {
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    background-color: brown;
-  }
-  
-  .radio-group label {
-    margin-right: 20px; /* Space between radio buttons */
-  }
-  </style> -->
-
-<script setup>
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const [emblaRef] = emblaCarouselVue()
 </script>
 
 <template>
-  <div class="embla" ref="emblaRef">
-    <div class="embla__container">
-      <img class="embla__slide" src="../../../assets/Artemis_temple.jpg"/>
-      <img class="embla__slide" src="../../../assets/gardens.jpg"/>
-      <img class="embla__slide" src="../../../assets/Colossus.jpg"/>
+  <div class="container" :style="{'background-color': getWonderByIdx(currentId).background}">
+    <div class="embla" ref="emblaRef">
+      <li class="embla__container">
+        <div class="embla__slide" v-for="wonder in availableWonders">
+          <img class="img" v-bind:src="getImageByWonder(wonder.img)"/>
+          <p> {{ wonder.name }} </p>
+        </div>
+      </li>
     </div>
+    <div class="horizontal">
+      <p>Enter the name: </p>
+      <input type="text">
+    </div>
+    <p> {{ getWonderByIdx(currentId).name }}</p>
   </div>
 </template>
 
 <style scoped>
+  .container {
+    justify-self: center;
+    width: 160mm;
+  }
   .embla {
     overflow: hidden;
     width: 160mm;
@@ -83,5 +95,13 @@
   .embla__slide {
     flex: 0 0 160mm;
     min-width: 0;
+  }
+  .img {
+    width: 160mm;
+  }
+  .horizontal { 
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
   }
 </style>
