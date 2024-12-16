@@ -8,43 +8,18 @@
       const [emblaRef, emblaApi] = emblaCarouselVue()
       return { emblaRef, emblaApi }
     },
-    
+    props: {
+      availableWonders: Array,
+      currentId: Number
+    },
     data() {
-      return {
-        availableWonders: [
-          { 
-            id: 0, 
-            name: 'Artemis Temple',
-            img: 'Artemis_temple.jpg',
-            background: 'red'
-          },
-          {
-            id: 1,
-            name: 'Gardens', 
-            img: 'gardens.jpg',
-            background: 'green'
-          },
-          {
-            id: 2,
-            name: 'Colossus', 
-            img: 'Colossus.jpg',
-            background: 'blue'
-          },
-          {
-            id: 3,
-            name: 'Colossus', 
-            img: 'Colossus.jpg',
-            background: "#ff0000"
-          }
-        ],
-        currentId: 2
+      return {  
       }
     },
     mounted() {
       this.emblaApi.on('select', (emblaApi) => {
         this.selectWonder(emblaApi)
       })
-      console.error(this.emblaApi)
     },
     methods: {
       getImageByWonder(img) {
@@ -54,7 +29,7 @@
         return this.availableWonders[idx]
       },
       selectWonder(emblaApi) {
-        this.currentId = emblaApi.selectedScrollSnap()
+        this.$emit('onWonderSelected', emblaApi.selectedScrollSnap())
       }
     }
   }

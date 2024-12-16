@@ -1,13 +1,15 @@
 <template>
-  <WonderAndName/>
-  <Gold/>
-  <Military/>
-  <Culture/>
-  <Trade/>
-  <Science/>
-  <Guild/>
-  <br/>
-  <button @click="meow">Calc and finish</button>
+   <div class="container" :style="{'background-color': getWonderByIdx(currentId).background}">
+    <WonderAndName @onWonderSelected="onWonderSelected($event)" :availableWonders="availableWonders" :currentId="currentId"/>
+    <Gold/>
+    <Military/>
+    <Culture/>
+    <Trade/>
+    <Science/>
+    <Guild/>
+    <br/>
+    <button @click="meow">Calc and finish</button>
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,33 @@ import Guild from './components/Guild.vue';
 export default {
   data() {
     return {
+      availableWonders: [
+          { 
+            id: 0, 
+            name: 'Artemis Temple',
+            img: 'Artemis_temple.jpg',
+            background: 'red'
+          },
+          {
+            id: 1,
+            name: 'Gardens', 
+            img: 'gardens.jpg',
+            background: 'green'
+          },
+          {
+            id: 2,
+            name: 'Colossus', 
+            img: 'Colossus.jpg',
+            background: 'blue'
+          },
+          {
+            id: 3,
+            name: 'Colossus', 
+            img: 'Colossus.jpg',
+            background: "#ffFF00"
+          }
+        ],
+        currentId: 1
     };
   },
   components: {
@@ -34,12 +63,19 @@ export default {
     Guild,
   },
   methods: {
+    onWonderSelected(wonderId) {
+      this.currentId = wonderId
+      console.error(`wonderId: ${wonderId}`)
+    },
     canMeow(wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints) {
       return ![wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints].any(NaN)
     },
     meow(player) {
       this.$router.back()
-    }
+    },
+    getWonderByIdx(idx) {
+      return this.availableWonders[idx]
+    },
   },
   emit: {
 
@@ -52,6 +88,11 @@ export default {
   text-align: center;
   margin: 20px;
 }
+
+.container {
+    justify-self: center;
+    width: 160mm;
+  }
 
 .radio-group {
   margin: 20px;
