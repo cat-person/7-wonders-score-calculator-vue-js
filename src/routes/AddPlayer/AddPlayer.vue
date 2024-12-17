@@ -29,46 +29,53 @@ export default {
             id: 0, 
             name: 'Artemis Temple',
             img: 'Artemis_temple.jpg',
+            pointsByStages: [3, 5, 7],
             background: '#D0E0F0'
           },
           {
             id: 1,
             name: 'Gardens', 
             img: 'gardens.jpg',
+            pointsByStages: [3, 5, 5],
             background: '#D8F8E0'
           },
           {
             id: 2,
             name: 'Colossus', 
             img: 'Colossus.jpg',
+            pointsByStages: [3, 5, 7],
             background: '#D0E8F4'
           },
           {
             id: 3,
             name: 'Lighthouse', 
             img: 'Lighthouse.jpg',
+            pointsByStages: [0, 3, 3, 3],
             background: "#D0D8D8"
           },
           {
             id: 3,
             name: 'Mausoleum', 
             img: 'Mausoleum.jpg',
+            pointsByStages: [0, 5, 5],
             background: "#F0E0E8"
           },
           {
             id: 3,
             name: 'Pyramides', 
             img: 'Pyramides.jpg',
+            pointsByStages: [0, 0, 7],
             background: "#F0E8C0"
           },
           {
             id: 3,
             name: 'Zeus Statue', 
             img: 'Zeus_statue.jpg',
+            pointsByStages: [3, 0, 7],
             background: "#E0E0E8"
           },
         ],
-        currentId: 1
+        currentId: 2
     };
   },
   components: {
