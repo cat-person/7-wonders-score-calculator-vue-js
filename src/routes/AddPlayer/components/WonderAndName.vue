@@ -14,7 +14,6 @@
     data() {
       return {
         selectedStage: 0, 
-        
       }
     },
     mounted() {
@@ -45,6 +44,7 @@
         this.$emit('onSideChanged', this.currentSide === 'A' ? 'B': 'A')
       },
       onChecked(event) {
+        console.error(`onChecked(${event})`)
         let id = parseInt(event.srcElement.id)
         if(event.srcElement.checked){
           this.selectedStage = id
@@ -52,10 +52,11 @@
           this.selectedStage = id - 1
         }
       },
-      calcWonderPoints(){
+      calcWonderPoints(currentId, c){
+        // console.error(`currentSide: ${currentSide}, currentSide: ${currentSide}`)
         let result = 0
         for (let idx = 0; idx < this.selectedStage; idx++) {
-          result += getWonder(this.currentId, side).pointsByStages[idx];
+          result += this.getWonder(this.currentId, this.currentSide).pointsByStages[idx];
         }
         return result
       }
