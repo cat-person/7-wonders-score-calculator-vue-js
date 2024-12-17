@@ -29,26 +29,44 @@ export default {
             id: 0, 
             name: 'Artemis Temple',
             img: 'Artemis_temple.jpg',
-            background: 'red'
+            background: '#D0E0F0'
           },
           {
             id: 1,
             name: 'Gardens', 
             img: 'gardens.jpg',
-            background: 'green'
+            background: '#D8F8E0'
           },
           {
             id: 2,
             name: 'Colossus', 
             img: 'Colossus.jpg',
-            background: 'blue'
+            background: '#D0E8F4'
           },
           {
             id: 3,
-            name: 'Colossus', 
-            img: 'Colossus.jpg',
-            background: "#ffFF00"
-          }
+            name: 'Lighthouse', 
+            img: 'Lighthouse.jpg',
+            background: "#D0D8D8"
+          },
+          {
+            id: 3,
+            name: 'Mausoleum', 
+            img: 'Mausoleum.jpg',
+            background: "#F0E0E8"
+          },
+          {
+            id: 3,
+            name: 'Pyramides', 
+            img: 'Pyramides.jpg',
+            background: "#F0E8C0"
+          },
+          {
+            id: 3,
+            name: 'Zeus Statue', 
+            img: 'Zeus_statue.jpg',
+            background: "#E0E0E8"
+          },
         ],
         currentId: 1
     };
