@@ -76,9 +76,9 @@
           <img class="img" v-bind:src="getImageByWonder(idx, currentSide)"/>
           <button @click="changeSide"> {{ currentSide }} </button>
           <div class="horizontal">
-            <div v-for="pointsByStage, idx in wonder.pointsByStages">
+            <div v-for="pointsByStage, stageIdx in getWonder(idx, currentSide).pointsByStages">
               <p> {{ pointsByStage }} </p>
-              <input type="checkbox" :checked="idx < selectedStage" :id="idx + 1" @change="onChecked($event)"/>
+              <input type="checkbox" :checked="stageIdx < selectedStage" :id="stageIdx + 1" @change="onChecked($event)"/>
             </div>
           </div>
           <p> {{ wonder.name }} </p>
