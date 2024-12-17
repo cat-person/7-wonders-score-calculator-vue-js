@@ -1,6 +1,12 @@
 <template>
-   <div class="container" :style="{'background-color': getWonderByIdx(currentId).background}">
-    <WonderAndName @onWonderSelected="onWonderSelected($event)" :availableWonders="availableWonders" :currentId="currentId"/>
+   <div class="container" :style="{'background-color': getWonder(currentId, currentSide).background}">
+    <WonderAndName  
+      :availableWonders="availableWonders" 
+      :currentId="currentId" 
+      :currentSide="currentSide"
+      
+      @onWonderSelected="onWonderSelected($event)"
+      @onSideChanged="onSideChanged($event)"/>
     <Gold/>
     <Military/>
     <Culture/>
@@ -25,57 +31,72 @@ export default {
   data() {
     return {
       availableWonders: [
-          { 
-            id: 0, 
-            name: 'Artemis Temple',
+        {
+          name: 'Artemis Temple',
+          A: { 
             img: 'Artemis_temple.jpg',
             pointsByStages: [3, 5, 7],
-            background: '#D0E0F0'
+            background: '#E3F2FD'
           },
-          {
-            id: 1,
-            name: 'Gardens', 
+          name: 'Artemis Temple',
+          B: { 
+            img: 'Artemis_temple.jpg',
+            pointsByStages: [3, 5, 7],
+            background: '#1E88E5'
+          },
+        },
+        {
+          name: 'Gardens',
+          A: { 
             img: 'gardens.jpg',
             pointsByStages: [3, 5, 5],
-            background: '#D8F8E0'
+            background: '#E8F5E9'
           },
-          {
-            id: 2,
-            name: 'Colossus', 
-            img: 'Colossus.jpg',
-            pointsByStages: [3, 5, 7],
-            background: '#D0E8F4'
+          name: 'Artemis Temple',
+          B: { 
+            img: 'gardens.jpg',
+            pointsByStages: [3, 5, 5],
+            background: '#43A047'
           },
-          {
-            id: 3,
-            name: 'Lighthouse', 
-            img: 'Lighthouse.jpg',
-            pointsByStages: [0, 3, 3, 3],
-            background: "#D0D8D8"
-          },
-          {
-            id: 3,
-            name: 'Mausoleum', 
-            img: 'Mausoleum.jpg',
-            pointsByStages: [0, 5, 5],
-            background: "#F0E0E8"
-          },
-          {
-            id: 3,
-            name: 'Pyramides', 
-            img: 'Pyramides.jpg',
-            pointsByStages: [0, 0, 7],
-            background: "#F0E8C0"
-          },
-          {
-            id: 3,
-            name: 'Zeus Statue', 
-            img: 'Zeus_statue.jpg',
-            pointsByStages: [3, 0, 7],
-            background: "#E0E0E8"
-          },
+        }
+          // {
+          //   id: 2,
+          //   name: 'Colossus', 
+          //   img: 'Colossus.jpg',
+          //   pointsByStages: [3, 5, 7],
+          //   background: '#D0E8F4'
+          // },
+          // {
+          //   id: 3,
+          //   name: 'Lighthouse', 
+          //   img: 'Lighthouse.jpg',
+          //   pointsByStages: [0, 3, 3, 3],
+          //   background: "#D0D8D8"
+          // },
+          // {
+          //   id: 3,
+          //   name: 'Mausoleum', 
+          //   img: 'Mausoleum.jpg',
+          //   pointsByStages: [0, 5, 5],
+          //   background: "#F0E0E8"
+          // },
+          // {
+          //   id: 3,
+          //   name: 'Pyramides', 
+          //   img: 'Pyramides.jpg',
+          //   pointsByStages: [0, 0, 7],
+          //   background: "#F0E8C0"
+          // },
+          // {
+          //   id: 3,
+          //   name: 'Zeus Statue', 
+          //   img: 'Zeus_statue.jpg',
+          //   pointsByStages: [3, 0, 7],
+          //   background: "#E0E0E8"
+          // },
         ],
-        currentId: 2
+        currentId: 1,
+        currentSide: 'A'
     };
   },
   components: {
@@ -101,10 +122,17 @@ export default {
     getWonderByIdx(idx) {
       return this.availableWonders[idx]
     },
+    getWonder(idx, currentSide) {
+      if(currentSide === 'A'){
+        return this.availableWonders[idx].A
+      } else {
+        return this.availableWonders[idx].B
+      }  
+    },
+    onSideChanged(givenSide) {
+      this.currentSide = givenSide
+    }
   },
-  emit: {
-
-  }
 };
 </script>
 

@@ -1,7 +1,5 @@
 <script>
   import emblaCarouselVue from 'embla-carousel-vue'
-  // import EmblaCarousel from 'embla-carousel'
-  import { onMounted } from "vue";
 
   export default {
     setup() {
@@ -10,12 +8,13 @@
     },
     props: {
       availableWonders: Array,
-      currentId: Number
+      currentId: Number,
+      currentSide: String
     },
     data() {
       return {
-        selectedStage: 0
-          
+        selectedStage: 0, 
+        
       }
     },
     mounted() {
@@ -25,30 +24,38 @@
       })
     },
     methods: {
-      getImageByWonder(img) {
-        return new URL(`../../../assets/${img}`, import.meta.url)
+      getImageByWonder(idx, currentSide) {
+        let wonder = this.getWonder(idx, currentSide)
+        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
       },
-      getWonderByIdx(idx) {
-        return this.availableWonders[idx]
+      getWonder(idx, currentSide) {
+        if(currentSide === 'A'){
+          return this.availableWonders[idx].A
+        } else {
+          return this.availableWonders[idx].B
+        }  
+      },
+      wonderName(idx) {
+        return this.availableWonders[idx].name
       },
       selectWonder(emblaApi) {
         this.$emit('onWonderSelected', emblaApi.selectedScrollSnap())
       },
+      changeSide() {
+        this.$emit('onSideChanged', this.currentSide === 'A' ? 'B': 'A')
+      },
       onChecked(event) {
         let id = parseInt(event.srcElement.id)
-        console.error(`id: ${id}`)
-        console.error(`selectedStage: ${this.selectedStage}`)
         if(event.srcElement.checked){
           this.selectedStage = id
         } else {
           this.selectedStage = id - 1
         }
-        console.error(`newSelectedStage: ${this.selectedStage}`)
       },
       calcWonderPoints(){
         let result = 0
         for (let idx = 0; idx < this.selectedStage; idx++) {
-          result += this.availableWonders[this.currentId].pointsByStages[idx];
+          result += getWonder(this.currentId, side).pointsByStages[idx];
         }
         return result
       }
@@ -65,8 +72,9 @@
     </div>
     <div class="embla" ref="emblaRef">
       <li class="embla__container">
-        <div class="embla__slide" v-for="wonder in availableWonders">
-          <img class="img" v-bind:src="getImageByWonder(wonder.img)"/>
+        <div class="embla__slide" v-for="wonder, idx in availableWonders">
+          <img class="img" v-bind:src="getImageByWonder(idx, currentSide)"/>
+          <button @click="changeSide"> {{ currentSide }} </button>
           <div class="horizontal">
             <div v-for="pointsByStage, idx in wonder.pointsByStages">
               <p> {{ pointsByStage }} </p>
@@ -77,7 +85,7 @@
         </div>
       </li>
     </div>
-    <p> {{ calcWonderPoints() }} </p>
+    <p> Wonder points: {{ calcWonderPoints() }} </p>
   </div>
 </template>
 
