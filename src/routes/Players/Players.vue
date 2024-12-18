@@ -14,7 +14,6 @@
 
 <script>
 export default {
-  // import myComponent from 'my-component'
   name: 'Players',
   props: {
     players: Array,

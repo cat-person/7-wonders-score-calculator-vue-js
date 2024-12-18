@@ -55,8 +55,9 @@
       calcWonderPoints(currentId, c){
         // console.error(`currentSide: ${currentSide}, currentSide: ${currentSide}`)
         let result = 0
-        for (let idx = 0; idx < this.selectedStage; idx++) {
-          result += this.getWonder(this.currentId, this.currentSide).pointsByStages[idx];
+        let pointsByStage = this.getWonder(this.currentId, this.currentSide).pointsByStages
+        for (let idx = 0; idx < pointsByStage.length; idx++) {
+          result += pointsByStage[idx];
         }
         return result
       }
