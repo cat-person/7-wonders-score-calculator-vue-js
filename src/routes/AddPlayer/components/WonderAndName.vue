@@ -44,7 +44,7 @@
         }  
       },
       selectWonder(emblaApi) {
-        this.$emit('onWonderSelected', emblaApi.selectedScrollSnap())
+        this.$emit('onWonderSelected', wonders[emblaApi.selectedScrollSnap()].id)
       },
       changeSide() {
         this.$emit('onSideChanged', this.wonderPoints.currentSide == 'A' ? 'B': 'A')
