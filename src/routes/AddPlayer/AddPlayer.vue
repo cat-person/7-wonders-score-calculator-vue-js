@@ -1,20 +1,19 @@
 <template>
-   <div class="container" :style="{'background-color': getWonder(currentId, currentSide).background}">
-    <WonderAndName  
-      :availableWonders="availableWonders" 
-      :currentId="currentId" 
-      :currentSide="currentSide"
-      
+   <div class="container" :style="{'background-color': getWonder(playerScoreData.wonder.id, playerScoreData.wonder.currentSide).background}">
+    <WonderAndName
+      :wonderPoints="playerScoreData.wonder"
       @onWonderSelected="onWonderSelected($event)"
-      @onSideChanged="onSideChanged($event)"/>
-    <Gold/>
+      @onSideChanged="onSideChanged($event)"
+      @onStageBuilt="onStageBuilt($event)"/>
+
+    <Gold :goldCount="goldCount" :onGoldCountChanged="onGoldCountChanged($event)"/>
     <Military/>
     <Culture/>
     <Trade/>
     <Science/>
     <Guild/>
     <br/>
-    <button @click="meow">Calc and finish</button>
+    <button @click="addPlayer()">Calc and finish</button>
   </div>
 </template>
 
@@ -26,108 +25,51 @@ import Culture from './components/Culture.vue';
 import Trade from './components/Trade.vue';
 import Science from './components/Science.vue';
 import Guild from './components/Guild.vue';
-import availableWonders from '@/assets/available_wonders.json'
+
+import wonders from '@/assets/wonders.json'
+
+const defaultScoreData = {
+  name: '',
+  wonder: {
+    id: 'the_colossus_of_rhodes',
+    currentSide: 'B',
+    stageBuilt: 2,
+  },
+  goldCount: 0,
+  battles: {
+    'bronze.left': 'Lost', 
+    'bronze.right': 'Lost',
+    'silver.left': 'Lost', 
+    'silver.right': 'Lost',
+    'golden.left': 'Lost', 
+    'golden.right': 'Lost'
+  },
+  culturePoints: 0,
+  tradePoints: 0,
+  science: {
+    clayCount: 0,
+    measurerCount: 0,
+    cogCount: 0,
+  },
+  guildPoints: 0
+}
 
 export default {
   data() {
+    let scoreData = defaultScoreData
+    if(this.savedScoreData){
+      scoreData = this.savedScoreData
+    }
+    
+    console.error(`meow: ${JSON.stringify(defaultScoreData)}`)
+    
     return {
-      availableWonders: availableWonders,
-      // [
-      //   {
-      //     name: 'The Colossus of Rhodes',
-      //     A: { 
-      //       img: 'the_colossus_of_rhodes.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#E0F2F1'
-      //     },
-      //     B: { 
-      //       img: 'the_colossus_of_rhodes.jpg',
-      //       pointsByStages: [3, 4],
-      //       background: '#004D40'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Lighthouse of Alexandria',
-      //     A: { 
-      //       img: 'the_lighthouse_of_alexandria.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#E1F5FE'
-      //     },
-      //     B: { 
-      //       img: 'the_lighthouse_of_alexandria.jpg',
-      //       pointsByStages: [0, 0, 7],
-      //       background: '#01579B'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Temple of Artemis in Ephesus',
-      //     A: { 
-      //       img: 'the_temple_of_artemis_in_ephesus.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#E8EAF6'
-      //     },
-      //     B: { 
-      //       img: 'the_temple_of_artemis_in_ephesus.jpg',
-      //       pointsByStages: [2, 3, 5],
-      //       background: '#1A237E'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Hanging Gardens of Babylon',
-      //     A: { 
-      //       img: 'the_hanging_gardens_of_babylon.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#E8F5E9'
-      //     },
-      //     B: { 
-      //       img: 'the_hanging_gardens_of_babylon.jpg',
-      //       pointsByStages: [3, 0, 0],
-      //       background: '#1B5E20'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Statue of Zeus in Olympia',
-      //     A: { 
-      //       img: 'the_statue_of_zeus_in_olympia.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#E3F2FD'
-      //     },
-      //     B: { 
-      //       img: 'the_statue_of_zeus_in_olympia.jpg',
-      //       pointsByStages: [0, 5, 0],
-      //       background: '#0D47A1'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Mausoleum of Halicarnassus',
-      //     A: { 
-      //       img: 'the_mausoleum_of_halicarnassus.jpg',
-      //       pointsByStages: [3, 0, 7],
-      //       background: '#EDE7F6'
-      //     },
-      //     B: { 
-      //       img: 'the_mausoleum_of_halicarnassus.jpg',
-      //       pointsByStages: [2, 1, 0],
-      //       background: '#311B92'
-      //     },
-      //   },
-      //   {
-      //     name: 'The Pyramids of Giza',
-      //     A: { 
-      //       img: 'the_pyramids_of_giza.jpg',
-      //       pointsByStages: [3, 5, 7],
-      //       background: '#FFF8E1'
-      //     },
-      //     B: { 
-      //       img: 'the_pyramids_of_giza.jpg',
-      //       pointsByStages: [3, 5, 5, 7],
-      //       background: '#FF6F00'
-      //     },
-      //   },
-      //   ],
-        currentId: 1,
-        currentSide: 'A'
-    };
+      wonders: wonders,
+      playerScoreData: scoreData
+    }  
+  },
+  props: {
+    savedScoreData: Object
   },
   components: {
     WonderAndName,
@@ -139,28 +81,36 @@ export default {
     Guild,
   },
   methods: {
+    onGoldCountChanged(givenCount){
+      this.playerScoreData.goldCount = givenCount
+    },
     onWonderSelected(wonderId) {
-      this.currentId = wonderId
+      this.playerScoreData.wonder.id = wonderId
       console.error(`wonderId: ${wonderId}`)
     },
-    canMeow(wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints) {
-      return ![wonderPoints, goldPoints, militaryPoints, culturePoints, tradePoints, sciencePoints, guildPoints].any(NaN)
-    },
-    meow(player) {
-      this.$router.back()
-    },
-    getWonderByIdx(idx) {
-      return this.availableWonders[idx]
-    },
-    getWonder(idx, currentSide) {
-      if(currentSide === 'A'){
-        return this.availableWonders[idx].A
+    getWonder(wonderId, side) {
+      console.error(`AddPlayer.getWonder(wonderId: ${wonderId}, side: ${side})`)
+      let result = undefined
+      this.wonders.forEach((wonder) => { 
+        if(wonder.id == wonderId){
+          result = wonder
+        }
+      })
+
+      if(side == 'A'){
+        return result.A
       } else {
-        return this.availableWonders[idx].B
-      }  
+        return result.B
+      }
     },
     onSideChanged(givenSide) {
-      this.currentSide = givenSide
+      this.playerScoreData.wonder.currentSide = givenSide
+    },
+    onStageBuilt(stageBuilt) {
+      this.playerScoreData.wonder.stageBuilt = stageBuilt
+    },
+    addPlayer() {
+      this.$emit("onPlayerAdded", this.playerScoreData)
     }
   },
 };

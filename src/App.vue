@@ -1,64 +1,79 @@
 <template>
-    <!-- <Players :players="aaaa.game.players" @add-player="addPlayer"/> -->
-    <!-- <AddPlayer/> -->
-    <router-view/>
+    <Players v-if="state.id === 'players'" :playerScores="playerScores" @addNewPlayer="handleAddNewPlayer()" @editPlayer=""/>
+    <AddPlayer v-if="state.id === 'add_player'" @onPlayerAdded="handlePlayerAdded($event)" />
 </template>
 
 <script>
   import Players from './routes/Players/Players.vue'
   import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
 
+  import wonders from '@/assets/wonders.json'
+
   export default {
     name: 'App',
     components: {
       Players,
-      AddPlayer
+      AddPlayer,
     },
 
-    data(){
+    data(){ 
       return {
-        aaaa: {
-          static: {
-            wonders: [
-              { name: 'Artemis temple', image: 'src/assets/Artemis_temple.jpg' },
-
-            ],
-            eventNames: {
-              addPlayer: 'addPlayer',
-              selectSide: 'selectSide',
-            }
+        wonders: wonders,
+        state: { id: 'players' },  // probably not idiomatic
+        playerScores: [
+          {
+            name: 'Alex',
+            wonder: {
+              id: 'the_colossus_of_rhodes',
+              currentSide: 'A',
+              stageBuilt: 1,
+            },
+            goldCount: 32,
+            battles: {
+              'bronze.left': 'Lost', 
+              'bronze.right': 'Won',
+              'silver.left': 'Lost', 
+              'silver.right': 'Won',
+              'golden.left': 'Won', 
+              'golden.right': 'Won'
+            },
+            culturePoints: 12,
+            tradePoints: 3,
+            science: {
+              clayCount: 2,
+              measurerCount: 4,
+              cogCount: 2,
+            },
+            guildPoints: 8
           },
-
-          game: {
-            players: [
-              { name: "AA", wonder: "Artemis Temple", side: "A" }, 
-              { name: "BA", wonder: "Piramyds", side: "B"  },
-              { name: "CA", wonder: "Gardens", side: "B"  }
-            ]
-          },
-
-          calculatedWonder: {
-            
-          }
-        }
+        ]
       }
     },
 
     methods: {
-      addPlayer(param) {
-        this.aaaa.game.players.push({ name: "Mate", wonder: "Zeus Statue", side: "A"  })
-        
-        console.log(param)
+      getNotAvailable() {
+        let result = []
+        this.playerScores.forEach((playerScore) => result.push(playerScore.id))
+        return result
+      },
+      handleAddNewPlayer(){
+        this.state = { 
+          id: 'add_player',
+        }
+      },
+      editPlayer(playerScore){
+        this.state = { addPlayer, playerScore }
+      },
+      handlePlayerAdded(playerScore) {
+        console.error(`playerScore: ${JSON.stringify(playerScore)}`)
+        this.playerScores.push(playerScore)
+        this.state = {id: 'players'}
       }
     }
-}
+  }
 
 </script> 
 
 <style scoped>
-/* .wrapper {
-  height: 100vh;
-  max-width: 80vw;
-  min-width: 1024px;
-} */
+
 </style>

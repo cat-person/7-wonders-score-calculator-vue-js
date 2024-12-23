@@ -1,28 +1,35 @@
 <template>
     <div id="Gold amount" class="gold">
       <h1>Gold</h1>
-      <input v-model="goldCount" @keypress="isNumber($event)" type="number">
-      <p>Gold points: {{ Math.floor(this.goldCount / 3) }}</p>
+      <input :value="goldCount" @keypress="isNumber($event)" @input="onGoldCountChanged()" type="number">
+      <p>Gold points: {{ calcPoints(goldCount) }}</p>
     </div>
 </template>
   
   <script>
   export default {
+    props: {
+      goldCount: Number
+    },
     data() {
-      return {
-        goldCount: 0,
-        methods: {
-            isNumber: function(evt) {
-                evt = (evt) ? evt : window.event;
-                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                    evt.preventDefault();
-                } else {
-                    return true;
-                }
-            }
-        }
-      };
+      return {}
+    },
+    methods: {
+      isNumber(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();
+          } else {
+              return true;
+          }
+      },
+      calcPoints(givenGoldCount) {
+        Math.floor(givenGoldCount / 3)
+      },
+      onGoldCountChanged(givenGoldCount) {
+        this.$emit("onGoldCountChanged", givenGoldCount)
+      }
     }
   };
   </script>

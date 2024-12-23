@@ -2,33 +2,40 @@
   <div id="app">
     <h1> Players </h1>
 
-    <div class="image-item" v-for="({name, wonder, side}, index) in players" :key="index">
-      <h2>{{name}}</h2>
-      <h3>{{wonder}}</h3>
-      <h3>{{side}}</h3>
+    <div class="image-item" v-for="(playerScore, index) in playerScores" :key="index">
+      <h2>{{playerScore.name}}</h2>
+      <h3>{{getWonderById(playerScore.wonder.id).name}}</h3>
     </div>
 
-    <button @click="navigateToAddPlayers">Add player</button>
+    <button @click="addNewPlayer">Add New Player</button>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Players',
-  props: {
-    players: Array,
-    // addPlayer: Function
-  },
-  data() {
-    return {
-      // players: ["A", "B"]
-    };
-  },
-  methods: {
-    navigateToAddPlayers(){
-      this.$router.push('/AddPlayer')
-    }
-  },
-  emits: ['add-player'],
-}
+  import wonders from '@/assets/wonders.json'
+
+  export default {
+    data() {
+      return {
+        wonders: wonders,
+      };
+    },
+    props: {
+      playerScores: Array
+    },
+    methods: {
+      addNewPlayer(){
+        this.$emit("addNewPlayer")
+      },
+      getWonderById(givenId) {
+        let result = null
+        wonders.forEach(wonder => {
+          if(wonder.id == givenId) {
+            result =  wonder
+          }
+        })
+        return result
+      }
+    },
+  }
 </script>

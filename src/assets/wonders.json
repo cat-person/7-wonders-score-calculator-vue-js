@@ -1,6 +1,7 @@
 [
   {
     "name": "The Colossus of Rhodes",
+    "id": "the_colossus_of_rhodes",
     "A": { 
       "img": "the_colossus_of_rhodes.jpg",
       "pointsByStages": [3, 0, 7],
@@ -14,6 +15,7 @@
   },
   {
     "name": "The Lighthouse of Alexandria",
+    "id": "the_lighthouse_of_alexandria",
     "A": { 
       "img": "the_lighthouse_of_alexandria.jpg",
       "pointsByStages": [3, 0, 7],
@@ -27,6 +29,7 @@
   },
   {
     "name": "The Temple of Artemis in Ephesus",
+    "id": "the_temple_of_artemis_in_ephesus",
     "A": { 
       "img": "the_temple_of_artemis_in_ephesus.jpg",
       "pointsByStages": [3, 0, 7],
@@ -40,6 +43,7 @@
   },
   {
     "name": "The Hanging Gardens of Babylon",
+    "id": "the_hanging_gardens_of_babylon",
     "A": { 
       "img": "the_hanging_gardens_of_babylon.jpg",
       "pointsByStages": [3, 0, 7],
@@ -53,6 +57,7 @@
   },
   {
     "name": "The Statue of Zeus in Olympia",
+    "id": "the_statue_of_zeus_in_olympia",
     "A": { 
       "img": "the_statue_of_zeus_in_olympia.jpg",
       "pointsByStages": [3, 0, 7],
@@ -66,6 +71,7 @@
   },
   {
     "name": "The Mausoleum of Halicarnassus",
+    "id": "the_mausoleum_of_halicarnassus",
     "A": { 
       "img": "the_mausoleum_of_halicarnassus.jpg",
       "pointsByStages": [3, 0, 7],
@@ -79,6 +85,7 @@
   },
   {
     "name": "The Pyramids of Giza",
+    "id": "the_pyramids_of_giza",
     "A": { 
       "img": "the_pyramids_of_giza.jpg",
       "pointsByStages": [3, 5, 7],

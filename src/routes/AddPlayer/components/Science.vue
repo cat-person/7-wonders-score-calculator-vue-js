@@ -15,7 +15,7 @@
             <input v-model="cogCount" @keypress="isNumber($event)" type="number">
           </div>
     </div>
-    <p> Science points: {{ clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount])) }} </p>
+    <p> Science points: {{ calcSciencePoints(clayCount, measurerCount, cogCount) }} </p>
   </div>
 </template>
   
@@ -38,6 +38,11 @@
           },
         }
       };
+    },
+    methods: {
+      calcSciencePoints(clayCount, measurerCount, cogCount) {
+        return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))
+      }
     }
   };
   </script>
