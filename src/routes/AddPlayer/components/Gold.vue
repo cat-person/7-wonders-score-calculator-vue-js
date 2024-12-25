@@ -1,8 +1,8 @@
 <template>
     <div id="Gold amount" class="gold">
       <h1>Gold</h1>
-      <input :value="goldCount" @keypress="isNumber($event)" @input="onGoldCountChanged()" type="number">
-      <p>Gold points: {{ calcPoints(goldCount) }}</p>
+      <input v-model.number="currentGoldCount" @keypress="isNumber($event)" @input="onGoldCountChanged()" type="number">
+      <p>Gold points: {{ this.calcPoints() }}</p>
     </div>
 </template>
   
@@ -12,7 +12,9 @@
       goldCount: Number
     },
     data() {
-      return {}
+      return {
+        currentGoldCount: this.goldCount
+      }
     },
     methods: {
       isNumber(evt) {
@@ -24,11 +26,13 @@
               return true;
           }
       },
-      calcPoints(givenGoldCount) {
-        Math.floor(givenGoldCount / 3)
+      calcPoints() {  
+        return Math.floor(this.currentGoldCount / 3)
       },
-      onGoldCountChanged(givenGoldCount) {
-        this.$emit("onGoldCountChanged", givenGoldCount)
+
+      onGoldCountChanged() {
+        console.error(`Gold.onGoldCountChanged(${JSON.stringify(this.currentGoldCount)})`)
+        this.$emit("goldCountChanged", this.currentGoldCount)
       }
     }
   };

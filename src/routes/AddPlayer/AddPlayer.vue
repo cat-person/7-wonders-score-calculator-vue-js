@@ -6,7 +6,7 @@
       @onSideChanged="onSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
-    <Gold :goldCount="goldCount" :onGoldCountChanged="onGoldCountChanged($event)"/>
+    <Gold :goldCount="playerScoreData.goldCount" :goldCountChanged="onGoldCountChanged($event)"/>
     <Military/>
     <Culture/>
     <Trade/>
@@ -63,6 +63,8 @@ export default {
     
     console.error(`meow: ${JSON.stringify(defaultScoreData)}`)
     
+    console.error(`scoreData.goldCount: ${scoreData.goldCount}`)
+
     return {
       wonders: wonders,
       playerScoreData: scoreData
@@ -82,6 +84,7 @@ export default {
   },
   methods: {
     onGoldCountChanged(givenCount){
+      console.error(`AppPlayer.onGoldCountChanged(${givenCount})`)
       this.playerScoreData.goldCount = givenCount
     },
     onWonderSelected(wonderId) {

@@ -1,6 +1,7 @@
 <script>
   import emblaCarouselVue from 'embla-carousel-vue'
   import wonders from '@/assets/wonders.json'
+  import * as util from '@/utils/calc';
 
   export default {
     setup() {
@@ -59,6 +60,9 @@
           selectedStage = id - 1
         }
         this.$emit("onStageBuilt", selectedStage)
+      },
+      calcGoldPoints(goldCount){
+        return util.calcGoldPoints(goldCount)
       },
       calcWonderPoints(){
         let result = 0
