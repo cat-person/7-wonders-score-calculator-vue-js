@@ -1,6 +1,10 @@
 <template>
    <div class="container" :style="{'background-color': getWonder(playerScoreData.wonder.id, playerScoreData.wonder.currentSide).background}">
-    <WonderAndName
+    <Name
+      :name="playerScoreData.name"
+      @changeName="onNameChanged($event)"/>
+      
+    <Wonder
       :wonderPoints="playerScoreData.wonder"
       @onWonderSelected="onWonderSelected($event)"
       @onSideChanged="onSideChanged($event)"
@@ -18,7 +22,8 @@
 </template>
 
 <script>
-import WonderAndName  from './components/WonderAndName.vue';
+import Name  from './components/Name.vue';
+import Wonder  from './components/Wonder.vue';
 import Gold from './components/Gold.vue';
 import Military from './components/Military.vue';
 import Culture from './components/Culture.vue';
@@ -74,7 +79,8 @@ export default {
     savedScoreData: Object
   },
   components: {
-    WonderAndName,
+    Name,
+    Wonder,
     Gold,
     Military,
     Culture,
@@ -83,6 +89,9 @@ export default {
     Guild,
   },
   methods: {
+    onNameChanged(name) {
+      this.playerScoreData.name = name
+    },
     onGoldCountChanged(givenCount){
       console.error(`AppPlayer.onGoldCountChanged(${givenCount})`)
       this.playerScoreData.goldCount = givenCount

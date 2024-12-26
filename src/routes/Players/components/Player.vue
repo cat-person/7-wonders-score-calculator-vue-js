@@ -4,12 +4,8 @@
   import * as util from '@/utils/calc';
 
   export default {
-    setup() {
-      const [emblaRef, emblaApi] = emblaCarouselVue()
-      return { emblaRef, emblaApi }
-    },
     props: {
-      wonderPoints: Object
+      playerScore: Object
     },
     data() {
       return {
@@ -60,9 +56,6 @@
           selectedStage = id - 1
         }
         this.$emit("onStageBuilt", selectedStage)
-      },
-      calcGoldPoints(goldCount){
-        return util.calcGoldPoints(goldCount)
       },
       calcWonderPoints(){
         let result = 0
