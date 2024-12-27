@@ -1,5 +1,4 @@
 <script>
-  import emblaCarouselVue from 'embla-carousel-vue'
   import wonders from '@/assets/wonders.json'
   import * as util from '@/utils/calc';
 
@@ -12,20 +11,14 @@
         wonders: wonders,
       }
     },
-    mounted() {
-      this.emblaApi.scrollTo(wonders.findIndex(wonder => wonder.id == this.wonderPoints.id), true)
-      this.emblaApi.on('select', (emblaApi) => {
-        this.selectWonder(emblaApi)
-      })
-    },
     methods: {
-      getImageByWonder(wonderId, side) {
-        console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
-        let wonder = this.getWonder(wonderId, side)
-        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
-      },
-      getWonder(wonderId, side) {
-        console.error(`WonderAndName.getWonder(wonderId: ${wonderId}, side: ${side})`)
+    //   getImageByWonder(wonderId, side) {
+    //     console.error(`Player.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
+    //     let wonder = this.getWonder(wonderId, side)
+    //     return new URL(`../../../assets/${wonder.img}`, import.meta.url)
+    //   },
+    getWonderById(wonderId) {
+        console.error(`Player.getWonderById(wonderId: ${wonderId})`)
 
         let result = undefined
         this.wonders.forEach((wonder) => { 
@@ -33,67 +26,39 @@
             result = wonder
           }
         })
-
-        if(side == 'A'){
-          return result.A
-        } else {
-          return result.B
-        }  
-      },
-      selectWonder(emblaApi) {
-        this.$emit('onWonderSelected', wonders[emblaApi.selectedScrollSnap()].id)
-      },
-      changeSide() {
-        this.$emit('onSideChanged', this.wonderPoints.currentSide == 'A' ? 'B': 'A')
-      },
-      onChecked(event) {
-        console.error(`onChecked(${event})`)
-        let id = parseInt(event.srcElement.id)
-        let selectedStage = 0
-        if(event.srcElement.checked){
-          selectedStage = id
-        } else {
-          selectedStage = id - 1
-        }
-        this.$emit("onStageBuilt", selectedStage)
-      },
-      calcWonderPoints(){
-        let result = 0
-        let pointsByStage = this.getWonder(this.wonderPoints.id, this.wonderPoints.currentSide).pointsByStages
-        for (let idx = 0; idx < pointsByStage.length; idx++) {
-          if(idx < this.wonderPoints.stageBuilt) {
-            result += pointsByStage[idx];
-          }
-        }
         return result
-      }
+      },
+      getPointsByCategory(playerScore){
+        const result = { 
+        wonder: 32,//util.calcWonderPoints(playerScore.wonder.id, playerScore.wonder.side, playerScore.wonder.stageBuilt),
+        gold: 12,
+        military: util.calcMilitary(playerScore.battles),
+        }
+
+        // console.error(`getPointsByCategory(${JSON.stringify(playerScore)}) => ${JSON.stringify(result)}`)
+
+        return result
+        // WonderAndName,
+        // Gold,
+        // Military,
+        // Culture,
+        // Trade,
+        // Science,
+        // Guild,
+        //   { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+        //   { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+        //   { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+        //   { age: 38, first_name: 'Jami', last_name: 'Carney' }
+        // ]
+        }
     }
   }
 </script>
 
 <template>
-  <div class="container">
-    <div class="horizontal">
-      <p>Enter the name: </p>
-      <input type="text">
-    </div>
-    <div class="embla" ref="emblaRef">
-      <li class="embla__container">
-        <div class="embla__slide" v-for="wonder in wonders">
-          <img class="img" v-bind:src="getImageByWonder(wonder.id, wonderPoints.side)"/>
-          <button @click="changeSide"> {{ wonderPoints.currentSide }} </button>
-          <div class="horizontal">
-            <div v-for="pointsByStage, stageIdx in getWonder(wonder.id, wonderPoints.currentSide).pointsByStages">
-              <p> {{ pointsByStage }} </p>
-              <input type="checkbox" :checked="stageIdx < wonderPoints.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
-            </div>
-          </div>
-          <p> {{ wonder.name }} </p>
-        </div>
-      </li>
-    </div>
-    <p> Wonder points: {{ calcWonderPoints() }} </p>
-  </div>
+    <h2>{{playerScore.name}}</h2>
+    <b-table striped hover :items="getPointsByCategory(playerScore)"></b-table>
+    <h3>{{getWonderById(playerScore.wonder.id).name}}</h3>
 </template>
 
 <style scoped>
@@ -103,18 +68,6 @@
   .container {
     justify-self: center;
     width: 160mm;
-  }
-  .embla {
-    overflow: hidden;
-    width: 160mm;
-    justify-self: center;
-  }
-  .embla__container {
-    display: flex;
-  }
-  .embla__slide {
-    flex: 0 0 160mm;
-    min-width: 0;
   }
   .img {
     width: 160mm;

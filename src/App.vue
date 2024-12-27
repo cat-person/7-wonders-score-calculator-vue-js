@@ -74,6 +74,8 @@
 
 </script> 
 
-<style scoped>
-
+<style>
+  #app {
+    text-align: center;
+  }
 </style>

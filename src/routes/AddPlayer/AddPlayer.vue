@@ -3,7 +3,6 @@
     <Name
       :name="playerScoreData.name"
       @changeName="onNameChanged($event)"/>
-      
     <Wonder
       :wonderPoints="playerScoreData.wonder"
       @onWonderSelected="onWonderSelected($event)"
@@ -129,14 +128,13 @@ export default {
 </script>
 
 <style>
-#app {
-  text-align: center;
-  margin: 20px;
-}
+
 
 .container {
     justify-self: center;
     width: 160mm;
+    padding-top: 6mm;
+    padding-bottom: 6mm;
   }
 
 .radio-group {
