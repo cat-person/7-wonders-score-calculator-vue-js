@@ -18,7 +18,7 @@ export function calcWonderPoints(wonder, side, stageBuilt) {
 
 export function calcGoldPoints(givenGoldCount) {
     console.error(`calcGoldPoints(${givenGoldCount})`)
-    Math.floor(givenGoldCount / 3)
+    return Math.floor(givenGoldCount / 3)
 }
 
 export function calcMilitary(battles) {
@@ -44,4 +44,8 @@ export function calcMilitary(battles) {
     }
 
     return result
+}
+
+export function calcSciencePoints(clayCount, measurerCount, cogCount) {
+    return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))
 }

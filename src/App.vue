@@ -76,6 +76,7 @@
 
 <style>
   #app {
+    user-select:none;
     text-align: center;
   }
 </style>

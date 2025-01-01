@@ -2,11 +2,11 @@
   <div id="app">
     <h1> Players </h1>
 
-    <div class="image-item" v-for="(playerScore, index) in playerScores" :key="index">
+    <div class="players" v-for="(playerScore, index) in playerScores" :key="index">
       <Player :playerScore="playerScore" @editClicked="editPlayer($event)"/>
     </div>
 
-    <button @click="addNewPlayer">Add New Player</button>
+    <button class="add_player_button" @click="addNewPlayer">Add Player</button>
   </div>
 </template>
 
@@ -36,3 +36,13 @@
     }
   }
 </script>
+
+<style scoped>
+  .players {
+    justify-self: center;
+    justify-items: center;
+  }
+  .add_player_button {
+    margin: 4mm
+  }
+</style>

@@ -76,7 +76,7 @@
 </script>
 
 <template>
-  <div class="container">
+  <div class="container"> 
     <div class="embla" ref="emblaRef">
       <li class="embla__container">
         <div class="embla__slide" v-for="wonder in wonders">
