@@ -4,15 +4,15 @@
     <div id="Science" class="horizontal">
           <div class="vertical">
             <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
-            <input v-model="clayCount" @keypress="isNumber($event)" type="number">
+            <input class="scienceInput" v-model="clayCount" @keypress="isNumber($event)" type="number">
           </div>
           <div class="vertical">
             <img src="../../../assets/science_icons/measurer.png" class="science_icon"/>
-            <input v-model="measurerCount" @keypress="isNumber($event)" type="number">
+            <input class="scienceInput" v-model="measurerCount" @keypress="isNumber($event)" type="number">
           </div>
           <div class="vertical">
             <img src="../../../assets/science_icons/cog.png" class="science_icon"/>  
-            <input v-model="cogCount" @keypress="isNumber($event)" type="number">
+            <input class="scienceInput" v-model="cogCount" @keypress="isNumber($event)" type="number">
           </div>
     </div>
     <p> Science points: {{ calcSciencePoints(clayCount, measurerCount, cogCount) }} </p>
@@ -48,6 +48,11 @@
   </script>
   
   <style>
+  .scienceInput {
+      justify-self: center;
+      width: 18mm;
+    }
+
   .science {
       background-color: cadetblue;
       justify-self: center;
@@ -65,6 +70,7 @@
   .vertical {
     display: flex;
     flex-direction: column;
+    margin: 2mm;
   }
 
   .science_icon {

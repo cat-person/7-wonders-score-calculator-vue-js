@@ -6,7 +6,10 @@
       <Player :playerScore="playerScore" @editClicked="editPlayer($event)"/>
     </div>
 
-    <button class="add_player_button" @click="addNewPlayer">Add Player</button>
+    <div class="vertical">
+      <button class="button" @click="addNewPlayer">Add Player</button>
+      <button class="new_game_button" @click="startNewGame">Start new game</button>
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,9 @@
       addNewPlayer(){
         this.$emit("addNewPlayer")
       },
+      startNewGame(){
+        this.$emit("startNewGame")
+      },
       editPlayer(playerScore){
         this.$emit("editPlayer", playerScore)
       },
@@ -42,7 +48,20 @@
     justify-self: center;
     justify-items: center;
   }
-  .add_player_button {
+  .button {
     margin: 4mm
   }
+
+  .new_game_button {
+    margin: 4mm;
+    background-color: rosybrown;
+  }
+
+  .vertical {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    width: 40mm;
+  }
+
 </style>
