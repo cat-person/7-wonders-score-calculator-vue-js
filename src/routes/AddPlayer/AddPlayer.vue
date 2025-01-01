@@ -1,10 +1,11 @@
 <template>
-   <div class="container" :style="{'background-color': getWonder(playerScoreData.wonder.id, playerScoreData.wonder.currentSide).background}">
+   <div class="container" :style="{'background-color': getBackgroundColor(playerScoreData.wonder, availableWonders)}">
     <Name
       :name="playerScoreData.name"
       @changeName="onNameChanged($event)"/>
     <Wonder
       :wonderPoints="playerScoreData.wonder"
+      :availableWonderIds="availableWonders"
       @onWonderSelected="onWonderSelected($event)"
       @onSideChanged="onSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
@@ -32,49 +33,47 @@ import Guild from './components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
 
-const defaultScoreData = {
-  name: '',
-  wonder: {
-    id: 'the_colossus_of_rhodes',
-    currentSide: 'B',
-    stageBuilt: 2,
-  },
-  goldCount: 0,
-  battles: {
-    'bronze.left': 'Lost', 
-    'bronze.right': 'Lost',
-    'silver.left': 'Lost', 
-    'silver.right': 'Lost',
-    'golden.left': 'Lost', 
-    'golden.right': 'Lost'
-  },
-  culturePoints: 0,
-  tradePoints: 0,
-  science: {
-    clayCount: 0,
-    measurerCount: 0,
-    cogCount: 0,
-  },
-  guildPoints: 0
+function getDefault(availableWonders){
+  return {
+    name: '',
+    wonder: {
+      id: availableWonders[0],
+      currentSide: 'B',
+      stageBuilt: 2,
+    },
+    goldCount: 0,
+    battles: {
+      'bronze.left': 'Lost', 
+      'bronze.right': 'Lost',
+      'silver.left': 'Lost', 
+      'silver.right': 'Lost',
+      'golden.left': 'Lost', 
+      'golden.right': 'Lost'
+    },
+    culturePoints: 0,
+    tradePoints: 0,
+    science: {
+      clayCount: 0,
+      measurerCount: 0,
+      cogCount: 0,
+    },
+    guildPoints: 0
+  }
 }
 
 export default {
   data() {
-    let scoreData = defaultScoreData
+    let scoreData = getDefault(this.availableWonders)
     if(this.savedScoreData){
       scoreData = this.savedScoreData
     }
-    
-    console.error(`meow: ${JSON.stringify(defaultScoreData)}`)
-    
-    console.error(`scoreData.goldCount: ${scoreData.goldCount}`)
-
     return {
       wonders: wonders,
       playerScoreData: scoreData
     }  
   },
   props: {
+    availableWonders: Array,
     savedScoreData: Object
   },
   components: {
@@ -87,6 +86,7 @@ export default {
     Science,
     Guild,
   },
+
   methods: {
     onNameChanged(name) {
       this.playerScoreData.name = name
@@ -122,7 +122,16 @@ export default {
     },
     addPlayer() {
       this.$emit("onPlayerAdded", this.playerScoreData)
-    }
+    },
+    isAvailable(wonder, availableWonders) {
+      return availableWonders.some(availableWonder => availableWonder == wonder.id)
+    },
+    getBackgroundColor(wonder, availableWonders) {
+      if(this.isAvailable(wonder, availableWonders)) {
+        return this.getWonder(wonder.id, wonder.currentSide).background
+      }
+      return '#808080'
+    },
   },
 };
 </script>

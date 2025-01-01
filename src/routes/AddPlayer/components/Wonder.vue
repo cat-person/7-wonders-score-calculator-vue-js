@@ -3,17 +3,26 @@
   import wonders from '@/assets/wonders.json'
   import * as util from '@/utils/calc';
 
+
+  function getAvailableWonders(availableWonderIds){
+    let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
+    console.error(`getAvailableWonders(${JSON.stringify(result)})`)
+    return result 
+  }
+
   export default {
     setup() {
       const [emblaRef, emblaApi] = emblaCarouselVue()
       return { emblaRef, emblaApi }
     },
     props: {
-      wonderPoints: Object
+      wonderPoints: Object,
+      availableWonderIds: Array
     },
     data() {
+      // console.error(`getAvailableWonders(availableWonderIds): ${getAvailableWonders(this.availableWonderIds)}`)
       return {
-        wonders: wonders,
+        availableWonders: getAvailableWonders(this.availableWonderIds)
       }
     },
     mounted() {
@@ -23,16 +32,11 @@
       })
     },
     methods: {
-      getImageByWonder(wonderId, side) {
-        console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
-        let wonder = this.getWonder(wonderId, side)
-        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
-      },
       getWonder(wonderId, side) {
-        console.error(`WonderAndName.getWonder(wonderId: ${wonderId}, side: ${side})`)
+        console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
 
         let result = undefined
-        this.wonders.forEach((wonder) => { 
+        wonders.forEach((wonder) => { 
           if(wonder.id == wonderId){
             result = wonder
           }
@@ -44,8 +48,13 @@
           return result.B
         }  
       },
+      getImageByWonder(wonderId, side) {
+        console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
+        let wonder = this.getWonder(wonderId, side)
+        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
+      },
       selectWonder(emblaApi) {
-        this.$emit('onWonderSelected', wonders[emblaApi.selectedScrollSnap()].id)
+        this.$emit('onWonderSelected', getAvailableWonders(this.availableWonderIds)[emblaApi.selectedScrollSnap()].id)
       },
       changeSide() {
         this.$emit('onSideChanged', this.wonderPoints.currentSide == 'A' ? 'B': 'A')
@@ -79,7 +88,7 @@
   <div class="container"> 
     <div class="embla" ref="emblaRef">
       <li class="embla__container">
-        <div class="embla__slide" v-for="wonder in wonders">
+        <div class="embla__slide" v-for="wonder in availableWonders">
           <img class="img" v-bind:src="getImageByWonder(wonder.id, wonderPoints.side)"/>
           <button @click="changeSide"> {{ wonderPoints.currentSide }} </button>
           <div class="horizontal">

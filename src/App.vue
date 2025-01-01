@@ -1,6 +1,6 @@
 <template>
     <Players v-if="state.id === 'players'" :playerScores="playerScores" @addNewPlayer="handleAddNewPlayer()" @editPlayer=""/>
-    <AddPlayer v-if="state.id === 'add_player'" @onPlayerAdded="handlePlayerAdded($event)" />
+    <AddPlayer v-if="state.id === 'add_player'" :availableWonders="getAvailableWonders()" @onPlayerAdded="handlePlayerAdded($event)" />
 </template>
 
 <script>
@@ -51,11 +51,17 @@
     },
 
     methods: {
-      getNotAvailable() {
+      getAvailableWonders() {
         let result = []
-        this.playerScores.forEach((playerScore) => result.push(playerScore.id))
+        wonders.forEach(wonder => {
+          if(!this.playerScores.some((playerScore) => wonder.id == playerScore.wonder.id)) {
+            result.push(wonder.id)
+          }
+        }) 
+        console.error(`App.getAvailableWonders(): ${JSON.stringify(result)}`)
         return result
       },
+
       handleAddNewPlayer(){
         this.state = { 
           id: 'add_player',
