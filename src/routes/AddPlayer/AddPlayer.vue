@@ -17,7 +17,7 @@
     <Science/>
     <Guild/>
     <br/>
-    <button @click="addPlayer()">Calc and finish</button>
+    <button :disabled="!canAdd(playerScoreData)" @click="addPlayer()">Calc and finish</button>
   </div>
 </template>
 
@@ -38,8 +38,8 @@ function getDefault(availableWonders){
     name: '',
     wonder: {
       id: availableWonders[0],
-      currentSide: 'B',
-      stageBuilt: 2,
+      currentSide: 'A',
+      stageBuilt: 0,
     },
     goldCount: 0,
     battles: {
@@ -132,6 +132,9 @@ export default {
       }
       return '#808080'
     },
+    canAdd(scoreData){
+      return scoreData.name != ""
+    }
   },
 };
 </script>
