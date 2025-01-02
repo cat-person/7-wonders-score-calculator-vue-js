@@ -29,10 +29,10 @@
       calcPoints() {  
         return Math.floor(this.currentGoldCount / 3)
       },
-
       onGoldCountChanged() {
-        console.error(`Gold.onGoldCountChanged(${JSON.stringify(this.currentGoldCount)})`)
-        this.$emit("goldCountChanged", this.currentGoldCount)
+        if(this.currentGoldCount) {
+          this.$emit("goldCountChanged", this.currentGoldCount)
+        }
       }
     }
   };

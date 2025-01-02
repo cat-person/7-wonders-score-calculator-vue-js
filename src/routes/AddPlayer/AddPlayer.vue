@@ -10,7 +10,7 @@
       @onSideChanged="onSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
-    <Gold :goldCount="playerScoreData.goldCount" :goldCountChanged="onGoldCountChanged($event)"/>
+    <Gold :goldCount="playerScoreData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
     <Military/>
     <Culture/>
     <Trade/>
@@ -91,8 +91,7 @@ export default {
     onNameChanged(name) {
       this.playerScoreData.name = name
     },
-    onGoldCountChanged(givenCount){
-      console.error(`AppPlayer.onGoldCountChanged(${givenCount})`)
+    handleGoldCountChanged(givenCount){
       this.playerScoreData.goldCount = givenCount
     },
     onWonderSelected(wonderId) {
