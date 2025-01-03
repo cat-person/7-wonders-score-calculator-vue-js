@@ -3,11 +3,12 @@
     <Name
       :name="playerScoreData.name"
       @changeName="onNameChanged($event)"/>
-    <Wonder
-      :wonderPoints="playerScoreData.wonder"
+    
+    <WonderSelection
+      :wonder="playerScoreData.wonder"
       :availableWonderIds="availableWonders"
       @onWonderSelected="onWonderSelected($event)"
-      @onSideChanged="onSideChanged($event)"
+      @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
     <Gold :goldCount="playerScoreData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
@@ -23,7 +24,7 @@
 
 <script>
 import Name  from './components/Name.vue';
-import Wonder  from './components/Wonder.vue';
+import Wonder  from './components/WonderSelection.vue';
 import Gold from './components/Gold.vue';
 import Military from './components/Military.vue';
 import Culture from './components/Culture.vue';
@@ -32,13 +33,14 @@ import Science from './components/Science.vue';
 import Guild from './components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
+import WonderSelection from './components/WonderSelection.vue';
 
 function getDefault(availableWonders){
   return {
     name: '',
     wonder: {
       id: availableWonders[0],
-      currentSide: 'A',
+      side: 'A',
       stageBuilt: 0,
     },
     goldCount: 0,
@@ -63,22 +65,17 @@ function getDefault(availableWonders){
 
 export default {
   data() {
-    let scoreData = getDefault(this.availableWonders)
-    if(this.savedScoreData){
-      scoreData = this.savedScoreData
-    }
     return {
       wonders: wonders,
-      playerScoreData: scoreData
+      playerScoreData: getDefault(this.availableWonders)
     }  
   },
   props: {
     availableWonders: Array,
-    savedScoreData: Object
   },
   components: {
     Name,
-    Wonder,
+    WonderSelection,
     Gold,
     Military,
     Culture,
@@ -113,8 +110,8 @@ export default {
         return result.B
       }
     },
-    onSideChanged(givenSide) {
-      this.playerScoreData.wonder.currentSide = givenSide
+    handleSideChanged(givenSide) {
+      this.playerScoreData.wonder.side = givenSide
     },
     onStageBuilt(stageBuilt) {
       this.playerScoreData.wonder.stageBuilt = stageBuilt
@@ -127,7 +124,7 @@ export default {
     },
     getBackgroundColor(wonder, availableWonders) {
       if(this.isAvailable(wonder, availableWonders)) {
-        return this.getWonder(wonder.id, wonder.currentSide).background
+        return this.getWonder(wonder.id, wonder.side).background
       }
       return '#808080'
     },
@@ -139,14 +136,12 @@ export default {
 </script>
 
 <style>
-
-
 .container {
-    justify-self: center;
-    width: 160mm;
-    padding-top: 6mm;
-    padding-bottom: 6mm;
-  }
+  justify-self: center;
+  width: 160mm;
+  padding-top: 6mm;
+  padding-bottom: 6mm;
+}
 
 .radio-group {
   margin: 20px;

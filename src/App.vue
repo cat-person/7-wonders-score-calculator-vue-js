@@ -3,8 +3,14 @@
     v-if="state.id === 'players'" 
     :playerScores="playerScores" 
     @addNewPlayer="handleAddNewPlayer()"
-    @editPlayer="" 
+    @editPlayer="handleEditPlayer($event)" 
     @startNewGame="handleStartNewGame()"/>
+  <EditPlayer 
+    v-if="state.id === 'edit_player'" 
+    :availableWonders="getAvailableWonders()"
+    :playerScore="state.playerScore"
+    @finishEditing="handleFinishEditting($event)"   
+  />
   <AddPlayer v-if="state.id === 'add_player'" :availableWonders="getAvailableWonders()"
     @onPlayerAdded="handlePlayerAdded($event)" />
 </template>
@@ -12,6 +18,7 @@
 <script>
 import Players from './routes/Players/Players.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
+import EditPlayer from './routes/AddPlayer/EditPlayer.vue'
 
 import wonders from '@/assets/wonders.json'
 
@@ -37,6 +44,7 @@ export default {
   components: {
     Players,
     AddPlayer,
+    EditPlayer,
   },
 
   data() {
@@ -63,8 +71,11 @@ export default {
       }
       window.localStorage.setItem('state', JSON.stringify(this.state))
     },
-    editPlayer(playerScore) {
-      this.state = { addPlayer, playerScore }
+    handleEditPlayer(playerScore) {
+      this.state = { 
+        id: 'edit_player',
+        playerScore: playerScore
+       }
       window.localStorage.setItem('state', JSON.stringify(this.state))
     },
     handlePlayerAdded(playerScore) {
@@ -78,6 +89,16 @@ export default {
       window.localStorage.clear()
       this.state = defaultState(window.localStorage)
       this.playerScores = defaultPlayerScores(window.localStorage)
+    },
+    handleFinishEditting(givenPlayerScore){
+      let editedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenPlayerScore.wonder.id)
+
+      this.playerScores = [...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)]
+
+      this.state = { id: 'players' }
+
+      window.localStorage.setItem('state', JSON.stringify(this.state))
+      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
     }
   },
 }

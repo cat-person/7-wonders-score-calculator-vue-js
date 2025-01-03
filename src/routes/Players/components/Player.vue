@@ -34,7 +34,7 @@
             return result
         },
         
-      getWonderByIdAndSide(wonderId, side) {
+        getWonderByIdAndSide(wonderId, side) {
             console.error(`Player.getWonderById(wonderId: ${wonderId})`)
 
             let wonder = this.getWonderById(wonderId)
@@ -93,24 +93,28 @@
                     color: colors.wonder,
                     points: util.calcWonderPoints(
                         this.getWonderById(playerScore.wonder.id),
-                        playerScore.wonder.currentSide,
+                        playerScore.wonder.side,
                         playerScore.wonder.stageBuilt
                     )
                 }
             ]
+        },
+
+        handleEditClicked(playerScore){
+            this.$emit("editClicked", playerScore)
         }
     }
   }
 </script>
 
 <template>
-    <!-- :style="getImageByWonder(playerScore.wonder.id, playerScore.wonder.currentSide)"  -->
+    <!-- :style="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"  -->
     <div class='img' :style="{ 
-        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.currentSide) + ')', 
+        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
         'background-size': 'cover',
         'background-repeat': 'no-repeat'
-        }">
-        <h2 class="wonder-lbl"  >{{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.currentSide }}): {{playerScore.name}}</h2>
+        }" @click="handleEditClicked(playerScore)">
+        <h2 class="wonder-lbl"  >{{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}</h2>
         <tbody class="table">
             <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
                 <div class="point-container" :style="{'background-color': scoreItem.color}">
@@ -134,8 +138,6 @@
     justify-items: center;
   }
   .table {
-    /* background-color: lightgrey; */
-
     vertical-align: bottom;
     height: 35mm;
     padding: 2mm;

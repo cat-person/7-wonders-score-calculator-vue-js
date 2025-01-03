@@ -1,7 +1,8 @@
 <script>
+  import emblaCarouselVue from 'embla-carousel-vue'
+  import Wonder  from './Wonder.vue';
   import wonders from '@/assets/wonders.json'
   import * as util from '@/utils/calc';
-
 
   function getAvailableWonders(availableWonderIds){
     let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
@@ -10,13 +11,29 @@
   }
 
   export default {
+    setup() {
+      const [emblaRef, emblaApi] = emblaCarouselVue()
+      return { emblaRef, emblaApi }
+    },
     props: {
       wonder: Object,
+      availableWonderIds: Array
     },
     data() {
+      // console.error(`getAvailableWonders(availableWonderIds): ${getAvailableWonders(this.availableWonderIds)}`)
       return {
+        availableWonders: getAvailableWonders(this.availableWonderIds),
         // wonder: this.wonder
       }
+    },
+    mounted() {
+      this.emblaApi.scrollTo(wonders.findIndex(wonder => wonder.id == this.wonder.id), true)
+      this.emblaApi.on('select', (emblaApi) => {
+        this.selectWonder(emblaApi)
+      })
+    },
+    components: {
+      Wonder
     },
     methods: {
       getWonder(wonderId, side) {
@@ -43,18 +60,10 @@
       selectWonder(emblaApi) {
         this.$emit('onWonderSelected', getAvailableWonders(this.availableWonderIds)[emblaApi.selectedScrollSnap()].id)
       },
-      handleChangeSide() {
+      handleSideChanged() {
         this.$emit('onSideChanged', this.wonder.side == 'A' ? 'B': 'A')
       },
-      onChecked(event) {
-        console.error(`onChecked(${event})`)
-        let id = parseInt(event.srcElement.id)
-        let selectedStage = 0
-        if(event.srcElement.checked){
-          selectedStage = id
-        } else {
-          selectedStage = id - 1
-        }
+      handleStageBuilt(selectedStage) {
         this.$emit("onStageBuilt", selectedStage)
       },
       calcWonderPoints(){
@@ -72,33 +81,36 @@
 </script>
 
 <template>
-  <div class="container"> 
-    <img class="img" v-bind:src="getImageByWonder(wonder.id, wonder.side)"/>
-    <button class="btn" @click="handleChangeSide"> {{wonder.side}} </button>
-    <div class="horizontal">
-      <div v-for="pointsByStage, stageIdx in getWonder(wonder.id, wonder.side).pointsByStages">
-        <p> {{ pointsByStage }} </p>
-        <input type="checkbox" :checked="stageIdx < wonder.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
-      </div>
+  <div> 
+    <div class="embla" ref="emblaRef">
+      <li class="embla__container">
+        <div class="embla__slide" v-for="availableWonder in availableWonders">
+          <Wonder
+            :wonder="{
+              id: availableWonder.id,
+              side: wonder.side,
+              stageBuilt: wonder.stageBuilt,
+            }"
+            @onStageBuilt="handleStageBuilt($event)"
+            @onSideChanged="handleSideChanged"/>
+        </div>
+      </li>
     </div>
-    <p> {{ wonder.name }} </p>
+    <p> Wonder points: {{ calcWonderPoints() }} </p>
   </div>
 </template>
 
-<style>
-  .container {
+<style scoped>
+  .embla {
+    overflow: hidden;
+    width: 160mm;
     justify-self: center;
-    width: 160mm;
   }
-  .img {
-    width: 160mm;
-  }
-  .btn {
-    height:
-  }
-  .horizontal { 
+  .embla__container {
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+  }
+  .embla__slide {
+    flex: 0 0 160mm;
+    min-width: 0;
   }
 </style>
