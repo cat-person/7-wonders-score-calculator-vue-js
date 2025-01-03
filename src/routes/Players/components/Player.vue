@@ -55,9 +55,13 @@
             console.error(`Player.getPointsByCategory(playerScore.goldCount: ${JSON.stringify(playerScore.goldCount)})`)
             return [
                 {
-                    name: 'culture',
-                    color: colors.culture,
-                    points: playerScore.culturePoints
+                    name: 'wonder',
+                    color: colors.wonder,
+                    points: util.calcWonderPoints(
+                        this.getWonderById(playerScore.wonder.id),
+                        playerScore.wonder.side,
+                        playerScore.wonder.stageBuilt
+                    )
                 },
                 {
                     name: 'gold',
@@ -65,14 +69,19 @@
                     points: util.calcGoldPoints(playerScore.goldCount)
                 },
                 {
-                    name: 'guild',
-                    color: colors.guild,
-                    points: playerScore.guildPoints
-                },
-                {
                     name: 'military',
                     color: colors.military,
                     points: util.calcMilitary(playerScore.battles)
+                },
+                {
+                    name: 'culture',
+                    color: colors.culture,
+                    points: playerScore.culturePoints
+                },
+                {
+                    name: 'trade',
+                    color: colors.trade,
+                    points: playerScore.tradePoints
                 },
                 {
                     name: 'science',
@@ -82,20 +91,11 @@
                         playerScore.science.measurerCount,
                         playerScore.science.cogCount
                     )
-                },
+                },  
                 {
-                    name: 'trade',
-                    color: colors.trade,
-                    points: playerScore.tradePoints
-                },
-                {
-                    name: 'wonder',
-                    color: colors.wonder,
-                    points: util.calcWonderPoints(
-                        this.getWonderById(playerScore.wonder.id),
-                        playerScore.wonder.side,
-                        playerScore.wonder.stageBuilt
-                    )
+                    name: 'guild',
+                    color: colors.guild,
+                    points: playerScore.guildPoints
                 }
             ]
         },

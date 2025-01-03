@@ -11,11 +11,11 @@
       />
 
     <Gold :goldCount="playerData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
-    <Military/>
-    <Culture/>
-    <Trade/>
-    <Science/>
-    <Guild/>
+    <Military :battles="playerData.battles" />
+    <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
+    <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
+    <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
+    <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
     <button :disabled="!canAdd(playerData)" @click="handleFinishEditing">Finish editing</button>
   </div>
@@ -55,6 +55,9 @@ export default {
   },
 
   methods: {
+    getBackgroundColor(wonder) {
+      return this.getWonder(wonder.id, wonder.side).background
+    },
     onNameChanged(name) {
       this.playerData.name = name
     },
@@ -85,14 +88,24 @@ export default {
     onStageBuilt(stageBuilt) {
       this.playerData.wonder.stageBuilt = stageBuilt
     },
-    handleFinishEditing() {
-      this.$emit("finishEditing", this.playerData)
+    handleCulturePointsUpdated(culturePoints){
+      this.playerData.culturePoints = culturePoints
     },
-    getBackgroundColor(wonder) {
-      return this.getWonder(wonder.id, wonder.side).background
+    handleTradePointsUpdated(tradePoints){
+      console.error(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
+      this.playerData.tradePoints = tradePoints
+    },
+    handleScienceUpdated(science){
+      this.playerData.science = science
+    },
+    handleGuildPointsUpdated(guildPoints){
+      this.playerData.guildPoints = guildPoints
     },
     canAdd(scoreData){
       return this.playerData.name != ""
+    },
+    handleFinishEditing() {
+      this.$emit("finishEditing", this.playerData)
     }
   },
 };

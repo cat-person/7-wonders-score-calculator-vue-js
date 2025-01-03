@@ -1,27 +1,33 @@
 <template>
   <div id="Trade" class="trade">
     <h1>Trade</h1>
-        <input v-model="tradePoints" @keypress="isNumber($event)" type="number">
+        <input v-model="tradePoints" @keypress="isNumber($event)" type="number" @input="handleTradePointsInput">
     </div>
 </template>
   
   <script>
   export default {
+    props: {
+      points: Object
+    },
     data() {
       return {
-        tradePoints: 0,
-        methods: {
-            isNumber: function(evt) {
-                evt = (evt) ? evt : window.event;
-                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                    evt.preventDefault();
-                } else {
-                    return true;
-                }
-            }
-        }
+        tradePoints: this.points,
       };
+    },
+    methods: {
+      handleTradePointsInput(){
+        this.$emit('tradePointsUpdated', this.tradePoints)
+      },
+      isNumber: function(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();
+          } else {
+              return true;
+          }
+      }
     }
   };
   </script>

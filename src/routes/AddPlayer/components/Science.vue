@@ -2,46 +2,48 @@
     <div class="science">
     <h1>Science</h1>
     <div id="Science" class="horizontal">
-          <div class="vertical">
-            <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
-            <input class="scienceInput" v-model="clayCount" @keypress="isNumber($event)" type="number">
-          </div>
-          <div class="vertical">
-            <img src="../../../assets/science_icons/measurer.png" class="science_icon"/>
-            <input class="scienceInput" v-model="measurerCount" @keypress="isNumber($event)" type="number">
-          </div>
-          <div class="vertical">
-            <img src="../../../assets/science_icons/cog.png" class="science_icon"/>  
-            <input class="scienceInput" v-model="cogCount" @keypress="isNumber($event)" type="number">
-          </div>
+      <div class="vertical">
+        <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
+        <input class="scienceInput" v-model="science.clayCount" @keypress="isNumber($event)" type="number">
+      </div>
+      <div class="vertical">
+        <img src="../../../assets/science_icons/measurer.png" class="science_icon"/>
+        <input class="scienceInput" v-model="science.measurerCount" @keypress="isNumber($event)" type="number">
+      </div>
+      <div class="vertical">
+        <img src="../../../assets/science_icons/cog.png" class="science_icon"/>  
+        <input class="scienceInput" v-model="science.cogCount" @keypress="isNumber($event)" type="number">
+      </div>
     </div>
-    <p> Science points: {{ calcSciencePoints(clayCount, measurerCount, cogCount) }} </p>
+    <p> Science points: {{ calcSciencePoints(science.clayCount, science.measurerCount, science.cogCount) }} </p>
   </div>
 </template>
   
   <script>
   export default {
+    props:{
+      science: Object
+    },
     data() {
       return {
-        clayCount: 0,
-        measurerCount: 0,
-        cogCount: 0,
-        methods: {
-          isNumber: function(evt) {
-              evt = (evt) ? evt : window.event;
-              var charCode = (evt.which) ? evt.which : evt.keyCode;
-              if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                  evt.preventDefault();
-              } else {
-                  return true;
-              }
-          },
-        }
-      };
+        science: this.science,
+      }
     },
     methods: {
       calcSciencePoints(clayCount, measurerCount, cogCount) {
         return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))
+      },
+      handleScienceUpdated(){
+        this.$emit('scienceUpdated', this.science)
+      },
+      isNumber(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();
+          } else {
+              return true;
+          }
       }
     }
   };

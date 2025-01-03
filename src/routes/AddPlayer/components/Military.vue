@@ -1,6 +1,4 @@
 <template>
-    
-    
     <div class="military">
         <h1>Military</h1>
         <div>
@@ -25,31 +23,36 @@
   
   <script>
   export default {
-
+    props: {
+        battles: Object
+    },
     data() {
+        console.error(`Military.battles: ${JSON.stringify(this.battles)}`)
       return {
-        age: {
-            Bronze: 'Bronze',
-            Silver: 'Silver',
-            Gold: 'Gold',
-        },
-        neighbours: {
-            Left: 'Left',
-            Right: 'Right',
-        },
-        Unknown: '?',
-        Won: 'Won',
-        Lost: 'Lost',
+        battles: this.battles
+      }
+    //     age: {
+    //         Bronze: 'Bronze',
+    //         Silver: 'Silver',
+    //         Gold: 'Gold',
+    //     },
+    //     neighbours: {
+    //         Left: 'Left',
+    //         Right: 'Right',
+    //     },
+    //     Unknown: '?',
+    //     Won: 'Won',
+    //     Lost: 'Lost',
 
-        battles: {
-            'bronze.left': 'Lost', 
-            'bronze.right': 'Lost',
-            'silver.left': 'Lost', 
-            'silver.right': 'Lost',
-            'golden.left': 'Lost', 
-            'golden.right': 'Lost'
-        }
-      };
+    //     battles: {
+    //         'bronze.left': 'Lost', 
+    //         'bronze.right': 'Lost',
+    //         'silver.left': 'Lost', 
+    //         'silver.right': 'Lost',
+    //         'golden.left': 'Lost', 
+    //         'golden.right': 'Lost'
+    //     }
+    //   };
     },
     methods: {
         calcMilitary(battles) {
@@ -78,8 +81,8 @@
         },
 
         handleClick(age, neighbour){
-            // console.error(`{\n\tage: ${age}, \n\tneighbour: ${neighbour}\n}`)
             this.battles[`${age}.${neighbour}`] = this.battles[`${age}.${neighbour}`] === 'Won' ? 'Lost' : 'Won'
+            this.$emit("battlesUpdated")
         }
     }
   };

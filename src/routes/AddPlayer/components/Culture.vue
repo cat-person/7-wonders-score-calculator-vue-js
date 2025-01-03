@@ -1,27 +1,33 @@
 <template>
     <div id="Culture" class="culture">
       <h1>Culture</h1>
-      <input v-model="culturePoints" @keypress="isNumber($event)" type="number">
+      <input v-model="culturePoints" @keypress="isNumber($event)" type="number" @input="handleCulturePointsInput">
     </div>
 </template>
   
 <script>
   export default {
+    props: {
+      points: Object
+    },
     data() {
       return {
-        culturePoints: 0,
+        culturePoints: this.points,
       }
     },
     methods: {
-        isNumber: function(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-                evt.preventDefault();
-            } else {
-                return true;
-            }
-        }
+      handleCulturePointsInput(){
+        this.$emit('culturePointsUpdated', this.culturePoints)
+      },
+      isNumber(evt) {
+          evt = (evt) ? evt : window.event;
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+              evt.preventDefault();
+          } else {
+              return true;
+          }
+      }
     },
   };
 </script> 

@@ -12,7 +12,7 @@
       @onStageBuilt="onStageBuilt($event)"/>
 
     <Gold :goldCount="playerScoreData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
-    <Military/>
+    <Military :battles="playerScoreData.battles"/>
     <Culture/>
     <Trade/>
     <Science/>
@@ -24,7 +24,7 @@
 
 <script>
 import Name  from './components/Name.vue';
-import Wonder  from './components/WonderSelection.vue';
+import WonderSelection  from './components/WonderSelection.vue';
 import Gold from './components/Gold.vue';
 import Military from './components/Military.vue';
 import Culture from './components/Culture.vue';
@@ -33,7 +33,6 @@ import Science from './components/Science.vue';
 import Guild from './components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
-import WonderSelection from './components/WonderSelection.vue';
 
 function getDefault(availableWonders){
   return {
