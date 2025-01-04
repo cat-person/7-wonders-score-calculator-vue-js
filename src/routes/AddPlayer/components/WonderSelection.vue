@@ -1,116 +1,157 @@
 <script>
-  import emblaCarouselVue from 'embla-carousel-vue'
-  import Wonder  from './Wonder.vue';
-  import wonders from '@/assets/wonders.json'
-  import * as util from '@/utils/calc';
+import emblaCarouselVue from 'embla-carousel-vue'
+import Wonder from './Wonder.vue';
+import wonders from '@/assets/wonders.json'
+import * as util from '@/utils/calc';
 
-  function getAvailableWonders(availableWonderIds){
-    let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
-    console.error(`getAvailableWonders(${JSON.stringify(result)})`)
-    return result 
-  }
+function getAvailableWonders(availableWonderIds) {
+  let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
+  console.error(`getAvailableWonders(${JSON.stringify(result)})`)
+  return result
+}
 
-  export default {
-    setup() {
-      const [emblaRef, emblaApi] = emblaCarouselVue()
-      return { emblaRef, emblaApi }
-    },
-    props: {
-      wonder: Object,
-      availableWonderIds: Array
-    },
-    data() {
-      // console.error(`getAvailableWonders(availableWonderIds): ${getAvailableWonders(this.availableWonderIds)}`)
-      return {
-        availableWonders: getAvailableWonders(this.availableWonderIds),
-        // wonder: this.wonder
-      }
-    },
-    mounted() {
-      this.emblaApi.scrollTo(wonders.findIndex(wonder => wonder.id == this.wonder.id), true)
-      this.emblaApi.on('select', (emblaApi) => {
-        this.selectWonder(emblaApi)
-      })
-    },
-    components: {
-      Wonder
-    },
-    methods: {
-      getWonder(wonderId, side) {
-        console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
+export default {
+  setup() {
+    const [emblaRef, emblaApi] = emblaCarouselVue()
+    return { emblaRef, emblaApi }
+  },
+  props: {
+    wonder: Object,
+    availableWonderIds: Array
+  },
+  data() {
+    // console.error(`getAvailableWonders(availableWonderIds): ${getAvailableWonders(this.availableWonderIds)}`)
+    return {
+      availableWonders: getAvailableWonders(this.availableWonderIds),
+      selectedWonderIdx: 0
+    }
+  },
+  mounted() {
+    this.emblaApi.scrollTo(wonders.findIndex(wonder => wonder.id == this.wonder.id), true)
+    this.emblaApi.on('select', (emblaApi) => {
+      this.selectWonder(emblaApi)
+    })
+  },
+  components: {
+    Wonder
+  },
+  methods: {
+    getWonder(wonderId, side) {
+      console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
 
-        let result = undefined
-        wonders.forEach((wonder) => { 
-          if(wonder.id == wonderId){
-            result = wonder
-          }
-        })
-
-        if(side == 'A'){
-          return result.A
-        } else {
-          return result.B
-        }  
-      },
-      getImageByWonder(wonderId, side) {
-        console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
-        let wonder = this.getWonder(wonderId, side)
-        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
-      },
-      selectWonder(emblaApi) {
-        this.$emit('onWonderSelected', getAvailableWonders(this.availableWonderIds)[emblaApi.selectedScrollSnap()].id)
-      },
-      handleSideChanged() {
-        this.$emit('onSideChanged', this.wonder.side == 'A' ? 'B': 'A')
-      },
-      handleStageBuilt(selectedStage) {
-        this.$emit("onStageBuilt", selectedStage)
-      },
-      calcWonderPoints(){
-        let result = 0
-        let pointsByStage = this.getWonder(this.wonder.id, this.wonder.side).pointsByStages
-        for (let idx = 0; idx < pointsByStage.length; idx++) {
-          if(idx < this.wonder.stageBuilt) {
-            result += pointsByStage[idx];
-          }
+      let result = undefined
+      wonders.forEach((wonder) => {
+        if (wonder.id == wonderId) {
+          result = wonder
         }
-        return result
+      })
+
+      if (side == 'A') {
+        return result.A
+      } else {
+        return result.B
       }
+    },
+    getImageByWonder(wonderId, side) {
+      console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
+      let wonder = this.getWonder(wonderId, side)
+      return new URL(`../../../assets/${wonder.img}`, import.meta.url)
+    },
+    selectWonder(emblaApi) {
+      this.selectedWonderIdx = emblaApi.selectedScrollSnap()
+      this.$emit('onWonderSelected', this.availableWonderIds[selectedWonderIdx])
+    },
+    handleSideChanged() {
+      this.$emit('onSideChanged', this.wonder.side == 'A' ? 'B' : 'A')
+    },
+    handleStageBuilt(selectedStage) {
+      this.$emit("onStageBuilt", selectedStage)
+    },
+    handleLeftArrowClicked() {
+
+    },
+    handleLeftArrowClicked() {
+
+    },
+    calcWonderPoints() {
+      let result = 0
+      let pointsByStage = this.getWonder(this.wonder.id, this.wonder.side).pointsByStages
+      for (let idx = 0; idx < pointsByStage.length; idx++) {
+        if (idx < this.wonder.stageBuilt) {
+          result += pointsByStage[idx];
+        }
+      }
+      return result
     }
   }
+}
 </script>
 
 <template>
-  <div> 
+  <div class="arrow_container">
     <div class="embla" ref="emblaRef">
       <li class="embla__container">
-        <div class="embla__slide" v-for="availableWonder in availableWonders">
-          <Wonder
-            :wonder="{
+        <div class="embla__slide" v-for="(availableWonder, availableWonderIdx) in availableWonders">
+          <div>
+            <Wonder :wonder="{
               id: availableWonder.id,
               side: wonder.side,
               stageBuilt: wonder.stageBuilt,
-            }"
-            @onStageBuilt="handleStageBuilt($event)"
-            @onSideChanged="handleSideChanged"/>
+            }" @onStageBuilt="handleStageBuilt($event)" @onSideChanged="handleSideChanged" />    
+            
+          </div>
         </div>
       </li>
     </div>
-    <p> Wonder points: {{ calcWonderPoints() }} </p>
+    <img
+      v-if="0 < selectedWonderIdx" 
+      class="arrow_left" 
+      src="@/assets/arrow_left.svg" 
+      @click="handleLeftArrowClicked(availableWonder)" />
+    
+    <img 
+      v-if="selectedWonderIdx < availableWonderIds.length - 1" 
+      class="arrow_right" 
+      src="@/assets/arrow_right.svg" 
+      @click="handleRightArrowClicked(availableWonder)" />
   </div>
 </template>
 
+<!--   -->
+
 <style scoped>
-  .embla {
-    overflow: hidden;
-    width: 160mm;
-    justify-self: center;
-  }
-  .embla__container {
-    display: flex;
-  }
-  .embla__slide {
-    flex: 0 0 160mm;
-    min-width: 0;
-  }
+.embla {
+  overflow: hidden;
+  width: 160mm;
+  justify-self: center;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 160mm;
+  min-width: 0;
+}
+
+.arrow_container {
+  position: relative;
+  margin: 0mm;
+  width: 160mm;
+}
+
+.arrow_right {
+  position: absolute;
+  height: 8mm;
+  width: 8mm;
+  top: 50%;
+  right: 2mm;
+}
+
+.arrow_left {
+  position:absolute;
+  height: 8mm;
+  width: 8mm;
+  top: 50%;
+  left: 2mm;
+}
 </style>

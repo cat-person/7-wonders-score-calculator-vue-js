@@ -19,15 +19,31 @@
 
 <template>
     <div class="horizontal">
-      <p>Enter your name:_</p>
-      <input v-model="currentName" type="text" @input="onNameChanged()">
+      <p class="enter_name_lbl">Enter your name:</p>
+      <input class="name_input" v-model="currentName" type="text" @input="onNameChanged()">
     </div>
 </template>
 
 <style scoped>
-  .horizontal { 
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-  }
+.horizontal { 
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.enter_name_lbl {
+  margin: 0mm;
+  align-self: center;
+  width: 30%;
+  height: 6mm;
+  color: white;
+}
+.name_input {
+  margin: 0mm;
+  align-self: center;
+  width: 70%;
+  height: 6mm;
+}
 </style>

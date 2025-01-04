@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <h1> Players </h1>
-
     <div class="players" v-for="(playerScore, index) in playerScores" :key="index">
-      <Player :playerScore="playerScore" @editClicked="editPlayer($event)"/>
+      <Player 
+        :playerScore="playerScore" 
+        @editPlayer="handleEditPlayer($event)"
+        @deletePlayer="handleDeletePlayer($event)"/>
     </div>
 
     <div class="vertical">
@@ -38,32 +39,35 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
-      editPlayer(playerScore){
+      handleEditPlayer(playerScore){
         this.$emit("editPlayer", playerScore)
+      },
+      handleDeletePlayer(playerScore){
+        this.$emit("deletePlayer", playerScore)
       },
     }
   }
 </script>
 
 <style scoped>
-  .players {
-    justify-self: center;
-    justify-items: center;
-  }
-  .button {
-    margin: 4mm
-  }
+.players {
+  justify-self: center;
+  justify-items: center;
+}
 
-  .new_game_button {
-    margin: 4mm;
-    background-color: rosybrown;
-  }
+.button {
+  margin: 4mm
+}
 
-  .vertical {
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    width: 40mm;
-  }
+.new_game_button {
+  margin: 4mm;
+  background-color: rosybrown;
+}
 
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 40mm;
+}
 </style>

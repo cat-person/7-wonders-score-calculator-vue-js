@@ -1,9 +1,17 @@
 <template>
    <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder)}">
-    <Name
-      :name="playerData.name"
-      @changeName="handleNameChanged($event)"/>
     
+    <div class="top_bar">
+      <Name
+        :name="playerData.name"
+        @changeName="handleNameChanged($event)"/>
+      
+      <img
+        class="close_btn"
+        src="@/assets/close.svg"
+        @click="handleCloseClicked"/>
+
+   </div>
     <WonderSelection
       :wonder="playerData.wonder"
       :availableWonderIds="availableWonders"
@@ -18,7 +26,7 @@
     <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
     <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerData)" @click="handleAddPlayer">Calc and finish</button>
+    <button :disabled="!canAdd(playerData)" @click="handleAddPlayer">Done</button>
   </div>
 </template>
 
@@ -83,8 +91,12 @@ export default {
     }  
   },
   methods: {
-    handleNameChanged(name) {
-      this.playerData.name = name
+    handleAddPlayer() {
+      this.$emit("playerAdded", this.playerData)
+    },
+    handleCloseClicked() {
+      console.error('AddPlayer.handleCloseClicked')
+      this.$emit('addPlayerClosed')
     },
     onWonderSelected(wonderId) {
       this.playerData.wonder.id = wonderId
@@ -110,6 +122,9 @@ export default {
         return result.B
       }
     },
+    handleNameChanged(name) {
+      this.playerData.name = name
+    },
     handleSideChanged(givenSide) {
       this.playerData.wonder.side = givenSide
     },
@@ -133,6 +148,7 @@ export default {
       return this.getWonder(wonder.id, wonder.side).background
     },
     canAdd(scoreData){
+      console.error(`AddPlayer.canAdd(${JSON.stringify(scoreData)})`)
       return scoreData.name != ""
     },
     handleAddPlayer() {
@@ -143,10 +159,23 @@ export default {
 </script>
 
 <style>
+.top_bar {
+  margin: 0mm;
+  display: flex;
+  /* margin-left: 6mm; */
+  height: 10mm;
+  background-color: #00000040;
+}
+
+.close_btn {
+  padding: 2mm;
+  width: 6mm;
+  height: 6mm;
+}
+
 .container {
+  margin: 0mm;
   justify-self: center;
   width: 160mm;
-  padding-top: 6mm;
-  padding-bottom: 6mm;
 }
 </style>

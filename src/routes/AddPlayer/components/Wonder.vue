@@ -19,15 +19,19 @@
       }
     },
     methods: {
-      getWonder(wonderId, side) {
-        console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
-
+      getWonderById(wonderId) {
         let result = undefined
         wonders.forEach((wonder) => { 
           if(wonder.id == wonderId){
             result = wonder
           }
         })
+        return result
+      },
+      getWonder(wonderId, side) {
+        console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
+
+        let result = this.getWonderById(wonderId)
 
         if(side == 'A'){
           return result.A
@@ -73,32 +77,69 @@
 
 <template>
   <div class="container"> 
-    <img class="img" v-bind:src="getImageByWonder(wonder.id, wonder.side)"/>
-    <button class="btn" @click="handleChangeSide"> {{wonder.side}} </button>
-    <div class="horizontal">
-      <div v-for="pointsByStage, stageIdx in getWonder(wonder.id, wonder.side).pointsByStages">
-        <p> {{ pointsByStage }} </p>
-        <input type="checkbox" :checked="stageIdx < wonder.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
+    <div class="stage_container">
+      <div class="points_by_stage">
+        <div v-for="pointsByStage, stageIdx in getWonder(wonder.id, wonder.side).pointsByStages">
+          <p class="points_by_stage_lbl"> {{ pointsByStage }} </p>
+          <input type="checkbox" :checked="stageIdx < wonder.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
+        </div>
       </div>
+      <p class="wonder_points"> Wonder points: {{ calcWonderPoints() }} </p>
     </div>
-    <p> {{ wonder.name }} </p>
+    <h3 class="wonder_name"> {{ getWonderById(wonder.id).name }} </h3>
+    <button class="btn" @click="handleChangeSide"> {{wonder.side}} </button>
+    <img class="img" v-bind:src="getImageByWonder(wonder.id, wonder.side)"/>
   </div>
 </template>
 
 <style>
   .container {
-    justify-self: center;
-    width: 160mm;
+    width: 160mm; 
+    margin: 0mm;
+  }
+  .wonder_name {
+    top: 4mm;
+    width: 100%;
+    position: absolute;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
   }
   .img {
     width: 160mm;
+    margin: 0mm;
   }
   .btn {
-    height:
+    margin: 2mm;
+    position: absolute;
+    justify-self: unset;
   }
-  .horizontal { 
+  .stage_container {
+    position: absolute;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    bottom: 7mm;
+    width: 100%;
+    margin: 0mm;
+    background-color: #00000040;
+  }
+  .points_by_stage {
+    /* width: 100%; */
+    margin: 0mm;
+    display: flex;
     flex-direction: row;
+    justify-self: center;
+    justify-content: center;
+  }
+  .points_by_stage_lbl {
+    margin: 0mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
+  }
+  .wonder_points {
+    margin: 0mm;
+    bottom: 4mm;
+    /* width: 100%; */
+    color: white;
+    text-shadow: 0px 0px 10px gray;
   }
 </style>

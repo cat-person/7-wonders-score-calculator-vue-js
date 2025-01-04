@@ -1,6 +1,6 @@
 <template>
   <div id="Guilds" class="guilds">
-      <h1>Guilds</h1>
+      <h3>Guilds</h3>
       <input v-model="guildPoints" @keypress="isNumber($event)" type="number" @input="handleGuildPointsInput">
   </div>
 </template>

@@ -1,8 +1,14 @@
 <template>
    <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder, availableWonders)}">
+    
+    <img
+      class="close_btn"
+      src="@/assets/close.svg"
+      @click="handleCloseClicked"/>
+
     <Name
       :name="playerData.name"
-      @changeName="onNameChanged($event)"/>
+      @changeName="handleNameChanged($event)"/>
     
     <Wonder
       :wonder="playerData.wonder"
@@ -17,7 +23,7 @@
     <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
     <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerData)" @click="handleFinishEditing">Finish editing</button>
+    <button :disabled="!canAdd(playerData)" @click="handleFinishEditing">Done</button>
   </div>
 </template>
 
@@ -58,7 +64,7 @@ export default {
     getBackgroundColor(wonder) {
       return this.getWonder(wonder.id, wonder.side).background
     },
-    onNameChanged(name) {
+    handleNameChanged(name) {
       this.playerData.name = name
     },
     handleGoldCountChanged(givenCount){
@@ -106,6 +112,9 @@ export default {
     },
     handleFinishEditing() {
       this.$emit("finishEditing", this.playerData)
+    },
+    handleCloseClicked() {
+      this.$emit("editPlayerClosed", this.playerData)
     }
   },
 };
@@ -117,5 +126,10 @@ export default {
   width: 160mm;
   padding-top: 6mm;
   padding-bottom: 6mm;
+}
+
+.close_btn {
+  width: 6mm;
+  height: 6mm;
 }
 </style>

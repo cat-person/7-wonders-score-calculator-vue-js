@@ -17,7 +17,7 @@ export default {
             playerScore: this.playerScore,
             colors: colors,
             pointsByCategory: {
-                wonder: 32,//util.calcWonderPoints(playerScore.wonder.id, playerScore.wonder.side, playerScore.wonder.stageBuilt),
+                wonder: 32,
                 gold: 12,
                 military: 6,
             }
@@ -25,8 +25,6 @@ export default {
     },
     methods: {
         getWonderById(wonderId) {
-            console.error(`Player.getWonderById(wonderId: ${wonderId})`)
-
             let result = undefined
             this.wonders.forEach((wonder) => { 
             if(wonder.id == wonderId){
@@ -37,8 +35,6 @@ export default {
         },
         
         getWonderByIdAndSide(wonderId, side) {
-            console.error(`Player.getWonderById(wonderId: ${wonderId})`)
-
             let wonder = this.getWonderById(wonderId)
             if(side == 'A') {
                 return wonder.A
@@ -53,8 +49,6 @@ export default {
         },
             
         getPointsByCategory(playerScore) {
-            console.error(`Player.getPointsByCategory(playerScore: ${JSON.stringify(playerScore)})`)
-            console.error(`Player.getPointsByCategory(playerScore.goldCount: ${JSON.stringify(playerScore.goldCount)})`)
             return [
                 {
                     name: 'wonder',
@@ -103,7 +97,12 @@ export default {
         },
 
         handleEditClicked(playerScore){
-            this.$emit("editClicked", playerScore)
+            console.error(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            this.$emit("editPlayer", playerScore)
+        },
+        handleDeleteClicked(playerScore) {
+            console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            this.$emit("deletePlayer", playerScore)
         }
     }
 }
@@ -114,9 +113,18 @@ export default {
         'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
         'background-size': 'cover',
         'background-repeat': 'no-repeat'
-        }" @click="handleEditClicked(playerScore)">
-        <h2 class="wonder-lbl"  >{{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}</h2>
-        <tbody class="table">
+        }">
+        <div class="horizontal">
+            <h3 class="wonder-lbl">
+                {{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}
+            </h3>
+            <img
+                class="close_btn"
+                src="../../../assets/close.svg"
+                @click="handleDeleteClicked(playerScore)"/>
+        </div>
+        <tbody class="table"
+            @click="handleEditClicked(playerScore)">
             <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
                 <div class="point-container" :style="{'background-color': scoreItem.color}">
                     <tr>{{ scoreItem.name }}</tr>
@@ -136,15 +144,30 @@ export default {
   .img {
     width: 160mm;
     height: 50mm;
+    margin-bottom: 4mm;
     justify-items: center;
   }
   .table {
     vertical-align: bottom;
-    height: 35mm;
+    height: 32mm;
     padding: 2mm;
   }
   .wonder-lbl {
+    margin-top: 2mm;
+    width: 150mm;
+    height: 8mm;
+    float: center;
     color: white;
     text-shadow: 0px 0px 10px gray;
+  }
+  .close_btn {
+    justify-content: ;
+    height: 6mm;
+    margin: 2mm;
+    width: 4mm;
+  }
+  .horizontal { 
+    display: flex;
+    flex-direction: row;
   }
 </style>
