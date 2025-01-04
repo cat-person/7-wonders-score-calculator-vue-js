@@ -1,6 +1,6 @@
 <template>
     <div class="science">
-    <h1>Science</h1>
+    <h3>Science</h3>
     <div id="Science" class="horizontal">
       <div class="vertical">
         <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
@@ -58,9 +58,10 @@
   .science {
       background-color: cadetblue;
       justify-self: center;
-      width: 120mm;
-      padding: 4mm;
-      margin: 10mm;
+      width: 130mm;
+      padding-bottom: 4mm;
+      padding-top: 1mm;
+      margin-bottom: 3mm;
     }
 
   .horizontal { 

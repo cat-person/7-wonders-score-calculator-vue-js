@@ -118,15 +118,4 @@ export default {
   padding-top: 6mm;
   padding-bottom: 6mm;
 }
-
-.radio-group {
-  margin: 20px;
-  display: flex;
-  flex-direction: row;
-  background-color: brown;
-}
-
-.radio-group label {
-  margin-right: 20px; /* Space between radio buttons */
-}
 </style>

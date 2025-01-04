@@ -33,11 +33,12 @@
   </script>
   
   <style>
-    .guilds {
-      background-color: mediumslateblue;
-      justify-self: center;
-      width: 120mm;
-      padding: 4mm;
-      margin: 10mm;
-    }
+  .guilds {
+    background-color: mediumslateblue;
+    justify-self: center;
+    width: 130mm;
+    padding-bottom: 4mm;
+    padding-top: 1mm;
+    margin-bottom: 3mm;
+  }
   </style>

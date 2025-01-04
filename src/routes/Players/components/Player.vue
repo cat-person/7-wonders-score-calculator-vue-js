@@ -1,25 +1,27 @@
 <script>
-  import wonders from '@/assets/wonders.json'
-  import colors from '@/assets/colors.json'
-  import * as util from '@/utils/calc';
+import wonders from '@/assets/wonders.json'
+import colors from '@/assets/colors.json'
+import * as util from '@/utils/calc';
 
-  const url = 'https://vuejs.org/images/logo.png'
+const url = 'https://vuejs.org/images/logo.png'
 
-  export default {
+export default {
     props: {
-      playerScore: Object
+        playerScore: Object
     },
-    
+
     data() {
-      return {
-        wonders: wonders,
-        colors: colors,
-        pointsByCategory: {
-            wonder: 32,//util.calcWonderPoints(playerScore.wonder.id, playerScore.wonder.side, playerScore.wonder.stageBuilt),
-            gold: 12,
-            military: 6,
+        console.error(`Player.data: ${JSON.stringify(this.playerScore)}`)
+        return {
+            wonders: wonders,
+            playerScore: this.playerScore,
+            colors: colors,
+            pointsByCategory: {
+                wonder: 32,//util.calcWonderPoints(playerScore.wonder.id, playerScore.wonder.side, playerScore.wonder.stageBuilt),
+                gold: 12,
+                military: 6,
+            }
         }
-      }
     },
     methods: {
         getWonderById(wonderId) {
@@ -49,7 +51,7 @@
             let wonder = this.getWonderByIdAndSide(wonderId, side)
             return new URL(`../../../assets/${wonder.img}`, import.meta.url)
         },
-         
+            
         getPointsByCategory(playerScore) {
             console.error(`Player.getPointsByCategory(playerScore: ${JSON.stringify(playerScore)})`)
             console.error(`Player.getPointsByCategory(playerScore.goldCount: ${JSON.stringify(playerScore.goldCount)})`)
@@ -104,11 +106,10 @@
             this.$emit("editClicked", playerScore)
         }
     }
-  }
+}
 </script>
 
 <template>
-    <!-- :style="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"  -->
     <div class='img' :style="{ 
         'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
         'background-size': 'cover',

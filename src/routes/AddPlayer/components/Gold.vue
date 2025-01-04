@@ -1,6 +1,6 @@
 <template>
     <div id="Gold amount" class="gold">
-      <h1>Gold</h1>
+      <h3>Gold</h3>
       <input v-model.number="currentGoldCount" @keypress="isNumber($event)" @input="onGoldCountChanged()" type="number">
       <p>Gold points: {{ this.calcPoints() }}</p>
     </div>
@@ -39,11 +39,12 @@
   </script>
   
   <style>
-    .gold {
-      background-color: goldenrod;
-      justify-self: center;
-      width: 120mm;
-      padding: 4mm;
-      margin: 10mm;
-    }
+  .gold {
+    background-color: goldenrod;
+    justify-self: center;
+    width: 130mm;
+    padding-bottom: 4mm;
+    padding-top: 1mm;
+    margin-bottom: 3mm;
+  }
   </style>

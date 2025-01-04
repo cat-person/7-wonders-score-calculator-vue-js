@@ -1,6 +1,6 @@
 <template>
     <div class="military">
-        <h1>Military</h1>
+        <h3>Military</h3>
         <div>
             <button @click="handleClick('bronze', 'left')">{{ this.battles['bronze.left'] }}</button>
             Bronze
@@ -21,38 +21,16 @@
 
 </template>
   
-  <script>
-  export default {
+<script>
+export default {
     props: {
         battles: Object
     },
     data() {
         console.error(`Military.battles: ${JSON.stringify(this.battles)}`)
-      return {
+        return {
         battles: this.battles
-      }
-    //     age: {
-    //         Bronze: 'Bronze',
-    //         Silver: 'Silver',
-    //         Gold: 'Gold',
-    //     },
-    //     neighbours: {
-    //         Left: 'Left',
-    //         Right: 'Right',
-    //     },
-    //     Unknown: '?',
-    //     Won: 'Won',
-    //     Lost: 'Lost',
-
-    //     battles: {
-    //         'bronze.left': 'Lost', 
-    //         'bronze.right': 'Lost',
-    //         'silver.left': 'Lost', 
-    //         'silver.right': 'Lost',
-    //         'golden.left': 'Lost', 
-    //         'golden.right': 'Lost'
-    //     }
-    //   };
+        }
     },
     methods: {
         calcMilitary(battles) {
@@ -85,15 +63,16 @@
             this.$emit("battlesUpdated")
         }
     }
-  };
-  </script>
+};
+</script>
   
-  <style>
-   .military {
-      background-color: firebrick;
-      justify-self: center;
-      width: 120mm;
-      padding: 4mm;
-      margin: 10mm;
-    }
-  </style>
+<style>
+.military {
+    background-color: firebrick;
+    justify-self: center;
+    width: 130mm;
+    padding-bottom: 4mm;
+    padding-top: 1mm;
+    margin-bottom: 3mm;
+}
+</style>

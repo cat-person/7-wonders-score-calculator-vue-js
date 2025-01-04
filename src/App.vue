@@ -12,7 +12,7 @@
     @finishEditing="handleFinishEditting($event)"   
   />
   <AddPlayer v-if="state.id === 'add_player'" :availableWonders="getAvailableWonders()"
-    @onPlayerAdded="handlePlayerAdded($event)" />
+    @playerAdded="handlePlayerAdded($event)" />
 </template>
 
 <script>

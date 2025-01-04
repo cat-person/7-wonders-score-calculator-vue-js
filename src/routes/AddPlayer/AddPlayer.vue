@@ -1,24 +1,24 @@
 <template>
-   <div class="container" :style="{'background-color': getBackgroundColor(playerScoreData.wonder, availableWonders)}">
+   <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder)}">
     <Name
-      :name="playerScoreData.name"
-      @changeName="onNameChanged($event)"/>
+      :name="playerData.name"
+      @changeName="handleNameChanged($event)"/>
     
     <WonderSelection
-      :wonder="playerScoreData.wonder"
+      :wonder="playerData.wonder"
       :availableWonderIds="availableWonders"
       @onWonderSelected="onWonderSelected($event)"
       @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
-    <Gold :goldCount="playerScoreData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
-    <Military :battles="playerScoreData.battles"/>
-    <Culture/>
-    <Trade/>
-    <Science/>
-    <Guild/>
+    <Gold :goldCount="playerData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
+    <Military :battles="playerData.battles" />
+    <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
+    <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
+    <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
+    <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerScoreData)" @click="addPlayer()">Calc and finish</button>
+    <button :disabled="!canAdd(playerData)" @click="handleAddPlayer">Calc and finish</button>
   </div>
 </template>
 
@@ -63,12 +63,6 @@ function getDefault(availableWonders){
 }
 
 export default {
-  data() {
-    return {
-      wonders: wonders,
-      playerScoreData: getDefault(this.availableWonders)
-    }  
-  },
   props: {
     availableWonders: Array,
   },
@@ -82,17 +76,25 @@ export default {
     Science,
     Guild,
   },
-
+  data() {
+    return {
+      wonders: wonders,
+      playerData: getDefault(this.availableWonders)
+    }  
+  },
   methods: {
-    onNameChanged(name) {
-      this.playerScoreData.name = name
-    },
-    handleGoldCountChanged(givenCount){
-      this.playerScoreData.goldCount = givenCount
+    handleNameChanged(name) {
+      this.playerData.name = name
     },
     onWonderSelected(wonderId) {
-      this.playerScoreData.wonder.id = wonderId
+      this.playerData.wonder.id = wonderId
       console.error(`wonderId: ${wonderId}`)
+    },
+    handleSideChanged(givenSide) {
+      this.playerData.wonder.side = givenSide
+    },
+    onStageBuilt(stageBuilt) {
+      this.playerData.wonder.stageBuilt = stageBuilt
     },
     getWonder(wonderId, side) {
       console.error(`AddPlayer.getWonder(wonderId: ${wonderId}, side: ${side})`)
@@ -102,7 +104,6 @@ export default {
           result = wonder
         }
       })
-
       if(side == 'A'){
         return result.A
       } else {
@@ -110,25 +111,32 @@ export default {
       }
     },
     handleSideChanged(givenSide) {
-      this.playerScoreData.wonder.side = givenSide
+      this.playerData.wonder.side = givenSide
     },
     onStageBuilt(stageBuilt) {
-      this.playerScoreData.wonder.stageBuilt = stageBuilt
+      this.playerData.wonder.stageBuilt = stageBuilt
     },
-    addPlayer() {
-      this.$emit("onPlayerAdded", this.playerScoreData)
+    handleCulturePointsUpdated(culturePoints){
+      this.playerData.culturePoints = culturePoints
     },
-    isAvailable(wonder, availableWonders) {
-      return availableWonders.some(availableWonder => availableWonder == wonder.id)
+    handleTradePointsUpdated(tradePoints){
+      console.error(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
+      this.playerData.tradePoints = tradePoints
     },
-    getBackgroundColor(wonder, availableWonders) {
-      if(this.isAvailable(wonder, availableWonders)) {
-        return this.getWonder(wonder.id, wonder.side).background
-      }
-      return '#808080'
+    handleScienceUpdated(science){
+      this.playerData.science = science
+    },
+    handleGuildPointsUpdated(guildPoints){
+      this.playerData.guildPoints = guildPoints
+    },
+    getBackgroundColor(wonder) {
+      return this.getWonder(wonder.id, wonder.side).background
     },
     canAdd(scoreData){
       return scoreData.name != ""
+    },
+    handleAddPlayer() {
+      this.$emit("playerAdded", this.playerData)
     }
   },
 };
@@ -140,16 +148,5 @@ export default {
   width: 160mm;
   padding-top: 6mm;
   padding-bottom: 6mm;
-}
-
-.radio-group {
-  margin: 20px;
-  display: flex;
-  flex-direction: row;
-  background-color: brown;
-}
-
-.radio-group label {
-  margin-right: 20px; /* Space between radio buttons */
 }
 </style>

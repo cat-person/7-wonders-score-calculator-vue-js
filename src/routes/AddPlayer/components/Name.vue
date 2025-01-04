@@ -19,8 +19,8 @@
 
 <template>
     <div class="horizontal">
-      <p>Enter the name: </p>
-      <input class="input" v-model="currentName" type="text" @input="onNameChanged()">
+      <p>Enter your name:_</p>
+      <input v-model="currentName" type="text" @input="onNameChanged()">
     </div>
 </template>
 
@@ -29,8 +29,5 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-  }
-  .input { 
-    margin: 3mm
   }
 </style>

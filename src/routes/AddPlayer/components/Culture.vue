@@ -1,6 +1,6 @@
 <template>
     <div id="Culture" class="culture">
-      <h1>Culture</h1>
+      <h3 class="title">Culture</h3>
       <input v-model="culturePoints" @keypress="isNumber($event)" type="number" @input="handleCulturePointsInput">
     </div>
 </template>
@@ -36,8 +36,9 @@
   .culture {
     background-color: dodgerblue;
     justify-self: center;
-    width: 120mm;
-    padding: 4mm;
-    margin: 10mm;
+    width: 130mm;
+    padding-bottom: 4mm;
+    padding-top: 1mm;
+    margin-bottom: 3mm;
   }
 </style>
