@@ -94,6 +94,7 @@
 
 <style>
   .container {
+    position: relative;
     width: 160mm; 
     margin: 0mm;
   }
@@ -111,19 +112,18 @@
   .btn {
     margin: 2mm;
     position: absolute;
-    justify-self: unset;
   }
   .stage_container {
     position: absolute;
     display: flex;
+    width: 100%;
     flex-direction: column;
     bottom: 7mm;
-    width: 100%;
+    /* width: 100%; */
     margin: 0mm;
     background-color: #00000040;
   }
   .points_by_stage {
-    /* width: 100%; */
     margin: 0mm;
     display: flex;
     flex-direction: row;

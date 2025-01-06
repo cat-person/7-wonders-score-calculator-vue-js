@@ -162,7 +162,6 @@ export default {
 .top_bar {
   margin: 0mm;
   display: flex;
-  /* margin-left: 6mm; */
   height: 10mm;
   background-color: #00000040;
 }

@@ -1,15 +1,29 @@
-export function calcWonderPoints(wonder, side, stageBuilt) {
-    console.error(`wonder: ${JSON.stringify(wonder)}`)
-    let result = 0
-    let pointsByStages = undefined
+import wonders from '@/assets/wonders.json'
+
+function getWonder(wonderId, side) {
+    console.error(`calc.getWonder (wonderId: ${wonderId}, side: ${side}`)
+    let result = undefined
+    wonders.forEach((wonder) => { 
+        if(wonder.id == wonderId){
+            result = wonder
+        }
+    })
     if(side == 'A'){
-        pointsByStages = wonder.A.pointsByStages
+      return result.A
     } else {
-        pointsByStages = wonder.B.pointsByStages
+      return result.B
     }
+}
+
+export function calcWonderPoints(wonderData) {
+    console.error(`calc.calcWonderPoints(wonderData: ${JSON.stringify(wonderData)})`)
+    let wonder = getWonder(wonderData.id, wonderData.side)
+
+    let result = 0
+    let pointsByStages = wonder.pointsByStages
 
     for (let idx = 0; idx < pointsByStages.length; idx++) {
-        if(idx < stageBuilt) {
+        if(idx < wonderData.stageBuilt) {
             result += pointsByStages[idx];
         }
     }
@@ -48,4 +62,23 @@ export function calcMilitary(battles) {
 
 export function calcSciencePoints(clayCount, measurerCount, cogCount) {
     return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))
+}
+
+export function calcSum(playerScore) {
+    console.error(`calcSum(playerScore: ${JSON.stringify(playerScore)})`)
+    let wonderPoints = calcWonderPoints(playerScore.wonder) // err
+    let goldPoints = calcGoldPoints(playerScore.goldCount)
+    let militaryPoints = calcMilitary(playerScore.battles)
+    let culturePoints = playerScore.culturePoints
+    let tradePoints = playerScore.tradePoints
+    let sciencePoints = calcSciencePoints(playerScore.science.clayCount, playerScore.science.measurerCount, playerScore.science.cogCount)
+    let guildPoints = playerScore.guildPoints
+
+    return wonderPoints 
+        + goldPoints
+        + militaryPoints
+        + culturePoints
+        + tradePoints
+        + sciencePoints
+        + guildPoints
 }

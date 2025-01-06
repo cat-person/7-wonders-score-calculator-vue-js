@@ -7,7 +7,7 @@ const url = 'https://vuejs.org/images/logo.png'
 
 export default {
     props: {
-        playerScore: Object
+        playerScore: Object,
     },
 
     data() {
@@ -53,11 +53,7 @@ export default {
                 {
                     name: 'wonder',
                     color: colors.wonder,
-                    points: util.calcWonderPoints(
-                        this.getWonderById(playerScore.wonder.id),
-                        playerScore.wonder.side,
-                        playerScore.wonder.stageBuilt
-                    )
+                    points: util.calcWonderPoints(playerScore.wonder)
                 },
                 {
                     name: 'gold',
@@ -103,40 +99,57 @@ export default {
         handleDeleteClicked(playerScore) {
             console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("deletePlayer", playerScore)
+        },
+        getRankColor(rank) {
+            switch(rank) {
+                case 1: return 'gold'
+                case 2: return 'silver'
+                case 3: return 'rosybrown'
+                default: return 'white'
+            }
         }
     }
 }
 </script>
 
 <template>
-    <div class='img' :style="{ 
-        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat'
+    <div :style="{ 
+            'padding': '1mm',
+            'background-color': getRankColor(playerScore.rank)
         }">
-        <div class="horizontal">
-            <h3 class="wonder-lbl">
-                {{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}
-            </h3>
-            <img
-                class="close_btn"
-                src="../../../assets/close.svg"
-                @click="handleDeleteClicked(playerScore)"/>
+        <div class='img' :style="{ 
+                'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
+                'background-size': 'cover',
+                'background-repeat': 'no-repeat'
+            }">
+
+            <h1 class="final_points_lbl" v-if="playerScore.finalPoints">{{ playerScore.finalPoints }}</h1>
+
+            <div class="horizontal">
+                <h3 class="wonder-lbl">
+                    {{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}
+                </h3>
+                <img
+                    class="close_btn"
+                    src="../../../assets/close.svg"
+                    @click="handleDeleteClicked(playerScore)"/>
+            </div>
+            <tbody class="table"
+                @click="handleEditClicked(playerScore)">
+                <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
+                    <div class="point-container" :style="{'background-color': scoreItem.color}">
+                        <tr>{{ scoreItem.name }}</tr>
+                        <tr>{{ scoreItem.points }}</tr>
+                    </div>
+                </td>
+            </tbody>
         </div>
-        <tbody class="table"
-            @click="handleEditClicked(playerScore)">
-            <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                <div class="point-container" :style="{'background-color': scoreItem.color}">
-                    <tr>{{ scoreItem.name }}</tr>
-                    <tr>{{ scoreItem.points }}</tr>
-                </div>
-            </td>
-        </tbody>
     </div>
 </template>
 
 <style scoped>
   .point-container {
+    position: relative;
     justify-content: center;
     justify-items: center;
     width: 20mm;
@@ -144,7 +157,6 @@ export default {
   .img {
     width: 160mm;
     height: 50mm;
-    margin-bottom: 4mm;
     justify-items: center;
   }
   .table {
@@ -169,5 +181,12 @@ export default {
   .horizontal { 
     display: flex;
     flex-direction: row;
+  }
+  .final_points_lbl {
+    position: absolute;
+    width: 160mm;
+    margin-top: 16mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
   }
 </style>

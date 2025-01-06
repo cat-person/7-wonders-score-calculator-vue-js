@@ -68,10 +68,10 @@ export default {
       this.$emit("onStageBuilt", selectedStage)
     },
     handleLeftArrowClicked() {
-
+        this.emblaApi.scrollPrev()
     },
-    handleLeftArrowClicked() {
-
+    handleRightArrowClicked() {
+        this.emblaApi.scrollNext()
     },
     calcWonderPoints() {
       let result = 0
@@ -107,13 +107,13 @@ export default {
       v-if="0 < selectedWonderIdx" 
       class="arrow_left" 
       src="@/assets/arrow_left.svg" 
-      @click="handleLeftArrowClicked(availableWonder)" />
+      @click="handleLeftArrowClicked" />
     
     <img 
       v-if="selectedWonderIdx < availableWonderIds.length - 1" 
       class="arrow_right" 
       src="@/assets/arrow_right.svg" 
-      @click="handleRightArrowClicked(availableWonder)" />
+      @click="handleRightArrowClicked" />
   </div>
 </template>
 

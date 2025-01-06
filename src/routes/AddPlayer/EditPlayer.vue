@@ -1,15 +1,18 @@
 <template>
-   <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder, availableWonders)}">
-    
-    <img
-      class="close_btn"
-      src="@/assets/close.svg"
-      @click="handleCloseClicked"/>
 
-    <Name
-      :name="playerData.name"
-      @changeName="handleNameChanged($event)"/>
+   <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder, availableWonders)}">
+  
+    <div class="top_bar">
+      <Name
+        :name="playerData.name"
+        @changeName="handleNameChanged($event)"/>
     
+      <img
+        class="close_btn"
+        src="@/assets/close.svg"
+        @click="handleCloseClicked"/>
+    </div>
+
     <Wonder
       :wonder="playerData.wonder"
       @onStageBuilt="onStageBuilt($event)"
@@ -126,6 +129,14 @@ export default {
   width: 160mm;
   padding-top: 6mm;
   padding-bottom: 6mm;
+}
+
+.top_bar {
+  margin: 0mm;
+  display: flex;
+  /* margin-left: 6mm; */
+  height: 10mm;
+  background-color: #00000040;
 }
 
 .close_btn {

@@ -6,7 +6,7 @@
     @editPlayer="handleEditPlayer($event)" 
     @deletePlayer="handleDeletePlayer($event)" 
     @startNewGame="handleStartNewGame"
-    @addPlayerClosed="handleAddOrEditClosed"/>
+    @winnerDetermined="handleWinnerDetermined($event)"/>
 
   <EditPlayer 
     v-if="state.id === 'edit_player'" 
@@ -84,6 +84,10 @@ export default {
         playerScore: playerScore
        }
       window.localStorage.setItem('state', JSON.stringify(this.state))
+    },
+    handleWinnerDetermined(playerScores) {
+      this.playerScores = playerScores
+      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
     },
     handleDeletePlayer(givenPlayerScore) {
       console.error(`App.handleDeletePlayer(givenPlayerScore: ${JSON.stringify(givenPlayerScore)})`)
