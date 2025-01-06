@@ -100,6 +100,16 @@ export default {
             console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("deletePlayer", playerScore)
         },
+        getOpacity(rank) {
+            switch(rank) {
+                case 1: 
+                case undefined:    
+                    return 1.0
+                case 2: return 0.85
+                case 3: return 0.75
+                default: return 0.4
+            }
+        },
         getRankColor(rank) {
             switch(rank) {
                 case 1: return 'gold'
@@ -114,6 +124,7 @@ export default {
 
 <template>
     <div :style="{ 
+            'opacity': getOpacity(playerScore.rank),
             'padding': '1mm',
             'background-color': getRankColor(playerScore.rank)
         }">

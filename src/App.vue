@@ -88,6 +88,7 @@ export default {
     handleWinnerDetermined(playerScores) {
       this.playerScores = playerScores
       window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
+      this.$forceUpdate();
     },
     handleDeletePlayer(givenPlayerScore) {
       console.error(`App.handleDeletePlayer(givenPlayerScore: ${JSON.stringify(givenPlayerScore)})`)
@@ -106,6 +107,8 @@ export default {
 
       window.localStorage.setItem('state', JSON.stringify(this.state))
       window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
+
+      this.$forceUpdate();
     },
     handlePlayerAdded(playerScore) {
       this.playerScores.push(playerScore)
