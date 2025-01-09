@@ -1,7 +1,7 @@
 <template>
     <div id="Gold amount" class="gold">
       <h3>Gold</h3>
-      <input v-model.number="currentGoldCount" @keypress="isNumber($event)" @input="onGoldCountChanged()" type="number">
+      <input v-model.number="currentGoldCount" @keypress="isNumber($event)" @input="onGoldCountChanged" type="number">
       <p>Gold points: {{ this.calcPoints() }}</p>
     </div>
 </template>
