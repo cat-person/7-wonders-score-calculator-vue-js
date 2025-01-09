@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       availableWonders: getAvailableWonders(this.availableWonderIds),
-      selectedWonderIdx: 0
+      selectedWonderId: this.availableWonderIds[0]
     }
   },
   mounted() {
@@ -57,8 +57,11 @@ export default {
       return new URL(`../../../assets/${wonder.img}`, import.meta.url)
     },
     selectWonder(emblaApi) {
-      this.selectedWonderIdx = emblaApi.selectedScrollSnap()
-      this.$emit('onWonderSelected', this.availableWonderIds[selectedWonderIdx])
+      let selectedWonderIdx = emblaApi.selectedScrollSnap()
+      this.selectedWonderId = this.availableWonders[selectedWonderIdx].id;
+      console.error(`WonderAndName.selectWonder(selectedWonderIdx: ${selectedWonderIdx})`)
+      console.error(`WonderAndName.onWonderSelected(selectedWonderIdx: ${this.selectedWonderId})`)
+      this.$emit('onWonderSelected', this.selectedWonderId)
     },
     handleSideChanged() {
       this.$emit('onSideChanged', this.wonder.side == 'A' ? 'B' : 'A')
