@@ -12,7 +12,7 @@ function getAvailableWonders(availableWonderIds) {
 
 export default {
   setup() {
-    const [emblaRef, emblaApi] = emblaCarouselVue()
+    const [emblaRef, emblaApi] = emblaCarouselVue({ loop: true })
     return { emblaRef, emblaApi }
   },
   props: {
@@ -20,7 +20,6 @@ export default {
     availableWonderIds: Array
   },
   data() {
-    // console.error(`getAvailableWonders(availableWonderIds): ${getAvailableWonders(this.availableWonderIds)}`)
     return {
       availableWonders: getAvailableWonders(this.availableWonderIds),
       selectedWonderIdx: 0
@@ -104,13 +103,11 @@ export default {
       </li>
     </div>
     <img
-      v-if="0 < selectedWonderIdx" 
       class="arrow_left" 
       src="@/assets/arrow_left.svg" 
       @click="handleLeftArrowClicked" />
     
     <img 
-      v-if="selectedWonderIdx < availableWonderIds.length - 1" 
       class="arrow_right" 
       src="@/assets/arrow_right.svg" 
       @click="handleRightArrowClicked" />

@@ -131,6 +131,9 @@ export default {
     onStageBuilt(stageBuilt) {
       this.playerData.wonder.stageBuilt = stageBuilt
     },
+    handleGoldCountChanged(goldCount) {
+      this.playerData.goldCount = goldCount
+    },
     handleCulturePointsUpdated(culturePoints){
       this.playerData.culturePoints = culturePoints
     },
