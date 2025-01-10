@@ -67,7 +67,7 @@ export function calcSciencePoints(clayCount, measurerCount, cogCount) {
 export function calcSum(playerScore) {
     console.error(`calcSum(playerScore: ${JSON.stringify(playerScore)})`)
     let wonderPoints = calcWonderPoints(playerScore.wonder) // err
-    let goldPoints = calcCoinPoints(playerScore.goldCount)
+    let coinPoints = calcCoinPoints(playerScore.coinCount)
     let militaryPoints = calcMilitary(playerScore.battles)
     let culturePoints = playerScore.culturePoints
     let tradePoints = playerScore.tradePoints
@@ -75,7 +75,7 @@ export function calcSum(playerScore) {
     let guildPoints = playerScore.guildPoints
 
     return wonderPoints 
-        + goldPoints
+        + coinPoints
         + militaryPoints
         + culturePoints
         + tradePoints

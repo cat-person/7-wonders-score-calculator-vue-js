@@ -19,7 +19,7 @@
       @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
-    <Coins :goldCount="playerData.goldCount" @goldCountChanged="handleCoinCountChanged($event)"/>
+    <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
     <Military :battles="playerData.battles" />
     <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
@@ -50,7 +50,7 @@ function getDefault(availableWonders){
       side: 'A',
       stageBuilt: 0,
     },
-    goldCount: 0,
+    coinCount: 0,
     battles: {
       'bronze.left': 'Lost', 
       'bronze.right': 'Lost',
@@ -131,8 +131,8 @@ export default {
     onStageBuilt(stageBuilt) {
       this.playerData.wonder.stageBuilt = stageBuilt
     },
-    handleCoinCountChanged(goldCount) {
-      this.playerData.goldCount = goldCount
+    handleCoinCountChanged(coinCount) {
+      this.playerData.coinCount = coinCount
     },
     handleCulturePointsUpdated(culturePoints){
       this.playerData.culturePoints = culturePoints

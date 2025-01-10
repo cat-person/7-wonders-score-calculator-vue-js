@@ -54,7 +54,7 @@
             let scoreToCompare = result[currentIdx-1]
             if(scoreToCompare.finalPoints < currentScore.finalPoints
               || (scoreToCompare.finalPoints == currentScore.finalPoints 
-                && scoreToCompare.goldCount < scoreToCompare.goldCount
+                && scoreToCompare.coinCount < scoreToCompare.coinCount
               )) {
                 if(scoreToCompare.rank < currentScore.rank) {
                   let savedRank = currentScore.rank
@@ -67,7 +67,7 @@
                 currentIdx--
             } else {
               if(scoreToCompare.finalPoints == currentScore.finalPoints 
-                && scoreToCompare.goldCount == scoreToCompare.goldCount){
+                && scoreToCompare.coinCount == scoreToCompare.coinCount){
                 currentScore.rank = scoreToCompare.rank
               }
               break;

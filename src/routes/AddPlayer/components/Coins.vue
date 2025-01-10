@@ -1,5 +1,5 @@
 <template>
-    <div id="Coins amount" class="gold">
+    <div id="Coins amount" class="coins">
       <h3>Coins</h3>
       <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" type="number">
       <p>Coin points: {{ this.calcPoints() }}</p>
@@ -9,11 +9,11 @@
   <script>
   export default {
     props: {
-      goldCount: Number
+      coinCount: Number
     },
     data() {
       return {
-        currentCoinCount: this.goldCount
+        currentCoinCount: this.coinCount
       }
     },
     methods: {
@@ -31,7 +31,7 @@
       },
       onCoinCountChanged() {
         if(this.currentCoinCount) {
-          this.$emit("goldCountChanged", this.currentCoinCount)
+          this.$emit("coinCountChanged", this.currentCoinCount)
         }
       }
     }
@@ -39,7 +39,7 @@
   </script>
   
   <style>
-  .gold {
+  .coins {
     background-color: goldenrod;
     justify-self: center;
     width: 130mm;

@@ -56,9 +56,9 @@ export default {
                     points: util.calcWonderPoints(playerScore.wonder)
                 },
                 {
-                    name: 'gold',
-                    color: colors.gold,
-                    points: util.calcCoinPoints(playerScore.goldCount)
+                    name: 'coins',
+                    color: colors.coins,
+                    points: util.calcCoinPoints(playerScore.coinCount)
                 },
                 {
                     name: 'military',

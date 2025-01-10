@@ -19,7 +19,7 @@
       @onSideChanged="handleSideChanged"
       />
 
-    <Coins :goldCount="playerData.goldCount" @goldCountChanged="handleCoinCountChanged($event)"/>
+    <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
     <Military :battles="playerData.battles" />
     <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
@@ -71,7 +71,7 @@ export default {
       this.playerData.name = name
     },
     handleCoinCountChanged(givenCount){
-      this.playerData.goldCount = givenCount
+      this.playerData.coinCount = givenCount
     },
     onWonderSelected(wonderId) {
       this.playerData.wonder.id = wonderId
