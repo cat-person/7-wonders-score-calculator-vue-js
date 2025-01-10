@@ -1,8 +1,8 @@
 <template>
-    <div id="Gold amount" class="gold">
-      <h3>Gold</h3>
-      <input v-model.number="currentGoldCount" @keypress="isNumber($event)" @input="onGoldCountChanged" type="number">
-      <p>Gold points: {{ this.calcPoints() }}</p>
+    <div id="Coins amount" class="gold">
+      <h3>Coins</h3>
+      <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" type="number">
+      <p>Coin points: {{ this.calcPoints() }}</p>
     </div>
 </template>
   
@@ -13,7 +13,7 @@
     },
     data() {
       return {
-        currentGoldCount: this.goldCount
+        currentCoinCount: this.goldCount
       }
     },
     methods: {
@@ -27,11 +27,11 @@
           }
       },
       calcPoints() {  
-        return Math.floor(this.currentGoldCount / 3)
+        return Math.floor(this.currentCoinCount / 3)
       },
-      onGoldCountChanged() {
-        if(this.currentGoldCount) {
-          this.$emit("goldCountChanged", this.currentGoldCount)
+      onCoinCountChanged() {
+        if(this.currentCoinCount) {
+          this.$emit("goldCountChanged", this.currentCoinCount)
         }
       }
     }

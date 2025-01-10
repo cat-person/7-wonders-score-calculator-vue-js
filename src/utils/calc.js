@@ -30,9 +30,9 @@ export function calcWonderPoints(wonderData) {
     return result
 }
 
-export function calcGoldPoints(givenGoldCount) {
-    console.error(`calcGoldPoints(${givenGoldCount})`)
-    return Math.floor(givenGoldCount / 3)
+export function calcCoinPoints(givenCoinCount) {
+    console.error(`calcCoinPoints(${givenCoinCount})`)
+    return Math.floor(givenCoinCount / 3)
 }
 
 export function calcMilitary(battles) {
@@ -67,7 +67,7 @@ export function calcSciencePoints(clayCount, measurerCount, cogCount) {
 export function calcSum(playerScore) {
     console.error(`calcSum(playerScore: ${JSON.stringify(playerScore)})`)
     let wonderPoints = calcWonderPoints(playerScore.wonder) // err
-    let goldPoints = calcGoldPoints(playerScore.goldCount)
+    let goldPoints = calcCoinPoints(playerScore.goldCount)
     let militaryPoints = calcMilitary(playerScore.battles)
     let culturePoints = playerScore.culturePoints
     let tradePoints = playerScore.tradePoints

@@ -19,7 +19,7 @@
       @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
-    <Gold :goldCount="playerData.goldCount" @goldCountChanged="handleGoldCountChanged($event)"/>
+    <Coins :goldCount="playerData.goldCount" @goldCountChanged="handleCoinCountChanged($event)"/>
     <Military :battles="playerData.battles" />
     <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
@@ -33,7 +33,7 @@
 <script>
 import Name  from './components/Name.vue';
 import WonderSelection  from './components/WonderSelection.vue';
-import Gold from './components/Gold.vue';
+import Coins from './components/Coins.vue';
 import Military from './components/Military.vue';
 import Culture from './components/Culture.vue';
 import Trade from './components/Trade.vue';
@@ -77,7 +77,7 @@ export default {
   components: {
     Name,
     WonderSelection,
-    Gold,
+    Coins,
     Military,
     Culture,
     Trade,
@@ -131,7 +131,7 @@ export default {
     onStageBuilt(stageBuilt) {
       this.playerData.wonder.stageBuilt = stageBuilt
     },
-    handleGoldCountChanged(goldCount) {
+    handleCoinCountChanged(goldCount) {
       this.playerData.goldCount = goldCount
     },
     handleCulturePointsUpdated(culturePoints){

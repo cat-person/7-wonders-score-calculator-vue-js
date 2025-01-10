@@ -58,7 +58,7 @@ export default {
                 {
                     name: 'gold',
                     color: colors.gold,
-                    points: util.calcGoldPoints(playerScore.goldCount)
+                    points: util.calcCoinPoints(playerScore.goldCount)
                 },
                 {
                     name: 'military',
