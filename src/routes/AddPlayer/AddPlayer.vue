@@ -27,6 +27,7 @@
     <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
     <button :disabled="!canAdd(playerData)" @click="handleAddPlayer">Done</button>
+    <p class="error" v-if="!canAdd(playerData)">❗️ Enter your name to complete the form ❗️</p>
   </div>
 </template>
 
@@ -179,5 +180,9 @@ export default {
   margin: 0mm;
   justify-self: center;
   width: 160mm;
+}
+
+.error {
+  color: darkred;
 }
 </style>
