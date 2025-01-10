@@ -1,26 +1,40 @@
 <template>
     <div class="military">
         <h3>Military</h3>
-        <div class="epoch_container">
-            <button class="battle_button" @click="handleClick('bronze', 'left')">{{ this.battles['bronze.left'] }}</button>
-            <p class="epoch"> Bronze: {{ calcBronze(battles['bronze.left'], battles['bronze.right']) }} </p>
-            <button class="battle_button" @click="handleClick('bronze', 'right')">{{ this.battles['bronze.right'] }}</button>
-        </div>
-        <div class="epoch_container">
-            <button class="battle_button" @click="handleClick('silver', 'left')">{{ this.battles['silver.left'] }}</button>
-            <p class="epoch"> Silver: {{ calcSilver(battles['silver.left'], battles['silver.right']) }} </p>
-            <button class="battle_button" @click="handleClick('silver', 'right')">{{ this.battles['silver.right'] }}</button>
-        </div>
-        <div class="epoch_container">
-            <button class="battle_button" @click="handleClick('golden', 'left')">{{ this.battles['golden.left'] }}</button>
-            <p class="epoch"> Gold: {{ calcGold(battles['golden.left'], battles['golden.right']) }} </p>
-            <button class="battle_button" @click="handleClick('golden', 'right')">{{ this.battles['golden.right'] }}</button>
+        <div class="horizontal">
+            <div class="epoch_container">
+                <p class="epoch"> Epoch I: {{ calcBronze(battles['bronze.left'], battles['bronze.right']) }} </p>
+                <div class="battle_container">
+                    <input class="battle_button" type="image" :src="getImage('bronze', this.battles['bronze.left'])"
+                        @click="handleClick('bronze', 'left')" />
+                    <input class="battle_button" type="image" :src="getImage('bronze', this.battles['bronze.right'])"
+                        @click="handleClick('bronze', 'right')" />
+                </div>
+            </div>
+            <div class="epoch_container">
+                <p class="epoch"> Epoch II: {{ calcSilver(battles['silver.left'], battles['silver.right']) }} </p>
+                <div class="battle_container">
+                    <input class="battle_button" type="image" :src="getImage('silver', this.battles['silver.left'])"
+                        @click="handleClick('silver', 'left')" />
+                    <input class="battle_button" type="image" :src="getImage('silver', this.battles['silver.right'])"
+                        @click="handleClick('silver', 'right')" />
+                </div>
+            </div>
+            <div class="epoch_container">
+                <p class="epoch"> Epoch III: {{ calcGold(battles['golden.left'], battles['golden.right']) }} </p>
+                <div class="battle_container">
+                    <input class="battle_button" type="image" :src="getImage('golden', this.battles['golden.left'])"
+                        @click="handleClick('golden', 'left')" />
+                    <input class="battle_button" type="image" :src="getImage('golden', this.battles['golden.right'])"
+                        @click="handleClick('golden', 'right')" />
+                </div>
+            </div>
+
         </div>
         <p>Total military points: {{ calcMilitary(this.battles) }}</p>
     </div>
-
 </template>
-  
+
 <script>
 export default {
     props: {
@@ -34,7 +48,7 @@ export default {
     },
     methods: {
         checkVictory(battle) {
-            if(battle == 'Won') {
+            if (battle == 'Won') {
                 return 1
             }
             return 0
@@ -43,29 +57,45 @@ export default {
             return 2 * (this.checkVictory(left) + this.checkVictory(right) - 1)
         },
         calcSilver(left, right) {
-            return 3 * (this.checkVictory(left) + this.checkVictory(right)) - 2
+            return 4 * (this.checkVictory(left) + this.checkVictory(right)) - 2
         },
         calcGold(left, right) {
-            return 5 * (this.checkVictory(left) + this.checkVictory(right)) - 2
+            return 6 * (this.checkVictory(left) + this.checkVictory(right)) - 2
         },
-        
-        
-
+        getImage(epoch, battleResult) {
+            if (battleResult == 'Won') {
+                switch (epoch) {
+                    case 'golden':
+                        return new URL('@/assets/icon_victory_5.png', import.meta.url) 
+                    case 'silver':
+                        return new URL('@/assets/icon_victory_3.png', import.meta.url)
+                    default:
+                        return new URL('@/assets/icon_victory_1.png', import.meta.url)
+                }
+            } else {
+                return new URL("@/assets/icon_defeat.png", import.meta.url)
+            }
+        },
         calcMilitary(battles) {
             return this.calcBronze(battles['bronze.left'], battles['bronze.right'])
                 + this.calcSilver(battles['silver.left'], battles['silver.right'])
                 + this.calcGold(battles['golden.left'], battles['golden.right'])
         },
 
-        handleClick(age, neighbour){
+        handleClick(age, neighbour) {
             this.battles[`${age}.${neighbour}`] = this.battles[`${age}.${neighbour}`] === 'Won' ? 'Lost' : 'Won'
             this.$emit("battlesUpdated")
         }
     }
 };
 </script>
-  
+
 <style>
+.horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
 .military {
     background-color: firebrick;
     justify-self: center;
@@ -74,18 +104,28 @@ export default {
     padding-top: 1mm;
     margin-bottom: 3mm;
 }
+
 .epoch_container {
-    height: 6mm;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+}
+
+.battle_container {
+    height: 18mm;
     display: flex;
     flex-direction: row;
     justify-items: center;
     justify-content: center;
 }
+
 .battle_button {
-    margin: 0;
-    height: 6mm;
-    width: 12mm;
+    margin: 1mm;
+    height: 16mm;
+    width: 16mm;
 }
+
 .epoch {
     margin: 0;
     height: 6mm;
