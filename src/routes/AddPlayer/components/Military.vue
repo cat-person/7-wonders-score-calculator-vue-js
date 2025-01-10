@@ -16,7 +16,7 @@
             <p class="epoch"> Gold: {{ calcGold(battles['golden.left'], battles['golden.right']) }} </p>
             <button class="battle_button" @click="handleClick('golden', 'right')">{{ this.battles['golden.right'] }}</button>
         </div>
-        <p>Total ilitary points: {{ calcMilitary(this.battles) }}</p>
+        <p>Total military points: {{ calcMilitary(this.battles) }}</p>
     </div>
 
 </template>
