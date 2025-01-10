@@ -19,8 +19,8 @@
 
 <template>
     <div class="horizontal">
-      <p class="enter_name_lbl">Enter your name:</p>
-      <input class="name_input" v-model="currentName" type="text" @input="onNameChanged()">
+      <p class="enter_name_lbl">Name:</p>
+      <input class="name_input" v-model="currentName" type="text" @input="onNameChanged()" placeholder="Enter your name">
     </div>
 </template>
 
@@ -36,14 +36,14 @@
 .enter_name_lbl {
   margin: 0mm;
   align-self: center;
-  width: 30%;
+  width: 20%;
   height: 6mm;
   color: white;
 }
 .name_input {
   margin: 0mm;
   align-self: center;
-  width: 70%;
+  width: 80%;
   height: 6mm;
 }
 </style>

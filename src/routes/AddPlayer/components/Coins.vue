@@ -1,7 +1,10 @@
 <template>
     <div id="Coins amount" class="coins">
       <h3>Coins</h3>
-      <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" type="number">
+      <div>
+        <p>Enter coin value</p>
+        <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" type="number">
+      </div>
       <p>Coin points: {{ this.calcPoints() }}</p>
     </div>
 </template>
