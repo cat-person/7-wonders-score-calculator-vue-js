@@ -36,29 +36,26 @@ export function calcCoinPoints(givenCoinCount) {
 }
 
 export function calcMilitary(battles) {
-    var result = -6
-
-    if(battles['bronze.left'] === 'Won') {
-        result += 2
-    }
-    if(battles['bronze.right'] === 'Won') {
-        result += 2
-    }   
-    if(battles['silver.left'] === 'Won') {
-        result += 4
-    }
-    if(battles['silver.right'] === 'Won') {
-        result += 4
-    }
-    if(battles['golden.left'] === 'Won') {
-        result += 6
-    }
-    if(battles['golden.right'] === 'Won') {
-        result += 6
-    }
-
-    return result
+    return calcBattlePoints('I', battles['bronze.left'])
+        + calcBattlePoints('I', battles['bronze.right'])
+        + calcBattlePoints('II', battles['silver.left'])
+        + calcBattlePoints('II', battles['silver.right'])
+        + calcBattlePoints('III', battles['golden.left'])
+        + calcBattlePoints('III', battles['golden.right'])
 }
+
+export function calcBattlePoints(epoch, result) {
+    switch(result) {
+        case 'defeat': return -1
+        case 'draw': return 0
+        default: switch(epoch) {
+            case 'III': return 5
+            case 'II': return 3
+            default: return 1
+        }
+    }
+}
+
 
 export function calcSciencePoints(clayCount, measurerCount, cogCount) {
     return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))

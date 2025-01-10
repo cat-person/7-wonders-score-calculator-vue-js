@@ -53,12 +53,12 @@ function getDefault(availableWonders){
     },
     coinCount: 0,
     battles: {
-      'bronze.left': 'Lost', 
-      'bronze.right': 'Lost',
-      'silver.left': 'Lost', 
-      'silver.right': 'Lost',
-      'golden.left': 'Lost', 
-      'golden.right': 'Lost'
+      'bronze.left': 'draw', 
+      'bronze.right': 'draw',
+      'silver.left': 'draw', 
+      'silver.right': 'draw',
+      'golden.left': 'draw', 
+      'golden.right': 'draw'
     },
     culturePoints: 0,
     tradePoints: 0,

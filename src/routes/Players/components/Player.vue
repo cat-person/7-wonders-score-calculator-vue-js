@@ -56,7 +56,7 @@ export default {
                     points: util.calcWonderPoints(playerScore.wonder)
                 },
                 {
-                    name: 'coins',
+                    name: 'gold',
                     color: colors.coins,
                     points: util.calcCoinPoints(playerScore.coinCount)
                 },
@@ -184,7 +184,7 @@ export default {
     text-shadow: 0px 0px 10px gray;
   }
   .close_btn {
-    justify-content: ;
+    justify-content: center;
     height: 6mm;
     margin: 2mm;
     width: 4mm;
