@@ -44,7 +44,7 @@ export default {
         },
         getImageByWonder(wonderId, side) {
             let wonder = this.getWonderByIdAndSide(wonderId, side)
-            return new URL(`@/assets/${wonder.img}`, import.meta.url)
+            return new URL(`../../../assets/${wonder.img}`, import.meta.url)
         },
         getPointsByCategory(playerScore) {
             return [
@@ -100,21 +100,21 @@ export default {
 </script>
 
 <template>
-    <div class='img' :style="{
+    <div class='root' :style="{
+        'position': 'relative',
         'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
         'background-size': 'cover',
         'background-repeat': 'no-repeat',
-        'margin-bottom': '2mm'
+        'justify-items': 'center',
+        'padding': '0mm',
+        'width': '160mm',
+        'height': '50mm',
+        'margin-bottom': '3mm'
     }">
-
-        <h1 class="final_points_lbl" v-if="playerScore.finalPoints">{{ playerScore.finalPoints }}</h1>
-
-        <div class="horizontal">
-            <h3 class="wonder-lbl">
-                {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
-            </h3>
-            <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
-        </div>
+        <h3 class="wonder-lbl">
+            {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
+        </h3>
+        <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
         <tbody class="table" @click="handleEditClicked(playerScore)">
             <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
                 <div class="point-container" :style="{ 'background-color': scoreItem.color }">
@@ -127,51 +127,46 @@ export default {
 </template>
 
 <style scoped>
-.point-container {
-    position: relative;
-    justify-content: center;
-    justify-items: center;
-    width: 20mm;
-}
-
-.img {
-    width: 160mm;
+/* .root {
+    margin: 0mm;
+    padding: 0mm;
+    
     height: 50mm;
-    justify-items: center;
-}
+    
+} */
 
 .table {
+    position: absolute;
     vertical-align: bottom;
-    height: 32mm;
-    padding: 2mm;
+    align-self: center;
+    justify-items: center;
+    width: 100%;
+    bottom: 2mm;
 }
 
 .wonder-lbl {
+    width: 100%;
+    position: absolute;
     margin-top: 2mm;
-    width: 150mm;
-    height: 8mm;
-    float: center;
     color: white;
     text-shadow: 0px 0px 10px gray;
 }
 
 .close_btn {
+    position: absolute;
     justify-content: center;
-    height: 6mm;
+    margin-top: 2mm;
+    right: 3mm;
+    top: 1.5mm;
+    height: 4mm;
     width: 4mm;
     text-shadow: 0px 0px 10px gray;
 }
 
-.horizontal {
-    display: flex;
-    flex-direction: row;
-}
-
-.final_points_lbl {
-    position: absolute;
-    width: 160mm;
-    margin-top: 16mm;
-    color: white;
-    text-shadow: 0px 0px 10px gray;
+.point-container {
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    width: 20mm;
 }
 </style>

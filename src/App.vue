@@ -3,24 +3,20 @@
     :playerScores="playerScores" 
     @addPlayer="() => navigateTo('add_player')"
     @editPlayer="navigateTo('edit_player', $event)" 
-    @deletePlayer="handleDeletePlayer($event)" 
-    @showResults="() => navigateTo('results', this.playerScores)"/>
+    @deletePlayer="handleDeletePlayer($event)"
+    @showResults="() => navigateTo('results', this.playerScores)" />
 
-  <Results v-if="state.id === 'results'" 
-    :playerScores="playerScores" 
-    @startNewGame="() => handleStartNewGame()"
-    @close="() => navigateTo('players')"/>
+  <Results v-if="state.id === 'results'" :playerScores="playerScores" @startNewGame="() => handleStartNewGame()"
+    @close="() => navigateTo('players')" />
 
   <EditPlayer v-if="state.id === 'edit_player'" 
     :playerScore="__getWonderById($event)"
-    :availableWonders="getAvailableWonders()"
-    @finishEditing="handleFinishEditting($event)"  
+    :availableWonders="getAvailableWonders()" 
+    @finishEditing="handleFinishEditting($event)"
     @close="() => navigateTo('players')" />
 
-  <AddPlayer v-if="state.id === 'add_player'" 
-    :availableWonders="getAvailableWonders()"
-    @playerAdded="handlePlayerAdded($event)" 
-    @close="() => navigateTo('players')" />
+  <AddPlayer v-if="state.id === 'add_player'" :availableWonders="getAvailableWonders()"
+    @playerAdded="handlePlayerAdded($event)" @close="() => navigateTo('players')" />
 
 </template>
 
@@ -34,7 +30,7 @@ import wonders from '@/assets/wonders.json'
 
 function defaultState(localStorage) {
   let result = { id: 'players' }
-  if(localStorage.getItem('state')) {
+  if (localStorage.getItem('state')) {
     result = JSON.parse(localStorage.getItem('state'))
   }
   return result
@@ -42,7 +38,7 @@ function defaultState(localStorage) {
 
 function defaultPlayerScores(localStorage) {
   let result = []
-  if(localStorage.getItem('playerScores')) {
+  if (localStorage.getItem('playerScores')) {
     result = JSON.parse(localStorage.getItem('playerScores'))
   }
   return result
@@ -61,15 +57,15 @@ export default {
   data() {
     return {
       wonders: wonders,
-      state: defaultState(window.localStorage), 
+      state: defaultState(window.localStorage),
       playerScores: defaultPlayerScores(window.localStorage)
     }
   },
 
   methods: {
-    navigateTo(route, data) { 
+    navigateTo(route, data) {
       console.debug(`App.navigateTo(route: ${route}, data: ${data})`)
-      this.state = { id: route, data: data}
+      this.state = { id: route, data: data }
       window.localStorage.setItem('state', JSON.stringify(this.state))
     },
     updatePlayers(playerScores) {
@@ -87,10 +83,10 @@ export default {
     },
     handleDeletePlayer(givenWonderId) {
       let deletedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenWonderId)
- 
-      if(deletedPlayerIdx == 0){
+
+      if (deletedPlayerIdx == 0) {
         this.updatePlayers([...this.playerScores.slice(1)])
-      } else if(0 < deletedPlayerIdx) {
+      } else if (0 < deletedPlayerIdx) {
         this.updatePlayers([...this.playerScores.slice(0, deletedPlayerIdx), ...this.playerScores.slice(deletedPlayerIdx + 1)])
       }
       this.$forceUpdate()
@@ -102,23 +98,23 @@ export default {
       window.localStorage.setItem('state', JSON.stringify(this.state))
       window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
     },
-    handleStartNewGame(){
+    handleStartNewGame() {
       window.localStorage.clear()
       this.updatePlayers([])
       this.navigateTo('players')
     },
-    handleFinishEditting(givenPlayerScore){
+    handleFinishEditting(givenPlayerScore) {
       let editedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenPlayerScore.wonder.id)
-      updatePlayers([...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)])
-      navigateTo('players')
+      this.updatePlayers([...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)])
+      this.navigateTo('players')
     },
 
 
-    __getWonderById(wonderId){
+    __getWonderById(wonderId) {
       console.error(`App.__getWonderById(wonderId: ${wonderId})`)
       console.error(`App.playerScores(wonderId: ${this.playerScores})`)
 
-      return this.playerScores.find(playerScore => playerScore.wonder.id == state.data)
+      return this.playerScores.find(playerScore => playerScore.wonder.id == this.state.data)
     }
   },
 }

@@ -1,23 +1,19 @@
 <template>
-
    <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder, availableWonders)}">
   
-    <div class="top_bar">
-      <Name
-        :name="playerData.name"
-        @changeName="handleNameChanged($event)"/>
-    
-      <img
-        class="close_btn"
-        src="@/assets/close.svg"
-        @click="handleCloseClicked"/>
-    </div>
+    <TopBar
+        :showClose=true
+        :title="'Results'"
+        @close="handleClose"/>
 
     <Wonder
       :wonder="playerData.wonder"
       @onStageBuilt="onStageBuilt($event)"
-      @onSideChanged="handleSideChanged"
-      />
+      @onSideChanged="handleSideChanged"/>
+
+    <Name
+      :name="playerData.name"
+      @changeName="handleNameChanged($event)"/>
 
     <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
     <Military :battles="playerData.battles" />
@@ -41,6 +37,7 @@ import Science from '../Common/components/Science.vue';
 import Guild from '../Common/components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
+import TopBar from '../Common/components/TopBar.vue';
 
 export default {
   props: {
@@ -53,8 +50,9 @@ export default {
     }  
   },
   components: {
-    Name,
+    TopBar,
     Wonder,
+    Name,
     Coins,
     Military,
     Culture,
@@ -116,8 +114,8 @@ export default {
     handleFinishEditing() {
       this.$emit("finishEditing", this.playerData)
     },
-    handleCloseClicked() {
-      this.$emit("editPlayerClosed", this.playerData)
+    handleClose() {
+      this.$emit("close")
     }
   },
 };

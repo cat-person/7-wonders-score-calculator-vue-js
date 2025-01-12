@@ -28,7 +28,7 @@
   .horizontal {
     position: relative;
     width: 160mm;
-    height: 8mm;
+    height: 12mm;
     margin-bottom: 2mm;
     justify-self: center;
     justify-content: center;

@@ -21,28 +21,28 @@ export default {
     methods: {
         getWonderById(wonderId) {
             let result = undefined
-            this.wonders.forEach((wonder) => { 
-                if(wonder.id == wonderId){
+            this.wonders.forEach((wonder) => {
+                if (wonder.id == wonderId) {
                     result = wonder
                 }
             })
             return result
         },
-        
+
         getWonderByIdAndSide(wonderId, side) {
             let wonder = this.getWonderById(wonderId)
-            if(side == 'A') {
+            if (side == 'A') {
                 return wonder.A
             } else {
                 return wonder.B
             }
-            
-        },  
+
+        },
         getImageByWonder(wonderId, side) {
             let wonder = this.getWonderByIdAndSide(wonderId, side)
             return new URL(`../../../assets/${wonder.img}`, import.meta.url)
         },
-            
+
         getPointsByCategory(playerScore) {
             return [
                 {
@@ -74,11 +74,11 @@ export default {
                     name: 'science',
                     color: colors.science,
                     points: util.calcSciencePoints(
-                        playerScore.science.clayCount, 
+                        playerScore.science.clayCount,
                         playerScore.science.measurerCount,
                         playerScore.science.cogCount
                     )
-                },  
+                },
                 {
                     name: 'guild',
                     color: colors.guild,
@@ -87,7 +87,7 @@ export default {
             ]
         },
 
-        handleEditClicked(playerScore){
+        handleEditClicked(playerScore) {
             console.error(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("editPlayer", playerScore)
         },
@@ -96,9 +96,9 @@ export default {
             this.$emit("deletePlayer", playerScore)
         },
         getOpacity(rank) {
-            switch(rank) {
-                case 1: 
-                case undefined:    
+            switch (rank) {
+                case 1:
+                case undefined:
                     return 1.0
                 case 2: return 0.85
                 case 3: return 0.75
@@ -106,7 +106,7 @@ export default {
             }
         },
         getRankColor(rank) {
-            switch(rank) {
+            switch (rank) {
                 case 1: return 'gold'
                 case 2: return 'silver'
                 case 3: return 'rosybrown'
@@ -118,81 +118,75 @@ export default {
 </script>
 
 <template>
-    <div :style="{ 
-            'opacity': getOpacity(playerScore.rank),
-            'padding': '1mm',
-            'background-color': getRankColor(playerScore.rank),
-            'margin-bottom': '2mm'
-        }">
-        <div class='img' :style="{ 
-                'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')', 
-                'background-size': 'cover',
-                'background-repeat': 'no-repeat'
-            }">
+    <div class='img' :style="{
+        'position': 'relative',
+        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
+        'background-size': 'cover',
+        'background-repeat': 'no-repeat',
+        'justify-items': 'center',
+        'padding': '0mm',
+        'width': '160mm',
+        'height': '50mm',
+        'margin-bottom': '3mm'
+    }">
 
-            <h1 class="final_points_lbl" v-if="playerScore.finalPoints">{{ playerScore.finalPoints }}</h1>
+        <h1 class="final_points_lbl" v-if="playerScore.finalPoints">{{ playerScore.finalPoints }}</h1>
 
-            <div class="horizontal">
-                <h3 class="wonder-lbl">
-                    {{getWonderById(playerScore.wonder.id).name}} ({{ playerScore.wonder.side }}): {{playerScore.name}}
-                </h3>
-                <img
-                    class="close_btn"
-                    src="@/assets/icon_remove_2.svg"
-                    @click="handleDeleteClicked(playerScore)"/>
-            </div>
-            <tbody class="table"
-                @click="handleEditClicked(playerScore)">
-                <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                    <div class="point-container" :style="{'background-color': scoreItem.color}">
-                        <tr>{{ scoreItem.name }}</tr>
-                        <tr>{{ scoreItem.points }}</tr>
-                    </div>
-                </td>
-            </tbody>
-        </div>
+        <h3 class="wonder-lbl"> {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}):
+            {{ playerScore.name }}</h3>
+
+        <tbody class="table" @click="handleEditClicked(playerScore)">
+            <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
+                <div class="point-container" :style="{ 'background-color': scoreItem.color }">
+                    <tr>{{ scoreItem.name }}</tr>
+                    <tr>{{ scoreItem.points }}</tr>
+                </div>
+            </td>
+        </tbody>
     </div>
 </template>
 
 <style scoped>
-  .point-container {
+.table {
+    position: absolute;
+    vertical-align: bottom;
+    align-self: center;
+    justify-items: center;
+    width: 100%;
+    bottom: 2mm;
+}
+
+.wonder-lbl {
+    width: 100%;
+    position: absolute;
+    margin-top: 2mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
+}
+
+.close_btn {
+    position: absolute;
+    justify-content: center;
+    margin-top: 2mm;
+    right: 3mm;
+    top: 1.5mm;
+    height: 4mm;
+    width: 4mm;
+    text-shadow: 0px 0px 10px gray;
+}
+
+.point-container {
     position: relative;
     justify-content: center;
     justify-items: center;
     width: 20mm;
-  }
-  .img {
-    width: 160mm;
-    height: 50mm;
-    justify-items: center;
-  }
-  .table {
-    vertical-align: bottom;
-    height: 32mm;
-    padding: 2mm;
-  }
-  .wonder-lbl {
-    margin-top: 2mm;
-    width: 150mm;
-    height: 8mm;
-    float: center;
-    color: white;
-    text-shadow: 0px 0px 10px gray;
-  }
-  .close_btn {
-    justify-content: center;
-    height: 6mm;
-    width: 4mm;
-  }
-  .horizontal { 
-    display: flex;
-    flex-direction: row;
-  }
-  .final_points_lbl {
+}
+
+.final_points_lbl {
     position: absolute;
     width: 160mm;
     margin-top: 16mm;
     color: white;
     text-shadow: 0px 0px 10px gray;
-  }
+}
 </style>

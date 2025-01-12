@@ -1,17 +1,26 @@
 <template>
-  <div class="results" v-for="playerScore in playerScores">
-    <ResultItem 
-      :playerScore="playerScore" 
-      :rank = "rank"
-      :points = "points"/>
-  </div>
+  <div class="root">
+    <TopBar
+        :showClose=true
+        :title="'Results'"
+        @close="handleClose"/>
 
-  <button class="new_game_button" @click="startNewGame">Start new game</button>
+    <div class="results" v-for="playerScore in playerScores">
+      <ResultItem 
+        :playerScore="playerScore" 
+        :rank = "rank"
+        :points = "points"/>
+    </div>
+
+    <button class="new_game_button" @click="startNewGame">Start new game</button>
+
+  </div>
 </template>
 
 <script>
   import wonders from '@/assets/wonders.json'
   import ResultItem  from './components/ResultItem.vue';
+  import TopBar from '../Common/components/TopBar.vue';
   import * as util from '@/utils/calc';
 
   export default {
@@ -26,7 +35,8 @@
       playerScores: Array
     },
     components: {
-      ResultItem
+      ResultItem,
+      TopBar
     },
     methods: {
       startNewGame(){
@@ -69,27 +79,63 @@
         this.$emit('showResults', result)
         console.error(`Updated playerScores: ${JSON.stringify(result)}`)   
       },
-      handleCloseClicked(playerScore){
-        this.$emit("close", playerScore)
+      handleClose(){
+        this.$emit("close")
       },
     }
   }
 </script>
 
 <style scoped>
+.root {
+  margin: 0mm;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
+}
+
 .results {
+  margin: 0mm;
   justify-self: center;
   justify-items: center;
 }
+
+.table {
+    position: absolute;
+    vertical-align: bottom;
+    align-self: center;
+    justify-items: center;
+    width: 100%;
+    bottom: 2mm;
+}
+
+.wonder-lbl {
+    width: 100%;
+    position: absolute;
+    margin-top: 2mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
+}
+
+.close_btn {
+    position: absolute;
+    justify-content: center;
+    margin-top: 2mm;
+    right: 3mm;
+    top: 1.5mm;
+    height: 4mm;
+    width: 4mm;
+    text-shadow: 0px 0px 10px gray;
+}
+
+.point-container {
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    width: 20mm;
+}
+
 .new_game_button {
   margin: 4mm;
   background-color: rosybrown;
-}
-
-.vertical {
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  width: 40mm;
 }
 </style>

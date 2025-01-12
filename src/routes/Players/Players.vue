@@ -74,7 +74,6 @@
 </script>
 
 <style scoped>
-
 .root {
   margin: 0mm;
   padding-top: 3mm;
@@ -89,10 +88,5 @@
   margin-top: 12mm;
   width: 40mm;
   height: 8mm;
-}
-.vertical {
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
 }
 </style>
