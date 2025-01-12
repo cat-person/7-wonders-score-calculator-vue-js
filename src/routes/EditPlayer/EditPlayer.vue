@@ -31,14 +31,14 @@
 </template>
 
 <script>
-import Name  from './components/Name.vue';
-import Wonder  from './components/Wonder.vue';
-import Coins from './components/Coins.vue';
-import Military from './components/Military.vue';
-import Culture from './components/Culture.vue';
-import Trade from './components/Trade.vue';
-import Science from './components/Science.vue';
-import Guild from './components/Guild.vue';
+import Name  from '../Common/components/Name.vue';
+import Wonder  from '../Common/components/Wonder.vue';
+import Coins from '../Common/components/Coins.vue';
+import Military from '../Common/components/Military.vue';
+import Culture from '../Common/components/Culture.vue';
+import Trade from '../Common/components/Trade.vue';
+import Science from '../Common/components/Science.vue';
+import Guild from '../Common/components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
 

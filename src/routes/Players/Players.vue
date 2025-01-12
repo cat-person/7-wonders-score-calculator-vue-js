@@ -1,24 +1,27 @@
 <template>
-  <div id="app">
-    <div class="players" v-for="playerScore in playerScores">
-      <Player 
+  <div class="root">
+    <TopBar 
+      :title="getTitle()" />
+
+    <div class="players_container" v-for="playerScore in playerScores">
+      <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
         @deletePlayer="handleDeletePlayer($event)"/>
     </div>
 
-    <div class="vertical">
-      <button class="button" @click="addNewPlayer">Add Player</button>
-      <button class="button" @click="handleDetermineTheWinnerClicked(playerScores)">Determine the winner</button>
-      <button class="new_game_button" @click="startNewGame">Start new game</button>
-    </div>
+    <AddPlayerItem
+      @addPlayer="handleAddPlayer"/>
+
+    <button v-if="calculateResultsShown(playerScores)" class="button" @click="handleCalculateResultsClicked(playerScores)">Calculate the results</button>
   </div>
 </template>
 
 <script>
   import wonders from '@/assets/wonders.json'
-  import Player  from './components/Player.vue';
-  import * as util from '@/utils/calc';
+  import PlayerItem  from './components/PlayerItem.vue';
+  import AddPlayerItem from './components/AddPlayerItem.vue';
+  import TopBar from '../Common/components/TopBar.vue';
 
   export default {
     data() {
@@ -32,81 +35,64 @@
       playerScores: Array
     },
     components: {
-      Player
+      TopBar,
+      PlayerItem,
+      AddPlayerItem
     },
     methods: {
-      addNewPlayer(){
-        this.$emit("addNewPlayer")
+      getTitle() {
+        if(this.playerScores.length == 0) {
+          return 'Press ➕ to start using the app'
+        } else {
+          return 'Players'
+        }
+      },
+      handleClosedClicked(){
+        this.$emit("close")
+      },
+      handleAddPlayer(){
+        this.$emit("addPlayer")
       },
       startNewGame(){
         this.$emit("startNewGame")
       },
-      handleDetermineTheWinnerClicked(playerScores) {
-        let result = Array(playerScores.length)
-
-        for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
-          let currentIdx = scoreIdx
-          let currentScore = playerScores[currentIdx]
-          currentScore.finalPoints = util.calcSum(currentScore)
-          currentScore.rank = scoreIdx + 1
-          
-          while (0 < currentIdx) { 
-            let scoreToCompare = result[currentIdx-1]
-            if(scoreToCompare.finalPoints < currentScore.finalPoints
-              || (scoreToCompare.finalPoints == currentScore.finalPoints 
-                && scoreToCompare.coinCount < scoreToCompare.coinCount
-              )) {
-                if(scoreToCompare.rank < currentScore.rank) {
-                  let savedRank = currentScore.rank
-                  currentScore.rank = scoreToCompare.rank
-                  scoreToCompare.rank = savedRank
-                } else if(scoreToCompare.rank == currentScore.rank) {
-                  scoreToCompare.rank = result[currentIdx + 1].rank 
-                }
-                result[currentIdx] = scoreToCompare
-                currentIdx--
-            } else {
-              if(scoreToCompare.finalPoints == currentScore.finalPoints 
-                && scoreToCompare.coinCount == scoreToCompare.coinCount){
-                currentScore.rank = scoreToCompare.rank
-              }
-              break;
-            }
-          }
-          result[currentIdx] = currentScore
-        }
-        this.$emit('winnerDetermined', result)
-        console.error(`Updated playerScores: ${JSON.stringify(result)}`)   
+      handleCalculateResultsClicked(playerScores) {
+        this.$emit('showResults')
       },
-      handleEditPlayer(playerScore){
-        this.$emit("editPlayer", playerScore)
+      handleEditPlayer(wonderId){
+        console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
+        this.$emit("editPlayer", wonderId)
       },
-      handleDeletePlayer(playerScore){
-        this.$emit("deletePlayer", playerScore)
+      handleDeletePlayer(wonderId){
+        this.$emit("deletePlayer", wonderId)
       },
+      calculateResultsShown(playerScores) {
+        return 2 < playerScores.length 
+      }
     }
   }
 </script>
 
 <style scoped>
-.players {
+
+.root {
+  margin: 0mm;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
+}
+
+.players_container {
   justify-self: center;
   justify-items: center;
 }
-
 .button {
-  margin: 4mm
+  margin-top: 12mm;
+  width: 40mm;
+  height: 8mm;
 }
-
-.new_game_button {
-  margin: 4mm;
-  background-color: rosybrown;
-}
-
 .vertical {
   display: flex;
   flex-direction: column;
   justify-self: center;
-  width: 40mm;
 }
 </style>

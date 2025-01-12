@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: "Montserrat";
     src: url('@/assets/fonts/Montserrat-Bold.ttf');
 }
@@ -50,7 +50,7 @@ p {
     font-size: 0.3cm;
     font-family: "MontserratRegular";
     color: #264A76;
-}
+} */
 
 div {
     font-size: 0.3cm;

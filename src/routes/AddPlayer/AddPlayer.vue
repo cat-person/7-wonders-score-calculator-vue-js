@@ -1,23 +1,29 @@
 <template>
-   <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder)}">
+   <div class="container" :style="{
+        'background-color': getBackgroundColor(playerData.wonder),
+        'margin': '0mm',
+        'justify-self': 'center',
+        'width': '160mm',
+        'padding-top': '3mm',
+        'padding-bottom': '3mm',
+        'margin': '0mm'
+      }">
     
-    <div class="top_bar">
-      <Name
-        :name="playerData.name"
-        @changeName="handleNameChanged($event)"/>
-      
-      <img
-        class="close_btn"
-        src="@/assets/close.svg"
-        @click="handleCloseClicked"/>
+    <TopBar
+      :title="'Select wonder and enter data'"
+      :showClose=true
+      @close="handleClose"/>
 
-   </div>
     <WonderSelection
       :wonder="playerData.wonder"
       :availableWonderIds="availableWonders"
       @onWonderSelected="onWonderSelected($event)"
       @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
+
+    <Name
+      :name="playerData.name"
+      @changeName="handleNameChanged($event)"/>
 
     <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
     <Military :battles="playerData.battles" />
@@ -32,14 +38,15 @@
 </template>
 
 <script>
-import Name  from './components/Name.vue';
 import WonderSelection  from './components/WonderSelection.vue';
-import Coins from './components/Coins.vue';
-import Military from './components/Military.vue';
-import Culture from './components/Culture.vue';
-import Trade from './components/Trade.vue';
-import Science from './components/Science.vue';
-import Guild from './components/Guild.vue';
+import Name  from '../Common/components/Name.vue';
+import Coins from '../Common/components/Coins.vue';
+import Military from '../Common/components/Military.vue';
+import Culture from '../Common/components/Culture.vue';
+import Trade from '../Common/components/Trade.vue';
+import Science from '../Common/components/Science.vue';
+import Guild from '../Common/components/Guild.vue';
+import TopBar from '../Common/components/TopBar.vue';
 
 import wonders from '@/assets/wonders.json'
 
@@ -76,6 +83,7 @@ export default {
     availableWonders: Array,
   },
   components: {
+    TopBar,
     Name,
     WonderSelection,
     Coins,
@@ -95,9 +103,8 @@ export default {
     handleAddPlayer() {
       this.$emit("playerAdded", this.playerData)
     },
-    handleCloseClicked() {
-      console.error('AddPlayer.handleCloseClicked')
-      this.$emit('addPlayerClosed')
+    handleClose() {
+      this.$emit('close')
     },
     onWonderSelected(wonderId) {
       this.playerData.wonder.id = wonderId
@@ -163,23 +170,8 @@ export default {
 </script>
 
 <style>
-.top_bar {
-  margin: 0mm;
-  display: flex;
-  height: 10mm;
-  background-color: #00000040;
-}
-
-.close_btn {
-  padding: 2mm;
-  width: 6mm;
-  height: 6mm;
-}
-
 .container {
-  margin: 0mm;
-  justify-self: center;
-  width: 160mm;
+  
 }
 
 .error {

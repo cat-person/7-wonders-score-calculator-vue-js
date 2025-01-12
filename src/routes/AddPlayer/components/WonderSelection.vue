@@ -1,8 +1,7 @@
 <script>
 import emblaCarouselVue from 'embla-carousel-vue'
-import Wonder from './Wonder.vue';
+import Wonder from '../../Common/components/Wonder.vue';
 import wonders from '@/assets/wonders.json'
-import * as util from '@/utils/calc';
 
 function getAvailableWonders(availableWonderIds) {
   let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
@@ -59,8 +58,6 @@ export default {
     selectWonder(emblaApi) {
       let selectedWonderIdx = emblaApi.selectedScrollSnap()
       this.selectedWonderId = this.availableWonders[selectedWonderIdx].id;
-      console.error(`WonderAndName.selectWonder(selectedWonderIdx: ${selectedWonderIdx})`)
-      console.error(`WonderAndName.onWonderSelected(selectedWonderIdx: ${this.selectedWonderId})`)
       this.$emit('onWonderSelected', this.selectedWonderId)
     },
     handleSideChanged() {
@@ -92,8 +89,8 @@ export default {
 <template>
   <div class="arrow_container">
     <div class="embla" ref="emblaRef">
-      <li class="embla__container">
-        <div class="embla__slide" v-for="(availableWonder, availableWonderIdx) in availableWonders">
+      <li class="embla_container">
+        <div class="embla_slide" v-for="(availableWonder, availableWonderIdx) in availableWonders">
           <div>
             <Wonder :wonder="{
               id: availableWonder.id,
@@ -117,18 +114,22 @@ export default {
   </div>
 </template>
 
-<!--   -->
-
 <style scoped>
 .embla {
+  margin-top: -6mm;
+  margin-bottom: -4mm;
+  padding: 0mm;
   overflow: hidden;
   width: 160mm;
   justify-self: center;
 }
-.embla__container {
+.embla_container {
+  margin: 0mm;
   display: flex;
 }
-.embla__slide {
+.embla_slide {
+  margin: 0mm;
+  padding: 0mm;
   flex: 0 0 160mm;
   min-width: 0;
 }

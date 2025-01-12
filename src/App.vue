@@ -1,30 +1,34 @@
 <template>
-  <Players 
-    v-if="state.id === 'players'" 
+  <Players v-if="state.id === 'players'" 
     :playerScores="playerScores" 
-    @addNewPlayer="handleAddNewPlayer()"
-    @editPlayer="handleEditPlayer($event)" 
+    @addPlayer="() => navigateTo('add_player')"
+    @editPlayer="navigateTo('edit_player', $event)" 
     @deletePlayer="handleDeletePlayer($event)" 
-    @startNewGame="handleStartNewGame"
-    @winnerDetermined="handleWinnerDetermined($event)"/>
+    @showResults="() => navigateTo('results', this.playerScores)"/>
 
-  <EditPlayer 
-    v-if="state.id === 'edit_player'" 
+  <Results v-if="state.id === 'results'" 
+    :playerScores="playerScores" 
+    @startNewGame="() => handleStartNewGame()"
+    @close="() => navigateTo('players')"/>
+
+  <EditPlayer v-if="state.id === 'edit_player'" 
+    :playerScore="__getWonderById($event)"
     :availableWonders="getAvailableWonders()"
-    :playerScore="state.playerScore"
     @finishEditing="handleFinishEditting($event)"  
-    @editPlayerClosed="handleAddOrEditClosed" 
-  />
+    @close="() => navigateTo('players')" />
+
   <AddPlayer v-if="state.id === 'add_player'" 
     :availableWonders="getAvailableWonders()"
     @playerAdded="handlePlayerAdded($event)" 
-    @addPlayerClosed="handleAddOrEditClosed" />
+    @close="() => navigateTo('players')" />
+
 </template>
 
 <script>
 import Players from './routes/Players/Players.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
-import EditPlayer from './routes/AddPlayer/EditPlayer.vue'
+import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
+import Results from './routes/Results/Results.vue'
 
 import wonders from '@/assets/wonders.json'
 
@@ -49,6 +53,7 @@ export default {
   name: 'App',
   components: {
     Players,
+    Results,
     AddPlayer,
     EditPlayer,
   },
@@ -62,6 +67,15 @@ export default {
   },
 
   methods: {
+    navigateTo(route, data) { 
+      console.debug(`App.navigateTo(route: ${route}, data: ${data})`)
+      this.state = { id: route, data: data}
+      window.localStorage.setItem('state', JSON.stringify(this.state))
+    },
+    updatePlayers(playerScores) {
+      this.playerScores = playerScores
+      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
+    },
     getAvailableWonders() {
       let result = []
       wonders.forEach(wonder => {
@@ -71,44 +85,15 @@ export default {
       })
       return result
     },
-    handleAddNewPlayer() {
-      this.state = {
-        id: 'add_player',
-      }
-      window.localStorage.setItem('state', JSON.stringify(this.state))
-    },
-    handleEditPlayer(playerScore) {
-      console.error(`App.handleEditPlayer(playerScore: ${JSON.stringify(playerScore)})`)
-      this.state = { 
-        id: 'edit_player',
-        playerScore: playerScore
-       }
-      window.localStorage.setItem('state', JSON.stringify(this.state))
-    },
-    handleWinnerDetermined(playerScores) {
-      this.playerScores = playerScores
-      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
-      this.$forceUpdate();
-    },
-    handleDeletePlayer(givenPlayerScore) {
-      console.error(`App.handleDeletePlayer(givenPlayerScore: ${JSON.stringify(givenPlayerScore)})`)
-      console.error(`App.handleDeletePlayer(this.playerScores: ${JSON.stringify(this.playerScores)})`)
-      let deletedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenPlayerScore.wonder.id)
-
-      console.error(`App.handleDeletePlayer(deletedPlayerIdx: ${JSON.stringify(deletedPlayerIdx)})`)
-
+    handleDeletePlayer(givenWonderId) {
+      let deletedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenWonderId)
+ 
       if(deletedPlayerIdx == 0){
-        this.playerScores = [...this.playerScores.slice(1)]
-      } else {
-        this.playerScores = [...this.playerScores.slice(0, deletedPlayerIdx), ...this.playerScores.slice(deletedPlayerIdx + 1)]
+        this.updatePlayers([...this.playerScores.slice(1)])
+      } else if(0 < deletedPlayerIdx) {
+        this.updatePlayers([...this.playerScores.slice(0, deletedPlayerIdx), ...this.playerScores.slice(deletedPlayerIdx + 1)])
       }
-      
-      this.state = { id: 'players' }
-
-      window.localStorage.setItem('state', JSON.stringify(this.state))
-      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
-
-      this.$forceUpdate();
+      this.$forceUpdate()
     },
     handlePlayerAdded(playerScore) {
       this.playerScores.push(playerScore)
@@ -119,22 +104,21 @@ export default {
     },
     handleStartNewGame(){
       window.localStorage.clear()
-      this.state = defaultState(window.localStorage)
-      this.playerScores = defaultPlayerScores(window.localStorage)
+      this.updatePlayers([])
+      this.navigateTo('players')
     },
     handleFinishEditting(givenPlayerScore){
       let editedPlayerIdx = this.playerScores.findIndex(playerScore => playerScore.wonder.id == givenPlayerScore.wonder.id)
-
-      this.playerScores = [...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)]
-
-      this.state = { id: 'players' }
-
-      window.localStorage.setItem('state', JSON.stringify(this.state))
-      window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
+      updatePlayers([...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)])
+      navigateTo('players')
     },
-    handleAddOrEditClosed() {
-      this.state = { id: 'players' }
-      window.localStorage.setItem('state', JSON.stringify(this.state))
+
+
+    __getWonderById(wonderId){
+      console.error(`App.__getWonderById(wonderId: ${wonderId})`)
+      console.error(`App.playerScores(wonderId: ${this.playerScores})`)
+
+      return this.playerScores.find(playerScore => playerScore.wonder.id == state.data)
     }
   },
 }
@@ -143,6 +127,7 @@ export default {
 
 <style>
 #app {
+  margin: 0mm;
   user-select: none;
   text-align: center;
 }
