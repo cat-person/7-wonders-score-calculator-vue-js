@@ -3,20 +3,11 @@
     <transition name="fade">
       <Players v-if="state.id === 'players'" 
         class="screen"
-        :key="JSON.stringify(playerScores)" 
         :playerScores="playerScores"
         @addPlayer="() => navigateTo('add_player')" 
         @editPlayer="navigateTo('edit_player', $event)"
         @deletePlayer="handleDeletePlayer($event)" 
         @showResults="() => navigateTo('results', this.playerScores)" />
-    </transition>
-
-    <transition name="fade">
-      <Results v-if="state.id === 'results'" 
-        class="screen"
-        :playerScores="playerScores" 
-        @startNewGame="() => handleStartNewGame()"
-        @close="() => navigateTo('players')" />
     </transition>
 
     <transition name="fade">
@@ -35,6 +26,14 @@
         @playerAdded="handlePlayerAdded($event)" 
         @close="() => navigateTo('players')" />
     </transition>
+
+    <transition name="fade">
+      <Results v-if="state.id === 'results'" 
+        class="screen"
+        :playerScores="playerScores" 
+        @startNewGame="handleStartNewGame"
+        @close="() => navigateTo('players')" />
+    </transition>
   </div>
 </template>
 
@@ -45,6 +44,8 @@ import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
 import Results from './routes/Results/Results.vue'
 
 import wonders from '@/assets/wonders.json'
+
+//:key="JSON.stringify(playerScores)" 
 
 function defaultState(localStorage) {
   let result = { id: 'players' }
