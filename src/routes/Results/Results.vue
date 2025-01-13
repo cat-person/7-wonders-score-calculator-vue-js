@@ -6,10 +6,12 @@
         @close="handleClose"/>
 
     <div class="results" v-for="playerScore in playerScores">
-      <ResultItem 
+      <p>{{ playerScore.name }}</p>
+
+      <!-- <ResultItem 
         :playerScore="playerScore" 
         :rank = "rank"
-        :points = "points"/>
+        :points = "points"/> -->
     </div>
 
     <button class="new_game_button" @click="startNewGame">Start new game</button>
@@ -25,9 +27,7 @@
   import * as util from '@/utils/calc';
 
   export default {
-
     data() {
-      console.error(`Players.data(): { playerScores: ${JSON.stringify(this.playerScores)} }`)
       return {
         wonders: wonders,
       };
@@ -43,7 +43,7 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
-      getRankedScores(playerScores) {
+      // getRankedScores(playerScores) {
         // let result = Array(playerScores.length)
 
         // for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
@@ -64,9 +64,9 @@
         //   result[currentIdx] = currentScore
         // }
         // return result
-      },
+      // },
       handleClose(){
-        this.$emit("close")
+        // this.$emit("close")
       },
     }
   }
