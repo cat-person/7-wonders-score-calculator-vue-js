@@ -82,8 +82,11 @@
   justify-self: center;
   justify-items: center;
 }
+
 .new_game_button {
-  margin: 4mm;
+  margin-top: 12mm;
+  width: 40mm;
+  height: 8mm;
   background-color: rosybrown;
 }
 </style>
