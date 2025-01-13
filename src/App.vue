@@ -1,23 +1,39 @@
 <template>
-  <Players v-if="state.id === 'players'" 
-    :playerScores="playerScores" 
-    @addPlayer="() => navigateTo('add_player')"
-    @editPlayer="navigateTo('edit_player', $event)" 
-    @deletePlayer="handleDeletePlayer($event)"
-    @showResults="() => navigateTo('results', this.playerScores)" />
+  <div class="root">
+    <transition name="fade">
+      <Players v-if="state.id === 'players'" 
+        class="screen"
+        :key="JSON.stringify(playerScores)" 
+        :playerScores="playerScores"
+        @addPlayer="() => navigateTo('add_player')" @editPlayer="navigateTo('edit_player', $event)"
+        @deletePlayer="handleDeletePlayer($event)" @showResults="() => navigateTo('results', this.playerScores)" />
+    </transition>
 
-  <Results v-if="state.id === 'results'" :playerScores="playerScores" @startNewGame="() => handleStartNewGame()"
-    @close="() => navigateTo('players')" />
+    <transition name="fade">
+      <Results v-if="state.id === 'results'" 
+        class="screen"
+        :playerScores="playerScores" 
+        @startNewGame="() => handleStartNewGame()"
+        @close="() => navigateTo('players')" />
+    </transition>
 
-  <EditPlayer v-if="state.id === 'edit_player'" 
-    :playerScore="__getWonderById($event)"
-    :availableWonders="getAvailableWonders()" 
-    @finishEditing="handleFinishEditting($event)"
-    @close="() => navigateTo('players')" />
+    <transition name="fade">
+      <EditPlayer v-if="state.id === 'edit_player'" 
+        class="screen"
+        :playerScore="__getWonderById($event)"
+        :availableWonders="getAvailableWonders()" 
+        @finishEditing="handleFinishEditting($event)"
+        @close="() => navigateTo('players')" />
+    </transition>
 
-  <AddPlayer v-if="state.id === 'add_player'" :availableWonders="getAvailableWonders()"
-    @playerAdded="handlePlayerAdded($event)" @close="() => navigateTo('players')" />
-
+    <transition name="fade">
+      <AddPlayer v-if="state.id === 'add_player'"
+        class="screen" 
+        :availableWonders="getAvailableWonders()"
+        @playerAdded="handlePlayerAdded($event)" 
+        @close="() => navigateTo('players')" />
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -44,7 +60,6 @@ function defaultPlayerScores(localStorage) {
   return result
 }
 
-
 export default {
   name: 'App',
   components: {
@@ -67,6 +82,7 @@ export default {
       console.debug(`App.navigateTo(route: ${route}, data: ${data})`)
       this.state = { id: route, data: data }
       window.localStorage.setItem('state', JSON.stringify(this.state))
+      window.scrollTo(0, 0);
     },
     updatePlayers(playerScores) {
       this.playerScores = playerScores
@@ -89,7 +105,6 @@ export default {
       } else if (0 < deletedPlayerIdx) {
         this.updatePlayers([...this.playerScores.slice(0, deletedPlayerIdx), ...this.playerScores.slice(deletedPlayerIdx + 1)])
       }
-      this.$forceUpdate()
     },
     handlePlayerAdded(playerScore) {
       this.playerScores.push(playerScore)
@@ -108,8 +123,6 @@ export default {
       this.updatePlayers([...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)])
       this.navigateTo('players')
     },
-
-
     __getWonderById(wonderId) {
       console.error(`App.__getWonderById(wonderId: ${wonderId})`)
       console.error(`App.playerScores(wonderId: ${this.playerScores})`)
@@ -127,4 +140,30 @@ export default {
   user-select: none;
   text-align: center;
 }
+
+.root {
+  width: 160mm;
+  justify-self: center;
+  position: relative;
+}
+
+.screen {
+  position: absolute;
+  justify-self: center;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+html {
+    overflow-y:scroll;
+}
+
 </style>

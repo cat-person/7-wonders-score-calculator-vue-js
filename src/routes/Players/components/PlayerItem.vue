@@ -127,14 +127,6 @@ export default {
 </template>
 
 <style scoped>
-/* .root {
-    margin: 0mm;
-    padding: 0mm;
-    
-    height: 50mm;
-    
-} */
-
 .table {
     position: absolute;
     vertical-align: bottom;

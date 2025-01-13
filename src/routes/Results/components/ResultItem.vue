@@ -88,11 +88,11 @@ export default {
         },
 
         handleEditClicked(playerScore) {
-            console.error(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            // console.error(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("editPlayer", playerScore)
         },
         handleDeleteClicked(playerScore) {
-            console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            // console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("deletePlayer", playerScore)
         },
         getOpacity(rank) {

@@ -11,6 +11,7 @@
     </div>
 
     <AddPlayerItem
+      v-if="playerScores.length < 7"
       @addPlayer="handleAddPlayer"/>
 
     <button v-if="calculateResultsShown(playerScores)" class="button" @click="handleCalculateResultsClicked(playerScores)">Calculate the results</button>
@@ -81,6 +82,7 @@
 }
 
 .players_container {
+  margin: 0mm;
   justify-self: center;
   justify-items: center;
 }

@@ -99,7 +99,7 @@
     margin: 0mm;
   }
   .wonder_name {
-    top: 4mm;
+    top: 3mm;
     width: 100%;
     position: absolute;
     color: white;
