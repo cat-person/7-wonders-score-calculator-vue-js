@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <transition name="fade">
-      <Players v-if="state.id === 'players' || state.id === 'results'" 
+      <Players v-if="state.id === 'players'" 
         class="screen"
         :key="JSON.stringify(playerScores)" 
         :playerScores="playerScores"
@@ -12,7 +12,7 @@
     </transition>
 
     <transition name="fade">
-      <Results v-if="false" 
+      <Results v-if="state.id === 'results'" 
         class="screen"
         :playerScores="playerScores" 
         @startNewGame="() => handleStartNewGame()"
