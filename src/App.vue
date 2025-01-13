@@ -72,6 +72,7 @@ export default {
   },
 
   data() {
+    window.localStorage.clear()
     return {
       wonders: wonders,
       state: defaultState(window.localStorage),
@@ -156,7 +157,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
