@@ -5,13 +5,11 @@
         :title="'Results'"
         @close="handleClose"/>
 
-    <div class="results" v-for="playerScore in playerScores">
-      <p>{{ playerScore.name }}</p>
-
-      <!-- <ResultItem 
+    <div class="results" v-for="playerScore in getRankedScores(playerScores)">
+      <ResultItem 
         :playerScore="playerScore" 
         :rank = "rank"
-        :points = "points"/> -->
+        :points = "points"/>
     </div>
 
     <button class="new_game_button" @click="startNewGame">Start new game</button>
@@ -43,30 +41,30 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
-      // getRankedScores(playerScores) {
-        // let result = Array(playerScores.length)
+      getRankedScores(playerScores) {
+        let result = Array(playerScores.length)
 
-        // for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
-        //   let currentIdx = scoreIdx
-        //   let currentScore = structuredClone(toRaw(playerScores[currentIdx]))
-        //   currentScore.finalPoints = util.calcSum(currentScore)
+        for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
+          let currentIdx = scoreIdx
+          let currentScore = structuredClone(toRaw(playerScores[currentIdx]))
+          currentScore.finalPoints = util.calcSum(currentScore)
           
-        //   while (0 < currentIdx) { 
-        //     let scoreToCompare = result[currentIdx-1]
-        //     if(scoreToCompare.finalPoints < currentScore.finalPoints
-        //       || (scoreToCompare.finalPoints == currentScore.finalPoints 
-        //         && scoreToCompare.coinCount < scoreToCompare.coinCount
-        //       )) {
-        //         result[currentIdx] = scoreToCompare
-        //         currentIdx--
-        //     }
-        //   }
-        //   result[currentIdx] = currentScore
-        // }
-        // return result
-      // },
+          // while (0 < currentIdx) { 
+          //   let scoreToCompare = result[currentIdx-1]
+          //   if(scoreToCompare.finalPoints < currentScore.finalPoints
+          //     || (scoreToCompare.finalPoints == currentScore.finalPoints 
+          //       && scoreToCompare.coinCount < scoreToCompare.coinCount
+          //     )) {
+          //       result[currentIdx] = scoreToCompare
+          //       currentIdx--
+          //   }
+          // }
+          result[currentIdx] = currentScore
+        }
+        return result
+      },
       handleClose(){
-        // this.$emit("close")
+        this.$emit("close")
       },
     }
   }

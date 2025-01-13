@@ -3,6 +3,7 @@
     <transition name="fade">
       <Players v-if="state.id === 'players'" 
         class="screen"
+        :key="getPlayerListKey()"
         :playerScores="playerScores"
         @addPlayer="() => navigateTo('add_player')" 
         @editPlayer="navigateTo('edit_player', $event)"
@@ -13,7 +14,7 @@
     <transition name="fade">
       <EditPlayer v-if="state.id === 'edit_player'" 
         class="screen"
-        :playerScore="__getWonderById(state.data)"
+        :playerScore="getWonderById(state.data)"
         :availableWonders="getAvailableWonders()" 
         @finishEditing="handleFinishEditting($event)"
         @close="() => navigateTo('players')" />
@@ -44,8 +45,6 @@ import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
 import Results from './routes/Results/Results.vue'
 
 import wonders from '@/assets/wonders.json'
-
-//:key="JSON.stringify(playerScores)" 
 
 function defaultState(localStorage) {
   let result = { id: 'players' }
@@ -126,11 +125,13 @@ export default {
       this.updatePlayers([...this.playerScores.slice(0, editedPlayerIdx), givenPlayerScore, ...this.playerScores.slice(editedPlayerIdx + 1)])
       this.navigateTo('players')
     },
-    __getWonderById(wonderId) {
-      console.error(`App.__getWonderById(wonderId: ${wonderId})`)
-      console.error(`App.playerScores(wonderId: ${this.playerScores})`)
-
+    getWonderById(wonderId) {
+      // console.error(`App.getWonderById(wonderId: ${wonderId})`)
+      // console.error(`App.playerScores(wonderId: ${this.playerScores})`)
       return this.playerScores.find(playerScore => playerScore.wonder.id == this.state.data)
+    },
+    getPlayerListKey() {
+      return JSON.stringify(this.playerScores.map(score => score.wonder.id))
     }
   },
 }
