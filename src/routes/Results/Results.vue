@@ -5,7 +5,7 @@
         :title="'Results'"
         @close="handleClose"/>
 
-    <div class="results" v-for="playerScore in playerScores">
+    <div class="results" v-for="playerScore in getRankedScores(playerScores)">
       <ResultItem 
         :playerScore="playerScore" 
         :rank = "rank"
@@ -42,7 +42,7 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
-      handleDetermineTheWinnerClicked(playerScores) {
+      getRankedScores(playerScores) {
         let result = Array(playerScores.length)
 
         for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
@@ -76,8 +76,8 @@
           }
           result[currentIdx] = currentScore
         }
-        this.$emit('showResults', result)
         console.error(`Updated playerScores: ${JSON.stringify(result)}`)   
+        return result
       },
       handleClose(){
         this.$emit("close")
@@ -98,42 +98,6 @@
   justify-self: center;
   justify-items: center;
 }
-
-.table {
-    position: absolute;
-    vertical-align: bottom;
-    align-self: center;
-    justify-items: center;
-    width: 100%;
-    bottom: 2mm;
-}
-
-.wonder-lbl {
-    width: 100%;
-    position: absolute;
-    margin-top: 2mm;
-    color: white;
-    text-shadow: 0px 0px 10px gray;
-}
-
-.close_btn {
-    position: absolute;
-    justify-content: center;
-    margin-top: 2mm;
-    right: 3mm;
-    top: 1.5mm;
-    height: 4mm;
-    width: 4mm;
-    text-shadow: 0px 0px 10px gray;
-}
-
-.point-container {
-    position: relative;
-    justify-content: center;
-    justify-items: center;
-    width: 20mm;
-}
-
 .new_game_button {
   margin: 4mm;
   background-color: rosybrown;

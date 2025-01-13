@@ -46,7 +46,7 @@ export default {
         getImage(epoch, battleResult) {
             switch (battleResult) {
                 case 'defeat': return new URL('@/assets/icon_defeat.png', import.meta.url) 
-                case 'draw': return new URL('@/assets/icon_draw.png', import.meta.url) 
+                case 'draw': return new URL('@/assets/icon_plus_small.svg', import.meta.url) 
                 default: switch (epoch) {
                     case 'III':
                         return new URL('@/assets/icon_victory_5.png', import.meta.url) 

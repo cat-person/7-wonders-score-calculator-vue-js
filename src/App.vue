@@ -5,8 +5,10 @@
         class="screen"
         :key="JSON.stringify(playerScores)" 
         :playerScores="playerScores"
-        @addPlayer="() => navigateTo('add_player')" @editPlayer="navigateTo('edit_player', $event)"
-        @deletePlayer="handleDeletePlayer($event)" @showResults="() => navigateTo('results', this.playerScores)" />
+        @addPlayer="() => navigateTo('add_player')" 
+        @editPlayer="navigateTo('edit_player', $event)"
+        @deletePlayer="handleDeletePlayer($event)" 
+        @showResults="() => navigateTo('results', this.playerScores)" />
     </transition>
 
     <transition name="fade">
@@ -20,7 +22,7 @@
     <transition name="fade">
       <EditPlayer v-if="state.id === 'edit_player'" 
         class="screen"
-        :playerScore="__getWonderById($event)"
+        :playerScore="__getWonderById(state.data)"
         :availableWonders="getAvailableWonders()" 
         @finishEditing="handleFinishEditting($event)"
         @close="() => navigateTo('players')" />

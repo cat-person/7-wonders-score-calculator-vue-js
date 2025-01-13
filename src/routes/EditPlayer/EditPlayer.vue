@@ -1,9 +1,15 @@
 <template>
-   <div class="container" :style="{'background-color': getBackgroundColor(playerData.wonder, availableWonders)}">
+   <div
+   :style="{
+    'background-color': getBackgroundColor(playerData.wonder, availableWonders),
+    'padding-top': '3mm',
+    'padding-bottom': '3mm'
+    }
+    ">
   
     <TopBar
         :showClose=true
-        :title="'Results'"
+        :title="`Edit data for ${playerData.name}`"
         @close="handleClose"/>
 
     <Wonder
@@ -125,20 +131,7 @@ export default {
 .container {
   justify-self: center;
   width: 160mm;
-  padding-top: 6mm;
-  padding-bottom: 6mm;
-}
-
-.top_bar {
-  margin: 0mm;
-  display: flex;
-  /* margin-left: 6mm; */
-  height: 10mm;
-  background-color: #00000040;
-}
-
-.close_btn {
-  width: 6mm;
-  height: 6mm;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
 }
 </style>

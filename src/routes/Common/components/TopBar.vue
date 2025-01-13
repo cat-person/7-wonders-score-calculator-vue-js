@@ -29,11 +29,8 @@
     position: relative;
     width: 160mm;
     height: 12mm;
-    margin-bottom: 2mm;
     justify-self: center;
     justify-content: center;
-    display: flex;
-    flex-direction: row;
   }
   .title {
     margin: 0mm;

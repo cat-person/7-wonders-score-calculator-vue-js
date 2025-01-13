@@ -116,8 +116,6 @@ export default {
 
 <style scoped>
 .embla {
-  margin-top: -6mm;
-  margin-bottom: -4mm;
   padding: 0mm;
   overflow: hidden;
   width: 160mm;

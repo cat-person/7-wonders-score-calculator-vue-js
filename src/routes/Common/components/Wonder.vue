@@ -97,11 +97,13 @@
     position: relative;
     width: 160mm; 
     margin: 0mm;
+    padding: 0mm;
+    margin-top: -3mm;
   }
   .wonder_name {
-    top: 3mm;
-    width: 100%;
     position: absolute;
+    top: 0mm;
+    width: 100%;
     color: white;
     text-shadow: 0px 0px 10px gray;
   }

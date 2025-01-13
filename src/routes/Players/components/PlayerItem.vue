@@ -100,22 +100,25 @@ export default {
 </script>
 
 <template>
-    <div class='root' :style="{
-        'position': 'relative',
-        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat',
-        'justify-items': 'center',
-        'padding': '0mm',
-        'width': '160mm',
-        'height': '50mm',
-        'margin-bottom': '3mm'
-    }">
+    <div class='root' 
+        @click="handleEditClicked(playerScore)"
+        :style="{
+            'position': 'relative',
+            'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
+            'background-size': 'cover',
+            'background-repeat': 'no-repeat',
+            'justify-items': 'center',
+            'padding': '0mm',
+            'width': '160mm',
+            'height': '50mm',
+            'margin-bottom': '3mm'
+        }">
+        
         <h3 class="wonder-lbl">
             {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
         </h3>
         <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
-        <tbody class="table" @click="handleEditClicked(playerScore)">
+        <tbody class="table">
             <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
                 <div class="point-container" :style="{ 'background-color': scoreItem.color }">
                     <tr>{{ scoreItem.name }}</tr>
