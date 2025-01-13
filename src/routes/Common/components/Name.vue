@@ -9,9 +9,8 @@
       }
     },
     methods: {
-      onNameChanged() {
-        console.error(`Name.onNameChanged(${this.currentName})`)
-        this.$emit("changeName", this.currentName)
+      handleNameChanged() {
+        this.$emit("changeName", this.currentName.trim())
       }
     }
   }
@@ -20,7 +19,7 @@
 <template>
     <div class="horizontal">
       <h3 class="enter_name_lbl">Name:</h3>
-      <input class="name_input" v-model="currentName" type="text" @input="onNameChanged()" placeholder="Enter your name">
+      <input class="name_input" v-model="currentName" type="text" @input="handleNameChanged" placeholder="Enter your name">
     </div>
 </template>
 
