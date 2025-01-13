@@ -72,7 +72,6 @@ export default {
   },
 
   data() {
-    window.localStorage.clear()
     return {
       wonders: wonders,
       state: defaultState(window.localStorage),
