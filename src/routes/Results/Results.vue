@@ -41,6 +41,10 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
+      isScoreBigger(score, scoreToCompare) {
+        return scoreToCompare.finalPoints < score.finalPoints
+              || (scoreToCompare.finalPoints == score.finalPoints && scoreToCompare.coinCount < score.coinCount)
+      },
       getRankedScores(playerScores) {
         let result = Array(playerScores.length)
 
@@ -49,16 +53,10 @@
           let currentScore = structuredClone(toRaw(playerScores[currentIdx]))
           currentScore.finalPoints = util.calcSum(currentScore)
           
-          // while (0 < currentIdx) { 
-          //   let scoreToCompare = result[currentIdx-1]
-          //   if(scoreToCompare.finalPoints < currentScore.finalPoints
-          //     || (scoreToCompare.finalPoints == currentScore.finalPoints 
-          //       && scoreToCompare.coinCount < scoreToCompare.coinCount
-          //     )) {
-          //       result[currentIdx] = scoreToCompare
-          //       currentIdx--
-          //   }
-          // }
+          while (0 < currentIdx && this.isScoreBigger(currentScore, result[currentIdx - 1])){
+            result[currentIdx] = result[currentIdx - 1]
+            currentIdx--
+          }
           result[currentIdx] = currentScore
         }
         return result
