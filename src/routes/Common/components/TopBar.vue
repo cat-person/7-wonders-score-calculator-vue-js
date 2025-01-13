@@ -29,13 +29,14 @@
     position: relative;
     width: 160mm;
     height: 12mm;
+    margin-bottom: 2mm;
     justify-self: center;
     justify-content: center;
   }
   .title {
     margin: 0mm;
-    margin-top: 0.5mm;
-    justify-self: center;
+    height: 8mm;
+    align-content: center;
   }
   .button {
     justify-self: center;

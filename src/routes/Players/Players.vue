@@ -12,6 +12,7 @@
 
     <AddPlayerItem
       v-if="playerScores.length < 7"
+      class="add_player_btn"
       @addPlayer="handleAddPlayer"/>
 
     <button v-if="calculateResultsShown(playerScores)" class="button" @click="handleCalculateResultsClicked(playerScores)">Calculate the results</button>
@@ -85,6 +86,9 @@
   margin: 0mm;
   justify-self: center;
   justify-items: center;
+}
+.add_player_btn {
+  margin: 0mm;
 }
 .button {
   margin-top: 12mm;
