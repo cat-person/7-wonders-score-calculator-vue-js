@@ -109,7 +109,7 @@ export default {
             'background-repeat': 'no-repeat',
             'justify-items': 'center',
             'padding': '0mm',
-            'width': '160mm',
+            'width': '80mm',
             'height': '50mm',
             'margin-bottom': '3mm'
         }">

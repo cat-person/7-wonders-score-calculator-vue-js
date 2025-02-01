@@ -1,18 +1,18 @@
 <template>
-  <div class="root">
+  <div :class="rootClass">
     <TopBar
         :showClose=true
         :title="'Results'"
         @close="handleClose"/>
 
-    <div class="results" v-for="playerScore in getRankedScores(playerScores)">
+    <div :class="resultsClass" v-for="playerScore in getRankedScores(playerScores)">
       <ResultItem 
         :playerScore="playerScore" 
         :rank = "rank"
         :points = "points"/>
     </div>
 
-    <button class="new_game_button" @click="startNewGame">Start new game</button>
+    <button :class="newGameButtonClass" @click="startNewGame">Start new game</button>
 
   </div>
 </template>
@@ -21,7 +21,7 @@
   import wonders from '@/assets/wonders.json'
   import ResultItem  from './components/ResultItem.vue';
   import TopBar from '../Common/components/TopBar.vue';
-  import { toRaw } from 'vue';
+  import { reactive, toRaw } from 'vue';
   import * as util from '@/utils/calc';
 
   export default {
@@ -66,25 +66,24 @@
       },
     }
   }
+
+const rootClass = reactive({
+  margin: '0mm',
+  paddingTop: '3mm',
+  paddingBottom: '3mm',
+})
+
+const resultsClass = reactive({
+  margin: '0mm',
+  justifySelf: 'center',
+  justifyItems: 'center',
+})
+
+const newGameButtonClass = reactive({
+  marginTop: '12mm',
+  width: '40mm',
+  height: '8mm',
+  backgroundColor: 'rosybrown'
+})
+
 </script>
-
-<style scoped>
-.root {
-  margin: 0mm;
-  padding-top: 3mm;
-  padding-bottom: 3mm;
-}
-
-.results {
-  margin: 0mm;
-  justify-self: center;
-  justify-items: center;
-}
-
-.new_game_button {
-  margin-top: 12mm;
-  width: 40mm;
-  height: 8mm;
-  background-color: rosybrown;
-}
-</style>

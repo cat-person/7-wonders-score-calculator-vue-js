@@ -125,7 +125,7 @@ export default {
         'background-repeat': 'no-repeat',
         'justify-items': 'center',
         'padding': '0mm',
-        'width': '160mm',
+        'width': '80mm',
         'height': '50mm',
         'margin-bottom': '3mm'
     }">
@@ -184,7 +184,7 @@ export default {
 
 .final_points_lbl {
     position: absolute;
-    width: 160mm;
+    width: 80mm;
     margin-top: 16mm;
     color: white;
     text-shadow: 0px 0px 10px gray;

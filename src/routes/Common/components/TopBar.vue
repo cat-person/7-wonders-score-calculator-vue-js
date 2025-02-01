@@ -27,7 +27,7 @@
 <style scoped>
   .horizontal {
     position: relative;
-    width: 160mm;
+    width: 80mm;
     height: 12mm;
     margin-bottom: 2mm;
     justify-self: center;

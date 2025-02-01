@@ -3,7 +3,7 @@
         'background-color': getBackgroundColor(playerData.wonder),
         'margin': '0mm',
         'justify-self': 'center',
-        'width': '160mm',
+        'width': '80mm',
         'padding-top': '3mm',
         'padding-bottom': '3mm',
         'margin': '0mm'

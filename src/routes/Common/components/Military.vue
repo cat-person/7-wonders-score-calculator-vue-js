@@ -87,7 +87,7 @@ export default {
 .military {
     background-color: firebrick;
     justify-self: center;
-    width: 130mm;
+    width: 70mm;
     padding-bottom: 4mm;
     padding-top: 1mm;
     margin-bottom: 3mm;
@@ -101,7 +101,7 @@ export default {
 }
 
 .battle_container {
-    height: 18mm;
+    height: 12mm;
     display: flex;
     flex-direction: row;
     justify-items: center;
@@ -109,15 +109,15 @@ export default {
 }
 
 .battle_button {
-    margin: 1mm;
-    height: 16mm;
-    width: 16mm;
+    margin: 0.5mm;
+    height: 8mm;
+    width: 8mm;
 }
 
 .epoch {
     margin: 0;
     height: 6mm;
-    width: 40mm;
+    width: 21mm;
     text-align: center;
 }
 </style>

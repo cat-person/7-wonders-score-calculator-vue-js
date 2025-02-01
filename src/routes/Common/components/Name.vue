@@ -28,7 +28,7 @@
   position: relative;
   justify-self: center;
   display: flex;
-  width: 126mm;
+  width: 66mm;
   padding: 2mm;
   margin-bottom: 2mm;
   justify-content: center;
@@ -41,7 +41,7 @@
   margin: 0mm;
   align-self: center;
   /* text-align: left; */
-  width: 20%;
+  width: 30%;
   height: 6mm;
   /* color: white; */
   /* background-color: blueviolet; */
@@ -49,7 +49,7 @@
 .name_input {
   margin: 0mm;
   align-self: center;
-  width: 80%;
+  width: 70%;
   height: 6mm;
 }
 </style>

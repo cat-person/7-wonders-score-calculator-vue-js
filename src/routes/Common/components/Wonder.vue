@@ -95,7 +95,7 @@
 <style>
   .container {
     position: relative;
-    width: 160mm; 
+    width: 80mm; 
     margin: 0mm;
     padding: 0mm;
     margin-top: -3mm;
@@ -108,7 +108,7 @@
     text-shadow: 0px 0px 10px gray;
   }
   .img {
-    width: 160mm;
+    width: 80mm;
     margin: 0mm;
   }
   .btn {

@@ -130,7 +130,7 @@ export default {
 <style>
 .container {
   justify-self: center;
-  width: 160mm;
+  width: 80mm;
   padding-top: 3mm;
   padding-bottom: 3mm;
 }
