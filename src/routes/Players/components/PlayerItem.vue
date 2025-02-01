@@ -109,7 +109,7 @@ export default {
             'background-repeat': 'no-repeat',
             'justify-items': 'center',
             'padding': '0mm',
-            'width': '80mm',
+            'width': '110mm',
             'height': '50mm',
             'margin-bottom': '3mm'
         }">
@@ -162,6 +162,6 @@ export default {
     position: relative;
     justify-content: center;
     justify-items: center;
-    width: 20mm;
+    width: 15mm;
 }
 </style>

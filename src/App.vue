@@ -146,7 +146,7 @@ export default {
 }
 
 .root {
-  width: 80mm;
+  width: 110mm;
   justify-self: center;
   position: relative;
 }

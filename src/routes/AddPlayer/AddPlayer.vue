@@ -3,7 +3,7 @@
         'background-color': getBackgroundColor(playerData.wonder),
         'margin': '0mm',
         'justify-self': 'center',
-        'width': '80mm',
+        'width': '110mm',
         'padding-top': '3mm',
         'padding-bottom': '3mm',
         'margin': '0mm'
@@ -170,10 +170,6 @@ export default {
 </script>
 
 <style>
-.container {
-  
-}
-
 .error {
   color: darkred;
 }

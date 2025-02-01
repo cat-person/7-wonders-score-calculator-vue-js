@@ -36,7 +36,7 @@
   .guilds {
     background-color: mediumslateblue;
     justify-self: center;
-    width: 70mm;
+    width: 100mm;
     padding-bottom: 4mm;
     padding-top: 1mm;
     margin-bottom: 3mm;

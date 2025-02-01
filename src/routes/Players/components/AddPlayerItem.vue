@@ -20,8 +20,8 @@ export default {
 
 <style scoped>
 .add_container {
-    width: 159mm;
-    height: 49mm;
+    width: 109mm;
+    height: 39mm;
     border-color: #606060;
     border-width: 0.5mm;
     border-style: solid;
@@ -30,13 +30,13 @@ export default {
 }
 
 .add_btn {
-    margin-top: 17mm;
+    margin-top: 11mm;
     height: 12mm;
     width: 12mm;
 }
 
 .add_player_lbl {
-    margin-top: 4mm;
+    margin-top: 1mm;
     color: #606060;
 }
 </style>
