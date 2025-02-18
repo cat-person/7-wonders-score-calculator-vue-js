@@ -141,6 +141,7 @@ export default {
 
 .wonder-lbl {
     width: 100%;
+    max-width: 160mm;
     position: absolute;
     margin-top: 2mm;
     color: white;

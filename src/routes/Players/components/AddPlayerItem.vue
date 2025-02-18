@@ -20,7 +20,8 @@ export default {
 
 <style scoped>
 .add_container {
-    width: 109mm;
+    width: 100%;
+    max-width: 159mm ;
     height: 39mm;
     border-color: #606060;
     border-width: 0.5mm;

@@ -139,14 +139,19 @@ export default {
 </script>
 
 <style>
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 #app {
   margin: 0mm;
+  font-family: 'open-sans';
   user-select: none;
   text-align: center;
 }
 
 .root {
-  width: 110mm;
+  width: 100%;
+  min-width: 160mm;
   justify-self: center;
   position: relative;
 }
@@ -166,8 +171,28 @@ export default {
   opacity: 0;
 }
 
-html {
-    overflow-y:scroll;
+.html {
+  overflow-y:scroll;
+}
+
+.body {
+  font-family: 'Playfair';
+}
+
+.open-sans-300 {
+  font-family: "Open Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair-display-300 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 </style>
