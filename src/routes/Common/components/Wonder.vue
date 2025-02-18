@@ -81,7 +81,7 @@
       <div class="points_by_stage">
         <div v-for="pointsByStage, stageIdx in getWonder(wonder.id, wonder.side).pointsByStages">
           <p class="points_by_stage_lbl"> {{ pointsByStage }} </p>
-          <input type="checkbox" :checked="stageIdx < wonder.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
+          <input type="checkbox" class="points_by_stage_checkbox" :checked="stageIdx < wonder.stageBuilt" :id="stageIdx + 1" @change="onChecked($event)"/>
         </div>
       </div>
       <p class="wonder_points"> Wonder points: {{ calcWonderPoints() }} </p>
@@ -131,6 +131,12 @@
     flex-direction: row;
     justify-self: center;
     justify-content: center;
+  }
+  .points_by_stage_checkbox {
+    width: 6mm;
+    height: 6mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
   }
   .points_by_stage_lbl {
     margin: 0mm;
