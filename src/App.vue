@@ -126,8 +126,8 @@ export default {
       this.navigateTo('players')
     },
     getWonderById(wonderId) {
-      // console.error(`App.getWonderById(wonderId: ${wonderId})`)
-      // console.error(`App.playerScores(wonderId: ${this.playerScores})`)
+      // console.debug(`App.getWonderById(wonderId: ${wonderId})`)
+      // console.debug(`App.playerScores(wonderId: ${this.playerScores})`)
       return this.playerScores.find(playerScore => playerScore.wonder.id == this.state.data)
     },
     getPlayerListKey() {
@@ -179,7 +179,7 @@ export default {
   font-family: 'Playfair';
 }
 
-.open-sans-300 {
+/* .open-sans-300 {
   font-family: "Open Sans", serif;
   font-optical-sizing: auto;
   font-weight: 300;
@@ -193,6 +193,6 @@ export default {
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-}
+} */
 
 </style>

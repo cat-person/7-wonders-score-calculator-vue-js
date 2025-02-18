@@ -27,7 +27,7 @@
 
   export default {
     data() {
-      console.error(`Players.data(): { playerScores: ${JSON.stringify(this.playerScores)} }`)
+      console.debug(`Players.data(): { playerScores: ${JSON.stringify(this.playerScores)} }`)
       return {
         playerScores: this.playerScores,
         wonders: wonders,

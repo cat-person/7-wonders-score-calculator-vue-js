@@ -1,7 +1,7 @@
 import wonders from '@/assets/wonders.json'
 
 function getWonder(wonderId, side) {
-    console.error(`calc.getWonder (wonderId: ${wonderId}, side: ${side}`)
+    console.debug(`calc.getWonder (wonderId: ${wonderId}, side: ${side}`)
     let result = undefined
     wonders.forEach((wonder) => { 
         if(wonder.id == wonderId){
@@ -16,7 +16,7 @@ function getWonder(wonderId, side) {
 }
 
 export function calcWonderPoints(wonderData) {
-    console.error(`calc.calcWonderPoints(wonderData: ${JSON.stringify(wonderData)})`)
+    console.debug(`calc.calcWonderPoints(wonderData: ${JSON.stringify(wonderData)})`)
     let wonder = getWonder(wonderData.id, wonderData.side)
 
     let result = 0
@@ -31,17 +31,8 @@ export function calcWonderPoints(wonderData) {
 }
 
 export function calcCoinPoints(givenCoinCount) {
-    console.error(`calcCoinPoints(${givenCoinCount})`)
+    console.debug(`calcCoinPoints(${givenCoinCount})`)
     return Math.floor(givenCoinCount / 3)
-}
-
-export function calcMilitary(battles) {
-    return calcBattlePoints('I', battles['bronze.left'])
-        + calcBattlePoints('I', battles['bronze.right'])
-        + calcBattlePoints('II', battles['silver.left'])
-        + calcBattlePoints('II', battles['silver.right'])
-        + calcBattlePoints('III', battles['golden.left'])
-        + calcBattlePoints('III', battles['golden.right'])
 }
 
 export function calcBattlePoints(epoch, result) {
@@ -62,10 +53,10 @@ export function calcSciencePoints(clayCount, measurerCount, cogCount) {
 }
 
 export function calcSum(playerScore) {
-    console.error(`calcSum(playerScore: ${JSON.stringify(playerScore)})`)
+    console.debug(`calcSum(playerScore: ${JSON.stringify(playerScore)})`)
     let wonderPoints = calcWonderPoints(playerScore.wonder) // err
     let coinPoints = calcCoinPoints(playerScore.coinCount)
-    let militaryPoints = calcMilitary(playerScore.battles)
+    let militaryPoints = playerScore.militaryPoints
     let culturePoints = playerScore.culturePoints
     let tradePoints = playerScore.tradePoints
     let sciencePoints = calcSciencePoints(playerScore.science.clayCount, playerScore.science.measurerCount, playerScore.science.cogCount)

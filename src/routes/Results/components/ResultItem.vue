@@ -11,7 +11,7 @@ export default {
     },
 
     data() {
-        console.error(`Player.data: ${JSON.stringify(this.playerScore)}`)
+        console.debug(`Player.data: ${JSON.stringify(this.playerScore)}`)
         return {
             wonders: wonders,
             playerScore: this.playerScore,
@@ -58,7 +58,7 @@ export default {
                 {
                     name: 'military',
                     color: colors.military,
-                    points: util.calcMilitary(playerScore.battles)
+                    points: playerScore.militaryPoints
                 },
                 {
                     name: 'culture',
@@ -88,11 +88,11 @@ export default {
         },
 
         handleEditClicked(playerScore) {
-            // console.error(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            // console.debug(`Player.handleEditClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("editPlayer", playerScore)
         },
         handleDeleteClicked(playerScore) {
-            // console.error(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
+            // console.debug(`Player.handleDeleteClicked(playerScore: ${JSON.stringify(playerScore)})`)
             this.$emit("deletePlayer", playerScore)
         },
         getOpacity(rank) {

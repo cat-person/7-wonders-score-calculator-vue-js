@@ -11,7 +11,7 @@ export default {
     },
 
     data() {
-        console.error(`Player.data: ${JSON.stringify(this.playerScore)}`)
+        console.debug(`Player.data: ${JSON.stringify(this.playerScore)}`)
         return {
             wonders: wonders,
             playerScore: this.playerScore,
@@ -61,7 +61,7 @@ export default {
                 {
                     name: 'military',
                     color: colors.military,
-                    points: util.calcMilitary(playerScore.battles)
+                    points: playerScore.militaryPoints
                 },
                 {
                     name: 'culture',

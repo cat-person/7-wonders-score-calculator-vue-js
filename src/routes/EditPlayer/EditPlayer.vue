@@ -22,7 +22,7 @@
       @changeName="handleNameChanged($event)"/>
 
     <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
-    <Military :battles="playerData.battles" />
+    <Military :battlePoints="playerData.battlePoints" />
     <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
     <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
@@ -79,7 +79,7 @@ export default {
     },
     onWonderSelected(wonderId) {
       this.playerData.wonder.id = wonderId
-      console.error(`wonderId: ${wonderId}`)
+      console.debug(`wonderId: ${wonderId}`)
     },
     getWonder(wonderId, side) {
       let result = undefined
@@ -105,7 +105,7 @@ export default {
       this.playerData.culturePoints = culturePoints
     },
     handleTradePointsUpdated(tradePoints){
-      console.error(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
+      console.debug(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
       this.playerData.tradePoints = tradePoints
     },
     handleScienceUpdated(science){

@@ -5,7 +5,7 @@ import wonders from '@/assets/wonders.json'
 
 function getAvailableWonders(availableWonderIds) {
   let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
-  console.error(`getAvailableWonders(${JSON.stringify(result)})`)
+  console.debug(`getAvailableWonders(${JSON.stringify(result)})`)
   return result
 }
 
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getWonder(wonderId, side) {
-      console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
+      console.debug(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
 
       let result = undefined
       wonders.forEach((wonder) => {
@@ -51,7 +51,7 @@ export default {
       }
     },
     getImageByWonder(wonderId, side) {
-      console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
+      console.debug(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
       let wonder = this.getWonder(wonderId, side)
       return new URL(`../../../assets/${wonder.img}`, import.meta.url)
     },

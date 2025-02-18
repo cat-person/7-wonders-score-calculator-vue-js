@@ -5,7 +5,7 @@
 
   function getAvailableWonders(availableWonderIds){
     let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
-    console.error(`getAvailableWonders(${JSON.stringify(result)})`)
+    console.debug(`getAvailableWonders(${JSON.stringify(result)})`)
     return result 
   }
 
@@ -29,7 +29,7 @@
         return result
       },
       getWonder(wonderId, side) {
-        console.error(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
+        console.debug(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
 
         let result = this.getWonderById(wonderId)
 
@@ -40,7 +40,7 @@
         }  
       },
       getImageByWonder(wonderId, side) {
-        console.error(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
+        console.debug(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
         let wonder = this.getWonder(wonderId, side)
         return new URL(`../../../assets/${wonder.img}`, import.meta.url)
       },
@@ -51,7 +51,7 @@
         this.$emit('onSideChanged', this.wonder.side == 'A' ? 'B': 'A')
       },
       onChecked(event) {
-        console.error(`onChecked(${event})`)
+        console.debug(`onChecked(${event})`)
         let id = parseInt(event.srcElement.id)
         let selectedStage = 0
         if(event.srcElement.checked){

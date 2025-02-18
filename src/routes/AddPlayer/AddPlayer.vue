@@ -26,7 +26,7 @@
       @changeName="handleNameChanged($event)"/>
 
     <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
-    <Military :battles="playerData.battles" />
+    <Military :points="playerData.militaryPoints" @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"/>
     <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
     <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
@@ -59,14 +59,7 @@ function getDefault(availableWonders){
       stageBuilt: 0,
     },
     coinCount: 0,
-    battles: {
-      'bronze.left': 'draw', 
-      'bronze.right': 'draw',
-      'silver.left': 'draw', 
-      'silver.right': 'draw',
-      'golden.left': 'draw', 
-      'golden.right': 'draw'
-    },
+    militaryPoints: 0,
     culturePoints: 0,
     tradePoints: 0,
     science: {
@@ -108,7 +101,7 @@ export default {
     },
     onWonderSelected(wonderId) {
       this.playerData.wonder.id = wonderId
-      console.error(`wonderId: ${wonderId}`)
+      console.debug(`wonderId: ${wonderId}`)
     },
     handleSideChanged(givenSide) {
       this.playerData.wonder.side = givenSide
@@ -117,7 +110,7 @@ export default {
       this.playerData.wonder.stageBuilt = stageBuilt
     },
     getWonder(wonderId, side) {
-      console.error(`AddPlayer.getWonder(wonderId: ${wonderId}, side: ${side})`)
+      console.debug(`AddPlayer.getWonder(wonderId: ${wonderId}, side: ${side})`)
       let result = undefined
       this.wonders.forEach((wonder) => { 
         if(wonder.id == wonderId){
@@ -142,11 +135,14 @@ export default {
     handleCoinCountChanged(coinCount) {
       this.playerData.coinCount = coinCount
     },
+    handleMilitaryPointsUpdated(militaryPoints){
+      this.playerData.militaryPoints = militaryPoints
+    },
     handleCulturePointsUpdated(culturePoints){
       this.playerData.culturePoints = culturePoints
     },
     handleTradePointsUpdated(tradePoints){
-      console.error(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
+      console.debug(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
       this.playerData.tradePoints = tradePoints
     },
     handleScienceUpdated(science){
@@ -159,7 +155,7 @@ export default {
       return this.getWonder(wonder.id, wonder.side).background
     },
     canAdd(scoreData){
-      console.error(`AddPlayer.canAdd(${JSON.stringify(scoreData)})`)
+      console.debug(`AddPlayer.canAdd(${JSON.stringify(scoreData)})`)
       return scoreData.name != ""
     },
     handleAddPlayer() {
