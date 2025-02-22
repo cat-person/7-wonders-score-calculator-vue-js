@@ -4,18 +4,18 @@
     <div id="Science" class="horizontal">
       <div class="vertical">
         <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
-        <input class="scienceInput" v-model="science.clayCount" @keypress="isNumber($event)" type="number">
+        <input class="scienceInput" v-model="scienceData.clayCount" @keypress="isNumber($event)" type="number">
       </div>
       <div class="vertical">
         <img src="../../../assets/science_icons/measurer.png" class="science_icon"/>
-        <input class="scienceInput" v-model="science.measurerCount" @keypress="isNumber($event)" type="number">
+        <input class="scienceInput" v-model="scienceData.measurerCount" @keypress="isNumber($event)" type="number">
       </div>
       <div class="vertical">
         <img src="../../../assets/science_icons/cog.png" class="science_icon"/>  
-        <input class="scienceInput" v-model="science.cogCount" @keypress="isNumber($event)" type="number">
+        <input class="scienceInput" v-model="scienceData.cogCount" @keypress="isNumber($event)" type="number">
       </div>
     </div>
-    <p> Science points: {{ calcSciencePoints(science.clayCount, science.measurerCount, science.cogCount) }} </p>
+    <p> Science points: {{ calcSciencePoints(scienceData.clayCount, scienceData.measurerCount, scienceData.cogCount) }} </p>
   </div>
 </template>
   
@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        science: this.science,
+        scienceData: this.science,
       }
     },
     methods: {
@@ -34,7 +34,7 @@
         return clayCount * clayCount + measurerCount * measurerCount + cogCount * cogCount + 7 * (Math.min.apply(Math, [clayCount, measurerCount, cogCount]))
       },
       handleScienceUpdated(){
-        this.$emit('scienceUpdated', this.science)
+        this.$emit('scienceUpdated', this.scienceData)
       },
       isNumber(evt) {
           evt = (evt) ? evt : window.event;

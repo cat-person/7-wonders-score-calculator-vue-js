@@ -1,4 +1,7 @@
 <template>
+  <button @click="handleCreateSessionClicked">Create session</button>
+  <button @click="handleGetPlayerScoreClicked">Get player score</button>
+
   <div class="root">
     <transition name="fade">
       <Players v-if="state.id === 'players'" 
@@ -36,15 +39,21 @@
         @close="() => navigateTo('players')" />
     </transition>
   </div>
+
 </template>
 
 <script>
+
+import { getUnauthSession, getPlayerScore } from '@/utils/remote'
+
 import Players from './routes/Players/Players.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
 import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
 import Results from './routes/Results/Results.vue'
 
 import wonders from '@/assets/wonders.json'
+
+
 
 function defaultState(localStorage) {
   let result = { id: 'players' }
@@ -126,12 +135,18 @@ export default {
       this.navigateTo('players')
     },
     getWonderById(wonderId) {
-      // console.debug(`App.getWonderById(wonderId: ${wonderId})`)
-      // console.debug(`App.playerScores(wonderId: ${this.playerScores})`)
       return this.playerScores.find(playerScore => playerScore.wonder.id == this.state.data)
     },
     getPlayerListKey() {
       return JSON.stringify(this.playerScores.map(score => score.wonder.id))
+    },
+    async handleCreateSessionClicked() {
+      const session = await getUnauthSession()
+      console.error(session)
+    },
+    async handleGetPlayerScoreClicked() {
+      const score = await getPlayerScore()
+      console.error(score)
     }
   },
 }

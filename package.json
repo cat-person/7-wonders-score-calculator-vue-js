@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
+    "appwrite": "^14.0.1",
     "embla-carousel-vue": "^8.5.1",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5"

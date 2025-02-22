@@ -8,7 +8,7 @@
 <script>
   export default {
     props: {
-      points: Object
+      points: Number
     },
     data() {
       return {

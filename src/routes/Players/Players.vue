@@ -3,7 +3,7 @@
     <TopBar 
       :title="getTitle()" />
 
-    <div class="players_container" v-for="playerScore in playerScores">
+    <div class="players_container" v-for="playerScore in playerScoreData">
       <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
@@ -15,7 +15,7 @@
       class="add_player_btn"
       @addPlayer="handleAddPlayer"/>
 
-    <button v-if="calculateResultsShown(playerScores)" class="button" @click="handleCalculateResultsClicked(playerScores)">Calculate the results</button>
+    <button v-if="calculateResultsShown(playerScoreData)" class="button" @click="handleCalculateResultsClicked">Calculate the results</button>
   </div>
 </template>
 
@@ -27,9 +27,9 @@
 
   export default {
     data() {
-      console.debug(`Players.data(): { playerScores: ${JSON.stringify(this.playerScores)} }`)
+      console.debug(`Players.data(): { playerScoreData: ${JSON.stringify(this.playerScoreData)} }`)
       return {
-        playerScores: this.playerScores,
+        playerScoreData: this.playerScores,
         wonders: wonders,
       };
     },
@@ -43,7 +43,7 @@
     },
     methods: {
       getTitle() {
-        if(this.playerScores.length == 0) {
+        if(this.playerScoreData.length == 0) {
           return 'Press ➕ to start using the app'
         } else {
           return 'Players'
@@ -58,7 +58,7 @@
       startNewGame(){
         this.$emit("startNewGame")
       },
-      handleCalculateResultsClicked(playerScores) {
+      handleCalculateResultsClicked() {
         this.$emit('showResults')
       },
       handleEditPlayer(wonderId){
@@ -68,8 +68,8 @@
       handleDeletePlayer(wonderId){
         this.$emit("deletePlayer", wonderId)
       },
-      calculateResultsShown(playerScores) {
-        return 2 < playerScores.length 
+      calculateResultsShown(playerScoreData) {
+        return 2 < playerScoreData.length 
       }
     }
   }
