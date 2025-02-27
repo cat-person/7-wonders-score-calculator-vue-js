@@ -1,5 +1,5 @@
 <template>
-  <button @click="handleCreateSessionClicked">Create session</button>
+  <button @click="handleCreateSessionClicked">Add player score</button>
   <button @click="handleGetPlayerScoreClicked">Get player score</button>
 
   <div class="root">
@@ -44,7 +44,7 @@
 
 <script>
 
-import { getUnauthSession, getPlayerScore } from '@/utils/remote'
+import { getUnauthSession, addPlayerScore, getPlayerScore } from '@/utils/remote'
 
 import Players from './routes/Players/Players.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
@@ -117,8 +117,12 @@ export default {
         this.updatePlayers([...this.playerScores.slice(0, deletedPlayerIdx), ...this.playerScores.slice(deletedPlayerIdx + 1)])
       }
     },
-    handlePlayerAdded(playerScore) {
+    async handlePlayerAdded(playerScore) {
       this.playerScores.push(playerScore)
+
+      const result = await addPlayerScore(playerScore.wonder.id, playerScore)
+      console.error(result)
+
       this.state = { id: 'players' }
 
       window.localStorage.setItem('state', JSON.stringify(this.state))
@@ -147,6 +151,9 @@ export default {
     async handleGetPlayerScoreClicked() {
       const score = await getPlayerScore()
       console.error(score)
+    },
+    async handleGetPlayerScoreClicked() {
+      const score = await getPlayerScore()
     }
   },
 }
