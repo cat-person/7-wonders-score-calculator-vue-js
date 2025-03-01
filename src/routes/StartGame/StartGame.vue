@@ -1,0 +1,51 @@
+<template>
+  <div class="root">
+    <TopBar 
+      :title='"Welcome to unofficial 7 wonders points calculator"' />
+
+    <StartGameItem
+      class="add_player_btn"
+      @startNewGame="handleStartNewGame"/>
+      
+  </div>
+</template>
+
+<script>
+  import wonders from '@/assets/wonders.json'
+  import StartGameItem from './components/StartGameItem.vue';
+  import TopBar from '../Common/components/TopBar.vue';
+
+  export default {
+    data() {
+      console.debug(`Players.data(): { playerScoreData: ${JSON.stringify(this.playerScoreData)} }`)
+      return {
+        playerScoreData: this.playerScores,
+        wonders: wonders,
+      };
+    },
+    props: {
+      playerScores: Array
+    },
+    components: {
+      TopBar,
+      StartGameItem
+    },
+    methods: {
+      handleStartNewGame(sessionId){
+        console.log(`handleStartNewGame ${sessionId}`)
+        this.$emit("startNewGame", sessionId)
+      },
+    }
+  }
+</script>
+
+<style scoped>
+.root {
+  margin: 0mm;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
+}
+.add_player_btn {
+  margin: 0mm;
+}
+</style>

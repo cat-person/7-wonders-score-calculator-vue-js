@@ -1,8 +1,14 @@
 <template>
-  <button @click="handleCreateSessionClicked">Add player score</button>
+  <button @click="handleGetSessionIdClicked">Get Session Id</button>
   <button @click="handleGetPlayerScoreClicked">Get player score</button>
 
   <div class="root">
+    <transition name="fade">
+      <StartGame v-if="state.id === 'new'" 
+        class="screen"
+        @startNewGame="(sessionId) => navigateTo('players', sessionId)" />
+    </transition>
+
     <transition name="fade">
       <Players v-if="state.id === 'players'" 
         class="screen"
@@ -45,18 +51,18 @@
 <script>
 
 import { getUnauthSession, addPlayerScore, getPlayerScore } from '@/utils/remote'
+import { getSessionId } from '@/utils/sessions'
 
 import Players from './routes/Players/Players.vue'
+import StartGame from './routes/StartGame/StartGame.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
 import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
 import Results from './routes/Results/Results.vue'
 
 import wonders from '@/assets/wonders.json'
 
-
-
 function defaultState(localStorage) {
-  let result = { id: 'players' }
+  let result = { id: 'new' }
   if (localStorage.getItem('state')) {
     result = JSON.parse(localStorage.getItem('state'))
   }
@@ -75,6 +81,7 @@ export default {
   name: 'App',
   components: {
     Players,
+    StartGame,
     Results,
     AddPlayer,
     EditPlayer,
@@ -84,6 +91,7 @@ export default {
     return {
       wonders: wonders,
       state: defaultState(window.localStorage),
+      playSession: null,
       playerScores: defaultPlayerScores(window.localStorage)
     }
   },
@@ -152,8 +160,9 @@ export default {
       const score = await getPlayerScore()
       console.error(score)
     },
-    async handleGetPlayerScoreClicked() {
-      const score = await getPlayerScore()
+    async handleGetSessionIdClicked(event) {
+      const seed = event.screenX * event.screenY * (new Date()).getMilliseconds()
+      console.error(getSessionId(seed))
     }
   },
 }
@@ -200,21 +209,5 @@ export default {
 .body {
   font-family: 'Playfair';
 }
-
-/* .open-sans-300 {
-  font-family: "Open Sans", serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-.playfair-display-300 {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-} */
 
 </style>
