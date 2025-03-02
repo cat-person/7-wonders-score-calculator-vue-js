@@ -4,9 +4,9 @@ import Wonder from '../../Common/components/Wonder.vue';
 import wonders from '@/assets/wonders.json'
 
 function getAvailableWonders(availableWonderIds) {
-  let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
-  console.debug(`getAvailableWonders(${JSON.stringify(result)})`)
-  return result
+  // let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
+  // console.debug(`getAvailableWonders(${JSON.stringify(result)})`)
+  return wonders
 }
 
 export default {
@@ -16,12 +16,12 @@ export default {
   },
   props: {
     wonder: Object,
-    availableWonderIds: Array
+  //   // availableWonderIds: Array
   },
   data() {
     return {
-      availableWonders: getAvailableWonders(this.availableWonderIds),
-      selectedWonderId: this.availableWonderIds[0]
+      availableWonders: getAvailableWonders(),
+      selectedWonderId: wonders[0].id
     }
   },
   mounted() {

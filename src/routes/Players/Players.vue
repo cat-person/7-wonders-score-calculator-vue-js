@@ -3,7 +3,7 @@
     <TopBar 
       :title="getTitle()" />
 
-    <div class="players_container" v-for="playerScore in playerScoreData">
+    <div class="players_container" v-for="playerScore in getPlayerScoreData()">
       <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
@@ -24,12 +24,14 @@
   import PlayerItem  from './components/PlayerItem.vue';
   import AddPlayerItem from './components/AddPlayerItem.vue';
   import TopBar from '../Common/components/TopBar.vue';
+import { getPlayerScore } from '@/utils/remote';
 
   export default {
     data() {
       console.debug(`Players.data(): { playerScoreData: ${JSON.stringify(this.playerScoreData)} }`)
       return {
         playerScoreData: this.playerScores,
+        sessionId: this.$route.params.id,
         wonders: wonders,
       };
     },
@@ -48,6 +50,9 @@
         } else {
           return 'Players'
         }
+      },
+      async getPlayerScore() {
+        
       },
       handleClosedClicked(){
         this.$emit("close")

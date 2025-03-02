@@ -28,12 +28,15 @@ export const getPlayerScore = async (playerId) => {
 }
 
 
-export const addPlayerScore = async (playerId, score) => {
+export const addPlayerScore = async (sessionId, score) => {
+    console.error(`${sessionId}.${score.wonder.id}`)
+
     return await databases.createDocument(
         '67b64d2d0017d8ef2b54',
         '67b6daee003dfa0cb7ee',
-        playerId,
+        `${sessionId}.${score.wonder.id}`,
         {
+            session_id: sessionId,
             name: score.name,
             wonder_id: score.wonder.id,
             wonder_side_a: score.wonder.side === 'A',

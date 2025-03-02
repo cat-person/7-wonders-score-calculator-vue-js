@@ -33,7 +33,7 @@
     methods: {
       handleStartNewGame(sessionId){
         console.log(`handleStartNewGame ${sessionId}`)
-        this.$emit("startNewGame", sessionId)
+        this.$router.push(`/${sessionId}/add_player`)
       },
     }
   }

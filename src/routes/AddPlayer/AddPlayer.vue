@@ -1,6 +1,6 @@
 <template>
    <div class="container" :style="{
-        'background-color': getBackgroundColor(playerData.wonder),
+        'background-color': getBackgroundColor(playerScore.wonder),
         'margin': '0mm',
         'justify-self': 'center',
         'width': '110mm',
@@ -14,26 +14,26 @@
       :showClose=true
       @close="handleClose"/>
 
+    <!-- :availableWonderIds="availableWonders" -->
     <WonderSelection
-      :wonder="playerData.wonder"
-      :availableWonderIds="availableWonders"
+      :wonder="playerScore.wonder"
       @onWonderSelected="onWonderSelected($event)"
       @onSideChanged="handleSideChanged($event)"
       @onStageBuilt="onStageBuilt($event)"/>
 
     <Name
-      :name="playerData.name"
+      :name="playerScore.name"
       @changeName="handleNameChanged($event)"/>
 
-    <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
-    <Military :points="playerData.militaryPoints" @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"/>
-    <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
-    <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
-    <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
-    <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
+    <Coins :coinCount="playerScore.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
+    <Military :points="playerScore.militaryPoints" @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"/>
+    <Culture :points="playerScore.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
+    <Trade :points="playerScore.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
+    <Science :science="playerScore.science" @scienceUpdated="handleScienceUpdated($event)"/>
+    <Guild :points="playerScore.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerData)" @click="handleAddPlayer">Done</button>
-    <p class="error" v-if="!canAdd(playerData)">❗️ Enter your name to complete the form ❗️</p>
+    <button :disabled="!canAdd(playerScore)" @click="handleAddPlayer">Done</button>
+    <p class="error" v-if="!canAdd(playerScore)">❗️ Enter your name to complete the form ❗️</p>
   </div>
 </template>
 
@@ -49,32 +49,28 @@ import Guild from '../Common/components/Guild.vue';
 import TopBar from '../Common/components/TopBar.vue';
 
 import wonders from '@/assets/wonders.json'
+import { addPlayerScore } from '@/utils/remote'
 
-function getDefault(availableWonders){
-  return {
-    name: '',
-    wonder: {
-      id: availableWonders[0],
-      side: 'A',
-      stageBuilt: 0,
-    },
-    coinCount: 0,
-    militaryPoints: 0,
-    culturePoints: 0,
-    tradePoints: 0,
-    science: {
-      clayCount: 0,
-      measurerCount: 0,
-      cogCount: 0,
-    },
-    guildPoints: 0
-  }
+const defaultPlayerScore = {
+  name: '',
+  wonder: {
+    id: wonders[0].id,
+    side: 'A',
+    stageBuilt: 0,
+  },
+  coinCount: 0,
+  militaryPoints: 0,
+  culturePoints: 0,
+  tradePoints: 0,
+  science: {
+    clayCount: 0,
+    measurerCount: 0,
+    cogCount: 0,
+  },
+  guildPoints: 0
 }
 
 export default {
-  props: {
-    availableWonders: Array,
-  },
   components: {
     TopBar,
     Name,
@@ -89,25 +85,22 @@ export default {
   data() {
     return {
       wonders: wonders,
-      playerData: getDefault(this.availableWonders)
+      playerScore: defaultPlayerScore
     }  
   },
   methods: {
-    handleAddPlayer() {
-      this.$emit("playerAdded", this.playerData)
-    },
     handleClose() {
-      this.$emit('close')
+      // navigate to players
+      // this.$emit('close')
     },
     onWonderSelected(wonderId) {
-      this.playerData.wonder.id = wonderId
-      console.debug(`wonderId: ${wonderId}`)
+      this.playerScore.wonder.id = wonderId
     },
     handleSideChanged(givenSide) {
-      this.playerData.wonder.side = givenSide
+      this.playerScore.wonder.side = givenSide
     },
     onStageBuilt(stageBuilt) {
-      this.playerData.wonder.stageBuilt = stageBuilt
+      this.playerScore.wonder.stageBuilt = stageBuilt
     },
     getWonder(wonderId, side) {
       console.debug(`AddPlayer.getWonder(wonderId: ${wonderId}, side: ${side})`)
@@ -124,32 +117,32 @@ export default {
       }
     },
     handleNameChanged(name) {
-      this.playerData.name = name
+      this.playerScore.name = name
     },
     handleSideChanged(givenSide) {
-      this.playerData.wonder.side = givenSide
+      this.playerScore.wonder.side = givenSide
     },
     onStageBuilt(stageBuilt) {
-      this.playerData.wonder.stageBuilt = stageBuilt
+      this.playerScore.wonder.stageBuilt = stageBuilt
     },
     handleCoinCountChanged(coinCount) {
-      this.playerData.coinCount = coinCount
+      this.playerScore.coinCount = coinCount
     },
     handleMilitaryPointsUpdated(militaryPoints){
-      this.playerData.militaryPoints = militaryPoints
+      this.playerScore.militaryPoints = militaryPoints
     },
     handleCulturePointsUpdated(culturePoints){
-      this.playerData.culturePoints = culturePoints
+      this.playerScore.culturePoints = culturePoints
     },
     handleTradePointsUpdated(tradePoints){
       console.debug(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
-      this.playerData.tradePoints = tradePoints
+      this.playerScore.tradePoints = tradePoints
     },
     handleScienceUpdated(science){
-      this.playerData.science = science
+      this.playerScore.science = science
     },
     handleGuildPointsUpdated(guildPoints){
-      this.playerData.guildPoints = guildPoints
+      this.playerScore.guildPoints = guildPoints
     },
     getBackgroundColor(wonder) {
       return this.getWonder(wonder.id, wonder.side).background
@@ -159,7 +152,8 @@ export default {
       return scoreData.name != ""
     },
     handleAddPlayer() {
-      this.$emit("playerAdded", this.playerData)
+      console.error(`playerAdded ${JSON.stringify(this.$route.params)}`)
+      addPlayerScore(this.$route.params.session_id, this.playerScore)
     }
   },
 };

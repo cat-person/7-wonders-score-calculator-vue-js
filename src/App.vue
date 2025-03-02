@@ -2,50 +2,51 @@
   <button @click="handleGetSessionIdClicked">Get Session Id</button>
   <button @click="handleGetPlayerScoreClicked">Get player score</button>
 
-  <div class="root">
-    <transition name="fade">
-      <StartGame v-if="state.id === 'new'" 
-        class="screen"
-        @startNewGame="(sessionId) => navigateTo('players', sessionId)" />
-    </transition>
+  <main class="root">
+    <RouterView />
+  </main>
 
-    <transition name="fade">
-      <Players v-if="state.id === 'players'" 
-        class="screen"
-        :key="getPlayerListKey()"
-        :playerScores="playerScores"
-        @addPlayer="() => navigateTo('add_player')" 
-        @editPlayer="navigateTo('edit_player', $event)"
-        @deletePlayer="handleDeletePlayer($event)" 
-        @showResults="() => navigateTo('results', this.playerScores)" />
-    </transition>
+  <!-- <transition name="fade">
+    <StartGame v-if="state.id === 'new'" 
+      class="screen"
+      @startNewGame="(sessionId) => navigateTo('players', sessionId)" />
+  </transition>
 
-    <transition name="fade">
-      <EditPlayer v-if="state.id === 'edit_player'" 
-        class="screen"
-        :playerScore="getWonderById(state.data)"
-        :availableWonders="getAvailableWonders()" 
-        @finishEditing="handleFinishEditting($event)"
-        @close="() => navigateTo('players')" />
-    </transition>
+  <transition name="fade">
+    <Players v-if="state.id === 'players'" 
+      class="screen"
+      :key="getPlayerListKey()"
+      :playerScores="playerScores"
+      @addPlayer="() => navigateTo('add_player')" 
+      @editPlayer="navigateTo('edit_player', $event)"
+      @deletePlayer="handleDeletePlayer($event)" 
+      @showResults="() => navigateTo('results', this.playerScores)" />
+  </transition>
 
-    <transition name="fade">
-      <AddPlayer v-if="state.id === 'add_player'"
-        class="screen" 
-        :availableWonders="getAvailableWonders()"
-        @playerAdded="handlePlayerAdded($event)" 
-        @close="() => navigateTo('players')" />
-    </transition>
+  <transition name="fade">
+    <EditPlayer v-if="state.id === 'edit_player'" 
+      class="screen"
+      :playerScore="getWonderById(state.data)"  
+      :availableWonders="getAvailableWonders()" 
+      @finishEditing="handleFinishEditting($event)"
+      @close="() => navigateTo('players')" />
+  </transition>
 
-    <transition name="fade">
-      <Results v-if="state.id === 'results'" 
-        class="screen"
-        :playerScores="playerScores" 
-        @startNewGame="handleStartNewGame"
-        @close="() => navigateTo('players')" />
-    </transition>
-  </div>
+  <transition name="fade">
+    <AddPlayer v-if="state.id === 'add_player'"
+      class="screen" 
+      :availableWonders="getAvailableWonders()"
+      @playerAdded="handlePlayerAdded($event)" 
+      @close="() => navigateTo('players')" />
+  </transition>
 
+  <transition name="fade">
+    <Results v-if="state.id === 'results'" 
+      class="screen"
+      :playerScores="playerScores" 
+      @startNewGame="handleStartNewGame"
+      @close="() => navigateTo('players')" />
+  </transition> -->
 </template>
 
 <script>
@@ -76,6 +77,7 @@ function defaultPlayerScores(localStorage) {
   }
   return result
 }
+
 
 export default {
   name: 'App',
