@@ -32,7 +32,7 @@
     <Science :science="playerScore.science" @scienceUpdated="handleScienceUpdated($event)"/>
     <Guild :points="playerScore.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerScore)" @click="handleAddPlayer">Done</button>
+    <button :disabled="!canAdd(playerScore)" @click="handleAddPlayer($route.params.session_id, playerScore)">Done</button>
     <p class="error" v-if="!canAdd(playerScore)">❗️ Enter your name to complete the form ❗️</p>
   </div>
 </template>
@@ -151,9 +151,9 @@ export default {
       console.debug(`AddPlayer.canAdd(${JSON.stringify(scoreData)})`)
       return scoreData.name != ""
     },
-    handleAddPlayer() {
-      console.error(`playerAdded ${JSON.stringify(this.$route.params)}`)
-      addPlayerScore(this.$route.params.session_id, this.playerScore)
+    handleAddPlayer(sessionId, playerScore) {
+      addPlayerScore(sessionId, playerScore)
+      this.$router.push(`/${sessionId}`)
     }
   },
 };

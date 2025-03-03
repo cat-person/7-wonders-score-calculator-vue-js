@@ -1,6 +1,6 @@
 <template>
-  <button @click="handleGetSessionIdClicked">Get Session Id</button>
-  <button @click="handleGetPlayerScoreClicked">Get player score</button>
+  <!-- <button @click="handleGetSessionIdClicked">Get Session Id</button>
+  <button @click="handleGetPlayerScoreClicked">Get player score</button> -->
 
   <main class="root">
     <RouterView />
@@ -51,8 +51,7 @@
 
 <script>
 
-import { getUnauthSession, addPlayerScore, getPlayerScore } from '@/utils/remote'
-import { getSessionId } from '@/utils/sessions'
+import { getUnauthSession, addPlayerScore, getPlayerScores } from '@/utils/remote'
 
 import Players from './routes/Players/Players.vue'
 import StartGame from './routes/StartGame/StartGame.vue'
@@ -157,16 +156,8 @@ export default {
     async handleCreateSessionClicked() {
       const session = await getUnauthSession()
       console.error(session)
-    },
-    async handleGetPlayerScoreClicked() {
-      const score = await getPlayerScore()
-      console.error(score)
-    },
-    async handleGetSessionIdClicked(event) {
-      const seed = event.screenX * event.screenY * (new Date()).getMilliseconds()
-      console.error(getSessionId(seed))
     }
-  },
+  }
 }
 
 </script>

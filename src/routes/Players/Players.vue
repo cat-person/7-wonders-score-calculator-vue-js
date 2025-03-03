@@ -3,7 +3,7 @@
     <TopBar 
       :title="getTitle()" />
 
-    <div class="players_container" v-for="playerScore in getPlayerScoreData()">
+    <div class="players_container" v-for="playerScore in playerScores">
       <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
@@ -11,32 +11,34 @@
     </div>
 
     <AddPlayerItem
-      v-if="playerScores.length < 7"
+      v-if="!playerScores || playerScores.length < 7"
       class="add_player_btn"
       @addPlayer="handleAddPlayer"/>
 
-    <button v-if="calculateResultsShown(playerScoreData)" class="button" @click="handleCalculateResultsClicked">Calculate the results</button>
+    <button v-if="calculateResultsShown(playerScores)" class="button" @click="handleCalculateResultsClicked">Calculate the results</button>
   </div>
 </template>
 
 <script>
   import wonders from '@/assets/wonders.json'
-  import PlayerItem  from './components/PlayerItem.vue';
-  import AddPlayerItem from './components/AddPlayerItem.vue';
-  import TopBar from '../Common/components/TopBar.vue';
-import { getPlayerScore } from '@/utils/remote';
+  import PlayerItem  from './components/PlayerItem.vue'
+  import AddPlayerItem from './components/AddPlayerItem.vue'
+  import TopBar from '../Common/components/TopBar.vue'
+
+  import { getPlayerScores } from '@/utils/remote'
 
   export default {
     data() {
-      console.debug(`Players.data(): { playerScoreData: ${JSON.stringify(this.playerScoreData)} }`)
+
+
       return {
-        playerScoreData: this.playerScores,
-        sessionId: this.$route.params.id,
+        playerScores: [],
+        sessionId: this.$route.params.session_id,
         wonders: wonders,
       };
     },
-    props: {
-      playerScores: Array
+    mounted: function () {
+      this.getPlayerScoresAAA(this.$route.params.session_id)
     },
     components: {
       TopBar,
@@ -44,15 +46,16 @@ import { getPlayerScore } from '@/utils/remote';
       AddPlayerItem
     },
     methods: {
+      async getPlayerScoresAAA(sessionId) {
+        console.error(`AAAAAAAAAAAAAAAAA ${sessionId}`)
+        this.playerScores = await getPlayerScores(this.$route.params.session_id)
+      },
       getTitle() {
-        if(this.playerScoreData.length == 0) {
+        if(!this.playerScores || this.playerScores.length == 0) {
           return 'Press ➕ to start using the app'
         } else {
           return 'Players'
         }
-      },
-      async getPlayerScore() {
-        
       },
       handleClosedClicked(){
         this.$emit("close")
@@ -73,8 +76,8 @@ import { getPlayerScore } from '@/utils/remote';
       handleDeletePlayer(wonderId){
         this.$emit("deletePlayer", wonderId)
       },
-      calculateResultsShown(playerScoreData) {
-        return 2 < playerScoreData.length 
+      calculateResultsShown(playerScores) {
+        return playerScores && 2 < playerScores.length 
       }
     }
   }
