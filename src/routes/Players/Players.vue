@@ -49,6 +49,7 @@
       async getPlayerScoresAAA(sessionId) {
         console.error(`AAAAAAAAAAAAAAAAA ${sessionId}`)
         this.playerScores = await getPlayerScores(this.$route.params.session_id)
+        console.error(`playerScores ${JSON.stringify(this.playerScores)}`)
       },
       getTitle() {
         if(!this.playerScores || this.playerScores.length == 0) {

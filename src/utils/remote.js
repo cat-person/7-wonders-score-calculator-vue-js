@@ -18,18 +18,20 @@ export const getUnauthSession = async () => {
 export const getPlayerScores = async (sessionId) => {
     console.error(`getPlayerScores(sessionId: ${sessionId})`)    
     
-    const result = await databases.listDocuments(
+    return await databases.listDocuments(
         '67b64d2d0017d8ef2b54',
         '67b6daee003dfa0cb7ee',
         [
             Query.equal('session_id', [sessionId]),
         ]).then((result) => {
             console.error(`result: ${JSON.stringify(result)}`)
-                return result.documents.map (remoteToLocal)
+                const playerScores = result.documents.map (remoteToLocal)
+                console.error(`playerScores: ${JSON.stringify(playerScores)}`)
+                return playerScores
             }).catch((error) => {
                 console.error(error)
-            return []
-        })    
+                return []
+            })    
 }
 
 const remoteToLocal = (remoteDoc) => {
@@ -79,13 +81,3 @@ export const addPlayerScore = async (sessionId, score) => {
         }    
     );
 }
-
-
-
-// const result = await databases.listDocuments(
-//     '<DATABASE_ID>', // databaseId
-//     '<COLLECTION_ID>', // collectionId
-//     [] // queries (optional)
-// );
-
-// console.log(result);
