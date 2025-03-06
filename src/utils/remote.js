@@ -15,6 +15,37 @@ export const getUnauthSession = async () => {
     return await account.createAnonymousSession(); // <== not sure if it needed
 }
 
+export const updatePlayerScore = async (sessionId, playerScore) => {
+    console.error(`getPlayerScores(sessionId: ${sessionId}, playerScore: ${JSON.stringify(playerScore)})`)
+
+    return await databases.updateDocument(
+        '67b64d2d0017d8ef2b54',
+        '67b6daee003dfa0cb7ee',
+        `${sessionId}.${score.wonder.id}`,
+        localToRemote(sessionId, playerScore)
+    )
+}
+
+export const getPlayerScoreByWonderId = async (sessionId, wonderId) => {
+    console.error(`getPlayerScoreByWonderId(sessionId: ${sessionId}, wonderId: ${wonderId})`)    
+    
+    return await databases.listDocuments(
+        '67b64d2d0017d8ef2b54',
+        '67b6daee003dfa0cb7ee',
+        [
+            Query.equal('session_id', [sessionId]),
+            Query.equal('wonder_id', [wonderId]),
+        ]).then((result) => {
+            console.error(`result: ${JSON.stringify(result)}`)
+                const playerScores = result.documents.map (remoteToLocal)
+                console.error(`playerScores: ${JSON.stringify(playerScores)}`)
+                return playerScores[0]
+            }).catch((error) => {
+                console.error(error)
+                return null
+            })    
+}
+
 export const getPlayerScores = async (sessionId) => {
     console.error(`getPlayerScores(sessionId: ${sessionId})`)    
     
@@ -39,7 +70,7 @@ const remoteToLocal = (remoteDoc) => {
         name: remoteDoc.name,
         wonder: {
             id: remoteDoc.wonder_id,
-            side: remoteDoc.wonder_side_a,
+            side: remoteDoc.wonder_side_a ? 'A' : 'B',
             stageBuilt: remoteDoc.wonder_stage_built
         },
         coinCount: remoteDoc.coin_count,
@@ -55,29 +86,31 @@ const remoteToLocal = (remoteDoc) => {
     }
 }
 
-
-export const addPlayerScore = async (sessionId, score) => {
-    console.error(`${sessionId}.${score.wonder.id}`)
+export const addPlayerScore = async (sessionId, playerScore) => {
+    console.error(`${sessionId}.${playerScore.wonder.id}`)
 
     return await databases.createDocument(
         '67b64d2d0017d8ef2b54',
         '67b6daee003dfa0cb7ee',
         `${sessionId}.${score.wonder.id}`,
-        {
-            session_id: sessionId,
-            name: score.name,
-            wonder_id: score.wonder.id,
-            wonder_side_a: score.wonder.side === 'A',
-            wonder_stage_built: score.wonder.stageBuilt,
-            coin_count: score.coinCount,
-            military_points: score.militaryPoints,
-            culture_points: score.culturePoints,
-            trade_points: score.tradePoints,
-            science_clay_tablet_count: score.science.clayCount,
-            science_square_and_compass_count: score.science.measurerCount,
-            science_cog_count: score.science.cogCount,
-            guild_points: score.guildPoints
-
-        }    
+        localToRemote(sessionId, playerScore)   
     );
+}
+
+const localToRemote = (sessionId, localPlayerScore) => {
+    return {
+        session_id: sessionId,
+        name: localPlayerScore.name,
+        wonder_id: localPlayerScore.wonder.id,
+        wonder_side_a: localPlayerScore.wonder.side === 'A',
+        wonder_stage_built: localPlayerScore.wonder.stageBuilt,
+        coin_count: localPlayerScore.coinCount,
+        military_points: localPlayerScore.militaryPoints,
+        culture_points: localPlayerScore.culturePoints,
+        trade_points: localPlayerScore.tradePoints,
+        science_clay_tablet_count: localPlayerScore.science.clayCount,
+        science_square_and_compass_count: localPlayerScore.science.measurerCount,
+        science_cog_count: localPlayerScore.science.cogCount,
+        guild_points: localPlayerScore.guildPoints
+    }
 }

@@ -6,12 +6,17 @@
     <StartGameItem
       class="add_player_btn"
       @startNewGame="handleStartNewGame"/>
+
+    <button
+      @click="deleteme_edit_rhodes">EDIT RHODES</button>  
       
   </div>
 </template>
 
 <script>
   import wonders from '@/assets/wonders.json'
+  // import {getPlayerScoreByWonderId} from '@/utils/remote'
+
   import StartGameItem from './components/StartGameItem.vue';
   import TopBar from '../Common/components/TopBar.vue';
 
@@ -35,6 +40,10 @@
         console.log(`handleStartNewGame ${sessionId}`)
         this.$router.push(`/${sessionId}/add_player`)
       },
+      deleteme_edit_rhodes() {
+        // getPlayerScoreByWonderId("AAAAAAAA", "rhodes")
+        this.$router.push(`/AAAAAAAA/edit/rhodes`)
+      }
     }
   }
 </script>

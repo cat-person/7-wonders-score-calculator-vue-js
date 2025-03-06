@@ -12,7 +12,7 @@ const routes = [
   { path: '/', component: StartGame },
   { path: '/:session_id', component: Players },
   { path: '/:session_id/add_player', component: AddPlayer },
-  { path: '/:session_id/edit_player', component: EditPlayer },
+  { path: '/:session_id/edit/:wonder_id', component: EditPlayer },
   { path: '/:session_id/results', component: Results },
 ]
 

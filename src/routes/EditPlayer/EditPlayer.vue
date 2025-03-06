@@ -1,34 +1,34 @@
 <template>
-   <div
-   :style="{
-    'background-color': getBackgroundColor(playerData.wonder, availableWonders),
-    'padding-top': '3mm',
-    'padding-bottom': '3mm'
-    }
-    ">
+   <div 
+   v-if="playerScore"
+    :style="{
+      'background-color': getBackgroundColor(playerData, wonders),
+      'padding-top': '3mm',
+      'padding-bottom': '3mm'
+    }">
   
     <TopBar
         :showClose=true
-        :title="`Edit data for ${playerData.name}`"
+        :title="`Edit data for ${playerScore.name}`"
         @close="handleClose"/>
-
+    
     <Wonder
-      :wonder="playerData.wonder"
+      :wonder="playerScore.wonder"
       @onStageBuilt="onStageBuilt($event)"
       @onSideChanged="handleSideChanged"/>
 
     <Name
-      :name="playerData.name"
+      :name="playerScore.name"
       @changeName="handleNameChanged($event)"/>
 
-    <Coins :coinCount="playerData.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
-    <Military :battlePoints="playerData.battlePoints" />
-    <Culture :points="playerData.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
-    <Trade :points="playerData.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
-    <Science :science="playerData.science" @scienceUpdated="handleScienceUpdated($event)"/>
-    <Guild :points="playerData.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
+    <Coins :coinCount="playerScore.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
+    <Military :battlePoints="playerScore.battlePoints" />
+    <Culture :points="playerScore.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
+    <Trade :points="playerScore.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
+    <Science :science="playerScore.science" @scienceUpdated="handleScienceUpdated($event)"/>
+    <Guild :points="playerScore.guildPoints" @guildPointsUpdated="handleGuildPointsUpdated($event)"/>
     <br/>
-    <button :disabled="!canAdd(playerData)" @click="handleFinishEditing">Done</button>
+    <button :disabled="!canAdd(playerScore)" @click="handleFinishEditing"> {{ getButtonTitle(originalPlayerScore, playerScore) }} </button>
   </div>
 </template>
 
@@ -44,16 +44,23 @@ import Guild from '../Common/components/Guild.vue';
 
 import wonders from '@/assets/wonders.json'
 import TopBar from '../Common/components/TopBar.vue';
+import { getPlayerScoreByWonderId, updatePlayerScore } from '@/utils/remote';
+import { onMounted } from 'vue';
 
 export default {
-  props: {
-    playerScore: Object
-  },
   data() {
+
     return {
       wonders: wonders,
-      playerData: this.playerScore,
+      originalPlayerScore: null,
+      playerScore: null,
     }  
+  },
+  mounted: function () {
+    // const sessionId = this.$route.params.session_id
+    // const wonderId = this.$route.params.wonder_id
+
+    this.getInitialPlayerScore()
   },
   components: {
     TopBar,
@@ -68,17 +75,31 @@ export default {
   },
 
   methods: {
-    getBackgroundColor(wonder) {
-      return this.getWonder(wonder.id, wonder.side).background
+    async getInitialPlayerScore() {
+      this.originalPlayerScore = await getPlayerScoreByWonderId(this.$route.params.session_id, this.$route.params.wonder_id)
+      this.playerScore = JSON.parse(JSON.stringify(this.originalPlayerScore))
+    },
+    getBackgroundColor(playerScore) {
+      if(playerScore && playerScore.wonder) {
+        return this.getWonder(playerScore.wonder.id, playerScore.wonder.side).background  
+      }
+      return 'gray' 
+    },
+    getButtonTitle(originalPlayerScore, playerScore){
+      if(JSON.stringify(originalPlayerScore) == JSON.stringify(playerScore)) {
+        return "Close"
+      } else {
+        return "Save Changes"
+      }
     },
     handleNameChanged(name) {
-      this.playerData.name = name
+      this.playerScore.name = name
     },
     handleCoinCountChanged(givenCount){
-      this.playerData.coinCount = givenCount
+      this.playerScore.coinCount = givenCount
     },
     onWonderSelected(wonderId) {
-      this.playerData.wonder.id = wonderId
+      this.playerScore.wonder.id = wonderId
       console.debug(`wonderId: ${wonderId}`)
     },
     getWonder(wonderId, side) {
@@ -96,29 +117,34 @@ export default {
       }
     },
     handleSideChanged(givenSide) {
-      this.playerData.wonder.side = givenSide
+      this.playerScore.wonder.side = givenSide
     },
     onStageBuilt(stageBuilt) {
-      this.playerData.wonder.stageBuilt = stageBuilt
+      this.playerScore.wonder.stageBuilt = stageBuilt
     },
     handleCulturePointsUpdated(culturePoints){
-      this.playerData.culturePoints = culturePoints
+      this.playerScore.culturePoints = culturePoints
     },
     handleTradePointsUpdated(tradePoints){
       console.debug(`EditPlayer.handleTradePointsUpdated(${tradePoints})`)
-      this.playerData.tradePoints = tradePoints
+      this.playerScore.tradePoints = tradePoints
     },
     handleScienceUpdated(science){
-      this.playerData.science = science
+      this.playerScore.science = science
     },
     handleGuildPointsUpdated(guildPoints){
-      this.playerData.guildPoints = guildPoints
+      this.playerScore.guildPoints = guildPoints
     },
     canAdd(scoreData){
-      return this.playerData.name != ""
+      return this.playerScore.name != ""
     },
-    handleFinishEditing() {
-      this.$emit("finishEditing", this.playerData)
+    async handleFinishEditing() {
+      if(originalPlayerScore == playerScore) {
+        this.$router.back()
+      } else {
+        await updatePlayerScore(this.$route.params.session_id, this.playerScore)
+        this.$router.back()
+      }
     },
     handleClose() {
       this.$emit("close")

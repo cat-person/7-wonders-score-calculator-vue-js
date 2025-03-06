@@ -47,7 +47,7 @@
     },
     methods: {
       async getPlayerScoresAAA(sessionId) {
-        console.error(`AAAAAAAAAAAAAAAAA ${sessionId}`)
+        console.error(`getPlayerScoresAAA(sessionId: ${sessionId})`)
         this.playerScores = await getPlayerScores(this.$route.params.session_id)
         console.error(`playerScores ${JSON.stringify(this.playerScores)}`)
       },
@@ -72,7 +72,9 @@
       },
       handleEditPlayer(wonderId){
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
-        this.$emit("editPlayer", wonderId)
+        // this.$emit("editPlayer", wonderId)
+        // this.$router.push(`/${sessionId}/add_player`)
+        this.$router.push(`/${this.sessionId}/edit/${wonderId}`)
       },
       handleDeletePlayer(wonderId){
         this.$emit("deletePlayer", wonderId)

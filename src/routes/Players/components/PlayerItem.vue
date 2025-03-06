@@ -90,6 +90,7 @@ export default {
             ]
         },
         handleEditClicked(playerScore) {
+            console.error(`handleEditClicked(wonderId: ${playerScore.wonder.id})`)
             this.$emit("editPlayer", playerScore.wonder.id)
         },
         handleDeleteClicked(playerScore) {
