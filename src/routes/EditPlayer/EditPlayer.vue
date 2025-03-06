@@ -139,10 +139,11 @@ export default {
       return this.playerScore.name != ""
     },
     async handleFinishEditing() {
-      if(originalPlayerScore == playerScore) {
+      if(JSON.stringify(this.originalPlayerScore) == JSON.stringify(this.playerScore)) {
         this.$router.back()
       } else {
         await updatePlayerScore(this.$route.params.session_id, this.playerScore)
+        console.error(`handleFinishEditing()`)
         this.$router.back()
       }
     },

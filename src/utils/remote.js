@@ -21,7 +21,7 @@ export const updatePlayerScore = async (sessionId, playerScore) => {
     return await databases.updateDocument(
         '67b64d2d0017d8ef2b54',
         '67b6daee003dfa0cb7ee',
-        `${sessionId}.${score.wonder.id}`,
+        `${sessionId}.${playerScore.wonder.id}`,
         localToRemote(sessionId, playerScore)
     )
 }
@@ -92,7 +92,7 @@ export const addPlayerScore = async (sessionId, playerScore) => {
     return await databases.createDocument(
         '67b64d2d0017d8ef2b54',
         '67b6daee003dfa0cb7ee',
-        `${sessionId}.${score.wonder.id}`,
+        `${sessionId}.${playerScore.wonder.id}`,
         localToRemote(sessionId, playerScore)   
     );
 }
