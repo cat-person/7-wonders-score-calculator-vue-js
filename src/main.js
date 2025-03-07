@@ -7,6 +7,7 @@ import Players from './routes/Players/Players.vue'
 import AddPlayer from './routes/AddPlayer/AddPlayer.vue'
 import EditPlayer from './routes/EditPlayer/EditPlayer.vue'
 import Results from './routes/Results/Results.vue'
+import DKToast from 'vue-dk-toast';
 
 const routes = [
   { path: '/', component: StartGame },
@@ -23,4 +24,5 @@ const router = createRouter({
 
 createApp(App)
     .use(router)
+    .use(DKToast)
     .mount('#app')

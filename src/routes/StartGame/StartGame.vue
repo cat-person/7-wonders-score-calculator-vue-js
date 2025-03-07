@@ -38,7 +38,13 @@
     methods: {
       handleStartNewGame(sessionId){
         console.log(`handleStartNewGame ${sessionId}`)
-        this.$router.push(`/${sessionId}/add_player`)
+        const route = this.$router.resolve(`/${sessionId}/`);
+        const absoluteURL = new URL(route.href, window.location.origin).href;
+        window.navigator.clipboard.writeText(absoluteURL)
+        this.$toast('Link copied to clipboard')
+        this.$toast(absoluteURL);
+
+        // this.$router.push(`/${sessionId}/add_player`)
       },
       deleteme_edit_rhodes() {
         // getPlayerScoreByWonderId("AAAAAAAA", "rhodes")
