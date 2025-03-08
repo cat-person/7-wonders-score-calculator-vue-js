@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 
 import App from './App.vue'
 import StartGame from './routes/StartGame/StartGame.vue'
@@ -12,13 +12,13 @@ import DKToast from 'vue-dk-toast';
 const routes = [
   { path: '/', component: StartGame },
   { path: '/:session_id', component: Players },
-  { path: '/:session_id/add_player', component: AddPlayer },
+  { path: '/:session_id/add', component: AddPlayer },
   { path: '/:session_id/edit/:wonder_id', component: EditPlayer },
   { path: '/:session_id/results', component: Results },
 ]
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 })
 

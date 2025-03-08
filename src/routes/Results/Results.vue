@@ -18,26 +18,35 @@
 </template>
 
 <script>
+  import { reactive, toRaw } from 'vue';
+  
   import wonders from '@/assets/wonders.json'
   import ResultItem  from './components/ResultItem.vue';
   import TopBar from '../Common/components/TopBar.vue';
-  import { reactive, toRaw } from 'vue';
+  
+  import { getPlayerScores } from '@/utils/remote'
   import * as util from '@/utils/calc';
 
+
   export default {
+    mounted: async function() {
+      this.playerScores = await getPlayerScores(this.$route.params.session_id)
+        console.error(`playerScores ${JSON.stringify(this.playerScores)}`)
+    },
     data() {
       return {
+        playerScores: [],
         wonders: wonders,
       };
-    },
-    props: {
-      playerScores: Array
     },
     components: {
       ResultItem,
       TopBar
     },
     methods: {
+      async aaaa(){
+        
+      },
       startNewGame(){
         this.$emit("startNewGame")
       },

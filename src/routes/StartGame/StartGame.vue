@@ -44,7 +44,7 @@
         this.$toast('Link copied to clipboard')
         this.$toast(absoluteURL);
 
-        // this.$router.push(`/${sessionId}/add_player`)
+        this.$router.push(`${sessionId}/add`)
       },
       deleteme_edit_rhodes() {
         // getPlayerScoreByWonderId("AAAAAAAA", "rhodes")

@@ -68,7 +68,7 @@
         this.$emit("startNewGame")
       },
       handleCalculateResultsClicked() {
-        this.$emit('showResults')
+        this.$router.push(`${this.sessionId}/results`)
       },
       handleEditPlayer(wonderId){
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
