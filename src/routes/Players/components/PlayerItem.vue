@@ -125,16 +125,15 @@ export default {
 <style scoped>
 
 .root {
+    width: 100%;
     position: relative;
     max-width: 160mm;
-    max-height: 60mm;
 }
 
 .wonder-img {
     width: 100%;
-    height: 50mm;
+    overflow: hidden;
     margin: 0;
-    max-width: 160mm;
 }
 
 .wonder-lbl {

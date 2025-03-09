@@ -22,7 +22,7 @@ export default {
 .start_new_game_container {
     width: 100%;
     max-width: 159mm ;
-    height: 39mm;
+    height: 49mm;
     border-color: #606060;
     border-width: 0.5mm;
     border-style: solid;

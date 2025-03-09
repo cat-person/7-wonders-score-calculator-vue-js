@@ -7,7 +7,7 @@
       <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
-        @deletePlayerScore="handleDeletePlayer($event)"/>
+        @deletePlayerScore="handleDeletePlayerScore($event)"/>
     </div>
 
     <AddPlayerItem
@@ -60,7 +60,7 @@
         this.$emit("close")
       },
       handleAddPlayer(){
-        this.$emit("addPlayer")
+        this.$router.push(`/${this.$route.params.session_id}/add`)
       },
       startNewGame(){
         this.$emit("startNewGame")
@@ -72,8 +72,9 @@
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
         this.$router.push(`/${this.sessionId}/edit/${wonderId}`)
       },
-      handleDeletePlayerScore(wonderId){
-        deletePlayerScore(this.sessionId, wonderId)
+      async handleDeletePlayerScore(wonderId){
+        await deletePlayerScore(this.sessionId, wonderId)
+        this.playerScores = await getPlayerScores(this.$route.params.session_id)
       },
       calculateResultsShown(playerScores) {
         return playerScores && 2 < playerScores.length 
