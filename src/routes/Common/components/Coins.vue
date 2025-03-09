@@ -45,7 +45,7 @@
   
   <style>
   .coins {
-    background-color: goldenrod;
+    background-color: gold;
     justify-self: center;
     width: 96%;
     padding-bottom: 4mm;
