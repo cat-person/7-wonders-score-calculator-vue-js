@@ -11,10 +11,11 @@ import DKToast from 'vue-dk-toast';
 
 const routes = [
   { path: '/', component: StartGame },
-  { path: '/:session_id', component: Players },
-  { path: '/:session_id/add', component: AddPlayer },
-  { path: '/:session_id/edit/:wonder_id', component: EditPlayer },
-  { path: '/:session_id/results', component: Results },
+  { path: '/7W/', component: StartGame },
+  { path: '/7W/:session_id', component: Players },
+  { path: '/7W/:session_id/add', component: AddPlayer },
+  { path: '/7W/:session_id/edit/:wonder_id', component: EditPlayer },
+  { path: '/7W/:session_id/results', component: Results },
 ]
 
 const router = createRouter({

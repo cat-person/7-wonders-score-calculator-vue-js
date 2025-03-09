@@ -60,17 +60,17 @@
         this.$emit("close")
       },
       handleAddPlayer(){
-        this.$router.push(`/${this.$route.params.session_id}/add`)
+        this.$router.push(`/7W/${this.$route.params.session_id}/add`)
       },
       startNewGame(){
         this.$emit("startNewGame")
       },
       handleCalculateResultsClicked() {
-        this.$router.push(`${this.sessionId}/results`)
+        this.$router.push(`/7W/${this.sessionId}/results`)
       },
       handleEditPlayer(wonderId){
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
-        this.$router.push(`/${this.sessionId}/edit/${wonderId}`)
+        this.$router.push(`/7W/${this.sessionId}/edit/${wonderId}`)
       },
       async handleDeletePlayerScore(wonderId){
         await deletePlayerScore(this.sessionId, wonderId)

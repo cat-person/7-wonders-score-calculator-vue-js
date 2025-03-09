@@ -44,9 +44,6 @@
       TopBar
     },
     methods: {
-      async aaaa(){
-        
-      },
       startNewGame(){
         this.$emit("startNewGame")
       },
