@@ -4,17 +4,15 @@ var prevSeed = 0
 
 export const getSessionId = (seed) => {
 
-    // const sessionIdLength = 8    
+    const sessionIdLength = 8    
     
-    // let result = '';
+    let result = '';
 
-    // for (var idx = 0; idx < sessionIdLength; idx++) {
-    //     result += getRandomCharFrom(seed);
-    // }
+    for (var idx = 0; idx < sessionIdLength; idx++) {
+        result += getRandomCharFrom(seed);
+    }
 
-    // return result;
-
-    return 'AAAAAAAA'
+    return result;
 }
 
 const getRandomCharFrom = (seed) => {
