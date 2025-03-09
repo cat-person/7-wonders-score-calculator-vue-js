@@ -29,8 +29,6 @@
 
   export default {
     data() {
-
-
       return {
         playerScores: [],
         sessionId: this.$route.params.session_id,
@@ -72,8 +70,6 @@
       },
       handleEditPlayer(wonderId){
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
-        // this.$emit("editPlayer", wonderId)
-        // this.$router.push(`/${sessionId}/add_player`)
         this.$router.push(`/${this.sessionId}/edit/${wonderId}`)
       },
       handleDeletePlayer(wonderId){
@@ -89,8 +85,6 @@
 <style scoped>
 .root {
   margin: 0mm;
-  padding-top: 3mm;
-  padding-bottom: 3mm;
 }
 
 .players_container {

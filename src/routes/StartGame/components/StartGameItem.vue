@@ -28,6 +28,7 @@ export default {
     border-style: solid;
     justify-items: center;
     justify-self: center;
+    background-color: aquamarine;
 }
 
 .start_new_game_lbl {

@@ -57,8 +57,8 @@
 <style scoped>
 .root {
   margin: 0mm;
-  padding-top: 3mm;
-  padding-bottom: 3mm;
+  padding: 3mm;
+  background-color: brown;
 }
 .add_player_btn {
   margin: 0mm;

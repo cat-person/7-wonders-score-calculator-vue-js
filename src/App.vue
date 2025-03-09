@@ -98,12 +98,6 @@ export default {
   },
 
   methods: {
-    navigateTo(route, data) {
-      console.debug(`App.navigateTo(route: ${route}, data: ${data})`)
-      this.state = { id: route, data: data }
-      window.localStorage.setItem('state', JSON.stringify(this.state))
-      window.scrollTo(0, 0);
-    },
     updatePlayers(playerScores) {
       this.playerScores = playerScores
       window.localStorage.setItem('playerScores', JSON.stringify(this.playerScores))
@@ -175,7 +169,7 @@ export default {
 
 .root {
   width: 100%;
-  min-width: 160mm;
+  max-width: 160mm;
   justify-self: center;
   position: relative;
 }
@@ -197,10 +191,6 @@ export default {
 
 .html {
   overflow-y:scroll;
-}
-
-.body {
-  font-family: 'Playfair';
 }
 
 </style>

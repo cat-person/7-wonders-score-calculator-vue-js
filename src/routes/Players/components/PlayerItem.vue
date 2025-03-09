@@ -100,44 +100,57 @@ export default {
 }
 </script>
 
+<!-- 'background-size': 'cover',
+            'background-repeat': 'no-repeat', -->
+
+            <!-- :style="{
+                
+                'background-image': ,
+                
+                'justify-items': 'center',
+                'padding': '0mm',
+                'width': '120mm',
+                'height': '50mm',
+                'margin-bottom': '3mm'
+            }"> -->
+
 <template>
     <div class='root' 
-        @click="handleEditClicked(playerScore)"
-        :style="{
-            'position': 'relative',
-            'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
-            'background-size': 'cover',
-            'background-repeat': 'no-repeat',
-            'justify-items': 'center',
-            'padding': '0mm',
-            'width': '110mm',
-            'height': '50mm',
-            'margin-bottom': '3mm'
-        }">
+        @click="handleEditClicked(playerScore)">
         
+        
+
         <h3 class="wonder-lbl">
             {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
         </h3>
         <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
         <tbody class="table">
-            <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                <div class="point-container" :style="{ 'background-color': scoreItem.color }">
+            <td class="point-container" :style="{ 'background-color': scoreItem.color, 'width': '14%' }" v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
+                <!-- <div class="point-container" > -->
                     <tr>{{ scoreItem.name }}</tr>
                     <tr>{{ scoreItem.points }}</tr>
-                </div>
+                <!-- </div> -->
             </td>
         </tbody>
+
+        <img
+            class='wonder-img'
+            v-bind:src="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"/>
     </div>
 </template>
 
 <style scoped>
-.table {
-    position: absolute;
-    vertical-align: bottom;
-    align-self: center;
-    justify-items: center;
+
+.root {
+    position: relative;
+    max-width: 160mm;
+    max-height: 60mm;
+}
+
+.wonder-img {
     width: 100%;
-    bottom: 2mm;
+    margin: 0;
+    max-width: 160mm;
 }
 
 .wonder-lbl {
@@ -149,6 +162,25 @@ export default {
     text-shadow: 0px 0px 10px gray;
 }
 
+
+.table {
+    position: absolute;
+    justify-content: center;
+    vertical-align: bottom;
+    justify-items: stretch;
+    width: 96%;
+    margin-left: 2%;
+    background-color: black;
+    bottom: 2mm;
+}
+
+.point-container {
+    justify-content: center;
+    justify-items: center;
+    font-size: 3mm;
+    /* max-width: 20mm; */
+}
+
 .close_btn {
     position: absolute;
     justify-content: center;
@@ -158,12 +190,5 @@ export default {
     height: 4mm;
     width: 4mm;
     text-shadow: 0px 0px 10px gray;
-}
-
-.point-container {
-    position: relative;
-    justify-content: center;
-    justify-items: center;
-    width: 15mm;
 }
 </style>
