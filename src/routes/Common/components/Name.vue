@@ -28,8 +28,11 @@
   position: relative;
   justify-self: center;
   display: flex;
-  width: 106mm;
-  padding: 2mm;
+  width: 96%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   margin-bottom: 2mm;
   justify-content: center;
   flex-direction: row;

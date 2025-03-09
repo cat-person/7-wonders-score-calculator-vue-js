@@ -27,8 +27,8 @@
 <style scoped>
   .horizontal {
     position: relative;
-    max-width: 110mm;
     height: 12mm;
+    width: 96%;
     margin-bottom: 2mm;
     justify-self: center;
     justify-content: center;
@@ -39,7 +39,7 @@
     align-content: center;
   }
   .button {
-    justify-self: center;
+    justify-self: left;
     position: absolute;
     left: 0mm;
     margin: 0mm;

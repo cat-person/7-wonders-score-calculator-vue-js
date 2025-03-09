@@ -100,20 +100,6 @@ export default {
 }
 </script>
 
-<!-- 'background-size': 'cover',
-            'background-repeat': 'no-repeat', -->
-
-            <!-- :style="{
-                
-                'background-image': ,
-                
-                'justify-items': 'center',
-                'padding': '0mm',
-                'width': '120mm',
-                'height': '50mm',
-                'margin-bottom': '3mm'
-            }"> -->
-
 <template>
     <div class='root' 
         @click="handleEditClicked(playerScore)">
@@ -162,7 +148,6 @@ export default {
     text-shadow: 0px 0px 10px gray;
 }
 
-
 .table {
     position: absolute;
     justify-content: center;
@@ -177,7 +162,7 @@ export default {
 .point-container {
     justify-content: center;
     justify-items: center;
-    font-size: 3mm;
+    font-size: 4mm;
     /* max-width: 20mm; */
 }
 

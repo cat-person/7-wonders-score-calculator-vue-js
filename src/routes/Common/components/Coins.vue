@@ -45,7 +45,7 @@
   .coins {
     background-color: goldenrod;
     justify-self: center;
-    width: 100mm;
+    width: 96%;
     padding-bottom: 4mm;
     padding-top: 1mm;
     margin-bottom: 3mm;

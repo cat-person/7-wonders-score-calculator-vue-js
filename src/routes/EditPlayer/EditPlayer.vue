@@ -157,7 +157,7 @@ export default {
 <style>
 .container {
   justify-self: center;
-  width: 110mm;
+  width: 100%;
   padding-top: 3mm;
   padding-bottom: 3mm;
 }

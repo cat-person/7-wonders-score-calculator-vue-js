@@ -95,10 +95,11 @@
 <style>
   .container {
     position: relative;
-    width: 110mm; 
+    width: 100%; 
     margin: 0mm;
     padding: 0mm;
     margin-top: -3mm;
+    background-color: aqua;
   }
   .wonder_name {
     position: absolute;
@@ -108,7 +109,7 @@
     text-shadow: 0px 0px 10px gray;
   }
   .img {
-    width: 110mm;
+    width: 100%;
     margin: 0mm;
   }
   .btn {
@@ -146,7 +147,6 @@
   .wonder_points {
     margin: 0mm;
     bottom: 4mm;
-    /* width: 100%; */
     color: white;
     text-shadow: 0px 0px 10px gray;
   }

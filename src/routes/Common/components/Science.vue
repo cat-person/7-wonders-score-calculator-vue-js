@@ -52,13 +52,13 @@
   <style>
   .scienceInput {
       justify-self: center;
-      width: 15mm;
+      width: 11mm;
     }
 
   .science {
       background-color: cadetblue;
       justify-self: center;
-      width: 100mm;
+      width: 96%;
       padding-bottom: 4mm;
       padding-top: 1mm;
       margin-bottom: 3mm;
@@ -78,7 +78,7 @@
 
   .science_icon {
     align-self: center;
-    width: 16mm;
-    height: 16mm;
+    width: 12mm;
+    height: 12mm;
   }
   </style>

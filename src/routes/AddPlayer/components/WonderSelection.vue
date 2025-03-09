@@ -118,7 +118,8 @@ export default {
 .embla {
   padding: 0mm;
   overflow: hidden;
-  width: 110mm;
+  width: 100%;
+  /* max-width: 110mm; */
   justify-self: center;
 }
 .embla_container {
@@ -128,14 +129,14 @@ export default {
 .embla_slide {
   margin: 0mm;
   padding: 0mm;
-  flex: 0 0 110mm;
+  flex: 0 0 100%;
   min-width: 0;
 }
 
 .arrow_container {
   position: relative;
   margin: 0mm;
-  width: 110mm;
+  width: 100%;
 }
 
 .arrow_right {

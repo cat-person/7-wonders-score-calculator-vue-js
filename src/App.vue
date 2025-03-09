@@ -169,6 +169,7 @@ export default {
 
 .root {
   width: 100%;
+  margin: 0mm;
   max-width: 160mm;
   justify-self: center;
   position: relative;
