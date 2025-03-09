@@ -1,7 +1,7 @@
 <template>
   <div id="Trade" class="trade">
     <h3>Trade</h3>
-    <input v-model="tradePoints" @keypress="isNumber($event)" type="number" @input="handleTradePointsInput">
+    <input v-model="tradePoints" @keypress="isNumber($event)" type="number" @input="handleTradePointsInput" @focus="$event.target.select()">
   </div>
 </template>
   
@@ -17,7 +17,11 @@
     },
     methods: {
       handleTradePointsInput(){
-        this.$emit('tradePointsUpdated', this.tradePoints)
+        if (this.tradePoints) {
+          this.$emit('tradePointsUpdated', this.tradePoints)
+        } else {
+          this.$emit("tradePointsUpdated", 0)
+        }
       },
       isNumber: function(evt) {
           evt = (evt) ? evt : window.event;

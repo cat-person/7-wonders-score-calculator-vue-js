@@ -3,7 +3,7 @@
       <h3>Coins</h3>
       <div>
         <p>Enter coin value</p>
-        <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" type="number">
+        <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" @focus="$event.target.select()" type="number">
       </div>
       <p>Coin points: {{ this.calcPoints() }}</p>
     </div>
@@ -35,6 +35,8 @@
       onCoinCountChanged() {
         if(this.currentCoinCount) {
           this.$emit("coinCountChanged", this.currentCoinCount)
+        } else {
+          this.$emit("coinCountChanged", 0)
         }
       }
     }

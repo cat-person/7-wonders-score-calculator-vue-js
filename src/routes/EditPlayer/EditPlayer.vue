@@ -22,7 +22,7 @@
       @changeName="handleNameChanged($event)"/>
 
     <Coins :coinCount="playerScore.coinCount" @coinCountChanged="handleCoinCountChanged($event)"/>
-    <Military :battlePoints="playerScore.battlePoints" />
+    <Military :points="playerScore.militaryPoints" />
     <Culture :points="playerScore.culturePoints" @culturePointsUpdated="handleCulturePointsUpdated($event)"/>
     <Trade :points="playerScore.tradePoints" @tradePointsUpdated="handleTradePointsUpdated($event)"/>
     <Science :science="playerScore.science" @scienceUpdated="handleScienceUpdated($event)"/>
