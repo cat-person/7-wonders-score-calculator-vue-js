@@ -1,14 +1,12 @@
 <template>
   <div class="root">
     <TopBar 
+      :showClose=false
       :title='"Welcome to unofficial 7 wonders points calculator"' />
 
     <StartGameItem
       class="add_player_btn"
       @startNewGame="handleStartNewGame"/>
-
-    <button
-      @click="deleteme_edit_rhodes">EDIT RHODES</button>  
       
   </div>
 </template>
@@ -45,10 +43,6 @@
         this.$toast(absoluteURL);
 
         this.$router.push(`${sessionId}/add`)
-      },
-      deleteme_edit_rhodes() {
-        // getPlayerScoreByWonderId("AAAAAAAA", "rhodes")
-        this.$router.push(`/AAAAAAAA/edit/rhodes`)
       }
     }
   }
@@ -58,7 +52,6 @@
 .root {
   margin: 0mm;
   padding: 3mm;
-  background-color: brown;
 }
 .add_player_btn {
   margin: 0mm;

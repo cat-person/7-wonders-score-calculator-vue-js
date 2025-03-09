@@ -43,11 +43,8 @@
 .enter_name_lbl {
   margin: 0mm;
   align-self: center;
-  /* text-align: left; */
   width: 20%;
   height: 6mm;
-  /* color: white; */
-  /* background-color: blueviolet; */
 }
 .name_input {
   margin: 0mm;

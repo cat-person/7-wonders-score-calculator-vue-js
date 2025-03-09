@@ -28,11 +28,12 @@ export default {
     border-style: solid;
     justify-items: center;
     justify-self: center;
-    background-color: aquamarine;
+
+    justify-content: center;
 }
 
 .start_new_game_lbl {
-    margin-top: 1mm;
+    margin-top: 16mm;
     color: #606060;
 }
 </style>

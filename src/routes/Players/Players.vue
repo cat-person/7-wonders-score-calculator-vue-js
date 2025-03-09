@@ -7,7 +7,7 @@
       <PlayerItem 
         :playerScore="playerScore" 
         @editPlayer="handleEditPlayer($event)"
-        @deletePlayer="handleDeletePlayer($event)"/>
+        @deletePlayerScore="handleDeletePlayer($event)"/>
     </div>
 
     <AddPlayerItem
@@ -25,7 +25,7 @@
   import AddPlayerItem from './components/AddPlayerItem.vue'
   import TopBar from '../Common/components/TopBar.vue'
 
-  import { getPlayerScores } from '@/utils/remote'
+  import { getPlayerScores, deletePlayerScore } from '@/utils/remote'
 
   export default {
     data() {
@@ -72,8 +72,8 @@
         console.debug(`Players.handleEditPlayer(wonderId: ${wonderId})`)
         this.$router.push(`/${this.sessionId}/edit/${wonderId}`)
       },
-      handleDeletePlayer(wonderId){
-        this.$emit("deletePlayer", wonderId)
+      handleDeletePlayerScore(wonderId){
+        deletePlayerScore(this.sessionId, wonderId)
       },
       calculateResultsShown(playerScores) {
         return playerScores && 2 < playerScores.length 

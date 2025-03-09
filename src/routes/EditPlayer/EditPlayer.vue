@@ -2,7 +2,7 @@
    <div 
    v-if="playerScore"
     :style="{
-      'background-color': getBackgroundColor(playerData, wonders),
+      'background-color': this.backgroundColor,
       'padding-top': '3mm',
       'padding-bottom': '3mm'
     }">
@@ -49,18 +49,17 @@ import { onMounted } from 'vue';
 
 export default {
   data() {
-
     return {
       wonders: wonders,
       originalPlayerScore: null,
       playerScore: null,
+      backgroundColor: 'gray',
     }  
   },
-  mounted: function () {
-    // const sessionId = this.$route.params.session_id
-    // const wonderId = this.$route.params.wonder_id
-
-    this.getInitialPlayerScore()
+  mounted: async function () {
+    this.originalPlayerScore = await getPlayerScoreByWonderId(this.$route.params.session_id, this.$route.params.wonder_id)
+    this.playerScore = JSON.parse(JSON.stringify(this.originalPlayerScore))
+    this.backgroundColor = this.getBackgroundColor(this.playerScore, this.wonders)
   },
   components: {
     TopBar,
@@ -76,8 +75,7 @@ export default {
 
   methods: {
     async getInitialPlayerScore() {
-      this.originalPlayerScore = await getPlayerScoreByWonderId(this.$route.params.session_id, this.$route.params.wonder_id)
-      this.playerScore = JSON.parse(JSON.stringify(this.originalPlayerScore))
+      
     },
     getBackgroundColor(playerScore) {
       if(playerScore && playerScore.wonder) {
@@ -118,6 +116,7 @@ export default {
     },
     handleSideChanged(givenSide) {
       this.playerScore.wonder.side = givenSide
+      this.backgroundColor = this.getBackgroundColor(this.playerScore, this.wonders)
     },
     onStageBuilt(stageBuilt) {
       this.playerScore.wonder.stageBuilt = stageBuilt

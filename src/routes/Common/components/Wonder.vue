@@ -1,6 +1,5 @@
 <script>
   import wonders from '@/assets/wonders.json'
-  import * as util from '@/utils/calc';
 
 
   function getAvailableWonders(availableWonderIds){
@@ -99,7 +98,6 @@
     margin: 0mm;
     padding: 0mm;
     margin-top: -3mm;
-    background-color: aqua;
   }
   .wonder_name {
     position: absolute;

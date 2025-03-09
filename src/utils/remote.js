@@ -26,6 +26,16 @@ export const updatePlayerScore = async (sessionId, playerScore) => {
     )
 }
 
+export const deletePlayerScore = async (sessionId, wonderId) => {
+    console.error(`deletePlayerScore(sessionId: ${sessionId}, wonderId: ${wonderId})`)
+
+    return await databases.deleteDocument(
+        '67b64d2d0017d8ef2b54',
+        '67b6daee003dfa0cb7ee',
+        `${sessionId}.${wonderId}`
+    )
+}
+
 export const getPlayerScoreByWonderId = async (sessionId, wonderId) => {
     console.error(`getPlayerScoreByWonderId(sessionId: ${sessionId}, wonderId: ${wonderId})`)    
     

@@ -89,38 +89,35 @@ export default {
                 }
             ]
         },
-        handleEditClicked(playerScore) {
-            console.error(`handleEditClicked(wonderId: ${playerScore.wonder.id})`)
-            this.$emit("editPlayer", playerScore.wonder.id)
+        handleEditClicked() {
+            console.error(`handleEditClicked()`)
+            this.$emit("editPlayer", this.playerScore.wonder.id)
         },
-        handleDeleteClicked(playerScore) {
-            this.$emit("deletePlayer", playerScore.wonder.id)
+        handleDeleteClicked() {
+            console.error(`deletePlayer()`)
+            this.$emit("deletePlayerScore", this.playerScore.wonder.id)
         }
     }
 }
 </script>
 
 <template>
-    <div class='root' 
-        @click="handleEditClicked(playerScore)">
-        
-        
-
+    <div class='root'>
+    
         <h3 class="wonder-lbl">
             {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
         </h3>
         <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
         <tbody class="table">
             <td class="point-container" :style="{ 'background-color': scoreItem.color, 'width': '14%' }" v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                <!-- <div class="point-container" > -->
-                    <tr>{{ scoreItem.name }}</tr>
-                    <tr>{{ scoreItem.points }}</tr>
-                <!-- </div> -->
+                <tr>{{ scoreItem.name }}</tr>
+                <tr>{{ scoreItem.points }}</tr>
             </td>
         </tbody>
 
         <img
             class='wonder-img'
+            @click="handleEditClicked"
             v-bind:src="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"/>
     </div>
 </template>
@@ -135,6 +132,7 @@ export default {
 
 .wonder-img {
     width: 100%;
+    height: 50mm;
     margin: 0;
     max-width: 160mm;
 }
@@ -163,7 +161,6 @@ export default {
     justify-content: center;
     justify-items: center;
     font-size: 4mm;
-    /* max-width: 20mm; */
 }
 
 .close_btn {

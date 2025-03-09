@@ -11,7 +11,7 @@
     },
     methods: {
       handleCloseClicked(){
-        this.$emit('close')
+        this.$router.back()
       }
     }
   }
