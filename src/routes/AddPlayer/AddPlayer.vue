@@ -151,8 +151,8 @@ export default {
       console.debug(`AddPlayer.canAdd(${JSON.stringify(scoreData)})`)
       return scoreData.name != ""
     },
-    handleAddPlayer(sessionId, playerScore) {
-      addPlayerScore(sessionId, playerScore)
+    async handleAddPlayer(sessionId, playerScore) {
+      await addPlayerScore(sessionId, playerScore)
       this.$router.push(`/${sessionId}`)
     }
   },

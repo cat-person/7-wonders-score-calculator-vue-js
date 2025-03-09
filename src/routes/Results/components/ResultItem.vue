@@ -118,75 +118,71 @@ export default {
 </script>
 
 <template>
-    <div class='img' :style="{
-        'position': 'relative',
-        'background-image': 'url(' + getImageByWonder(playerScore.wonder.id, playerScore.wonder.side) + ')',
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat',
-        'justify-items': 'center',
-        'padding': '0mm',
-        'width': '110mm',
-        'height': '50mm',
-        'margin-bottom': '3mm'
-    }">
+    <div class='root'>
 
         <h1 class="final_points_lbl" v-if="playerScore.finalPoints">{{ playerScore.finalPoints }}</h1>
 
         <h3 class="wonder-lbl"> {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}):
             {{ playerScore.name }}</h3>
 
-        <tbody class="table" @click="handleEditClicked(playerScore)">
-            <td v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                <div class="point-container" :style="{ 'background-color': scoreItem.color }">
-                    <tr>{{ scoreItem.name }}</tr>
-                    <tr>{{ scoreItem.points }}</tr>
-                </div>
+        <tbody class="table">
+            <td class="point-container" :style="{ 'background-color': scoreItem.color, 'width': '14%' }" v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
+                <tr>{{ scoreItem.name }}</tr>
+                <tr>{{ scoreItem.points }}</tr>
             </td>
         </tbody>
+
+        <img
+            class='wonder-img'
+            @click="handleEditClicked"
+            v-bind:src="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"/>
     </div>
 </template>
 
 <style scoped>
-.table {
-    position: absolute;
-    vertical-align: bottom;
-    align-self: center;
-    justify-items: center;
+.root {
     width: 100%;
-    bottom: 2mm;
+    height: 100%;
+    max-width: 160mm;
+}
+
+.wonder-img {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
 }
 
 .wonder-lbl {
     width: 100%;
+    max-width: 160mm;
     position: absolute;
     margin-top: 2mm;
     color: white;
     text-shadow: 0px 0px 10px gray;
 }
 
-.close_btn {
+.table {
     position: absolute;
     justify-content: center;
-    margin-top: 2mm;
-    right: 3mm;
-    top: 1.5mm;
-    height: 4mm;
-    width: 4mm;
-    text-shadow: 0px 0px 10px gray;
+    vertical-align: bottom;
+    justify-items: stretch;
+    width: 96%;
+    margin-left: 2%;
+    background-color: black;
+    bottom: 2mm;
 }
 
 .point-container {
-    position: relative;
     justify-content: center;
     justify-items: center;
-    width: 15mm;
+    font-size: 4mm;
 }
 
 .final_points_lbl {
     position: absolute;
     width: 100%;
-    margin-top: 16mm;
-    color: white;
+    bottom: 40%;
+    color: white;   
     text-shadow: 0px 0px 10px gray;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div :class="rootClass">
+  <div class="root">
     <TopBar
         :showClose=true
         :title="'Results'"
         @close="handleClose"/>
 
-    <div :class="resultsClass" v-for="playerScore in getRankedScores(playerScores)">
+    <div class="results" v-for="playerScore in getRankedScores(playerScores)">
       <ResultItem 
         :playerScore="playerScore" 
         :rank = "rank"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { reactive, toRaw } from 'vue';
+  import { toRaw } from 'vue';
   
   import wonders from '@/assets/wonders.json'
   import ResultItem  from './components/ResultItem.vue';
@@ -76,23 +76,56 @@
     }
   }
 
-const rootClass = reactive({
-  margin: '0mm',
-  paddingTop: '3mm',
-  paddingBottom: '3mm',
-})
-
-const resultsClass = reactive({
-  margin: '0mm',
-  justifySelf: 'center',
-  justifyItems: 'center',
-})
-
-const newGameButtonClass = reactive({
-  marginTop: '12mm',
-  width: '40mm',
-  height: '8mm',
-  backgroundColor: 'rosybrown'
-})
-
 </script>
+
+<style scoped>
+
+.root {
+    width: 100%;
+    position: relative;
+    max-width: 160mm;
+}
+
+.wonder-img {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+.wonder-lbl {
+    width: 100%;
+    max-width: 160mm;
+    position: absolute;
+    margin-top: 2mm;
+    color: white;
+    text-shadow: 0px 0px 10px gray;
+}
+
+.table {
+    position: absolute;
+    justify-content: center;
+    vertical-align: bottom;
+    justify-items: stretch;
+    width: 96%;
+    margin-left: 2%;
+    background-color: black;
+    bottom: 2mm;
+}
+
+.point-container {
+    justify-content: center;
+    justify-items: center;
+    font-size: 4mm;
+}
+
+.close_btn {
+    position: absolute;
+    justify-content: center;
+    margin-top: 2mm;
+    right: 3mm;
+    top: 1.5mm;
+    height: 4mm;
+    width: 4mm;
+    text-shadow: 0px 0px 10px gray;
+}
+</style>
