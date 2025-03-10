@@ -41,7 +41,7 @@
       getImageByWonder(wonderId, side) {
         console.debug(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
         let wonder = this.getWonder(wonderId, side)
-        return new URL(`../../../assets/${wonder.img}`, import.meta.url)
+        return new URL(`../../../assets/wonders/${wonder.img}`, import.meta.url)
       },
       selectWonder(emblaApi) {
         this.$emit('onWonderSelected', getAvailableWonders(this.availableWonderIds)[emblaApi.selectedScrollSnap()].id)
