@@ -40,7 +40,7 @@ export default {
         },
         getImageByWonder(wonderId, side) {
             let wonder = this.getWonderByIdAndSide(wonderId, side)
-            return new URL(`../../../assets/${wonder.img}`, import.meta.url)
+            return new URL(`../../../assets/wonders/${wonder.img}`, import.meta.url)
         },
 
         getPointsByCategory(playerScore) {

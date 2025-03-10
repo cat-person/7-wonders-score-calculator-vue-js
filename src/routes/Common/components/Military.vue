@@ -18,6 +18,11 @@
     methods: {
       handleMilitaryPointsInput(){
         this.$emit('militaryPointsUpdated', this.militaryPoints)
+        if (this.militaryPoints) {
+          this.$emit('militaryPointsUpdated', this.militaryPoints)
+        } else {
+          this.$emit("militaryPointsUpdated", 0)
+        }
       },
       isNumber(evt) {
           evt = (evt) ? evt : window.event;
