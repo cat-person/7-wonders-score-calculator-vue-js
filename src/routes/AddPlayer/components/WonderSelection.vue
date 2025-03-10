@@ -141,17 +141,19 @@ export default {
 
 .arrow_right {
   position: absolute;
-  height: 8mm;
-  width: 8mm;
-  top: 50%;
+  height: 10mm;
+  width: 10mm;
+  top: 44%;
   right: 2mm;
+  filter: drop-shadow(0px 0px 0.5mm #000000A0);
 }
 
 .arrow_left {
   position:absolute;
-  height: 8mm;
-  width: 8mm;
-  top: 50%;
+  height: 10mm;
+  width: 10mm;
+  top: 44%;
   left: 2mm;
+  filter: drop-shadow(0px 0px 0.5mm #000000A0);
 }
 </style>
