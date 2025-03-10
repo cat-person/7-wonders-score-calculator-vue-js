@@ -153,7 +153,7 @@ export default {
     },
     async handleAddPlayer(sessionId, playerScore) {
       await addPlayerScore(sessionId, playerScore)
-      this.$router.push(`/7W/${sessionId}`)
+      this.$router.push(`/${sessionId}`)
     }
   },
 };
