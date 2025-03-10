@@ -35,12 +35,12 @@
     },
     methods: {
       handleStartNewGame(sessionId){
-        console.log(`handleStartNewGame ${sessionId}`)
-        const route = this.$router.resolve(`/${sessionId}/`);
-        const absoluteURL = new URL(route.href, window.location.origin).href;
-        window.navigator.clipboard.writeText(absoluteURL)
-        this.$toast('Link copied to clipboard')
-        this.$toast(absoluteURL);
+        // console.log(`handleStartNewGame ${sessionId}`)
+        // const route = this.$router.resolve(`/${sessionId}/`);
+        // const absoluteURL = new URL(route.href, window.location.origin).href;
+        // window.navigator.clipboard.writeText(absoluteURL)
+        // this.$toast('Link copied to clipboard')
+        // this.$toast(absoluteURL);
 
         this.$router.push(`/${sessionId}/add`)
       }
