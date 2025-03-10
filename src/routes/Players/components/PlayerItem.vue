@@ -11,7 +11,6 @@ export default {
     },
 
     data() {
-        console.debug(`Player.data: ${JSON.stringify(this.playerScore)}`)
         return {
             wonders: wonders,
             playerScore: this.playerScore,
@@ -54,7 +53,7 @@ export default {
                     points: util.calcWonderPoints(playerScore.wonder)
                 },
                 {
-                    name: 'gold',
+                    name: 'coins',
                     color: colors.coins,
                     points: util.calcCoinPoints(playerScore.coinCount)
                 },
