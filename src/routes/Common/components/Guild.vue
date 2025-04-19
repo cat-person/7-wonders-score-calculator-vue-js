@@ -1,7 +1,7 @@
 <template>
   <div id="Guilds" class="guilds">
       <h3>Guilds</h3>
-      <input v-model="guildPoints" @keypress="isNumber($event)" type="number" @input="handleGuildPointsInput" @focus="$event.target.select()">
+      <input v-model="guildPoints" type="number" @input="handleGuildPointsInput" @focus="$event.target.select()" min="0">
   </div>
 </template>
   
@@ -16,15 +16,6 @@
       };
     },
     methods: {
-      isNumber: function(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-              evt.preventDefault();
-          } else {
-              return true;
-          }
-      },
       handleGuildPointsInput(){
         if (this.guildPoints) {
           this.$emit('guildPointsUpdated', this.guildPoints)

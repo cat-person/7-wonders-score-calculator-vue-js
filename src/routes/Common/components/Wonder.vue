@@ -12,11 +12,6 @@
     props: {
       wonder: Object,
     },
-    data() {
-      return {
-        // wonder: this.wonder
-      }
-    },
     methods: {
       getWonderById(wonderId) {
         let result = undefined
@@ -28,8 +23,6 @@
         return result
       },
       getWonder(wonderId, side) {
-        console.debug(`Wonder.getWonder(wonderId: ${wonderId}, side: ${side})`)
-
         let result = this.getWonderById(wonderId)
 
         if(side == 'A'){
@@ -39,7 +32,6 @@
         }  
       },
       getImageByWonder(wonderId, side) {
-        console.debug(`WonderAndName.getImageByWonder(wonderId: ${wonderId}, side: ${side})`)
         let wonder = this.getWonder(wonderId, side)
         return new URL(`../../../assets/wonders/${wonder.img}`, import.meta.url)
       },

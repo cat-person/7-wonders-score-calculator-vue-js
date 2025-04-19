@@ -1,7 +1,7 @@
 <template>
   <div id="Trade" class="trade">
     <h3>Trade</h3>
-    <input v-model="tradePoints" @keypress="isNumber($event)" type="number" @input="handleTradePointsInput" @focus="$event.target.select()">
+    <input v-model="tradePoints" type="number" @input="handleTradePointsInput" @focus="$event.target.select()" min="0">
   </div>
 </template>
   
@@ -22,15 +22,6 @@
         } else {
           this.$emit("tradePointsUpdated", 0)
         }
-      },
-      isNumber: function(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-              evt.preventDefault();
-          } else {
-              return true;
-          }
       }
     }
   };

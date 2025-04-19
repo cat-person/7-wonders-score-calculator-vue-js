@@ -3,7 +3,7 @@
       <h3>Coins</h3>
       <div>
         <p>Enter coin value</p>
-        <input v-model.number="currentCoinCount" @keypress="isNumber($event)" @input="onCoinCountChanged" @focus="$event.target.select()" type="number">
+        <input v-model.number="currentCoinCount" @input="onCoinCountChanged" @focus="$event.target.select()" type="number" min="0">
       </div>
       <p>Coin points: {{ this.calcPoints() }}</p>
     </div>
@@ -20,15 +20,6 @@
       }
     },
     methods: {
-      isNumber(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-              evt.preventDefault();
-          } else {
-              return true;
-          }
-      },
       calcPoints() {  
         return Math.floor(this.currentCoinCount / 3)
       },

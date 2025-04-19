@@ -4,15 +4,15 @@
     <div id="Science" class="horizontal">
       <div class="vertical">
         <img src="../../../assets/science_icons/clay.png" class="science_icon"/>
-        <input class="scienceInput" v-model="scienceData.clayCount" @keypress="isNumber($event)" type="number" @focus="$event.target.select()">
+        <input class="scienceInput" v-model="scienceData.clayCount" type="number" @focus="$event.target.select()" min="0">
       </div>
       <div class="vertical">
         <img src="../../../assets/science_icons/measurer.png" class="science_icon"/>
-        <input class="scienceInput" v-model="scienceData.measurerCount" @keypress="isNumber($event)" type="number" @focus="$event.target.select()">
+        <input class="scienceInput" v-model="scienceData.measurerCount" type="number" @focus="$event.target.select()" min="0">
       </div>
       <div class="vertical">
         <img src="../../../assets/science_icons/cog.png" class="science_icon"/>  
-        <input class="scienceInput" v-model="scienceData.cogCount" @keypress="isNumber($event)" type="number" @focus="$event.target.select()">
+        <input class="scienceInput" v-model="scienceData.cogCount" type="number" @focus="$event.target.select()" min="0">
       </div>
     </div>
     <p> Science points: {{ calcSciencePoints(scienceData.clayCount, scienceData.measurerCount, scienceData.cogCount) }} </p>
@@ -35,15 +35,6 @@
       },
       handleScienceUpdated(){
         this.$emit('scienceUpdated', this.scienceData)
-      },
-      isNumber(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-              evt.preventDefault();
-          } else {
-              return true;
-          }
       }
     }
   };

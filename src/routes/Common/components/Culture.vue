@@ -1,7 +1,7 @@
 <template>
     <div id="Culture" class="culture">
       <h3 class="title">Culture</h3>
-      <input v-model="culturePoints" @keypress="isNumber($event)" type="number" @input="handleCulturePointsInput" @focus="$event.target.select()">
+      <input v-model="culturePoints" type="number" @input="handleCulturePointsInput" @focus="$event.target.select()" min="0">
     </div>
 </template>
   
@@ -22,17 +22,7 @@
         } else {
           this.$emit("culturePointsUpdated", 0)
         }
-        
       },
-      isNumber(evt) {
-          evt = (evt) ? evt : window.event;
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-              evt.preventDefault();
-          } else {
-              return true;
-          }
-      }
     },
   };
 </script> 
