@@ -1,82 +1,90 @@
 <template>
-  <div class="root">
-    <TopBar
-        :showClose=true
-        :title="'Results'"
-        @close="handleClose"/>
+    <div class="root">
+        <TopBar :showClose="true" :title="'Results'" @close="handleClose" />
 
-    <div class="results" v-for="playerScore in getRankedScores(playerScores)">
-      <ResultItem 
-        :playerScore="playerScore" 
-        :rank = "rank"
-        :points = "points"/>
+        <div
+            class="results"
+            v-for="playerScore in getRankedScores(playerScores)"
+        >
+            <ResultItem
+                :playerScore="playerScore"
+                :rank="rank"
+                :points="points"
+            />
+        </div>
+
+        <button :class="newGameButtonClass" @click="startNewGame">
+            Start new game
+        </button>
     </div>
-
-    <button :class="newGameButtonClass" @click="startNewGame">Start new game</button>
-
-  </div>
 </template>
 
 <script>
-  import { toRaw } from 'vue';
-  
-  import wonders from '@/assets/wonders.json'
-  import ResultItem  from './components/ResultItem.vue';
-  import TopBar from '../Common/components/TopBar.vue';
-  
-  import { getPlayerScores } from '@/utils/remote'
-  import * as util from '@/utils/calc';
+import { toRaw } from "vue";
 
+import wonders from "@/assets/wonders.json";
+import ResultItem from "./components/ResultItem.vue";
+import TopBar from "../Common/components/TopBar.vue";
 
-  export default {
-    mounted: async function() {
-      this.playerScores = await getPlayerScores(this.$route.params.session_id)
-        console.error(`playerScores ${JSON.stringify(this.playerScores)}`)
+import { getPlayerScores } from "@/utils/remote";
+import * as util from "@/utils/calc";
+
+export default {
+    mounted: async function () {
+        this.playerScores = await getPlayerScores(
+            this.$route.params.session_id,
+        );
     },
     data() {
-      return {
-        playerScores: [],
-        wonders: wonders,
-      };
+        return {
+            playerScores: [],
+            wonders: wonders,
+        };
     },
     components: {
-      ResultItem,
-      TopBar
+        ResultItem,
+        TopBar,
     },
     methods: {
-      startNewGame(){
-        this.$emit("startNewGame")
-      },
-      isScoreBigger(score, scoreToCompare) {
-        return scoreToCompare.finalPoints < score.finalPoints
-              || (scoreToCompare.finalPoints == score.finalPoints && scoreToCompare.coinCount < score.coinCount)
-      },
-      getRankedScores(playerScores) {
-        let result = Array(playerScores.length)
+        startNewGame() {
+            this.$emit("startNewGame");
+        },
+        isScoreBigger(score, scoreToCompare) {
+            return (
+                scoreToCompare.finalPoints < score.finalPoints ||
+                (scoreToCompare.finalPoints == score.finalPoints &&
+                    scoreToCompare.coinCount < score.coinCount)
+            );
+        },
+        getRankedScores(playerScores) {
+            let result = Array(playerScores.length);
 
-        for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
-          let currentIdx = scoreIdx
-          let currentScore = structuredClone(toRaw(playerScores[currentIdx]))
-          currentScore.finalPoints = util.calcSum(currentScore)
-          
-          while (0 < currentIdx && this.isScoreBigger(currentScore, result[currentIdx - 1])){
-            result[currentIdx] = result[currentIdx - 1]
-            currentIdx--
-          }
-          result[currentIdx] = currentScore
-        }
-        return result
-      },
-      handleClose(){
-        this.$emit("close")
-      },
-    }
-  }
+            for (let scoreIdx = 0; scoreIdx < playerScores.length; scoreIdx++) {
+                let currentIdx = scoreIdx;
+                let currentScore = structuredClone(
+                    toRaw(playerScores[currentIdx]),
+                );
+                currentScore.finalPoints = util.calcSum(currentScore);
 
+                while (
+                    0 < currentIdx &&
+                    this.isScoreBigger(currentScore, result[currentIdx - 1])
+                ) {
+                    result[currentIdx] = result[currentIdx - 1];
+                    currentIdx--;
+                }
+                result[currentIdx] = currentScore;
+            }
+            return result;
+        },
+        handleClose() {
+            this.$emit("close");
+        },
+    },
+};
 </script>
 
 <style scoped>
-
 .root {
     width: 100%;
     position: relative;

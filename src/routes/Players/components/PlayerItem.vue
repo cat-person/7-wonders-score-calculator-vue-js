@@ -1,9 +1,9 @@
 <script>
-import wonders from '@/assets/wonders.json'
-import colors from '@/assets/colors.json'
-import * as util from '@/utils/calc';
+import wonders from "@/assets/wonders.json";
+import colors from "@/assets/colors.json";
+import * as util from "@/utils/calc";
 
-const url = 'https://vuejs.org/images/logo.png'
+const url = "https://vuejs.org/images/logo.png";
 
 export default {
     props: {
@@ -19,110 +19,130 @@ export default {
                 wonder: 32,
                 gold: 12,
                 military: 6,
-            }
-        }
+            },
+        };
     },
     methods: {
         getWonderById(wonderId) {
-            let result = undefined
+            let result = undefined;
             this.wonders.forEach((wonder) => {
                 if (wonder.id == wonderId) {
-                    result = wonder
+                    result = wonder;
                 }
-            })
-            return result
+            });
+            return result;
         },
         getWonderByIdAndSide(wonderId, side) {
-            let wonder = this.getWonderById(wonderId)
-            if (side == 'A') {
-                return wonder.A
+            let wonder = this.getWonderById(wonderId);
+            if (side == "A") {
+                return wonder.A;
             } else {
-                return wonder.B
+                return wonder.B;
             }
-
         },
         getImageByWonder(wonderId, side) {
-            let wonder = this.getWonderByIdAndSide(wonderId, side)
-            return new URL(`../../../assets/wonders/${wonder.img}`, import.meta.url)
+            let wonder = this.getWonderByIdAndSide(wonderId, side);
+            return new URL(
+                `../../../assets/wonders/${wonder.img}`,
+                import.meta.url,
+            );
         },
         getPointsByCategory(playerScore) {
             return [
                 {
-                    name: 'wonder',
+                    name: "wonder",
                     color: colors.wonder,
-                    points: util.calcWonderPoints(playerScore.wonder)
+                    points: util.calcWonderPoints(playerScore.wonder),
                 },
                 {
-                    name: 'coins',
+                    name: "coins",
                     color: colors.coins,
-                    points: util.calcCoinPoints(playerScore.coinCount)
+                    points: util.calcCoinPoints(playerScore.coinCount),
                 },
                 {
-                    name: 'military',
+                    name: "military",
                     color: colors.military,
-                    points: playerScore.militaryPoints
+                    points: playerScore.militaryPoints,
                 },
                 {
-                    name: 'culture',
+                    name: "culture",
                     color: colors.culture,
-                    points: playerScore.culturePoints
+                    points: playerScore.culturePoints,
                 },
                 {
-                    name: 'trade',
+                    name: "trade",
                     color: colors.trade,
-                    points: playerScore.tradePoints
+                    points: playerScore.tradePoints,
                 },
                 {
-                    name: 'science',
+                    name: "science",
                     color: colors.science,
                     points: util.calcSciencePoints(
                         playerScore.science.clayCount,
                         playerScore.science.measurerCount,
-                        playerScore.science.cogCount
-                    )
+                        playerScore.science.cogCount,
+                    ),
                 },
                 {
-                    name: 'guild',
+                    name: "guild",
                     color: colors.guild,
-                    points: playerScore.guildPoints
-                }
-            ]
+                    points: playerScore.guildPoints,
+                },
+            ];
         },
         handleEditClicked() {
-            console.error(`handleEditClicked()`)
-            this.$emit("editPlayer", this.playerScore.wonder.id)
+            this.$emit("editPlayer", this.playerScore.wonder.id);
         },
         handleDeleteClicked() {
-            console.error(`deletePlayer()`)
-            this.$emit("deletePlayerScore", this.playerScore.wonder.id)
-        }
-    }
-}
+            this.$emit("deletePlayerScore", this.playerScore.wonder.id);
+        },
+    },
+};
 </script>
 
 <template>
-    <div class='root'>
-    
+    <div class="root">
         <h3 class="wonder-lbl">
-            {{ getWonderById(playerScore.wonder.id).name }} ({{ playerScore.wonder.side }}): {{ playerScore.name }}
+            {{ getWonderById(playerScore.wonder.id).name }} ({{
+                playerScore.wonder.side
+            }}): {{ playerScore.name }}
         </h3>
-        <img class="close_btn" src="../../../assets/icon_remove_2.svg" @click="handleDeleteClicked(playerScore)" />
+        <img
+            class="close_btn"
+            src="../../../assets/icon_remove_2.svg"
+            @click="handleDeleteClicked(playerScore)"
+        />
         <tbody class="table">
-            <td class="point-container" :style="{ 'background-color': scoreItem.color, 'width': '14%' }" v-for="scoreItem in getPointsByCategory(playerScore)" :key="scoreItem.name">
-                <tr>{{ scoreItem.name }}</tr>
-                <tr>{{ scoreItem.points }}</tr>
+            <td
+                class="point-container"
+                :style="{ 'background-color': scoreItem.color, width: '14%' }"
+                v-for="scoreItem in getPointsByCategory(playerScore)"
+                :key="scoreItem.name"
+            >
+                <tr>
+                    {{
+                        scoreItem.name
+                    }}
+                </tr>
+                <tr>
+                    {{
+                        scoreItem.points
+                    }}
+                </tr>
             </td>
         </tbody>
 
         <img
-            class='wonder-img'
+            class="wonder-img"
             @click="handleEditClicked"
-            v-bind:src="getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)"/>
+            v-bind:src="
+                getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)
+            "
+        />
     </div>
 </template>
 
 <style scoped>
-
 .root {
     width: 100%;
     position: relative;

@@ -1,52 +1,52 @@
 <template>
-  <div class="root">
-    <TopBar 
-      :showClose=false
-      :title='"Welcome to unofficial 7 wonders points calculator"' />
+    <div class="root">
+        <TopBar
+            :showClose="false"
+            :title="'Welcome to unofficial 7 wonders points calculator'"
+        />
 
-    <StartGameItem
-      class="add_player_btn"
-      @startNewGame="handleStartNewGame"/>
-      
-  </div>
+        <StartGameItem
+            class="add_player_btn"
+            @startNewGame="handleStartNewGame"
+        />
+    </div>
 </template>
 
 <script>
-  import wonders from '@/assets/wonders.json'
-  // import {getPlayerScoreByWonderId} from '@/utils/remote'
+import wonders from "@/assets/wonders.json";
+// import {getPlayerScoreByWonderId} from '@/utils/remote'
 
-  import StartGameItem from './components/StartGameItem.vue';
-  import TopBar from '../Common/components/TopBar.vue';
+import StartGameItem from "./components/StartGameItem.vue";
+import TopBar from "../Common/components/TopBar.vue";
 
-  export default {
+export default {
     data() {
-      console.debug(`Players.data(): { playerScoreData: ${JSON.stringify(this.playerScoreData)} }`)
-      return {
-        playerScoreData: this.playerScores,
-        wonders: wonders,
-      };
+        return {
+            playerScoreData: this.playerScores,
+            wonders: wonders,
+        };
     },
     props: {
-      playerScores: Array
+        playerScores: Array,
     },
     components: {
-      TopBar,
-      StartGameItem
+        TopBar,
+        StartGameItem,
     },
     methods: {
-      handleStartNewGame(sessionId){
-        this.$router.push(`/${sessionId}/add`)
-      }
-    }
-  }
+        handleStartNewGame(sessionId) {
+            this.$router.push(`/${sessionId}/add`);
+        },
+    },
+};
 </script>
 
 <style scoped>
 .root {
-  margin: 0mm;
-  padding: 3mm;
+    margin: 0mm;
+    padding: 3mm;
 }
 .add_player_btn {
-  margin: 0mm;
+    margin: 0mm;
 }
 </style>
