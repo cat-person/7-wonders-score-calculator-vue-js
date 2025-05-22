@@ -28,7 +28,10 @@
             :coinCount="playerScore.coinCount"
             @coinCountChanged="handleCoinCountChanged($event)"
         />
-        <Military :points="playerScore.militaryPoints" />
+        <Military
+            :points="playerScore.militaryPoints"
+            @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"
+        />
         <Culture
             :points="playerScore.culturePoints"
             @culturePointsUpdated="handleCulturePointsUpdated($event)"
@@ -125,6 +128,9 @@ export default {
         },
         handleCoinCountChanged(givenCount) {
             this.playerScore.coinCount = givenCount;
+        },
+        handleMilitaryPointsUpdated(givenPoints) {
+            this.playerScore.militaryPoints = givenPoints;
         },
         onWonderSelected(wonderId) {
             this.playerScore.wonder.id = wonderId;

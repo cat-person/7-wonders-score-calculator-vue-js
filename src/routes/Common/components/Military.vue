@@ -46,13 +46,13 @@ export default {
             );
             this.$emit("militaryPointsUpdated", this.militaryPoints);
         },
-        handleMilitaryPointsInput() {
-            if (this.militaryPoints) {
-                this.$emit("militaryPointsUpdated", this.militaryPoints);
-            } else {
-                this.$emit("militaryPointsUpdated", 0);
-            }
-        },
+        // handleMilitaryPointsInput() {
+        //     if (this.militaryPoints) {
+        //         this.$emit("militaryPointsUpdated", this.militaryPoints);
+        //     } else {
+        //         this.$emit("militaryPointsUpdated", 0);
+        //     }
+        // },
     },
 };
 </script>
