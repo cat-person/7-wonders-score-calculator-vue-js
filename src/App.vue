@@ -13,6 +13,7 @@ export default {
 <style>
 #app {
     margin: 0mm;
+    padding: 0mm;
     font-family: "open-sans";
     user-select: none;
     text-align: center;
@@ -21,6 +22,7 @@ export default {
 .root {
     width: 100%;
     margin: 0mm;
+    padding: 0mm;
     max-width: 160mm;
     justify-self: center;
     position: relative;
