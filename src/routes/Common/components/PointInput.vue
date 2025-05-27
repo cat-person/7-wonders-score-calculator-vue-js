@@ -1,16 +1,11 @@
 <template>
-    <div class="pointInput">
-        <button
-            class="pointsChangeBtn"
-            @click="() => handleMilitaryPointsChanged(-1)"
-        >
+    <div :style="this.getStyle(color)">
+        <!--  -->
+        <button class="pointsChangeBtn" @click="() => handlePointsChanged(-1)">
             -
         </button>
-        <h3 class="pointTxt">Military points: {{ militaryPoints }}</h3>
-        <button
-            class="pointsChangeBtn"
-            @click="() => handleMilitaryPointsChanged(1)"
-        >
+        <h3 class="pointTxt">{{ category }} points: {{ points }}</h3>
+        <button class="pointsChangeBtn" @click="() => handlePointsChanged(1)">
             +
         </button>
     </div>
@@ -27,18 +22,35 @@ export default {
     },
     data() {
         return {
-            data: {
-                currentPoints: this.points,
-            },
+            currentPoints: this.points,
         };
     },
     methods: {
-        handleMilitaryPointsChanged(valueToAdd) {
-            this.data = Math.min(
-                Math.max(this.currentPoints + valueToAdd, -6),
-                18,
+        handlePointsChanged(valueToAdd) {
+            const min = this.min ? this.min : 0;
+            const max = this.max ? this.max : 100;
+
+            this.$emit(
+                "pointsUpdated",
+                Math.min(Math.max(this.points + valueToAdd, min), max),
             );
-            this.$emit("militaryPointsUpdated", this.currentPoints);
+        },
+        getStyle(color) {
+            return {
+                display: "flex",
+                flexDirection: "row",
+                width: "96%",
+                justifySelf: "center",
+                justifyContent: "center",
+                paddingBottom: "3mm",
+                paddingTop: "3mm",
+                marginBottom: "3mm",
+                backgroundColor: "white",
+                borderStyle: "solid",
+                borderWidth: "1mm",
+                borderColor: color,
+                borderRadius: "1mm",
+            };
         },
     },
 };
