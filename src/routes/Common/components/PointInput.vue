@@ -1,11 +1,18 @@
 <template>
     <div :style="this.getStyle(color)">
-        <!--  -->
-        <button class="pointsChangeBtn" @click="() => handlePointsChanged(-1)">
+        <button
+            class="pointsChangeBtn"
+            v-longpress="() => handlePointsChanged(-1)"
+            @click="() => handlePointsChanged(-1)"
+        >
             -
         </button>
         <h3 class="pointTxt">{{ category }} points: {{ points }}</h3>
-        <button class="pointsChangeBtn" @click="() => handlePointsChanged(1)">
+        <button
+            class="pointsChangeBtn"
+            @click="() => handlePointsChanged(1)"
+            v-longpress="() => handlePointsChanged(1)"
+        >
             +
         </button>
     </div>
@@ -34,6 +41,9 @@ export default {
                 "pointsUpdated",
                 Math.min(Math.max(this.points + valueToAdd, min), max),
             );
+        },
+        longPressDetected() {
+            alert("longPressDetected");
         },
         getStyle(color) {
             return {

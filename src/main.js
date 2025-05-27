@@ -7,7 +7,7 @@ import Players from "./routes/Players/Players.vue";
 import AddPlayer from "./routes/AddPlayer/AddPlayer.vue";
 import EditPlayer from "./routes/EditPlayer/EditPlayer.vue";
 import Results from "./routes/Results/Results.vue";
-// import DKToast from 'vue-dk-toast';
+import longpress from "./utils/longpress";
 
 const routes = [
   { path: "/", component: StartGame },
@@ -17,12 +17,11 @@ const routes = [
   { path: "/:session_id/results", component: Results },
 ];
 
+// Vue.directive("longpress", longpress({ delay: 300, interval: 50 }));
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
 
-createApp(App)
-  .use(router)
-  // .use(DKToast)
-  .mount("#app");
+createApp(App).use(longpress).use(router).mount("#app");

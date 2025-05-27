@@ -3,6 +3,7 @@
         <div class="horizontal">
             <button
                 class="pointsChangeBtn"
+                v-longpress="() => handleCoinValueChanged(-1)"
                 @click="() => handleCoinValueChanged(-1)"
             >
                 -
@@ -10,6 +11,7 @@
             <h3 class="pointTxt">Coin value: {{ coinValue }}</h3>
             <button
                 class="pointsChangeBtn"
+                v-longpress="() => handleCoinValueChanged(1)"
                 @click="() => handleCoinValueChanged(1)"
             >
                 +

@@ -157,7 +157,6 @@ export default {
             this.playerScore.wonder.stageBuilt = stageBuilt;
         },
         handleCoinValueChanged(coinValue) {
-            console.error(coinValue);
             this.playerScore.coinCount = coinValue;
         },
         handleMilitaryPointsUpdated(points) {
