@@ -2,7 +2,7 @@
     <div
         v-if="playerScore"
         :style="{
-            'background-color': this.backgroundColor,
+            backgroundColor: 'papayawhip',
             'padding-top': '3mm',
             'padding-bottom': '3mm',
         }"
@@ -25,28 +25,38 @@
         />
 
         <Coins
-            :coinCount="playerScore.coinCount"
-            @coinCountChanged="handleCoinCountChanged($event)"
+            :coinValue="playerScore.coinCount"
+            @coinValueChanged="handleCoinValueChanged($event)"
         />
-        <Military
+        <PointInput
+            :category="'Military'"
+            :color="'firebrick'"
+            :min="-6"
+            :max="18"
             :points="playerScore.militaryPoints"
-            @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"
+            @pointsUpdated="handleMilitaryPointsUpdated($event)"
         />
-        <Culture
+        <PointInput
+            :category="'Culture'"
+            :color="'blue'"
             :points="playerScore.culturePoints"
-            @culturePointsUpdated="handleCulturePointsUpdated($event)"
+            @pointsUpdated="handleCulturePointsUpdated($event)"
         />
-        <Trade
+        <PointInput
+            :category="'Trade'"
+            :color="'gold'"
             :points="playerScore.tradePoints"
-            @tradePointsUpdated="handleTradePointsUpdated($event)"
+            @pointsUpdated="handleTradePointsUpdated($event)"
         />
         <Science
             :science="playerScore.science"
             @scienceUpdated="handleScienceUpdated($event)"
         />
-        <Guild
+        <PointInput
+            :category="'Guilds'"
+            :color="'purple'"
             :points="playerScore.guildPoints"
-            @guildPointsUpdated="handleGuildPointsUpdated($event)"
+            @pointsUpdated="handleGuildPointsUpdated($event)"
         />
         <br />
         <button :disabled="!canAdd(playerScore)" @click="handleFinishEditing">
@@ -58,17 +68,13 @@
 <script>
 import Name from "../Common/components/Name.vue";
 import Wonder from "../Common/components/Wonder.vue";
+import PointInput from "../Common/components/PointInput.vue";
 import Coins from "../Common/components/Coins.vue";
-import Military from "../Common/components/Military.vue";
-import Culture from "../Common/components/Culture.vue";
-import Trade from "../Common/components/Trade.vue";
 import Science from "../Common/components/Science.vue";
-import Guild from "../Common/components/Guild.vue";
 
 import wonders from "@/assets/wonders.json";
 import TopBar from "../Common/components/TopBar.vue";
 import { getPlayerScoreByWonderId, updatePlayerScore } from "@/utils/remote";
-import { onMounted } from "vue";
 
 export default {
     data() {
@@ -95,11 +101,8 @@ export default {
         Wonder,
         Name,
         Coins,
-        Military,
-        Culture,
-        Trade,
+        PointInput,
         Science,
-        Guild,
     },
 
     methods: {
@@ -126,7 +129,7 @@ export default {
         handleNameChanged(name) {
             this.playerScore.name = name;
         },
-        handleCoinCountChanged(givenCount) {
+        handleCoinValueChanged(givenCount) {
             this.playerScore.coinCount = givenCount;
         },
         handleMilitaryPointsUpdated(givenPoints) {

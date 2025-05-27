@@ -1,46 +1,72 @@
 <template>
     <div id="Coins amount" class="coins">
-      <h3>Coins</h3>
-      <div>
-        <p>Enter coin value</p>
-        <input v-model.number="currentCoinCount" @input="onCoinCountChanged" @focus="$event.target.select()" type="number" min="0">
-      </div>
-      <p>Coin points: {{ this.calcPoints() }}</p>
+        <div class="horizontal">
+            <button
+                class="pointsChangeBtn"
+                @click="() => handleCoinValueChanged(-1)"
+            >
+                -
+            </button>
+            <h3 class="pointTxt">Coin value: {{ coinValue }}</h3>
+            <button
+                class="pointsChangeBtn"
+                @click="() => handleCoinValueChanged(1)"
+            >
+                +
+            </button>
+        </div>
+        <p class="points">
+            Points for coins: {{ this.calcPoints(this.coinValue) }}
+        </p>
     </div>
 </template>
-  
-  <script>
-  export default {
+
+<script>
+export default {
     props: {
-      coinCount: Number
-    },
-    data() {
-      return {
-        currentCoinCount: this.coinCount
-      }
+        coinValue: Number,
     },
     methods: {
-      calcPoints() {  
-        return Math.floor(this.currentCoinCount / 3)
-      },
-      onCoinCountChanged() {
-        if(this.currentCoinCount) {
-          this.$emit("coinCountChanged", this.currentCoinCount)
-        } else {
-          this.$emit("coinCountChanged", 0)
-        }
-      }
-    }
-  };
-  </script>
-  
-  <style>
-  .coins {
-    background-color: silver;
+        calcPoints(coinValue) {
+            return Math.floor(coinValue / 3);
+        },
+        handleCoinValueChanged(valueToAdd) {
+            const min = 0;
+            const max = 100;
+
+            this.$emit(
+                "coinValueChanged",
+                Math.min(Math.max(this.coinValue + valueToAdd, min), max),
+            );
+        },
+    },
+};
+</script>
+
+<style>
+.coins {
+    background-color: white;
+    border-style: solid;
+    border-width: 1mm;
+    border-radius: 1mm;
+    border-color: silver;
     justify-self: center;
     width: 96%;
-    padding-bottom: 4mm;
-    padding-top: 1mm;
+    padding-top: 3mm;
+    padding-bottom: 3mm;
     margin-bottom: 3mm;
-  }
-  </style>
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+    justify-self: center;
+    justify-content: center;
+    margin-bottom: 3mm;
+}
+.points {
+    margin: 0mm;
+    padding: 0mm;
+}
+</style>

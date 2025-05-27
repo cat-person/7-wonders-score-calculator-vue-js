@@ -1,13 +1,12 @@
 <template>
     <div
-        class="container"
         :style="{
-            'background-color': getBackgroundColor(playerScore.wonder),
+            backgroundColor: 'papayawhip',
             margin: '0mm',
-            'justify-self': 'center',
+            padding: '0mm',
+            paddingTop: '2mm',
+            justifySelf: 'center',
             width: '100%',
-            'padding-top': '3mm',
-            'padding-bottom': '3mm',
             margin: '0mm',
         }"
     >
@@ -17,7 +16,6 @@
             @close="handleClose"
         />
 
-        <!-- :availableWonderIds="availableWonders" -->
         <WonderSelection
             :wonder="playerScore.wonder"
             @onWonderSelected="onWonderSelected($event)"
@@ -31,28 +29,38 @@
         />
 
         <Coins
-            :coinCount="playerScore.coinCount"
-            @coinCountChanged="handleCoinCountChanged($event)"
+            :coinValue="playerScore.coinCount"
+            @coinValueChanged="handleCoinValueChanged($event)"
         />
-        <Military
+        <PointInput
+            :category="'Military'"
+            :color="'firebrick'"
+            :min="-6"
+            :max="18"
             :points="playerScore.militaryPoints"
-            @militaryPointsUpdated="handleMilitaryPointsUpdated($event)"
+            @pointsUpdated="handleMilitaryPointsUpdated($event)"
         />
-        <Culture
+        <PointInput
+            :category="'Culture'"
+            :color="'blue'"
             :points="playerScore.culturePoints"
-            @culturePointsUpdated="handleCulturePointsUpdated($event)"
+            @pointsUpdated="handleCulturePointsUpdated($event)"
         />
-        <Trade
+        <PointInput
+            :category="'Trade'"
+            :color="'gold'"
             :points="playerScore.tradePoints"
-            @tradePointsUpdated="handleTradePointsUpdated($event)"
+            @pointsUpdated="handleTradePointsUpdated($event)"
         />
         <Science
             :science="playerScore.science"
             @scienceUpdated="handleScienceUpdated($event)"
         />
-        <Guild
+        <PointInput
+            :category="'Guilds'"
+            :color="'purple'"
             :points="playerScore.guildPoints"
-            @guildPointsUpdated="handleGuildPointsUpdated($event)"
+            @pointsUpdated="handleGuildPointsUpdated($event)"
         />
         <br />
         <button
@@ -71,12 +79,9 @@
 import WonderSelection from "./components/WonderSelection.vue";
 import Name from "../Common/components/Name.vue";
 import Coins from "../Common/components/Coins.vue";
-import Military from "../Common/components/Military.vue";
-import Culture from "../Common/components/Culture.vue";
-import Trade from "../Common/components/Trade.vue";
 import Science from "../Common/components/Science.vue";
-import Guild from "../Common/components/Guild.vue";
 import TopBar from "../Common/components/TopBar.vue";
+import PointInput from "../Common/components/PointInput.vue";
 
 import wonders from "@/assets/wonders.json";
 import { addPlayerScore } from "@/utils/remote";
@@ -106,11 +111,8 @@ export default {
         Name,
         WonderSelection,
         Coins,
-        Military,
-        Culture,
-        Trade,
+        PointInput,
         Science,
-        Guild,
     },
     data() {
         return {
@@ -154,23 +156,24 @@ export default {
         onStageBuilt(stageBuilt) {
             this.playerScore.wonder.stageBuilt = stageBuilt;
         },
-        handleCoinCountChanged(coinCount) {
-            this.playerScore.coinCount = coinCount;
+        handleCoinValueChanged(coinValue) {
+            console.error(coinValue);
+            this.playerScore.coinCount = coinValue;
         },
-        handleMilitaryPointsUpdated(militaryPoints) {
-            this.playerScore.militaryPoints = militaryPoints;
+        handleMilitaryPointsUpdated(points) {
+            this.playerScore.militaryPoints = points;
         },
-        handleCulturePointsUpdated(culturePoints) {
-            this.playerScore.culturePoints = culturePoints;
+        handleCulturePointsUpdated(points) {
+            this.playerScore.culturePoints = points;
         },
-        handleTradePointsUpdated(tradePoints) {
-            this.playerScore.tradePoints = tradePoints;
+        handleTradePointsUpdated(points) {
+            this.playerScore.tradePoints = points;
         },
         handleScienceUpdated(science) {
             this.playerScore.science = science;
         },
-        handleGuildPointsUpdated(guildPoints) {
-            this.playerScore.guildPoints = guildPoints;
+        handleGuildPointsUpdated(points) {
+            this.playerScore.guildPoints = points;
         },
         getBackgroundColor(wonder) {
             return this.getWonder(wonder.id, wonder.side).background;
