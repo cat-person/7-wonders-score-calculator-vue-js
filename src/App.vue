@@ -15,7 +15,6 @@ export default {
     margin: 0mm;
     padding: 0mm;
     font-family: "open-sans";
-    user-select: none;
     text-align: center;
     overflow-y: scroll;
 }
@@ -24,9 +23,8 @@ export default {
     width: 100%;
     margin: 0mm;
     padding: 0mm;
-    padding-bottom: 60mm;
+    padding-bottom: 3mm;
     max-width: 160mm;
     justify-self: center;
-    position: relative;
 }
 </style>
