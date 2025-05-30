@@ -3,11 +3,10 @@
         <input
             :style="inputStyle"
             type="text"
-            placeholder="Enter your name to complete the form"
+            :placeholder="label"
             :value="value"
             @input="handleValueChanged($event)"
-            @focus="isFocused = true"
-            @blur="isFocused = false"
+            @focus="handleFocus"
         />
     </div>
 </template>
@@ -27,12 +26,20 @@ export default {
     data() {
         return {
             name: "",
-            isFocused: false,
         };
     },
     methods: {
         handleValueChanged($event) {
             this.$emit("valueUpdated", event.target.value);
+        },
+        handleFocus() {
+            // Scroll element into view when keyboard appears
+            setTimeout(() => {
+                this.$refs.mobileInput.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+            }, 300);
         },
     },
     computed: {

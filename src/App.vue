@@ -8,29 +8,6 @@
 export default {
     name: "App",
 };
-
-// Auto-scroll implementation
-document.addEventListener("DOMContentLoaded", function () {
-    const inputs = document.querySelectorAll("input, textarea");
-
-    inputs.forEach((input) => {
-        input.addEventListener("focus", function () {
-            // Timeout ensures this runs after the keyboard appears
-            setTimeout(() => {
-                // Scroll the input into view with some padding
-                this.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                });
-
-                // Additional offset if needed (for fixed headers)
-                const headerHeight =
-                    document.querySelector(".header").offsetHeight;
-                window.scrollBy(0, -headerHeight - 10);
-            }, 300);
-        });
-    });
-});
 </script>
 
 <style>
