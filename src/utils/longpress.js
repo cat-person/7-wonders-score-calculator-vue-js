@@ -19,7 +19,6 @@ export default {
         }
 
         const start = (e) => {
-          console.error(e.type);
           if (e.type === "click" && e.button !== 0) return;
 
           // Clear any existing timers

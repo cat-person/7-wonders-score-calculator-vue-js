@@ -23,11 +23,6 @@
             @onStageBuilt="onStageBuilt($event)"
         />
 
-        <Name
-            :name="playerScore.name"
-            @changeName="handleNameChanged($event)"
-        />
-
         <Coins
             :coinValue="playerScore.coinCount"
             @coinValueChanged="handleCoinValueChanged($event)"
@@ -62,16 +57,21 @@
             :points="playerScore.guildPoints"
             @pointsUpdated="handleGuildPointsUpdated($event)"
         />
+
+        <Name
+            label="Enter your name to complete the form"
+            :value="playerScore.name"
+            @valueUpdated="handleNameChanged($event)"
+        />
+
         <br />
+
         <button
-            :disabled="!canAdd(playerScore)"
+            :disabled="!canAdd"
             @click="handleAddPlayer($route.params.session_id, playerScore)"
         >
             Done
         </button>
-        <p class="error" v-if="!canAdd(playerScore)">
-            ❗️ Enter your name to complete the form ❗️
-        </p>
     </div>
 </template>
 
@@ -108,8 +108,8 @@ const defaultPlayerScore = {
 export default {
     components: {
         TopBar,
-        Name,
         WonderSelection,
+        Name,
         Coins,
         PointInput,
         Science,
@@ -120,11 +120,17 @@ export default {
             playerScore: defaultPlayerScore,
         };
     },
-    methods: {
-        handleClose() {
-            // navigate to players
-            // this.$emit('close')
+    computed: {
+        canAdd: {
+            get() {
+                if (this.playerScore.name) {
+                    return true;
+                }
+                return false;
+            },
         },
+    },
+    methods: {
         onWonderSelected(wonderId) {
             this.playerScore.wonder.id = wonderId;
         },
@@ -146,9 +152,6 @@ export default {
             } else {
                 return result.B;
             }
-        },
-        handleNameChanged(name) {
-            this.playerScore.name = name;
         },
         handleSideChanged(givenSide) {
             this.playerScore.wonder.side = givenSide;
@@ -174,11 +177,8 @@ export default {
         handleGuildPointsUpdated(points) {
             this.playerScore.guildPoints = points;
         },
-        getBackgroundColor(wonder) {
-            return this.getWonder(wonder.id, wonder.side).background;
-        },
-        canAdd(scoreData) {
-            return scoreData.name != "";
+        handleNameChanged(name) {
+            this.playerScore.name = name;
         },
         async handleAddPlayer(sessionId, playerScore) {
             await addPlayerScore(sessionId, playerScore);
@@ -187,9 +187,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.error {
-    color: darkred;
-}
-</style>

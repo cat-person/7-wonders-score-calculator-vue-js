@@ -19,11 +19,6 @@
             @onSideChanged="handleSideChanged"
         />
 
-        <Name
-            :name="playerScore.name"
-            @changeName="handleNameChanged($event)"
-        />
-
         <Coins
             :coinValue="playerScore.coinCount"
             @coinValueChanged="handleCoinValueChanged($event)"
@@ -58,7 +53,15 @@
             :points="playerScore.guildPoints"
             @pointsUpdated="handleGuildPointsUpdated($event)"
         />
+
+        <Name
+            label="Enter your name to complete the form"
+            :value="playerScore.name"
+            @valueUpdated="handleNameChanged($event)"
+        />
+
         <br />
+
         <button :disabled="!canAdd(playerScore)" @click="handleFinishEditing">
             {{ getButtonTitle(originalPlayerScore, playerScore) }}
         </button>
