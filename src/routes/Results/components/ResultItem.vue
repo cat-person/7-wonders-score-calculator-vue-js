@@ -135,25 +135,36 @@ export default {
             }}): {{ playerScore.name }}
         </h3>
 
-        <tbody class="table">
-            <td
-                class="point-container"
-                :style="{ 'background-color': scoreItem.color, width: '14%' }"
-                v-for="scoreItem in getPointsByCategory(playerScore)"
-                :key="scoreItem.name"
-            >
+        <table class="table">
+            <tbody>
                 <tr>
-                    {{
-                        scoreItem.name
-                    }}
+                    <td
+                        class="point-container"
+                        :style="{
+                            'background-color': scoreItem.color,
+                            width: '14%',
+                        }"
+                        v-for="scoreItem in getPointsByCategory(playerScore)"
+                        :key="scoreItem.name"
+                    >
+                        {{ scoreItem.name }}
+                    </td>
                 </tr>
                 <tr>
-                    {{
-                        scoreItem.points
-                    }}
+                    <td
+                        class="point-container"
+                        :style="{
+                            'background-color': scoreItem.color,
+                            width: '14%',
+                        }"
+                        v-for="scoreItem in getPointsByCategory(playerScore)"
+                        :key="scoreItem.name"
+                    >
+                        {{ scoreItem.points }}
+                    </td>
                 </tr>
-            </td>
-        </tbody>
+            </tbody>
+        </table>
 
         <img
             class="wonder-img"
@@ -188,14 +199,17 @@ export default {
 }
 
 .table {
+    padding: 0mm;
+    margin: 0mm;
     position: absolute;
     justify-content: center;
     vertical-align: bottom;
     justify-items: stretch;
     width: 96%;
     margin-left: 2%;
-    background-color: black;
-    bottom: 2mm;
+    background-color: white;
+    border-collapse: collapse;
+    bottom: 6mm;
 }
 
 .point-container {
