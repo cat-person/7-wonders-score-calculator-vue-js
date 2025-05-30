@@ -136,6 +136,7 @@ export default {
 }
 .embla_container {
     margin: 0mm;
+    margin-bottom: 2mm;
     display: flex;
 }
 .embla_slide {

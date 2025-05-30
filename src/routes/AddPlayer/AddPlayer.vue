@@ -5,9 +5,9 @@
             margin: '0mm',
             padding: '0mm',
             paddingTop: '2mm',
+            paddingBottom: '4mm',
             justifySelf: 'center',
             width: '100%',
-            margin: '0mm',
         }"
     >
         <TopBar

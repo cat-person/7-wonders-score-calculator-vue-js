@@ -129,6 +129,7 @@ export default {
 }
 .btn {
     margin: 2mm;
+    margin-top: 5mm;
     position: absolute;
 }
 .stage_container {

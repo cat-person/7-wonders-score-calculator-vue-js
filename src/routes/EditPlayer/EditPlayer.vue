@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="playerScore"
         :style="{
             backgroundColor: 'papayawhip',
             'padding-top': '3mm',
@@ -200,12 +199,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.container {
-    justify-self: center;
-    width: 100%;
-    padding-top: 3mm;
-    padding-bottom: 3mm;
-}
-</style>
