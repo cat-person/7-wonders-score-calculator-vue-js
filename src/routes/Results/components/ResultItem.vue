@@ -176,16 +176,17 @@ export default {
 
 <style scoped>
 .root {
-    margin: 0;
     width: 100%;
-    height: 100%;
-    max-width: 160mm;
+    position: relative;
+    padding: 0mm;
+    margin: 0mm;
+    margin-bottom: 2mm;
 }
 
 .wonder-img {
     width: 100%;
     overflow: hidden;
-    margin: 0;
+    margin: 0mm;
 }
 
 .wonder-lbl {
@@ -208,7 +209,14 @@ export default {
     margin-left: 2%;
     background-color: white;
     border-collapse: collapse;
-    bottom: 6mm;
+    bottom: 3mm;
+}
+
+td {
+    border-style: none;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-color: grey;
 }
 
 .point-container {
