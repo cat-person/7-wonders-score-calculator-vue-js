@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div>
         <TopBar :showClose="true" :title="'Results'" @close="handleClose" />
 
         <div
@@ -85,12 +85,6 @@ export default {
 </script>
 
 <style scoped>
-.root {
-    width: 100%;
-    position: relative;
-    max-width: 160mm;
-}
-
 .wonder-img {
     width: 100%;
     overflow: hidden;

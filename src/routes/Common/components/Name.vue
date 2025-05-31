@@ -32,15 +32,15 @@ export default {
         handleValueChanged($event) {
             this.$emit("valueUpdated", event.target.value);
         },
-        handleFocus() {
-            // Scroll element into view when keyboard appears
-            setTimeout(() => {
-                this.$refs.mobileInput.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                });
-            }, 300);
-        },
+        // handleFocus() {
+        //     // Scroll element into view when keyboard appears
+        //     setTimeout(() => {
+        //         this.$refs.mobileInput.scrollIntoView({
+        //             behavior: "smooth",
+        //             block: "center",
+        //         });
+        //     }, 300);
+        // },
     },
     computed: {
         inputStyle: {

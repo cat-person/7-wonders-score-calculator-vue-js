@@ -1,21 +1,19 @@
-const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-const characterLen = characters.length
-var prevSeed = 0
+const characters =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const characterLen = characters.length;
+var prevSeed = 0;
 
-export const getSessionId = (seed) => {
+export const getPseudoRandom = (seed, length) => {
+  let result = "";
 
-    const sessionIdLength = 8    
-    
-    let result = '';
+  for (var idx = 0; idx < length; idx++) {
+    result += getRandomCharFrom(seed);
+  }
 
-    for (var idx = 0; idx < sessionIdLength; idx++) {
-        result += getRandomCharFrom(seed);
-    }
-
-    return result;
-}
+  return result;
+};
 
 const getRandomCharFrom = (seed) => {
-    prevSeed = Math.floor((seed * 73 % 31) + (prevSeed * 113 % 31))
-    return characters.charAt(prevSeed % characterLen)
-}
+  prevSeed = Math.floor(((seed * 73) % 31) + ((prevSeed * 113) % 31));
+  return characters.charAt(prevSeed % characterLen);
+};

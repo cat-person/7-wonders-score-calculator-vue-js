@@ -1,14 +1,15 @@
 <script>
-import { getSessionId } from '@/utils/sessions'
+import { getPseudoRandom } from "@/utils/sessions";
 
 export default {
     methods: {
         handleStartNewGameClicked(event) {
-            const seed = event.screenX * event.screenY * (new Date()).getMilliseconds()
-            this.$emit("startNewGame", getSessionId(seed))
-        }
-    }
-}
+            const seed =
+                event.screenX * event.screenY + new Date().getMilliseconds();
+            this.$emit("startNewGame", getPseudoRandom(seed, 8));
+        },
+    },
+};
 </script>
 
 <template>
@@ -21,7 +22,7 @@ export default {
 <style scoped>
 .start_new_game_container {
     width: 100%;
-    max-width: 159mm ;
+    max-width: 159mm;
     height: 49mm;
     border-color: #606060;
     border-width: 0.5mm;

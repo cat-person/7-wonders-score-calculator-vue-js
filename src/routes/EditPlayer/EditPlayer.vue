@@ -1,11 +1,5 @@
 <template>
-    <div
-        :style="{
-            backgroundColor: 'papayawhip',
-            'padding-top': '3mm',
-            'padding-bottom': '3mm',
-        }"
-    >
+    <div v-if="playerScore">
         <TopBar
             :showClose="true"
             :title="`Edit data for ${playerScore.name}`"
@@ -14,8 +8,8 @@
 
         <Wonder
             :wonder="playerScore.wonder"
+            @onSideChanged="handleSideChanged($event)"
             @onStageBuilt="onStageBuilt($event)"
-            @onSideChanged="handleSideChanged"
         />
 
         <Coins
@@ -177,7 +171,7 @@ export default {
             this.playerScore.guildPoints = guildPoints;
         },
         canAdd(scoreData) {
-            return this.playerScore.name != "";
+            return scoreData.name !== "";
         },
         async handleFinishEditing() {
             if (

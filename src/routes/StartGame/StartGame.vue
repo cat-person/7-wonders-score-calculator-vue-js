@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div>
         <TopBar
             :showClose="false"
             :title="'Welcome to unofficial 7 wonders points calculator'"
@@ -42,10 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.root {
-    margin: 0mm;
-    padding: 3mm;
-}
 .add_player_btn {
     margin: 0mm;
 }

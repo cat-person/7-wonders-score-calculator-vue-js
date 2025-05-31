@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div>
         <TopBar :title="getTitle()" />
 
         <div class="players_container" v-for="playerScore in playerScores">
@@ -92,10 +92,6 @@ export default {
 </script>
 
 <style scoped>
-.root {
-    margin: 0mm;
-}
-
 .players_container {
     margin: 0mm;
     justify-self: center;

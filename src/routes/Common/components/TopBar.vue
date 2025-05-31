@@ -32,15 +32,14 @@ export default {
 <style scoped>
 .horizontal {
     position: relative;
-    height: 12mm;
-    width: 96%;
-    margin-bottom: 2mm;
+    height: 8mm;
+    width: 100%;
     justify-self: center;
     justify-content: center;
 }
 .title {
     margin: 0mm;
-    height: 12mm;
+    height: 8mm;
     align-content: center;
     vertical-align: center;
 }
@@ -48,7 +47,6 @@ export default {
     justify-self: left;
     position: absolute;
     left: 0mm;
-    margin: 2mm;
     width: 8mm;
     height: 8mm;
 }

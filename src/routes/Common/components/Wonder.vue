@@ -114,7 +114,7 @@ export default {
     width: 100%;
     margin: 0mm;
     padding: 0mm;
-    margin-top: -3mm;
+    /* margin-top: -3mm; */
 }
 .wonder_name {
     position: absolute;
@@ -129,7 +129,7 @@ export default {
 }
 .btn {
     margin: 2mm;
-    margin-top: 5mm;
+    margin-top: 2mm;
     position: absolute;
 }
 .stage_container {
@@ -137,7 +137,7 @@ export default {
     display: flex;
     width: 100%;
     flex-direction: column;
-    bottom: 7mm;
+    bottom: 1mm;
     /* width: 100%; */
     margin: 0mm;
     background-color: #00000040;

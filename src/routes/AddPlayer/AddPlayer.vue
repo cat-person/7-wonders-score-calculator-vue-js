@@ -1,15 +1,5 @@
 <template>
-    <div
-        :style="{
-            backgroundColor: 'papayawhip',
-            margin: '0mm',
-            padding: '0mm',
-            paddingTop: '2mm',
-            paddingBottom: '4mm',
-            justifySelf: 'center',
-            width: '100%',
-        }"
-    >
+    <div>
         <TopBar
             :title="'Select wonder and enter data'"
             :showClose="true"
@@ -76,7 +66,7 @@
 </template>
 
 <script>
-import WonderSelection from "./components/WonderSelection.vue";
+import WonderSelection from "../Common/components/WonderSelection.vue";
 import Name from "../Common/components/Name.vue";
 import Coins from "../Common/components/Coins.vue";
 import Science from "../Common/components/Science.vue";
@@ -140,19 +130,19 @@ export default {
         onStageBuilt(stageBuilt) {
             this.playerScore.wonder.stageBuilt = stageBuilt;
         },
-        getWonder(wonderId, side) {
-            let result = undefined;
-            this.wonders.forEach((wonder) => {
-                if (wonder.id == wonderId) {
-                    result = wonder;
-                }
-            });
-            if (side == "A") {
-                return result.A;
-            } else {
-                return result.B;
-            }
-        },
+        // getWonder(wonderId, side) {
+        //     let result = undefined;
+        //     this.wonders.forEach((wonder) => {
+        //         if (wonder.id == wonderId) {
+        //             result = wonder;
+        //         }
+        //     });
+        //     if (side == "A") {
+        //         return result.A;
+        //     } else {
+        //         return result.B;
+        //     }
+        // },
         handleSideChanged(givenSide) {
             this.playerScore.wonder.side = givenSide;
         },
