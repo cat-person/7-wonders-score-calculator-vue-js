@@ -157,13 +157,15 @@ export default {
 .root {
     width: 100%;
     position: relative;
-    max-width: 160mm;
+    padding: 0mm;
+    margin: 0mm;
+    margin-bottom: 2mm;
 }
 
 .wonder-img {
     width: 100%;
     overflow: hidden;
-    margin: 0;
+    margin: 0mm;
 }
 
 .wonder-lbl {
@@ -186,7 +188,7 @@ export default {
     margin-left: 2%;
     background-color: white;
     border-collapse: collapse;
-    bottom: 6mm;
+    bottom: 3mm;
 }
 
 td {
