@@ -6,13 +6,15 @@
             type="text"
             :placeholder="label"
             :value="value"
-            @input="handleValueChanged($event)"
+            @input="handleValueChanged"
             @focus="handleFocus"
         />
     </div>
 </template>
 
 <script>
+import { useTemplateRef, onMounted } from 'vue'
+
 export default {
     props: {
         label: {
@@ -29,18 +31,24 @@ export default {
             name: "",
         };
     },
+    onMounted() {
+      const inputRef = this.$refs.input;
+      inputRef.value.focus()
+    },
     methods: {
         handleValueChanged($event) {
             this.$emit("valueUpdated", event.target.value);
         },
-        handleFocus() {
-          const inputRef = useTemplateRef("input");
-          // Scroll element into view when keyboard appears
+        handleFocus($event) {
+          console.error(JSON.stringify(event))
+          const inputRef = this.$refs.input;
           setTimeout(() => {
+            if(document.activeElement === inputRef.current) {
               inputRef.scrollIntoView({
                   behavior: "smooth",
                   block: "center",
               });
+            }
           }, 300);
         },
     },
