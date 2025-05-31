@@ -1,6 +1,7 @@
 <template>
     <div class="root">
         <input
+            ref="input"
             :style="inputStyle"
             type="text"
             :placeholder="label"
@@ -32,15 +33,16 @@ export default {
         handleValueChanged($event) {
             this.$emit("valueUpdated", event.target.value);
         },
-        // handleFocus() {
-        //     // Scroll element into view when keyboard appears
-        //     setTimeout(() => {
-        //         this.$refs.mobileInput.scrollIntoView({
-        //             behavior: "smooth",
-        //             block: "center",
-        //         });
-        //     }, 300);
-        // },
+        handleFocus() {
+          const inputRef = useTemplateRef("input");
+          // Scroll element into view when keyboard appears
+          setTimeout(() => {
+              inputRef.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+              });
+          }, 300);
+        },
     },
     computed: {
         inputStyle: {
