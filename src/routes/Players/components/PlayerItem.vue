@@ -3,8 +3,6 @@ import wonders from "@/assets/wonders.json";
 import colors from "@/assets/colors.json";
 import * as util from "@/utils/calc";
 
-const url = "https://vuejs.org/images/logo.png";
-
 export default {
     props: {
         playerScore: Object,

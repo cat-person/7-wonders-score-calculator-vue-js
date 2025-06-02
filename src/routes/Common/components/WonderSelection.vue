@@ -3,6 +3,7 @@ import emblaCarouselVue from "embla-carousel-vue";
 import Wonder from "../../Common/components/Wonder.vue";
 import wonders from "@/assets/wonders.json";
 
+//TODO refactor me
 function getAvailableWonders(availableWonderIds) {
     // let result = wonders.filter(wonder => availableWonderIds.some(availableWonderId => availableWonderId == wonder.id))
     return wonders;
@@ -15,7 +16,6 @@ export default {
     },
     props: {
         wonder: Object,
-        //   // availableWonderIds: Array
     },
     data() {
         return {
@@ -117,7 +117,6 @@ export default {
             src="@/assets/arrow_left.svg"
             @click="handleLeftArrowClicked"
         />
-
         <img
             class="arrow_right"
             src="@/assets/arrow_right.svg"

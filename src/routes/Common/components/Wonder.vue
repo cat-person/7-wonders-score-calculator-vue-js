@@ -138,7 +138,6 @@ export default {
     width: 100%;
     flex-direction: column;
     bottom: 1mm;
-    /* width: 100%; */
     margin: 0mm;
     background-color: #00000040;
 }

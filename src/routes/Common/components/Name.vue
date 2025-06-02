@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { useTemplateRef, onMounted } from 'vue'
-
 export default {
     props: {
         label: {
@@ -32,24 +30,24 @@ export default {
         };
     },
     onMounted() {
-      const inputRef = this.$refs.input;
-      inputRef.value.focus()
+        const inputRef = this.$refs.input;
+        inputRef.value.focus();
     },
     methods: {
-        handleValueChanged($event) {
+        handleValueChanged(event) {
             this.$emit("valueUpdated", event.target.value);
         },
-        handleFocus($event) {
-          console.error(JSON.stringify(event))
-          const inputRef = this.$refs.input;
-          setTimeout(() => {
-            if(document.activeElement === inputRef.current) {
-              inputRef.scrollIntoView({
-                  behavior: "smooth",
-                  block: "center",
-              });
-            }
-          }, 300);
+        handleFocus(event) {
+            console.error(JSON.stringify(event));
+            const inputRef = this.$refs.input;
+            setTimeout(() => {
+                if (document.activeElement === inputRef.current) {
+                    inputRef.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }
+            }, 300);
         },
     },
     computed: {
@@ -81,8 +79,8 @@ export default {
     width: 100%;
     margin: 0mm;
     padding: 0mm;
-    justifyself: center;
-    justifycontent: center;
+    justify-self: center;
+    justify-content: center;
     margin-bottom: 3mm;
 }
 </style>

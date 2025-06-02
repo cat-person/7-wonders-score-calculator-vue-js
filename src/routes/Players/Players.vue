@@ -43,7 +43,7 @@ export default {
         };
     },
     mounted: function () {
-        this.getPlayerScoresAAA(this.$route.params.session_id);
+        this.getPlayerScores();
     },
     components: {
         TopBar,
@@ -51,7 +51,7 @@ export default {
         AddPlayerItem,
     },
     methods: {
-        async getPlayerScoresAAA(sessionId) {
+        async getPlayerScores() {
             this.playerScores = await getPlayerScores(
                 this.$route.params.session_id,
             );

@@ -130,19 +130,6 @@ export default {
         onStageBuilt(stageBuilt) {
             this.playerScore.wonder.stageBuilt = stageBuilt;
         },
-        // getWonder(wonderId, side) {
-        //     let result = undefined;
-        //     this.wonders.forEach((wonder) => {
-        //         if (wonder.id == wonderId) {
-        //             result = wonder;
-        //         }
-        //     });
-        //     if (side == "A") {
-        //         return result.A;
-        //     } else {
-        //         return result.B;
-        //     }
-        // },
         handleSideChanged(givenSide) {
             this.playerScore.wonder.side = givenSide;
         },
