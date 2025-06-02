@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
-import VueI18n from "vue-i18n";
+import { createI18n } from "vue-i18n";
 
 import App from "./App.vue";
 import StartGame from "./routes/StartGame/StartGame.vue";
@@ -9,7 +9,7 @@ import AddPlayer from "./routes/AddPlayer/AddPlayer.vue";
 import EditPlayer from "./routes/EditPlayer/EditPlayer.vue";
 import Results from "./routes/Results/Results.vue";
 import longpress from "./utils/longpress";
-import locales from "./assets/locales/*";
+import locales from "./assets/locales";
 
 const routes = [
   { path: "/", component: StartGame },
@@ -24,10 +24,10 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(longpress).use(router).use(VueI18n).mount("#app");
-
-export default i18n = new VueI18n({
+const i18n = createI18n({
   locale: "en", // default language
   fallbackLocale: "en",
   locales,
 });
+
+createApp(App).use(longpress).use(router).use(i18n).mount("#app");

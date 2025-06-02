@@ -1,0 +1,47 @@
+{
+  "route": {
+    "title": {
+      "start": "Welcome to unofficial 7 wonders points calculator",
+      "playersNone": "Press ➕ to start using the app",
+      "players": "Players",
+      "add": "Select wonder and enter data",
+      "edit": "Edit data for ${playerName}",
+      "results": "Results"
+    }
+  },
+  "categories": {
+    "military": "Military",
+    "culture": "Culture",
+    "trade": "Trade",
+    "guilds": "Guilds",
+    "name": "Enter your name to complete the form"
+  },
+  "side": {
+    "A": "A",
+    "B": "B"
+  },
+
+  "done": "Done",
+  "calculateResults": "Calculate the results",
+  "startNewGame": "Start new game",
+  "welcome": "Bienvenue",
+  "greeting": "Bonjour, {name}",
+  "components": {
+    "coins": {
+      "title": "Coins amount",
+      "value": "Coin value: ${coinValue}"
+    },
+    "points": {
+      "points": "${category } points: ${ points }"
+    },
+    "science": {
+      "points": "Science points: ${points}"
+    },
+    "wonder": {
+      "points": "Wonder points: ${wonderPoints}"
+    },
+    "addPlayer": {
+      "title": "Add player"
+    }
+  }
+}
