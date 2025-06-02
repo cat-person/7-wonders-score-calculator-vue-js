@@ -46,6 +46,14 @@ export default {
 </script>
 
 <style>
+.pointsChangeBtn {
+    width: 8mm;
+    height: 8mm;
+    font-size: 4mm;
+    margin: 1mm;
+    justify-content: center;
+    text-align: center;
+}
 .coins {
     background-color: white;
     border-style: solid;

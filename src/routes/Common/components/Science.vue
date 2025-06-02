@@ -176,4 +176,12 @@ export default {
     width: 10mm;
     height: 10mm;
 }
+.pointsChangeBtn {
+    width: 8mm;
+    height: 8mm;
+    font-size: 4mm;
+    margin: 1mm;
+    justify-content: center;
+    text-align: center;
+}
 </style>

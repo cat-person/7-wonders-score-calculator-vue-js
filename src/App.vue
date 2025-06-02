@@ -17,6 +17,7 @@ export default {
     font-family: "open-sans";
     text-align: center;
     overflow-y: scroll;
+    user-select: none;
 }
 
 .root {

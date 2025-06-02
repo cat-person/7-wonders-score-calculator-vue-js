@@ -93,5 +93,6 @@ export default {
     font-size: 4mm;
     margin: 1mm;
     justify-content: center;
+    text-align: center;
 }
 </style>
