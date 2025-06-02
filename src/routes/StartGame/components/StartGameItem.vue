@@ -14,7 +14,6 @@ export default {
 
 <template>
     <div class="start_new_game_container" @click="handleStartNewGameClicked">
-        <!-- <img class="add_btn" src="@/assets/icon_plus.svg" /> -->
         <p class="start_new_game_lbl">Start New Game</p>
     </div>
 </template>

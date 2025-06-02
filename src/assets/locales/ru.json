@@ -1,4 +1,45 @@
 {
-  "welcome": "Bienvenue",
-  "greeting": "Bonjour, {name}"
+  "route": {
+    "title": {
+      "start": "Добро пожаловать в неофициальный калькулятор для игры 7 чудес",
+      "playersNone": "Нажмите ➕ чтобы начать",
+      "players": "Список игроков",
+      "add": "Выберете ваше чудо света и заполните данные",
+      "edit": "Радактирование данных для игрока под ником ${playerName}",
+      "results": "Результаты"
+    }
+  },
+  "categories": {
+    "military": "Военное дело",
+    "culture": "Культура",
+    "trade": "Торговля",
+    "guilds": "Гильдии",
+    "name": "Введите ваше имя чтобы закончить заполнение данных"
+  },
+  "side": {
+    "A": "А",
+    "B": "Б"
+  },
+
+  "done": "Готово",
+  "calculateResults": "Посчитать результаты",
+  "startNewGame": "Начать заново",
+  "components": {
+    "coins": {
+      "title": "Суммарный номинал монет",
+      "value": "Номинал монет: ${coinValue}"
+    },
+    "points": {
+      "points": "${category } очки: ${ points }"
+    },
+    "science": {
+      "points": "Очки за Науку: ${points}"
+    },
+    "wonder": {
+      "points": "Очки за чудо света: ${wonderPoints}"
+    },
+    "addPlayer": {
+      "title": "Добавить игрока"
+    }
+  }
 }
