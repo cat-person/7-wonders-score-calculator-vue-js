@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopBar
-            :title="$t('route.title.start')"
+            :title="$t('route.title.add')"
             :showClose="true"
             @close="handleClose"
         />
