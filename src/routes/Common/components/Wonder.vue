@@ -1,3 +1,40 @@
+<template>
+    <div class="container">
+        <div class="stage_container">
+            <div class="points_by_stage">
+                <div
+                    v-for="(pointsByStage, stageIdx) in getWonder(
+                        wonder.id,
+                        wonder.side,
+                    ).pointsByStages"
+                >
+                    <p class="points_by_stage_lbl">{{ pointsByStage }}</p>
+                    <input
+                        type="checkbox"
+                        class="points_by_stage_checkbox"
+                        :checked="stageIdx < wonder.stageBuilt"
+                        :id="stageIdx + 1"
+                        @change="onChecked($event)"
+                    />
+                </div>
+            </div>
+            <p class="wonder_points">
+                {{
+                    $t("components.wonder.points", {
+                        points: calcWonderPoints(),
+                    })
+                }}
+            </p>
+        </div>
+        <h3 class="wonder_name">{{ getWonderById(wonder.id).name }}</h3>
+        <button class="btn" @click="handleChangeSide">{{ wonder.side }}</button>
+        <img
+            class="img"
+            v-bind:src="getImageByWonder(wonder.id, wonder.side)"
+        />
+    </div>
+</template>
+
 <script>
 import wonders from "@/assets/wonders.json";
 
@@ -77,43 +114,6 @@ export default {
 };
 </script>
 
-<template>
-    <div class="container">
-        <div class="stage_container">
-            <div class="points_by_stage">
-                <div
-                    v-for="(pointsByStage, stageIdx) in getWonder(
-                        wonder.id,
-                        wonder.side,
-                    ).pointsByStages"
-                >
-                    <p class="points_by_stage_lbl">{{ pointsByStage }}</p>
-                    <input
-                        type="checkbox"
-                        class="points_by_stage_checkbox"
-                        :checked="stageIdx < wonder.stageBuilt"
-                        :id="stageIdx + 1"
-                        @change="onChecked($event)"
-                    />
-                </div>
-            </div>
-            <p class="wonder_points">
-                {{
-                    $t("components.wonder.points", {
-                        points: calcWonderPoints(),
-                    })
-                }}
-            </p>
-        </div>
-        <h3 class="wonder_name">{{ getWonderById(wonder.id).name }}</h3>
-        <button class="btn" @click="handleChangeSide">{{ wonder.side }}</button>
-        <img
-            class="img"
-            v-bind:src="getImageByWonder(wonder.id, wonder.side)"
-        />
-    </div>
-</template>
-
 <style>
 .container {
     position: relative;
@@ -124,10 +124,14 @@ export default {
 }
 .wonder_name {
     position: absolute;
+    margin: 0mm;
+    padding: 0mm;
+    padding-top: 2mm;
+    padding-bottom: 2mm;
     top: 0mm;
     width: 100%;
     color: white;
-    text-shadow: 0px 0px 10px gray;
+    background: #00000040;
 }
 .img {
     width: 100%;

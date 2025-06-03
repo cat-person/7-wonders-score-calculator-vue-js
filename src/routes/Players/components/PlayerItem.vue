@@ -22,7 +22,7 @@
                         v-for="scoreItem in getPointsByCategory(playerScore)"
                         :key="scoreItem.name"
                     >
-                        {{ scoreItem.name }}
+                        {{ $t(`categories.${scoreItem.name}`) }}
                     </td>
                 </tr>
                 <tr>
@@ -135,7 +135,7 @@ export default {
                     ),
                 },
                 {
-                    name: "guild",
+                    name: "guilds",
                     color: colors.guild,
                     points: playerScore.guildPoints,
                 },

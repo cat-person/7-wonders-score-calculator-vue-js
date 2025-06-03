@@ -1,3 +1,56 @@
+<template>
+    <div class="root">
+        <h1 class="final_points_lbl" v-if="playerScore.finalPoints">
+            {{ playerScore.finalPoints }}
+        </h1>
+
+        <h3 class="wonder-lbl">
+            {{ getWonderById(playerScore.wonder.id).name }} ({{
+                playerScore.wonder.side
+            }}): {{ playerScore.name }}
+        </h3>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td
+                        class="point-container"
+                        :style="{
+                            'background-color': scoreItem.color,
+                            width: '14%',
+                        }"
+                        v-for="scoreItem in getPointsByCategory(playerScore)"
+                        :key="scoreItem.name"
+                    >
+                        {{ $t(`categories.${scoreItem.name}`) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        class="point-container"
+                        :style="{
+                            'background-color': scoreItem.color,
+                            width: '14%',
+                        }"
+                        v-for="scoreItem in getPointsByCategory(playerScore)"
+                        :key="scoreItem.name"
+                    >
+                        {{ scoreItem.points }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <img
+            class="wonder-img"
+            @click="handleEditClicked"
+            v-bind:src="
+                getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)
+            "
+        />
+    </div>
+</template>
+
 <script>
 import wonders from "@/assets/wonders.json";
 import colors from "@/assets/colors.json";
@@ -79,7 +132,7 @@ export default {
                     ),
                 },
                 {
-                    name: "guild",
+                    name: "guilds",
                     color: colors.guild,
                     points: playerScore.guildPoints,
                 },
@@ -120,59 +173,6 @@ export default {
     },
 };
 </script>
-
-<template>
-    <div class="root">
-        <h1 class="final_points_lbl" v-if="playerScore.finalPoints">
-            {{ playerScore.finalPoints }}
-        </h1>
-
-        <h3 class="wonder-lbl">
-            {{ getWonderById(playerScore.wonder.id).name }} ({{
-                playerScore.wonder.side
-            }}): {{ playerScore.name }}
-        </h3>
-
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td
-                        class="point-container"
-                        :style="{
-                            'background-color': scoreItem.color,
-                            width: '14%',
-                        }"
-                        v-for="scoreItem in getPointsByCategory(playerScore)"
-                        :key="scoreItem.name"
-                    >
-                        {{ scoreItem.name }}
-                    </td>
-                </tr>
-                <tr>
-                    <td
-                        class="point-container"
-                        :style="{
-                            'background-color': scoreItem.color,
-                            width: '14%',
-                        }"
-                        v-for="scoreItem in getPointsByCategory(playerScore)"
-                        :key="scoreItem.name"
-                    >
-                        {{ scoreItem.points }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <img
-            class="wonder-img"
-            @click="handleEditClicked"
-            v-bind:src="
-                getImageByWonder(playerScore.wonder.id, playerScore.wonder.side)
-            "
-        />
-    </div>
-</template>
 
 <style scoped>
 .root {
