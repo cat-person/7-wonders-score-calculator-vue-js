@@ -26,7 +26,7 @@
                 }}
             </p>
         </div>
-        <h3 class="wonder_name">{{ getWonderById(wonder.id).name }}</h3>
+        <h3 class="wonder_name">{{ $t(`wonders.${wonder.id}`) }}</h3>
         <button class="btn" @click="handleChangeSide">{{ wonder.side }}</button>
         <img
             class="img"

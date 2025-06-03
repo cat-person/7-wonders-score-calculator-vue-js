@@ -1,97 +1,90 @@
 [
   {
-    "name": "Rhodes",
     "id": "rhodes",
-    "A": { 
+    "A": {
       "img": "rhodes_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#E0F2F1"
     },
-    "B": { 
+    "B": {
       "img": "rhodes_b.jpg",
       "pointsByStages": [3, 4],
       "background": "#004D40"
     }
   },
   {
-    "name": "Alexandria",
     "id": "alexandria",
-    "A": { 
+    "A": {
       "img": "alexandria_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#E1F5FE"
     },
-    "B": { 
+    "B": {
       "img": "alexandria_b.jpg",
       "pointsByStages": [0, 0, 7],
       "background": "#01579B"
     }
   },
   {
-    "name": "Ephesus",
     "id": "ephesus",
-    "A": { 
+    "A": {
       "img": "ephesus_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#E8EAF6"
     },
-    "B": { 
+    "B": {
       "img": "ephesus_b.jpg",
       "pointsByStages": [2, 3, 5],
       "background": "#1A237E"
     }
   },
   {
-    "name": "Babylon",
     "id": "babylon",
-    "A": { 
+    "A": {
       "img": "babylon_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#E8F5E9"
     },
-    "B": { 
+    "B": {
       "img": "babylon_b.jpg",
       "pointsByStages": [3, 0, 0],
       "background": "#1B5E20"
     }
   },
   {
-    "name": "Olympia",
     "id": "olympia",
-    "A": { 
+    "A": {
       "img": "olympia_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#E3F2FD"
     },
-    "B": { 
+    "B": {
       "img": "olympia_b.jpg",
       "pointsByStages": [0, 5, 0],
       "background": "#0D47A1"
     }
   },
   {
-    "name": "Halicarnassus",
     "id": "halicarnassus",
-    "A": { 
+    "A": {
       "img": "halicarnassus_a.jpg",
       "pointsByStages": [3, 0, 7],
       "background": "#EDE7F6"
     },
-    "B": { 
+    "B": {
       "img": "halicarnassus_b.jpg",
       "pointsByStages": [2, 1, 0],
       "background": "#311B92"
     }
   },
   {
-    "name": "Giza",
     "id": "giza",
-    "A": { 
+    "A": {
       "img": "giza_a.jpg",
       "pointsByStages": [3, 5, 7],
       "background": "#FFF8E1"
     },
-    "B": { 
+    "B": {
       "img": "giza_b.jpg",
       "pointsByStages": [3, 5, 5, 7],
       "background": "#FF6F00"

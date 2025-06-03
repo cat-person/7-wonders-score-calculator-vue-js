@@ -5,7 +5,7 @@
         </h1>
 
         <h3 class="wonder-lbl">
-            {{ getWonderById(playerScore.wonder.id).name }} ({{
+            {{ $t(`wonders.${playerScore.wonder.id}`) }} ({{
                 playerScore.wonder.side
             }}): {{ playerScore.name }}
         </h3>
@@ -22,7 +22,7 @@
                         v-for="scoreItem in getPointsByCategory(playerScore)"
                         :key="scoreItem.name"
                     >
-                        {{ $t(`categories.${scoreItem.name}`) }}
+                        {{ $t(`categories.${scoreItem.name}.nom`) }}
                     </td>
                 </tr>
                 <tr>
@@ -193,9 +193,11 @@ export default {
     width: 100%;
     max-width: 160mm;
     position: absolute;
-    margin-top: 2mm;
+    margin: 0mm;
+    padding-top: 2mm;
+    padding-bottom: 2mm;
     color: white;
-    text-shadow: 0px 0px 10px gray;
+    background: #00000040;
 }
 
 .table {

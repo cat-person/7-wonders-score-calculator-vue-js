@@ -17,7 +17,7 @@
             @coinValueChanged="handleCoinValueChanged($event)"
         />
         <PointInput
-            :category="$t('categories.military')"
+            :category="$t('categories.military.gen')"
             :color="'firebrick'"
             :min="-6"
             :max="18"
@@ -25,13 +25,13 @@
             @pointsUpdated="handleMilitaryPointsUpdated($event)"
         />
         <PointInput
-            :category="$t('categories.culture')"
+            :category="$t('categories.culture.gen')"
             :color="'blue'"
             :points="playerScore.culturePoints"
             @pointsUpdated="handleCulturePointsUpdated($event)"
         />
         <PointInput
-            :category="$t('categories.trade')"
+            :category="$t('categories.trade.gen')"
             :color="'gold'"
             :points="playerScore.tradePoints"
             @pointsUpdated="handleTradePointsUpdated($event)"
@@ -41,7 +41,7 @@
             @scienceUpdated="handleScienceUpdated($event)"
         />
         <PointInput
-            :category="$t('categories.guilds')"
+            :category="$t('categories.guilds.gen')"
             :color="'purple'"
             :points="playerScore.guildPoints"
             @pointsUpdated="handleGuildPointsUpdated($event)"
@@ -71,7 +71,6 @@ import Science from "../Common/components/Science.vue";
 import wonders from "@/assets/wonders.json";
 import TopBar from "../Common/components/TopBar.vue";
 import { getPlayerScoreByWonderId, updatePlayerScore } from "@/utils/remote";
-import i18n from "@/main";
 
 export default {
     data() {
