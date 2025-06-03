@@ -63,7 +63,7 @@
       "points": "Очки за Науку: {points}"
     },
     "wonder": {
-      "points": "Очки за чудо света: {points}"
+      "points": "Очки за ярусы чуда света: {points}"
     },
     "addPlayer": {
       "title": "Добавить игрока"
