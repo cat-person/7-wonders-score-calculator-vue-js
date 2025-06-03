@@ -14,7 +14,8 @@ export default {
 #app {
     margin: 0mm;
     padding: 0mm;
-    font-family: "open-sans";
+    font-family: "Crimson Text", serif;
+    font-weight: 300;
     text-align: center;
     overflow-y: scroll;
     user-select: none;
