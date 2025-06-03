@@ -1,47 +1,83 @@
 {
-  "route": {
-    "title": {
-      "start": "Welcome to unofficial 7 wonders points calculator",
-      "playersNone": "Press ➕ to start using the app",
-      "players": "Players",
-      "add": "Select wonder and enter data",
-      "edit": "Edit data for ${playerName}",
-      "results": "Results"
-    }
+  "titles": {
+    "start": "Point Calculator for 7 wonders",
+    "playersNone": "Click ➕ to start",
+    "players": "Players",
+    "add": "Select the wonder and enter data",
+    "edit": "Editing for player {name}",
+    "results": "Results"
   },
   "categories": {
-    "military": "Military",
-    "culture": "Culture",
-    "trade": "Trade",
-    "guilds": "Guilds",
-    "name": "Enter your name to complete the form"
+    "coins": {
+      "nom": "Coins",
+      "gen": "Coins"
+    },
+    "wonder": {
+      "nom": "Wonder",
+      "gen": "Wonder"
+    },
+    "science": {
+      "nom": "Science",
+      "gen": "Science"
+    },
+    "guilds": {
+      "nom": "Guilds",
+      "gen": "Guilds"
+    },
+    "military": {
+      "nom": "Conflicts",
+      "gen": "Conflicts"
+    },
+    "culture": {
+      "nom": "Culture",
+      "gen": "Culture"
+    },
+    "trade": {
+      "nom": "Trade",
+      "gen": "Trade"
+    },
+    "name": "Enter your name to continue"
   },
   "side": {
     "A": "A",
     "B": "B"
   },
 
-  "done": "Done",
-  "calculateResults": "Calculate the results",
-  "startNewGame": "Start new game",
-  "welcome": "Bienvenue",
-  "greeting": "Bonjour, {name}",
+  "buttons": {
+    "done": "Done",
+    "close": "Close",
+    "saveChanges": "Save Changes",
+    "newSession": "New Session",
+    "calculateResults": "Calculate the results",
+    "startNewGame": "Start New"
+  },
+
   "components": {
     "coins": {
-      "value": "Coins amount {coinValue}",
-      "points": "Coin value: {coinPoints}"
+      "value": "Coins value: {coinValue}",
+      "points": "Points for Coins: {coinPoints}"
     },
     "points": {
-      "points": "${category } points: { points }"
+      "points": "Points for { category }: { points }"
     },
     "science": {
-      "points": "Science points: {points}"
+      "points": "Points for Science: {points}"
     },
     "wonder": {
-      "points": "Wonder points: {wonderPoints}"
+      "points": "Points for Wonder Stages: {points}"
     },
     "addPlayer": {
-      "title": "Add player"
+      "title": "Add Player"
     }
+  },
+
+  "wonders": {
+    "rhodes": "The Colossus of Rhodes",
+    "alexandria": "The Lighthouse of Alexandria",
+    "ephesus": "The Temple of Artemis in Ephesus",
+    "babylon": "The Hanging Gardens of Babylon",
+    "olympia": "The Statue of Zeus in Olympia",
+    "halicarnassus": "The Mausoleum of Halicarnassus",
+    "giza": "The Pyramids of Giza"
   }
 }
