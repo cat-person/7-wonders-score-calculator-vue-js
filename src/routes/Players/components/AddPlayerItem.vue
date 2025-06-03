@@ -1,27 +1,25 @@
 <script>
-
 export default {
-    props: {
-    },
+    props: {},
     methods: {
         handleAddButtonClicked() {
-            this.$emit("addPlayer")
-        }
-    }
-}
+            this.$emit("addPlayer");
+        },
+    },
+};
 </script>
 
 <template>
     <div class="add_container" @click="handleAddButtonClicked">
         <img class="add_btn" src="@/assets/icon_plus.svg" />
-        <p class="add_player_lbl">Add player</p>
+        <p class="add_player_lbl">{{ $t("components.addPlayer.title") }}</p>
     </div>
 </template>
 
 <style scoped>
 .add_container {
     width: 100%;
-    max-width: 159mm ;
+    max-width: 159mm;
     height: 39mm;
     border-color: #606060;
     border-width: 0.5mm;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopBar
-            :title="'Select wonder and enter data'"
+            :title="$t('route.title.start')"
             :showClose="true"
             @close="handleClose"
         />
@@ -18,7 +18,7 @@
             @coinValueChanged="handleCoinValueChanged($event)"
         />
         <PointInput
-            :category="'Military'"
+            :category="$t('categories.military')"
             :color="'firebrick'"
             :min="-6"
             :max="18"
@@ -26,13 +26,13 @@
             @pointsUpdated="handleMilitaryPointsUpdated($event)"
         />
         <PointInput
-            :category="'Culture'"
+            :category="$t('categories.culture')"
             :color="'blue'"
             :points="playerScore.culturePoints"
             @pointsUpdated="handleCulturePointsUpdated($event)"
         />
         <PointInput
-            :category="'Trade'"
+            :category="$t('categories.trade')"
             :color="'gold'"
             :points="playerScore.tradePoints"
             @pointsUpdated="handleTradePointsUpdated($event)"
@@ -42,14 +42,14 @@
             @scienceUpdated="handleScienceUpdated($event)"
         />
         <PointInput
-            :category="'Guilds'"
+            :category="$t('categories.guilds')"
             :color="'purple'"
             :points="playerScore.guildPoints"
             @pointsUpdated="handleGuildPointsUpdated($event)"
         />
 
         <Name
-            label="Enter your name to complete the form"
+            :label="$t('categories.name')"
             :value="playerScore.name"
             @valueUpdated="handleNameChanged($event)"
         />
@@ -60,7 +60,7 @@
             :disabled="!canAdd"
             @click="handleAddPlayer($route.params.session_id, playerScore)"
         >
-            Done
+            {{ $t("done") }}
         </button>
     </div>
 </template>

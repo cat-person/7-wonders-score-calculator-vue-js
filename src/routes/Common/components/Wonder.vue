@@ -97,7 +97,13 @@ export default {
                     />
                 </div>
             </div>
-            <p class="wonder_points">Wonder points: {{ calcWonderPoints() }}</p>
+            <p class="wonder_points">
+                {{
+                    $t("components.wonder.points", {
+                        points: calcWonderPoints(),
+                    })
+                }}
+            </p>
         </div>
         <h3 class="wonder_name">{{ getWonderById(wonder.id).name }}</h3>
         <button class="btn" @click="handleChangeSide">{{ wonder.side }}</button>

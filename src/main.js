@@ -25,9 +25,12 @@ const router = createRouter({
 });
 
 const i18n = createI18n({
-  locale: "en", // default language
-  fallbackLocale: "en",
-  locales,
+  locale: "ru", // default language
+  fallbackLocale: "ru",
+  messages: locales,
+  silentTranslationWarn: process.env.NODE_ENV === "production",
 });
 
 createApp(App).use(longpress).use(router).use(i18n).mount("#app");
+
+export default i18n;

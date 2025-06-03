@@ -1,14 +1,8 @@
 <template>
     <div>
-        <TopBar
-            :showClose="false"
-            :title="'Welcome to unofficial 7 wonders points calculator'"
-        />
+        <TopBar :showClose="false" :title="$t('route.title.start')" />
 
-        <StartGameItem
-            class="add_player_btn"
-            @startNewGame="handleStartNewGame"
-        />
+        <StartGameItem class="new_session" @startNewGame="handleStartNewGame" />
     </div>
 </template>
 
@@ -42,7 +36,7 @@ export default {
 </script>
 
 <style scoped>
-.add_player_btn {
+.new_session {
     margin: 0mm;
 }
 </style>

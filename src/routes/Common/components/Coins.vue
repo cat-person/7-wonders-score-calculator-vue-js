@@ -8,7 +8,9 @@
             >
                 -
             </button>
-            <h3 class="pointTxt">Coin value: {{ coinValue }}</h3>
+            <h3 class="pointTxt">
+                {{ $t("components.coins.value", { coinValue: coinValue }) }}
+            </h3>
             <button
                 class="pointsChangeBtn"
                 v-longpress="() => handleCoinValueChanged(1)"
@@ -18,7 +20,11 @@
             </button>
         </div>
         <p class="points">
-            Points for coins: {{ this.calcPoints(this.coinValue) }}
+            {{
+                $t("components.coins.points", {
+                    coinPoints: calcPoints(coinValue),
+                })
+            }}
         </p>
     </div>
 </template>
@@ -30,7 +36,7 @@ export default {
     },
     methods: {
         calcPoints(coinValue) {
-            return Math.floor(coinValue / 3);
+            return coinValue ? Math.floor(coinValue / 3) : 0;
         },
         handleCoinValueChanged(valueToAdd) {
             const min = 0;

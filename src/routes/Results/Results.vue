@@ -1,6 +1,10 @@
 <template>
     <div>
-        <TopBar :showClose="true" :title="'Results'" @close="handleClose" />
+        <TopBar
+            :showClose="true"
+            :title="$t('route.title.results')"
+            @close="handleClose"
+        />
 
         <div
             class="results"
@@ -14,7 +18,7 @@
         </div>
 
         <button :class="newGameButtonClass" @click="startNewGame">
-            Start new game
+            {{ $t("startNewGame") }}
         </button>
     </div>
 </template>

@@ -28,17 +28,17 @@
   "greeting": "Bonjour, {name}",
   "components": {
     "coins": {
-      "title": "Coins amount",
-      "value": "Coin value: ${coinValue}"
+      "value": "Coins amount {coinValue}",
+      "points": "Coin value: {coinPoints}"
     },
     "points": {
-      "points": "${category } points: ${ points }"
+      "points": "${category } points: { points }"
     },
     "science": {
-      "points": "Science points: ${points}"
+      "points": "Science points: {points}"
     },
     "wonder": {
-      "points": "Wonder points: ${wonderPoints}"
+      "points": "Wonder points: {wonderPoints}"
     },
     "addPlayer": {
       "title": "Add player"

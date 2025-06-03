@@ -1,11 +1,11 @@
 {
   "route": {
     "title": {
-      "start": "Добро пожаловать в неофициальный калькулятор для игры 7 чудес",
+      "start": "Неофициальный калькулятор для игры 7 чудес",
       "playersNone": "Нажмите ➕ чтобы начать",
       "players": "Список игроков",
       "add": "Выберете ваше чудо света и заполните данные",
-      "edit": "Радактирование данных для игрока под ником ${playerName}",
+      "edit": "Радактирование данных для игрока {name}",
       "results": "Результаты"
     }
   },
@@ -22,21 +22,24 @@
   },
 
   "done": "Готово",
+  "close": "Назад",
+  "newSession": "Начать игру",
+  "saveChanges": "Сохранить изменения",
   "calculateResults": "Посчитать результаты",
   "startNewGame": "Начать заново",
   "components": {
     "coins": {
-      "title": "Суммарный номинал монет",
-      "value": "Номинал монет: ${coinValue}"
+      "value": "Суммарный номинал монет {coinValue}",
+      "points": "Очки за монеты: {coinPoints}"
     },
     "points": {
-      "points": "${category } очки: ${ points }"
+      "points": "Очки за { category }: { points }"
     },
     "science": {
-      "points": "Очки за Науку: ${points}"
+      "points": "Очки за Науку: {points}"
     },
     "wonder": {
-      "points": "Очки за чудо света: ${wonderPoints}"
+      "points": "Очки за чудо света: {points}"
     },
     "addPlayer": {
       "title": "Добавить игрока"

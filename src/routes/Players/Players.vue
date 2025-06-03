@@ -21,7 +21,7 @@
             class="button"
             @click="handleCalculateResultsClicked"
         >
-            Calculate the results
+            {{ $t("calculateResults") }}
         </button>
     </div>
 </template>
@@ -58,9 +58,9 @@ export default {
         },
         getTitle() {
             if (!this.playerScores || this.playerScores.length == 0) {
-                return "Press ➕ to start using the app";
+                return this.$t("route.title.playersNone");
             } else {
-                return "Players";
+                return this.$t("route.title.players");
             }
         },
         handleClosedClicked() {

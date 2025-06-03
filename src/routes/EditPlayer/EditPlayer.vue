@@ -2,7 +2,7 @@
     <div v-if="playerScore">
         <TopBar
             :showClose="true"
-            :title="`Edit data for ${playerScore.name}`"
+            :title="$t('route.title.edit', { name: playerScore.name })"
             @close="handleClose"
         />
 
@@ -17,7 +17,7 @@
             @coinValueChanged="handleCoinValueChanged($event)"
         />
         <PointInput
-            :category="'Military'"
+            :category="$t('categories.military')"
             :color="'firebrick'"
             :min="-6"
             :max="18"
@@ -25,13 +25,13 @@
             @pointsUpdated="handleMilitaryPointsUpdated($event)"
         />
         <PointInput
-            :category="'Culture'"
+            :category="$t('categories.culture')"
             :color="'blue'"
             :points="playerScore.culturePoints"
             @pointsUpdated="handleCulturePointsUpdated($event)"
         />
         <PointInput
-            :category="'Trade'"
+            :category="$t('categories.trade')"
             :color="'gold'"
             :points="playerScore.tradePoints"
             @pointsUpdated="handleTradePointsUpdated($event)"
@@ -41,7 +41,7 @@
             @scienceUpdated="handleScienceUpdated($event)"
         />
         <PointInput
-            :category="'Guilds'"
+            :category="$t('categories.guilds')"
             :color="'purple'"
             :points="playerScore.guildPoints"
             @pointsUpdated="handleGuildPointsUpdated($event)"
@@ -71,6 +71,7 @@ import Science from "../Common/components/Science.vue";
 import wonders from "@/assets/wonders.json";
 import TopBar from "../Common/components/TopBar.vue";
 import { getPlayerScoreByWonderId, updatePlayerScore } from "@/utils/remote";
+import i18n from "@/main";
 
 export default {
     data() {
@@ -117,9 +118,9 @@ export default {
                 JSON.stringify(originalPlayerScore) ==
                 JSON.stringify(playerScore)
             ) {
-                return "Close";
+                return this.$t("close");
             } else {
-                return "Save Changes";
+                return this.$t("saveChanges");
             }
         },
         handleNameChanged(name) {

@@ -1,13 +1,14 @@
 <template>
     <div class="science">
         <h3>
-            Science points:
             {{
-                calcSciencePoints(
-                    scienceData.clayCount,
-                    scienceData.measurerCount,
-                    scienceData.cogCount,
-                )
+                $t("components.science.points", {
+                    points: calcSciencePoints(
+                        scienceData.clayCount,
+                        scienceData.measurerCount,
+                        scienceData.cogCount,
+                    ),
+                })
             }}
         </h3>
         <div class="horizontal">

@@ -7,7 +7,14 @@
         >
             -
         </button>
-        <h3 class="pointTxt">{{ category }} points: {{ points }}</h3>
+        <h3 class="pointTxt">
+            {{
+                $t("components.points.points", {
+                    category,
+                    points,
+                })
+            }}
+        </h3>
         <button
             class="pointsChangeBtn"
             @click="() => handlePointsChanged(1)"
