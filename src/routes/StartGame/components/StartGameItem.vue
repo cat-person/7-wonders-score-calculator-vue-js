@@ -14,7 +14,7 @@ export default {
 
 <template>
     <div class="start_new_game_container" @click="handleStartNewGameClicked">
-        <p class="start_new_game_lbl">{{ $t("newSession") }}</p>
+        <p class="start_new_game_lbl">{{ $t("buttons.newSession") }}</p>
     </div>
 </template>
 

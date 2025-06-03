@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopBar
-            :title="$t('route.title.add')"
+            :title="$t('titles.add')"
             :showClose="true"
             @close="handleClose"
         />
@@ -60,7 +60,7 @@
             :disabled="!canAdd"
             @click="handleAddPlayer($route.params.session_id, playerScore)"
         >
-            {{ $t("done") }}
+            {{ $t("buttons.done") }}
         </button>
     </div>
 </template>

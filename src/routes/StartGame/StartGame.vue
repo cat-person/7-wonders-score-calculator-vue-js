@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TopBar :showClose="false" :title="$t('route.title.start')" />
+        <TopBar :showClose="false" :title="$t('titles.start')" />
 
         <StartGameItem class="new_session" @startNewGame="handleStartNewGame" />
     </div>

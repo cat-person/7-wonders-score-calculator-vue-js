@@ -2,7 +2,7 @@
     <div v-if="playerScore">
         <TopBar
             :showClose="true"
-            :title="$t('route.title.edit', { name: playerScore.name })"
+            :title="$t('titles.edit', { name: playerScore.name })"
             @close="handleClose"
         />
 
@@ -117,9 +117,9 @@ export default {
                 JSON.stringify(originalPlayerScore) ==
                 JSON.stringify(playerScore)
             ) {
-                return this.$t("close");
+                return this.$t("buttons.close");
             } else {
-                return this.$t("saveChanges");
+                return this.$t("buttons.saveChanges");
             }
         },
         handleNameChanged(name) {

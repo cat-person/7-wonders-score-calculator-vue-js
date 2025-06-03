@@ -21,7 +21,7 @@
             class="button"
             @click="handleCalculateResultsClicked"
         >
-            {{ $t("calculateResults") }}
+            {{ $t("buttons.calculateResults") }}
         </button>
     </div>
 </template>
@@ -58,9 +58,9 @@ export default {
         },
         getTitle() {
             if (!this.playerScores || this.playerScores.length == 0) {
-                return this.$t("route.title.playersNone");
+                return this.$t("titles.playersNone");
             } else {
-                return this.$t("route.title.players");
+                return this.$t("titles.players");
             }
         },
         handleClosedClicked() {
