@@ -173,7 +173,6 @@ export default {
     margin: 0mm;
     padding-top: 2mm;
     padding-bottom: 2mm;
-
     color: white;
     background: #00000040;
 }
@@ -202,7 +201,7 @@ td {
 .point-container {
     justify-content: center;
     justify-items: center;
-    font-size: 4mm;
+    font-size: 3mm;
 }
 
 .close_btn {
