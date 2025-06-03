@@ -81,7 +81,7 @@ export default {
     margin-left: 3mm;
     margin-right: 3mm;
     justify-content: center;
-    min-width: 72mm;
+    min-width: 54mm;
 }
 .pointInput {
     display: flex;
