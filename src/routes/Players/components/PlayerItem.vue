@@ -170,6 +170,7 @@ export default {
     width: 100%;
     max-width: 160mm;
     position: absolute;
+    top: 0mm;
     margin: 0mm;
     padding-top: 2mm;
     padding-bottom: 2mm;
