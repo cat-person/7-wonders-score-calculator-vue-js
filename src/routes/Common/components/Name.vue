@@ -59,6 +59,7 @@ export default {
                     padding: "0mm",
                     width: "96%",
                     height: "8mm",
+                    alignSelf: "center",
                     textAlign: "center",
                     fontSize: "5.5mm",
                     borderRadius: "1mm",
