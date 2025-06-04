@@ -47,7 +47,7 @@
     },
     "B": {
       "img": "babylon_b.jpg",
-      "pointsByStages": [3, 0, 0],
+      "pointsByStages": [0, 0],
       "background": "#1B5E20"
     }
   },
@@ -60,7 +60,7 @@
     },
     "B": {
       "img": "olympia_b.jpg",
-      "pointsByStages": [0, 5, 0],
+      "pointsByStages": [2, 3, 5],
       "background": "#0D47A1"
     }
   },
