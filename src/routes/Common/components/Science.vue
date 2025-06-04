@@ -16,6 +16,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleClayCountChanged(-1)"
+                    v-longpress="() => handleClayCountChanged(-1)"
                 >
                     -
                 </button>
@@ -29,6 +30,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleClayCountChanged(+1)"
+                    v-longpress="() => handleClayCountChanged(+1)"
                 >
                     +
                 </button>
@@ -37,6 +39,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleMeasurerCountChanged(-1)"
+                    v-longpress="() => handleMeasurerCountChanged(-1)"
                 >
                     -
                 </button>
@@ -52,6 +55,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleMeasurerCountChanged(+1)"
+                    v-longpress="() => handleMeasurerCountChanged(+1)"
                 >
                     +
                 </button>
@@ -60,6 +64,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleCogCountChanged(-1)"
+                    v-longpress="() => handleCogCountChanged(-1)"
                 >
                     -
                 </button>
@@ -73,6 +78,7 @@
                 <button
                     class="pointsChangeBtn"
                     @click="() => handleCogCountChanged(+1)"
+                    v-longpress="() => handleCogCountChanged(+1)"
                 >
                     +
                 </button>
