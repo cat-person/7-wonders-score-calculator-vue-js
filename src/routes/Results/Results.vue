@@ -30,11 +30,12 @@ import wonders from "@/assets/wonders.json";
 import ResultItem from "./components/ResultItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
-import { getPlayerScores } from "@/utils/remote";
+import { getPlayerScores, getPlayerScoresCached } from "@/utils/remote";
 import * as util from "@/utils/calc";
 
 export default {
     mounted: async function () {
+        this.playerScores = getPlayerScoresCached();
         this.playerScores = await getPlayerScores(
             this.$route.params.session_id,
         );
