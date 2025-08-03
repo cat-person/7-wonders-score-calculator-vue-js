@@ -2,6 +2,8 @@ import { Client, Account, Databases, Query } from "appwrite";
 
 const client = new Client();
 
+const cache = new Map();
+
 client
   .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
   .setProject("cat-person-7w"); // Your project ID
@@ -73,6 +75,10 @@ export const getPlayerScoreByWonderId = async (sessionId, wonderId) => {
     });
 };
 
+export const getPlayerScoresCached = () => {
+  return cache.get("player_scores");
+};
+
 export const getPlayerScores = async (sessionId) => {
   return await databases
     .listDocuments("67b64d2d0017d8ef2b54", "67b6daee003dfa0cb7ee", [
@@ -80,11 +86,16 @@ export const getPlayerScores = async (sessionId) => {
     ])
     .then((result) => {
       const playerScores = result.documents.map(remoteToLocal);
+      cache.set("player_scores", playerScores);
       return playerScores;
     })
     .catch((error) => {
       return [];
     });
+};
+
+export const clearCache = () => {
+  cache.clear();
 };
 
 const remoteToLocal = (remoteDoc) => {

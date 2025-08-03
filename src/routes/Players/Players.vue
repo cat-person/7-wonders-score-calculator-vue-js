@@ -32,7 +32,11 @@ import PlayerItem from "./components/PlayerItem.vue";
 import AddPlayerItem from "./components/AddPlayerItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
-import { getPlayerScores, deletePlayerScore } from "@/utils/remote";
+import {
+    getPlayerScores,
+    getPlayerScoresCached,
+    deletePlayerScore,
+} from "@/utils/remote";
 
 export default {
     data() {
@@ -52,6 +56,7 @@ export default {
     },
     methods: {
         async getPlayerScores() {
+            this.playerScores = getPlayerScoresCached();
             this.playerScores = await getPlayerScores(
                 this.$route.params.session_id,
             );
