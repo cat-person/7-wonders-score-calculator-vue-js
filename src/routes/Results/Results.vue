@@ -30,7 +30,11 @@ import wonders from "@/assets/wonders.json";
 import ResultItem from "./components/ResultItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
-import { getPlayerScores, getPlayerScoresCached } from "@/utils/remote";
+import {
+    getPlayerScores,
+    getPlayerScoresCached,
+    clearCache,
+} from "@/utils/remote";
 import * as util from "@/utils/calc";
 
 export default {
@@ -52,6 +56,7 @@ export default {
     },
     methods: {
         startNewGame() {
+            clearCache();
             this.$emit("startNewGame");
         },
         isScoreBigger(score, scoreToCompare) {

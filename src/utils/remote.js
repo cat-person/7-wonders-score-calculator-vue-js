@@ -17,12 +17,19 @@ export const getUnauthSession = async () => {
 };
 
 export const addPlayerScore = async (sessionId, playerScore) => {
-  return await databases.createDocument(
-    "67b64d2d0017d8ef2b54",
-    "67b6daee003dfa0cb7ee",
-    `${sessionId}.${playerScore.wonder.id}`,
-    localToRemote(sessionId, playerScore),
+  console.error(
+    `addPlayerScore (sessionId:${sessionId}, playerScore:${playerScore})`,
   );
+  try {
+    return await databases.createDocument(
+      "67b64d2d0017d8ef2b54",
+      "67b6daee003dfa0cb7ee",
+      `${sessionId}.${playerScore.wonder.id}`,
+      localToRemote(sessionId, playerScore),
+    );
+  } catch (err) {
+    throw err;
+  }
 };
 
 const localToRemote = (sessionId, localPlayerScore) => {

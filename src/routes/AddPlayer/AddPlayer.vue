@@ -58,9 +58,27 @@
 
         <button
             :disabled="!canAdd"
+            v-if="!scoreCollision"
             @click="handleAddPlayer($route.params.session_id, playerScore)"
         >
             {{ $t("buttons.done") }}
+        </button>
+
+        <p v-if="scoreCollision">
+            {{
+                $t("forceUpdate", {
+                    wonder: $t(`wonders.${playerScore.wonder.id}`),
+                })
+            }}
+        </p>
+
+        <button
+            v-if="scoreCollision"
+            @click="
+                handleForceUpdatePlayer($route.params.session_id, playerScore)
+            "
+        >
+            {{ $t("buttons.forceUpdate") }}
         </button>
     </div>
 </template>
@@ -74,7 +92,11 @@ import TopBar from "../Common/components/TopBar.vue";
 import PointInput from "../Common/components/PointInput.vue";
 
 import wonders from "@/assets/wonders.json";
-import { addPlayerScore } from "@/utils/remote";
+import {
+    addPlayerScore,
+    updatePlayerScore,
+    getPlayerScores,
+} from "@/utils/remote";
 
 const defaultPlayerScore = {
     name: "",
@@ -108,6 +130,7 @@ export default {
         return {
             wonders: wonders,
             playerScore: defaultPlayerScore,
+            scoreCollision: false,
         };
     },
     computed: {
@@ -158,8 +181,21 @@ export default {
             this.playerScore.name = name;
         },
         async handleAddPlayer(sessionId, playerScore) {
-            await addPlayerScore(sessionId, playerScore);
-            this.$router.push(`/${sessionId}`);
+            try {
+                await addPlayerScore(sessionId, playerScore);
+                await getPlayerScores(sessionId);
+                this.$router.back();
+            } catch (err) {
+                console.error(
+                    `handleAddPlayer error ${JSON.stringify(err.code)}`,
+                );
+                this.scoreCollision = true;
+            }
+        },
+        async handleForceUpdatePlayer(sessionId, playerScore) {
+            await updatePlayerScore(sessionId, playerScore);
+            await getPlayerScores(sessionId);
+            this.$router.back();
         },
     },
 };
