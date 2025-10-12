@@ -4,9 +4,7 @@ import { getPseudoRandom } from "@/utils/sessions";
 export default {
     methods: {
         handleStartNewGameClicked(event) {
-            const seed =
-                event.screenX * event.screenY + new Date().getMilliseconds();
-            this.$emit("startNewGame", getPseudoRandom(seed, 8));
+            this.$emit("startNewGame", getPseudoRandom(8));
         },
     },
 };
