@@ -17,9 +17,6 @@ export const getUnauthSession = async () => {
 };
 
 export const addPlayerScore = async (sessionId, playerScore) => {
-  console.error(
-    `addPlayerScore (sessionId:${sessionId}, playerScore:${playerScore})`,
-  );
   try {
     return await databases.createDocument(
       "67b64d2d0017d8ef2b54",

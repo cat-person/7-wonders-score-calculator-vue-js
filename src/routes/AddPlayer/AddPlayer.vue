@@ -142,6 +142,11 @@ export default {
                 return false;
             },
         },
+        prevRouteName: {
+            get() {
+                return this.$route.meta.prevRoute?.name || "none"; // Fallback if no previous (e.g., initial load)
+            },
+        },
     },
     methods: {
         onWonderSelected(wonderId) {
@@ -181,21 +186,22 @@ export default {
             this.playerScore.name = name;
         },
         async handleAddPlayer(sessionId, playerScore) {
+            console.error(
+                `handleAddPlayer(sessionId: ${sessionId}, playerScore: ${JSON.stringify(playerScore)})`,
+            );
             try {
                 await addPlayerScore(sessionId, playerScore);
                 await getPlayerScores(sessionId);
-                this.$router.back();
+                this.$router.push(`/${sessionId}/`);
             } catch (err) {
-                console.error(
-                    `handleAddPlayer error ${JSON.stringify(err.code)}`,
-                );
+                console.error(`handleAddPlayer error ${JSON.stringify(err)}`);
                 this.scoreCollision = true;
             }
         },
         async handleForceUpdatePlayer(sessionId, playerScore) {
             await updatePlayerScore(sessionId, playerScore);
             await getPlayerScores(sessionId);
-            this.$router.back();
+            this.$router.push(`/${sessionId}/`);
         },
     },
 };
