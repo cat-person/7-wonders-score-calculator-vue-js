@@ -98,25 +98,6 @@ import {
     getPlayerScores,
 } from "@/utils/remote";
 
-const defaultPlayerScore = {
-    name: "",
-    wonder: {
-        id: wonders[0].id,
-        side: "A",
-        stageBuilt: 0,
-    },
-    coinCount: 0,
-    militaryPoints: 0,
-    culturePoints: 0,
-    tradePoints: 0,
-    science: {
-        clayCount: 0,
-        measurerCount: 0,
-        cogCount: 0,
-    },
-    guildPoints: 0,
-};
-
 export default {
     components: {
         TopBar,
@@ -129,7 +110,24 @@ export default {
     data() {
         return {
             wonders: wonders,
-            playerScore: defaultPlayerScore,
+            playerScore: {
+                name: "",
+                wonder: {
+                    id: wonders[0].id,
+                    side: "A",
+                    stageBuilt: 0,
+                },
+                coinCount: 0,
+                militaryPoints: 0,
+                culturePoints: 0,
+                tradePoints: 0,
+                science: {
+                    clayCount: 0,
+                    measurerCount: 0,
+                    cogCount: 0,
+                },
+                guildPoints: 0,
+            },
             scoreCollision: false,
         };
     },
