@@ -9,11 +9,20 @@ import AddPlayer from "./routes/AddPlayer/AddPlayer.vue";
 import EditPlayer from "./routes/EditPlayer/EditPlayer.vue";
 import Results from "./routes/Results/Results.vue";
 import longpress from "./utils/longpress";
+import { getPseudoRandom } from "./utils/sessions";
 import locales from "./assets/locales";
 
 const routes = [
-  { path: "/", component: StartGame },
-  { path: "/:session_id", component: Players },
+  {
+    path: "/",
+    redirect: (to) => {
+      // the function receives the target route as the argument
+      // we return a redirect path/location here.
+      return `/${getPseudoRandom(8)}`;
+    },
+  },
+  { path: "/:session_id", component: StartGame },
+  { path: "/:session_id/players", component: Players },
   { path: "/:session_id/add", component: AddPlayer },
   { path: "/:session_id/edit/:wonder_id", component: EditPlayer },
   { path: "/:session_id/results", component: Results },

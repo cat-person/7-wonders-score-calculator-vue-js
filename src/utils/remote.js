@@ -102,6 +102,10 @@ export const clearCache = () => {
   cache.clear();
 };
 
+export const clearCacheField = (field) => {
+  cache.delete(field);
+};
+
 const remoteToLocal = (remoteDoc) => {
   return {
     name: remoteDoc.name,

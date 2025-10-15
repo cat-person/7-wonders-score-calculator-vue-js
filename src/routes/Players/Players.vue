@@ -1,6 +1,10 @@
 <template>
     <div>
-        <TopBar :title="getTitle()" />
+        <TopBar
+            :title="getTitle()"
+            :showQR="true"
+            @handleIconClick="handleTopBarIconClicked"
+        />
 
         <div class="players_container" v-for="playerScore in playerScores">
             <PlayerItem
@@ -44,6 +48,7 @@ export default {
             playerScores: [],
             sessionId: this.$route.params.session_id,
             wonders: wonders,
+            shareUrl: `${window.location.origin}/#${this.$route.fullPath}`,
         };
     },
     mounted: function () {
@@ -91,6 +96,11 @@ export default {
         },
         calculateResultsShown(playerScores) {
             return playerScores && 2 < playerScores.length;
+        },
+        handleTopBarIconClicked(icon) {
+            if (icon == "qr") {
+                // this.$route;
+            }
         },
     },
 };

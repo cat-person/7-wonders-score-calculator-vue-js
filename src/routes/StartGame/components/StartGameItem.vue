@@ -4,7 +4,7 @@ import { getPseudoRandom } from "@/utils/sessions";
 export default {
     methods: {
         handleStartNewGameClicked(event) {
-            this.$emit("startNewGame", getPseudoRandom(8));
+            this.$emit("startNewGame");
         },
     },
 };

@@ -3,7 +3,7 @@
         <TopBar
             :title="$t('titles.add')"
             :showClose="true"
-            @close="handleClose"
+            @handleIconClick="handleTopBarIconClicked"
         />
 
         <WonderSelection
@@ -95,7 +95,7 @@ import wonders from "@/assets/wonders.json";
 import {
     addPlayerScore,
     updatePlayerScore,
-    getPlayerScores,
+    clearCacheField,
 } from "@/utils/remote";
 
 export default {
@@ -189,8 +189,9 @@ export default {
             );
             try {
                 await addPlayerScore(sessionId, playerScore);
-                await getPlayerScores(sessionId);
-                this.$router.push(`/${sessionId}/`);
+                // await getPlayerScores(sessionId);
+                clearCacheField("player_scores");
+                this.$router.push(`/${sessionId}/players/`);
             } catch (err) {
                 console.error(`handleAddPlayer error ${JSON.stringify(err)}`);
                 this.scoreCollision = true;
@@ -198,8 +199,14 @@ export default {
         },
         async handleForceUpdatePlayer(sessionId, playerScore) {
             await updatePlayerScore(sessionId, playerScore);
-            await getPlayerScores(sessionId);
-            this.$router.push(`/${sessionId}/`);
+            // await getPlayerScores(sessionId);
+            clearCacheField("player_scores");
+            this.$router.push(`/${sessionId}/players/`);
+        },
+        handleTopBarIconClicked(icon) {
+            if (icon == "close") {
+                this.$router.back();
+            }
         },
     },
 };

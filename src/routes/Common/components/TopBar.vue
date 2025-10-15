@@ -2,6 +2,7 @@
 export default {
     props: {
         showClose: Boolean,
+        showQR: Boolean,
         title: String,
     },
     data() {
@@ -10,8 +11,8 @@ export default {
         };
     },
     methods: {
-        handleCloseClicked() {
-            this.$router.back();
+        handleIconClick(icon) {
+            this.$emit("handleIconClick", icon);
         },
     },
 };
@@ -23,9 +24,17 @@ export default {
             v-if="showClose"
             class="button"
             src="@/assets/icon_back.svg"
-            @click="handleCloseClicked"
+            @click="handleIconClick('close')"
         />
+
         <h3 class="title">{{ this.title }}</h3>
+
+        <img
+            v-if="showQR"
+            class="button_right"
+            src="@/assets/icon_qr.svg"
+            @click="handleIconClick('qr')"
+        />
     </div>
 </template>
 
@@ -47,6 +56,14 @@ export default {
     justify-self: left;
     position: absolute;
     left: 0mm;
+    width: 8mm;
+    height: 8mm;
+}
+
+.button_right {
+    justify-self: right;
+    position: absolute;
+    right: 1mm;
     width: 8mm;
     height: 8mm;
 }
