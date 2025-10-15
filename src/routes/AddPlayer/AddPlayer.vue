@@ -148,6 +148,7 @@ export default {
     },
     methods: {
         onWonderSelected(wonderId) {
+            scoreCollision = false;
             this.playerScore.wonder.id = wonderId;
         },
         handleSideChanged(givenSide) {
@@ -191,7 +192,7 @@ export default {
                 await addPlayerScore(sessionId, playerScore);
                 // await getPlayerScores(sessionId);
                 clearCacheField("player_scores");
-                this.$router.push(`/${sessionId}/players/`);
+                this.$router.push(`/${sessionId}`);
             } catch (err) {
                 console.error(`handleAddPlayer error ${JSON.stringify(err)}`);
                 this.scoreCollision = true;
@@ -201,7 +202,7 @@ export default {
             await updatePlayerScore(sessionId, playerScore);
             // await getPlayerScores(sessionId);
             clearCacheField("player_scores");
-            this.$router.push(`/${sessionId}/players/`);
+            this.$router.push(`/${sessionId}`);
         },
         handleTopBarIconClicked(icon) {
             if (icon == "close") {

@@ -5,13 +5,13 @@
         <div class="qr_code_container">
             <QrcodeVue
                 class="final_points_lbl"
-                :value="qrCodeUrl"
+                :value="getQrCodeUrl(sessionId)"
                 :size="qrCodeSize"
                 level="H"
             />
         </div>
 
-        <div class="qr_code_container"></div>
+        <button @click="handleStartNewGame">start game</button>
     </div>
 </template>
 
@@ -26,12 +26,18 @@ import StartGameItem from "./components/StartGameItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
 export default {
+    beforeMount() {
+        window.addEventListener("beforeunload", this.handlePageRefreshed);
+    },
+    beforeDestroy() {
+        window.removeEventListener("beforeunload", this.handlePageRefreshed);
+    },
     data() {
         return {
+            sessionId: getPseudoRandom(8),
             playerScoreData: this.playerScores,
             wonders: wonders,
             qrCodeSize: qrSizePx(30),
-            qrCodeUrl: `${window.location.origin}/#${this.$route.fullPath}`,
         };
     },
     props: {
@@ -44,7 +50,15 @@ export default {
     },
     methods: {
         handleStartNewGame() {
-            this.$router.push(`/${getPseudoRandom(8)}/add`);
+            this.$router.push(`/${this.sessionId}/add`);
+        },
+        handlePageRefreshed(event) {
+            // throw AppwriteException("AAAAAA");
+            this.sessionId = getPseudoRandom(8);
+            console.error("AAAAAAAAAAA");
+        },
+        getQrCodeUrl(sessionId) {
+            return `${window.location.origin}/#/${sessionId}`;
         },
     },
 };
