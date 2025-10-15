@@ -148,7 +148,7 @@ export default {
     },
     methods: {
         onWonderSelected(wonderId) {
-            scoreCollision = false;
+            this.scoreCollision = false;
             this.playerScore.wonder.id = wonderId;
         },
         handleSideChanged(givenSide) {
