@@ -11,7 +11,9 @@
             />
         </div>
 
-        <button @click="handleStartNewGame">start game</button>
+        <button class="start_btn" @click="handleStartNewGame">
+            start game
+        </button>
     </div>
 </template>
 
@@ -37,7 +39,7 @@ export default {
             sessionId: getPseudoRandom(8),
             playerScoreData: this.playerScores,
             wonders: wonders,
-            qrCodeSize: qrSizePx(30),
+            qrCodeSize: qrSizePx(40),
         };
     },
     props: {
@@ -92,8 +94,8 @@ export default {
     font-size: 4mm;
 }
 
-.close_btn {
-    position: absolute;
+.start_btn {
+    /*position: absolute;*/
     justify-content: center;
     margin-top: 2mm;
     right: 3mm;
@@ -107,9 +109,6 @@ export default {
     width: 100%;
     max-width: 150mm;
     padding: 5mm;
-    /*border-color: #606060;*/
-    /*border-width: 0.5mm;*/
-    /*border-style: solid;*/
     justify-items: center;
     justify-self: center;
 

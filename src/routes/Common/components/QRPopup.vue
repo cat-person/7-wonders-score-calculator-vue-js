@@ -17,7 +17,6 @@ export default {
     methods: {
         handleClick(event) {
             console.error(`Current path: ${this.url}`);
-            // this.$emit("click");
             this.$router.back();
         },
         getShareUrl() {

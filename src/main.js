@@ -15,7 +15,7 @@ import QRPopup from "./routes/Common/components/QRPopup.vue";
 const routes = [
   { path: "/", component: StartGame },
   {
-    path: "/:session_id",
+    path: "/:session_id/",
     component: Players,
     children: [
       {

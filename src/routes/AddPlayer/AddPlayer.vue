@@ -110,6 +110,7 @@ export default {
     data() {
         return {
             wonders: wonders,
+            sessionId: this.$route.params.session_id,
             playerScore: {
                 name: "",
                 wonder: {
@@ -206,7 +207,7 @@ export default {
         },
         handleTopBarIconClicked(icon) {
             if (icon == "close") {
-                this.$router.back();
+                this.$router.push(`/${this.sessionId}/`);
             }
         },
     },
