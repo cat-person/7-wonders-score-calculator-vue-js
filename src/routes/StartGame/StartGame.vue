@@ -52,13 +52,8 @@ export default {
         handleStartNewGame() {
             this.$router.push(`/${this.sessionId}/add`);
         },
-        handlePageRefreshed(event) {
-            // throw AppwriteException("AAAAAA");
-            this.sessionId = getPseudoRandom(8);
-            console.error("AAAAAAAAAAA");
-        },
         getQrCodeUrl(sessionId) {
-            return `${window.location.origin}/#/${sessionId}`;
+            return `${window.location.origin}/${this.$route.path}/#/${sessionId}/add`;
         },
     },
 };

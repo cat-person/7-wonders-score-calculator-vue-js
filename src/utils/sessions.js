@@ -43,3 +43,7 @@ export const getPseudoRandom = (length, seed = generateSeed()) => {
   }
   return result;
 };
+
+export const getQrCodeUrl = (sessionId) => {
+  return `${window.location.origin}/${path}/#/${sessionId}/add`;
+};

@@ -1,15 +1,6 @@
 <template>
     <div class="add_container" @click="handleClick">
-        <!-- <div class="horizontal">
-            <img
-                v-if="showClose"
-                class="button"
-                src="@/assets/icon_back.svg"
-                @click="handleCloseClicked"
-            />
-            <h3 class="title">{{ this.title }}</h3>
-        </div> -->
-        <QrcodeVue :value="getShareUrl(sessionId)" :size="200" />
+        <QrcodeVue :value="getShareUrl()" :size="200" />
     </div>
 </template>
 
@@ -29,8 +20,11 @@ export default {
             // this.$emit("click");
             this.$router.back();
         },
-        getShareUrl(sessionId) {
-            return `${window.location.origin}/#/${sessionId}`;
+        getShareUrl() {
+            return `${window.location.origin}/${this.$route.path}`.replace(
+                "popup",
+                "add",
+            );
         },
     },
     components: {
