@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-view class="qr_code_container"></router-view>
         <TopBar
             :title="getTitle()"
             :showQR="true"
@@ -48,7 +49,6 @@ export default {
             playerScores: [],
             sessionId: this.$route.params.session_id,
             wonders: wonders,
-            shareUrl: `${window.location.origin}/#${this.$route.fullPath}`,
         };
     },
     mounted: function () {
@@ -99,7 +99,12 @@ export default {
         },
         handleTopBarIconClicked(icon) {
             if (icon == "qr") {
-                // this.$route;
+                if (this.$route.path.includes("popup")) {
+                    this.$router.back();
+                } else {
+                    this.$router.push({ name: "popup" });
+                }
+                console.error("qr");
             }
         },
     },
@@ -107,6 +112,12 @@ export default {
 </script>
 
 <style scoped>
+.qr_code_container {
+    position: absolute;
+    width: 100%;
+    margin-top: 11mm;
+    z-index: 10;
+}
 .players_container {
     margin: 0mm;
     justify-self: center;

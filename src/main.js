@@ -10,10 +10,22 @@ import EditPlayer from "./routes/EditPlayer/EditPlayer.vue";
 import Results from "./routes/Results/Results.vue";
 import longpress from "./utils/longpress";
 import locales from "./assets/locales";
+import QRPopup from "./routes/Common/components/QRPopup.vue";
 
 const routes = [
   { path: "/", component: StartGame },
-  { path: "/:session_id", component: Players },
+  {
+    path: "/:session_id",
+    component: Players,
+    children: [
+      {
+        path: "popup",
+        name: "popup",
+        component: QRPopup,
+      },
+    ],
+  },
+
   { path: "/:session_id/add", component: AddPlayer },
   { path: "/:session_id/edit/:wonder_id", component: EditPlayer },
   { path: "/:session_id/results", component: Results },

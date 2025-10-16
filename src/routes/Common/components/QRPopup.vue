@@ -1,15 +1,36 @@
+<template>
+    <div class="add_container" @click="handleClick">
+        <!-- <div class="horizontal">
+            <img
+                v-if="showClose"
+                class="button"
+                src="@/assets/icon_back.svg"
+                @click="handleCloseClicked"
+            />
+            <h3 class="title">{{ this.title }}</h3>
+        </div> -->
+        <QrcodeVue :value="getShareUrl(sessionId)" :size="200" />
+    </div>
+</template>
+
 <script>
 import QrcodeVue from "qrcode.vue";
+import { qrSizePx } from "@/utils/dpi";
 
 export default {
-    props: {
-        hidden: Boolean,
-        url: String,
+    data() {
+        return {
+            sessionId: this.$route.params.session_id,
+        };
     },
     methods: {
-        handleAddButtonClicked(event) {
+        handleClick(event) {
             console.error(`Current path: ${this.url}`);
-            // this.$emit("addPlayer");
+            // this.$emit("click");
+            this.$router.back();
+        },
+        getShareUrl(sessionId) {
+            return `${window.location.origin}/#/${sessionId}`;
         },
     },
     components: {
@@ -18,33 +39,17 @@ export default {
 };
 </script>
 
-<template>
-    <div class="add_container" @click="handleAddButtonClicked">
-        <div class="horizontal">
-            <img
-                v-if="showClose"
-                class="button"
-                src="@/assets/icon_back.svg"
-                @click="handleCloseClicked"
-            />
-            <h3 class="title">{{ this.title }}</h3>
-        </div>
-        <!-- <QrcodeVue :value="url" :size="qrSizePx(25)" level="H" /> -->
-    </div>
-</template>
-
 <style scoped>
 .add_container {
-    width: 100%;
-    height: 100%;
-    padding: 5mm;
-    max-width: 149mm;
+    width: 80%;
+    max-width: 99mm;
+    padding: 5%;
     /*height: 59mm;*/
-    background-color: #800000;
+    background-color: white;
     border-color: #606060;
     border-width: 0.5mm;
     border-style: solid;
     justify-items: center;
-    justify-self: center;
+    justify-self: right;
 }
 </style>
