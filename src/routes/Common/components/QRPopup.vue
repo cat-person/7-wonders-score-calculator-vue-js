@@ -1,6 +1,8 @@
 <template>
-    <div class="add_container" @click="handleClick">
-        <QrcodeVue :value="getShareUrl()" :size="qrCodeSize" />
+    <div class="pupupu" @click="handleOutsideClick">
+        <div class="qr_code_container">
+            <QrcodeVue :value="getShareUrl()" :size="qrCodeSize" />
+        </div>
     </div>
 </template>
 
@@ -16,10 +18,11 @@ export default {
         };
     },
     methods: {
-        handleClick(event) {
+        handleOutsideClick(event) {
             console.error(`Current path: ${this.url}`);
             this.$router.back();
         },
+
         getShareUrl() {
             return window.location.href.replace("popup", "add");
         },
@@ -31,14 +34,26 @@ export default {
 </script>
 
 <style scoped>
-.add_container {
-    padding: 5mm;
+.qr_code_container {
+    padding: 2mm;
     inline-size: min-content;
-    background-color: white;
+    background-color: #ffffff;
     border-color: #606060;
     border-width: 0.5mm;
     border-style: solid;
     justify-items: center;
+    justify-self: right;
+}
+
+.pupupu {
+    padding: 0mm;
+    margin-top: 11mm;
+    width: 100%;
+    max-width: 160mm;
+    border-style: none;
+    background-color: #ffffff80;
+    height: 90dvh;
+    justify-items: right;
     justify-self: right;
 }
 </style>
