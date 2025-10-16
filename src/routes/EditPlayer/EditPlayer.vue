@@ -3,7 +3,7 @@
         <TopBar
             :showClose="true"
             :title="$t('titles.edit', { name: playerScore.name })"
-            @close="handleClose"
+            @handleIconClick="handleTopBarIconClicked"
         />
 
         <Wonder
@@ -76,6 +76,7 @@ export default {
     data() {
         return {
             wonders: wonders,
+            sessionId: this.$route.params.session_id,
             originalPlayerScore: null,
             playerScore: null,
             backgroundColor: "gray",
@@ -187,8 +188,10 @@ export default {
                 this.$router.back();
             }
         },
-        handleClose() {
-            this.$emit("close");
+        handleTopBarIconClicked(icon) {
+            if (icon == "close") {
+                this.$router.push(`/${this.sessionId}/`);
+            }
         },
     },
 };
