@@ -31,7 +31,7 @@ export default {
             sessionId: getPseudoRandom(8),
             playerScoreData: this.playerScores,
             wonders: wonders,
-            qrCodeSize: qrSizePx(40),
+            qrCodeSize: qrSizePx(60),
         };
     },
     props: {
