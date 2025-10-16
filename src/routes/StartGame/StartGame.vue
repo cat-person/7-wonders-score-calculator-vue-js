@@ -74,7 +74,6 @@ export default {
 .qr_code_container {
     width: 100%;
     margin-top: 2mm;
-    max-width: 150mm;
     justify-items: center;
     justify-self: center;
 
