@@ -27,7 +27,6 @@ export default {
 #app {
     margin: 0mm;
     padding: 0mm;
-    height: 100%;
     font-family: "Roboto Condensed", sans-serif;
     text-align: center;
     overflow-y: scroll;
@@ -53,6 +52,6 @@ export default {
     width: 60mm;
     margin: 0mm;
     margin-top: 24mm;
-    margin-bottom: 3mm;
+    margin-bottom: 6mm;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="root">
         <TopBar :showClose="false" :title="$t('titles.start')" />
 
         <div class="qr_code_container">
@@ -10,10 +10,11 @@
                 level="H"
             />
         </div>
-
-        <button class="start_btn" @click="handleStartNewGame">
-            {{ $t("buttons.startNewGame") }}
-        </button>
+        <div class="qr_code_container">
+            <button class="start_btn" @click="handleStartNewGame">
+                {{ $t("buttons.startNewGame") }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -53,48 +54,27 @@ export default {
 </script>
 
 <style scoped>
-.wonder-img {
-    width: 100%;
+.root {
     overflow: hidden;
+    justify-items: center;
+    justify-self: center;
+    justify-content: center;
     margin: 0;
 }
 
-.wonder-lbl {
-    width: 100%;
-    max-width: 160mm;
-    position: absolute;
-    margin-top: 2mm;
-    color: white;
-    text-shadow: 0px 0px 10px gray;
-}
-
-.table {
-    position: absolute;
-    justify-content: center;
-    vertical-align: bottom;
-    justify-items: stretch;
-    width: 96%;
-    margin-left: 2%;
-    background-color: black;
-    bottom: 2mm;
-}
-
-.point-container {
-    justify-content: center;
-    justify-items: center;
-    font-size: 4mm;
-}
-
 .start_btn {
-    margin-top: 12mm;
+    margin-top: 6mm;
     width: 50mm;
     height: 8mm;
+    justify-items: center;
+    justify-self: center;
+    justify-content: center;
 }
 
 .qr_code_container {
     width: 100%;
+    margin-top: 2mm;
     max-width: 150mm;
-    padding: 5mm;
     justify-items: center;
     justify-self: center;
 
