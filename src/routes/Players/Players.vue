@@ -4,7 +4,7 @@
         <TopBar
             :title="getTitle()"
             :showQR="true"
-            :showClose="false"
+            :showClose="true"
             @handleIconClick="handleTopBarIconClicked"
         />
 

@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             sessionId: this.$route.params.session_id,
-            qrCodeSize: qrSizePx(30),
+            qrCodeSize: qrSizePx(36),
         };
     },
     methods: {
@@ -32,9 +32,8 @@ export default {
 
 <style scoped>
 .add_container {
-    width: 80%;
-    max-width: 119mm;
     padding: 5mm;
+    inline-size: min-content;
     background-color: white;
     border-color: #606060;
     border-width: 0.5mm;
