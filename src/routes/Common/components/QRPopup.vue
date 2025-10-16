@@ -1,6 +1,6 @@
 <template>
     <div class="add_container" @click="handleClick">
-        <QrcodeVue :value="getShareUrl()" :size="200" />
+        <QrcodeVue :value="getShareUrl()" :size="qrCodeSize" />
     </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
     data() {
         return {
             sessionId: this.$route.params.session_id,
+            qrCodeSize: qrSizePx(40),
         };
     },
     methods: {

@@ -23,17 +23,9 @@ import QrcodeVue from "qrcode.vue";
 import { getPseudoRandom } from "@/utils/sessions";
 import { qrSizePx } from "@/utils/dpi";
 import wonders from "@/assets/wonders.json";
-
-import StartGameItem from "./components/StartGameItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
 export default {
-    beforeMount() {
-        window.addEventListener("beforeunload", this.handlePageRefreshed);
-    },
-    beforeDestroy() {
-        window.removeEventListener("beforeunload", this.handlePageRefreshed);
-    },
     data() {
         return {
             sessionId: getPseudoRandom(8),
@@ -47,7 +39,6 @@ export default {
     },
     components: {
         TopBar,
-        StartGameItem,
         QrcodeVue,
     },
     methods: {
