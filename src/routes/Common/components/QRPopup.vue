@@ -21,10 +21,7 @@ export default {
             this.$router.back();
         },
         getShareUrl() {
-            return `${window.location.origin}/${this.$route.path}`.replace(
-                "popup",
-                "add",
-            );
+            return window.location.href.replace("popup", "add");
         },
     },
     components: {

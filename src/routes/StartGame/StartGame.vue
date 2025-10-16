@@ -53,7 +53,7 @@ export default {
             this.$router.push(`/${this.sessionId}/add`);
         },
         getQrCodeUrl(sessionId) {
-            return `${window.location.origin}/${this.$route.path}/#/${sessionId}/add`;
+            return `${window.location.href}${sessionId}/add`;
         },
     },
 };
