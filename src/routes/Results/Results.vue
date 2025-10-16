@@ -3,7 +3,7 @@
         <TopBar
             :showClose="true"
             :title="$t('titles.results')"
-            @close="handleClose"
+            @handleIconClick="handleTopBarIconClicked"
         />
 
         <div
@@ -16,10 +16,6 @@
                 :points="points"
             />
         </div>
-
-        <button :class="newGameButtonClass" @click="startNewGame">
-            {{ $t("buttons.startNewGame") }}
-        </button>
     </div>
 </template>
 
@@ -30,11 +26,7 @@ import wonders from "@/assets/wonders.json";
 import ResultItem from "./components/ResultItem.vue";
 import TopBar from "../Common/components/TopBar.vue";
 
-import {
-    getPlayerScores,
-    getPlayerScoresCached,
-    clearCache,
-} from "@/utils/remote";
+import { getPlayerScores, getPlayerScoresCached } from "@/utils/remote";
 import * as util from "@/utils/calc";
 
 export default {
@@ -55,10 +47,6 @@ export default {
         TopBar,
     },
     methods: {
-        startNewGame() {
-            clearCache();
-            this.$emit("startNewGame");
-        },
         isScoreBigger(score, scoreToCompare) {
             return (
                 scoreToCompare.finalPoints < score.finalPoints ||
@@ -87,8 +75,10 @@ export default {
             }
             return result;
         },
-        handleClose() {
-            this.$emit("close");
+        handleTopBarIconClicked(icon) {
+            if (icon == "close") {
+                this.$router.back();
+            }
         },
     },
 };

@@ -12,7 +12,7 @@
         </div>
 
         <button class="start_btn" @click="handleStartNewGame">
-            start game
+            {{ $t("buttons.startNewGame") }}
         </button>
     </div>
 </template>
@@ -95,14 +95,9 @@ export default {
 }
 
 .start_btn {
-    /*position: absolute;*/
-    justify-content: center;
-    margin-top: 2mm;
-    right: 3mm;
-    top: 1.5mm;
-    height: 4mm;
-    width: 4mm;
-    text-shadow: 0px 0px 10px gray;
+    margin-top: 12mm;
+    width: 50mm;
+    height: 8mm;
 }
 
 .qr_code_container {

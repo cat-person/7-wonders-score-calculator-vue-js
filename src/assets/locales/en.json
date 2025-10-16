@@ -50,7 +50,7 @@
     "saveChanges": "Save Changes",
     "newSession": "New Session",
     "calculateResults": "Calculate the results",
-    "startNewGame": "Start New"
+    "startNewGame": "Start"
   },
 
   "forceUpdate": "{wonder} has already been selected by another player. Make sure you have selected the correct wonder, as clicking 'Force Update' will overwrite their data.",

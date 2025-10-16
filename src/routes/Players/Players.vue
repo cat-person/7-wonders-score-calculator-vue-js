@@ -4,6 +4,7 @@
         <TopBar
             :title="getTitle()"
             :showQR="true"
+            :showClose="false"
             @handleIconClick="handleTopBarIconClicked"
         />
 
@@ -105,6 +106,8 @@ export default {
                     this.$router.push({ name: "popup" });
                 }
                 console.error("qr");
+            } else if (icon == "close") {
+                this.$router.push("/");
             }
         },
     },
