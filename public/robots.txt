@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cat-person.github.io/7-wonders-score-calculator-vue-js/sitemap.xml
