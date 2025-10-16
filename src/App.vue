@@ -27,6 +27,7 @@ export default {
 #app {
     margin: 0mm;
     padding: 0mm;
+    height: 100%;
     font-family: "Roboto Condensed", sans-serif;
     text-align: center;
     overflow-y: scroll;
@@ -37,14 +38,14 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     margin: 0mm;
     padding: 0mm;
     padding-top: 3mm;
     max-width: 160mm;
     justify-self: center;
     justify-content: center;
-    background-color: aliceblue;
+    background-color: #f5f5f5;
 }
 
 .change-language {
