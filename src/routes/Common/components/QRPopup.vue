@@ -34,7 +34,7 @@ export default {
 .add_container {
     width: 80%;
     max-width: 119mm;
-    padding: 10mm;
+    padding: 5mm;
     background-color: white;
     border-color: #606060;
     border-width: 0.5mm;
