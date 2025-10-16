@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             sessionId: this.$route.params.session_id,
-            qrCodeSize: qrSizePx(30),
+            qrCodeSize: qrSizePx(25),
         };
     },
     methods: {
