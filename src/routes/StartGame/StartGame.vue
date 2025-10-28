@@ -2,14 +2,14 @@
     <div class="root">
         <TopBar :showClose="false" :title="$t('titles.start')" />
 
-        <div class="qr_code_container">
+        <!-- <div class="qr_code_container">
             <QrcodeVue
                 class="final_points_lbl"
                 :value="getQrCodeUrl(sessionId)"
                 :size="qrCodeSize"
                 level="H"
             />
-        </div>
+        </div> -->
         <div class="qr_code_container">
             <button class="start_btn" @click="handleStartNewGame">
                 {{ $t("buttons.startNewGame") }}
@@ -44,11 +44,14 @@ export default {
     },
     methods: {
         handleStartNewGame() {
-            this.$router.push(`/${this.sessionId}/add`);
+            this.$router.push({
+                path: "/add",
+                query: { sessionId: this.sessionId },
+            });
         },
-        getQrCodeUrl(sessionId) {
-            return `${window.location.href}${sessionId}/add`;
-        },
+        // getQrCodeUrl(sessionId) {
+        //     return `${window.location.href}${sessionId}/add`;
+        // },
     },
 };
 </script>

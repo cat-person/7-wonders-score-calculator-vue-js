@@ -76,7 +76,8 @@ export default {
     data() {
         return {
             wonders: wonders,
-            sessionId: this.$route.params.session_id,
+            sessionId: this.$route.query.sessionId,
+            wonderId: this.$route.query.wonderId,
             originalPlayerScore: null,
             playerScore: null,
             backgroundColor: "gray",
@@ -84,8 +85,8 @@ export default {
     },
     mounted: async function () {
         this.originalPlayerScore = await getPlayerScoreByWonderId(
-            this.$route.params.session_id,
-            this.$route.params.wonder_id,
+            this.sessionId,
+            this.wonderId,
         );
         this.playerScore = JSON.parse(JSON.stringify(this.originalPlayerScore));
         this.backgroundColor = this.getBackgroundColor(
@@ -181,10 +182,7 @@ export default {
             ) {
                 this.$router.back();
             } else {
-                await updatePlayerScore(
-                    this.$route.params.session_id,
-                    this.playerScore,
-                );
+                await updatePlayerScore(this.sessionId, this.playerScore);
                 this.$router.back();
             }
         },

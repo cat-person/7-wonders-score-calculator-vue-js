@@ -48,7 +48,7 @@ export default {
     data() {
         return {
             playerScores: [],
-            sessionId: this.$route.params.session_id,
+            sessionId: this.$route.query.sessionId,
             wonders: wonders,
         };
     },
@@ -63,9 +63,7 @@ export default {
     methods: {
         async getPlayerScores() {
             this.playerScores = getPlayerScoresCached();
-            this.playerScores = await getPlayerScores(
-                this.$route.params.session_id,
-            );
+            this.playerScores = await getPlayerScores(this.sessionId);
         },
         getTitle() {
             if (!this.playerScores || this.playerScores.length == 0) {
@@ -78,22 +76,32 @@ export default {
             this.$emit("close");
         },
         handleAddPlayer() {
-            this.$router.push(`/${this.$route.params.session_id}/add`);
+            this.$router.push({
+                path: "/add",
+                query: { sessionId: this.sessionId },
+            });
         },
         startNewGame() {
             this.$emit("startNewGame");
         },
         handleCalculateResultsClicked() {
-            this.$router.push(`/${this.sessionId}/results`);
+            this.$router.push({
+                path: "/results",
+                query: { sessionId: this.sessionId },
+            });
         },
         handleEditPlayer(wonderId) {
-            this.$router.push(`/${this.sessionId}/edit/${wonderId}`);
+            this.$router.push({
+                path: "/results",
+                query: {
+                    sessionId: this.sessionId,
+                    wonderId: wonderId,
+                },
+            });
         },
         async handleDeletePlayerScore(wonderId) {
             await deletePlayerScore(this.sessionId, wonderId);
-            this.playerScores = await getPlayerScores(
-                this.$route.params.session_id,
-            );
+            this.playerScores = await getPlayerScores(this.sessionId);
         },
         calculateResultsShown(playerScores) {
             return playerScores && 2 < playerScores.length;
@@ -103,7 +111,10 @@ export default {
                 if (this.$route.path.includes("popup")) {
                     this.$router.back();
                 } else {
-                    this.$router.push({ name: "popup" });
+                    this.$router.push({
+                        name: "popup",
+                        query: { sessionId: this.sessionId },
+                    });
                 }
                 console.error("qr");
             } else if (icon == "close") {

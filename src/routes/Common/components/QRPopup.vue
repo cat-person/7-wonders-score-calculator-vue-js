@@ -13,7 +13,7 @@ import { qrSizePx } from "@/utils/dpi";
 export default {
     data() {
         return {
-            sessionId: this.$route.params.session_id,
+            sessionId: this.$route.query.sessionId,
             qrCodeSize: qrSizePx(36),
         };
     },

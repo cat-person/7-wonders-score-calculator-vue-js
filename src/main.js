@@ -15,20 +15,22 @@ import QRPopup from "./routes/Common/components/QRPopup.vue";
 const routes = [
   { path: "/", component: StartGame },
   {
-    path: "/:session_id/",
+    path: "/list/",
+    query: { sessionId: "sessionId" },
     component: Players,
     children: [
       {
         path: "popup",
         name: "popup",
         component: QRPopup,
+        query: { sessionId: "sessionId" },
       },
     ],
   },
 
-  { path: "/:session_id/add", component: AddPlayer },
-  { path: "/:session_id/edit/:wonder_id", component: EditPlayer },
-  { path: "/:session_id/results", component: Results },
+  { path: "/add", component: AddPlayer, query: { sessionId: "sessionId" } },
+  { path: "/edit/", component: EditPlayer, query: { sessionId: "sessionId" } },
+  { path: "/results", component: Results, query: { sessionId: "sessionId" } },
 ];
 
 const router = createRouter({

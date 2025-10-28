@@ -32,9 +32,7 @@ import * as util from "@/utils/calc";
 export default {
     mounted: async function () {
         this.playerScores = getPlayerScoresCached();
-        this.playerScores = await getPlayerScores(
-            this.$route.params.session_id,
-        );
+        this.playerScores = await getPlayerScores(this.sessionId);
     },
     data() {
         return {

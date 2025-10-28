@@ -59,7 +59,7 @@
         <button
             :disabled="!canAdd"
             v-if="!scoreCollision"
-            @click="handleAddPlayer($route.params.session_id, playerScore)"
+            @click="handleAddPlayer(sessionId, playerScore)"
         >
             {{ $t("buttons.done") }}
         </button>
@@ -74,9 +74,7 @@
 
         <button
             v-if="scoreCollision"
-            @click="
-                handleForceUpdatePlayer($route.params.session_id, playerScore)
-            "
+            @click="handleForceUpdatePlayer(sessionId, playerScore)"
         >
             {{ $t("buttons.forceUpdate") }}
         </button>
@@ -110,7 +108,7 @@ export default {
     data() {
         return {
             wonders: wonders,
-            sessionId: this.$route.params.session_id,
+            sessionId: this.$route.query.sessionId,
             playerScore: {
                 name: "",
                 wonder: {
@@ -193,7 +191,10 @@ export default {
                 await addPlayerScore(sessionId, playerScore);
                 // await getPlayerScores(sessionId);
                 clearCacheField("player_scores");
-                this.$router.push(`/${sessionId}`);
+                this.$router.push({
+                    path: "/list",
+                    query: { sessionId: sessionId },
+                });
             } catch (err) {
                 console.error(`handleAddPlayer error ${JSON.stringify(err)}`);
                 this.scoreCollision = true;
@@ -203,11 +204,17 @@ export default {
             await updatePlayerScore(sessionId, playerScore);
             // await getPlayerScores(sessionId);
             clearCacheField("player_scores");
-            this.$router.push(`/${sessionId}`);
+            this.$router.push({
+                path: "/list",
+                query: { sessionId: sessionId },
+            });
         },
         handleTopBarIconClicked(icon) {
             if (icon == "close") {
-                this.$router.push(`/${this.sessionId}/`);
+                this.$router.push({
+                    path: "/list",
+                    query: { sessionId: this.sessionId },
+                });
             }
         },
     },
