@@ -24,7 +24,9 @@ export default {
         },
 
         getShareUrl() {
-            return window.location.href.replace("popup", "add");
+            return window.location.href
+                .replace("popup", "add")
+                .replace("list", "");
         },
     },
     components: {

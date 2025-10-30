@@ -13,7 +13,18 @@ import locales from "./assets/locales";
 import QRPopup from "./routes/Common/components/QRPopup.vue";
 
 const routes = [
-  { path: "/", component: StartGame },
+  {
+    path: "/",
+    component: StartGame,
+    children: [
+      {
+        path: "popup",
+        name: "popup_start",
+        component: QRPopup,
+        query: { sessionId: "sessionId" },
+      },
+    ],
+  },
   {
     path: "/list/",
     query: { sessionId: "sessionId" },

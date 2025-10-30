@@ -54,7 +54,7 @@
   },
 
   "forceUpdate": "{wonder} has already been selected by another player. Make sure you have selected the correct wonder, as clicking 'Force Update' will overwrite their data.",
-
+  "linkToShare": "Share the game session link",
   "components": {
     "coins": {
       "value": "Coins value: {coinValue}",

@@ -1,20 +1,41 @@
 <template>
-    <div class="root">
-        <TopBar :showClose="false" :title="$t('titles.start')" />
+    <div>
+        <router-view class="qr_code_container"></router-view>
+        <TopBar
+            :title="$t('titles.start')"
+            :showQR="true"
+            :showClose="false"
+            @handleIconClick="handleTopBarIconClicked"
+        />
 
-        <!-- <div class="qr_code_container">
-            <QrcodeVue
-                class="final_points_lbl"
-                :value="getQrCodeUrl(sessionId)"
-                :size="qrCodeSize"
-                level="H"
-            />
-        </div> -->
-        <div class="qr_code_container">
-            <button class="start_btn" @click="handleStartNewGame">
-                {{ $t("buttons.startNewGame") }}
+        <div class="horizontal">
+            <p class="link_to_share">
+                {{ getLinkToShare(sessionId) }}
+                <!-- {{ $t("buttons.startNewGame", { linkToShare: link }) }} -->
+            </p>
+            <button class="img_button">
+                <img
+                    class="icon"
+                    type="image"
+                    src="@/assets/icon_copy.svg"
+                    @click="handleCopyClick(getLinkToShare(sessionId))"
+                />
+            </button>
+
+            <button class="img_button">
+                <img
+                    class="icon"
+                    type="image"
+                    src="@/assets/icon_share.svg"
+                    @click="handleShareClick(getLinkToShare(sessionId))"
+                />
             </button>
         </div>
+        <!-- <div class="qr_code_container"> -->
+        <button class="start_btn" @click="handleStartNewGame">
+            {{ $t("buttons.startNewGame") }}
+        </button>
+        <!-- </div> -->
     </div>
 </template>
 
@@ -49,9 +70,34 @@ export default {
                 query: { sessionId: this.sessionId },
             });
         },
-        // getQrCodeUrl(sessionId) {
-        //     return `${window.location.href}${sessionId}/add`;
-        // },
+        getLinkToShare(sessionId) {
+            return `${window.location.href}add?sessionId=${sessionId}`;
+        },
+        handleTopBarIconClicked(icon) {
+            if (icon == "qr") {
+                if (this.$route.path.includes("popup")) {
+                    this.$router.back();
+                } else {
+                    this.$router.push({
+                        name: "popup_start",
+                        query: { sessionId: this.sessionId },
+                    });
+                }
+                console.error("qr");
+            }
+        },
+        handleCopyClick(linkToShare) {
+            navigator.clipboard.writeText(linkToShare);
+        },
+        async handleShareClick(linkToShare) {
+            try {
+                await navigator.share(linkToShare);
+                // The data was shared successfully.
+            } catch (e) {
+                // The data could not be shared.
+                console.error(`Error: ${e}`);
+            }
+        },
     },
 };
 </script>
@@ -62,7 +108,46 @@ export default {
     justify-items: center;
     justify-self: center;
     justify-content: center;
+    padding: 0;
     margin: 0;
+}
+
+.horizontal {
+    flex-direction: row;
+    height: 8mm;
+    width: 100%;
+    justify-self: center;
+    justify-content: center;
+}
+
+.link_to_share {
+    margin-top: 1mm;
+    margin-right: 3mm;
+    padding: 0mm;
+    width: 100%;
+    justify-self: center;
+}
+
+.img_button {
+    margin-left: 2mm;
+    margin-right: 2mm;
+    padding: 1mm;
+    width: 7mm;
+    height: 7mm;
+    justify-content: center;
+}
+
+.icon {
+    margin: 0mm;
+    width: 4mm;
+    height: 4mm;
+}
+
+.qr_code_container {
+    position: absolute;
+    width: 100%;
+    margin-top: 11mm;
+    z-index: 10;
 }
 
 .start_btn {
@@ -71,15 +156,6 @@ export default {
     height: 8mm;
     justify-items: center;
     justify-self: center;
-    justify-content: center;
-}
-
-.qr_code_container {
-    width: 100%;
-    margin-top: 2mm;
-    justify-items: center;
-    justify-self: center;
-
     justify-content: center;
 }
 </style>

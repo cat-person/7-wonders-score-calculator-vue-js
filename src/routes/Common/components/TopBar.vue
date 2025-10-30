@@ -55,7 +55,7 @@ export default {
 .button {
     justify-self: left;
     position: absolute;
-    left: 0mm;
+    left: 1mm;
     width: 8mm;
     height: 8mm;
 }
