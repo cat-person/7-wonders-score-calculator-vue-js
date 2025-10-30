@@ -36,6 +36,7 @@ export default {
     },
     data() {
         return {
+            sessionId: this.$route.query.sessionId,
             playerScores: [],
             wonders: wonders,
         };

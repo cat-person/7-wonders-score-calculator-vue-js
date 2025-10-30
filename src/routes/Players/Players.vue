@@ -92,7 +92,7 @@ export default {
         },
         handleEditPlayer(wonderId) {
             this.$router.push({
-                path: "/results",
+                path: "/edit",
                 query: {
                     sessionId: this.sessionId,
                     wonderId: wonderId,

@@ -188,7 +188,7 @@ export default {
         },
         handleTopBarIconClicked(icon) {
             if (icon == "close") {
-                this.$router.push(`/${this.sessionId}/`);
+                this.$router.back();
             }
         },
     },

@@ -40,7 +40,11 @@ const routes = [
   },
 
   { path: "/add", component: AddPlayer, query: { sessionId: "sessionId" } },
-  { path: "/edit/", component: EditPlayer, query: { sessionId: "sessionId" } },
+  {
+    path: "/edit/",
+    component: EditPlayer,
+    query: { sessionId: "sessionId", wonderId: "wonderId" },
+  },
   { path: "/results", component: Results, query: { sessionId: "sessionId" } },
 ];
 
