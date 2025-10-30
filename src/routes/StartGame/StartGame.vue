@@ -24,6 +24,7 @@
 
             <button class="img_button">
                 <img
+                    v-if="webShareApiSupported"
                     class="icon"
                     type="image"
                     src="@/assets/icon_share.svg"
@@ -50,6 +51,7 @@ import TopBar from "../Common/components/TopBar.vue";
 export default {
     data() {
         return {
+            webShareApiSupported: false,
             sessionId: getPseudoRandom(8),
             playerScoreData: this.playerScores,
             wonders: wonders,
@@ -62,6 +64,10 @@ export default {
     components: {
         TopBar,
         QrcodeVue,
+    },
+    mounted() {
+        // Check if the Web Share API is available
+        this.webShareApiSupported = !!navigator.share;
     },
     methods: {
         handleStartNewGame() {
@@ -91,7 +97,11 @@ export default {
         },
         async handleShareClick(linkToShare) {
             try {
-                await navigator.share(linkToShare);
+                await navigator.share({
+                    title: "Join the session",
+                    text: "Enter your data and see result points for you and the opponents",
+                    url: linkToShare,
+                });
                 // The data was shared successfully.
             } catch (e) {
                 // The data could not be shared.
@@ -129,8 +139,8 @@ export default {
 }
 
 .img_button {
-    margin-left: 2mm;
-    margin-right: 2mm;
+    margin-left: 1.5mm;
+    margin-right: 1.5mm;
     padding: 1mm;
     width: 7mm;
     height: 7mm;
