@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
 export default {
     name: "App",
     methods: {
@@ -19,6 +20,10 @@ export default {
                 this.$i18n.locale = "en";
             }
         },
+    },
+    onMounted() {
+        // Force SSG to capture content
+        document.dispatchEvent(new Event("vite-ssg-render"));
     },
 };
 </script>

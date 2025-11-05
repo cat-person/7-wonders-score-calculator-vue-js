@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite-ssg build"
+    "build": "rm -rf .vite-ssg-temp && vite-ssg build && cp -a public docs/public"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
