@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopBar
-            :title="$t('titles.add')"
+            :topBarTitle="$t('titles.add')"
             :showClose="true"
             @handleIconClick="handleTopBarIconClicked"
         />
