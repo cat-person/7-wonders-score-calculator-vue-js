@@ -23,7 +23,12 @@ export default {
     },
     onMounted() {
         // Force SSG to capture content
-        document.dispatchEvent(new Event("vite-ssg-render"));
+        async () => {
+            await nextTick(); // Wait for DOM
+            // Trigger SSG capture
+            if (import.meta.env.SSR) return;
+            document.dispatchEvent(new CustomEvent("ssr:ready"));
+        };
     },
 };
 </script>
