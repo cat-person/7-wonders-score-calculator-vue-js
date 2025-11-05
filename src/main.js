@@ -1,4 +1,3 @@
-import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { createI18n } from "vue-i18n";
 
@@ -11,6 +10,7 @@ import Results from "./routes/Results/Results.vue";
 import longpress from "./utils/longpress";
 import locales from "./assets/locales";
 import QRPopup from "./routes/Common/components/QRPopup.vue";
+import { ViteSSG } from "vite-ssg";
 
 const routes = [
   {
@@ -48,11 +48,6 @@ const routes = [
   { path: "/results", component: Results, query: { sessionId: "sessionId" } },
 ];
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
-});
-
 const i18n = createI18n({
   locale: "en", // default language
   fallbackLocale: "en",
@@ -60,6 +55,10 @@ const i18n = createI18n({
   silentTranslationWarn: process.env.NODE_ENV === "production",
 });
 
-createApp(App).use(longpress).use(router).use(i18n).mount("#app");
-
 export default i18n;
+
+export const createApp = ViteSSG(App, { routes }, ({ app, ssgRouter }) => {
+  if (!import.meta.env.SS) {
+    app.use(ssgRouter).use(longpress).use(i18n);
+  }
+});

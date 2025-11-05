@@ -43,7 +43,7 @@
 <script>
 import QrcodeVue from "qrcode.vue";
 
-import { getPseudoRandom } from "@/utils/sessions";
+import { getPseudoRandom, urlBase } from "@/utils/sessions";
 import { qrSizePx } from "@/utils/dpi";
 import wonders from "@/assets/wonders.json";
 import TopBar from "../Common/components/TopBar.vue";
@@ -77,7 +77,7 @@ export default {
             });
         },
         getLinkToShare(sessionId) {
-            return `${window.location.href}add?sessionId=${sessionId}`;
+            return `${urlBase}add?sessionId=${sessionId}`;
         },
         handleTopBarIconClicked(icon) {
             if (icon == "qr") {

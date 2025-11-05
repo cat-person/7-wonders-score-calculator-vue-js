@@ -1,7 +1,7 @@
 <template>
     <div class="pupupu" @click="handleOutsideClick">
         <div class="qr_code_container">
-            <QrcodeVue :value="getShareUrl()" :size="qrCodeSize" />
+            <QrcodeVue :value="getShareUrl(sessionId)" :size="qrCodeSize" />
         </div>
     </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import QrcodeVue from "qrcode.vue";
 import { qrSizePx } from "@/utils/dpi";
+import { urlBase } from "@/utils/sessions";
 
 export default {
     data() {
@@ -23,10 +24,8 @@ export default {
             this.$router.back();
         },
 
-        getShareUrl() {
-            return window.location.href
-                .replace("popup", "add")
-                .replace("list", "");
+        getShareUrl(sessionId) {
+            return `${urlBase}add?sessionId=${sessionId}`;
         },
     },
     components: {

@@ -1,5 +1,5 @@
 <template>
-    <div :style="this.getStyle(color)">
+    <div :style="getStyle(color)">
         <button
             class="pointsChangeBtn"
             v-longpress="() => handlePointsChanged(-1)"

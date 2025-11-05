@@ -27,7 +27,7 @@ export default {
             @click="handleIconClick('close')"
         />
 
-        <h3 class="title">{{ this.title }}</h3>
+        <h3 class="title">{{ title }}</h3>
 
         <img
             v-if="showQR"
